@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class AboutViewModel
-    {
-    }
+	public class LocationListViewModel
+	{
+	}
 }
