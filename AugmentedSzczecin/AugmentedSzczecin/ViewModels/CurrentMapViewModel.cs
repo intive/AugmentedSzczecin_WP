@@ -124,7 +124,7 @@ namespace AugmentedSzczecin.ViewModels
             showAdditionalLocations();
         }
 
-        private List<LocationForMap> mapLocations = new List<LocationForMap>();
+        private List<LocationForMap> mapLocations;
 
         public List<LocationForMap> MapLocations
         {
