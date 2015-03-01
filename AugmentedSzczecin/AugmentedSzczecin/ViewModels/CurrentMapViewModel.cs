@@ -10,17 +10,8 @@ using Windows.Devices.Geolocation;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : Screen, INotifyPropertyChanged
+    public class CurrentMapViewModel : PropertyChangedBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(String info)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
 
         public CurrentMapViewModel()
         {
@@ -95,7 +86,7 @@ namespace AugmentedSzczecin.ViewModels
                 if (centerOfTheMap != value)
                 {
                     centerOfTheMap = value;
-                    NotifyPropertyChanged("CenterOfTheMap");
+                    NotifyOfPropertyChange(() => CenterOfTheMap);
                 }
             }
         }
@@ -132,7 +123,7 @@ namespace AugmentedSzczecin.ViewModels
                 if (mapLocations != value)
                 {
                     mapLocations = value;
-                    NotifyPropertyChanged("MapLocations");
+                    NotifyOfPropertyChange(() => MapLocations);
                 }
             }
         }
