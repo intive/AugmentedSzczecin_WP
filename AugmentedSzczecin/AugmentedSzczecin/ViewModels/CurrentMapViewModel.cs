@@ -6,19 +6,26 @@ using Windows.Devices.Geolocation;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : PropertyChangedBase
+    public class CurrentMapViewModel :  Screen
     {
 
         public CurrentMapViewModel()
         {
-            setGeolocation();
-            mapLocations = new List<Location>();
+            //setGeolocation();
+            mapLocations = new List<LocationForMap>();
             showAdditionalLocations();
         }
 
+        protected override void OnActivate()
+        {
+            setGeolocation();
+            //showAdditionalLocations();
+        }
+
+
         private void showAdditionalLocations()
         {
-            MapLocations.Add(new Location
+            MapLocations.Add(new LocationForMap
             {
                 Geopoint = new Geopoint(new BasicGeoposition
                 {
@@ -28,12 +35,22 @@ namespace AugmentedSzczecin.ViewModels
                 Name = "Redmond"
             });
 
-            MapLocations.Add(new Location
+            MapLocations.Add(new LocationForMap
             {
                 Geopoint = new Geopoint(new BasicGeoposition
                 {
                     Longitude = -122.1381556,
                     Latitude = 47.6796119
+                }),
+                Name = "Moja ulubiona cukiernia"
+            });
+
+            MapLocations.Add(new LocationForMap
+            {
+                Geopoint = new Geopoint(new BasicGeoposition
+                {
+                    Longitude = 14.536886131390929,
+                    Latitude = 53.469053423032165
                 }),
                 Name = "Moja ulubiona cukiernia"
             });
@@ -104,11 +121,12 @@ namespace AugmentedSzczecin.ViewModels
             };
 
             CenterOfTheMap = new Geopoint(myLocation);
+            showAdditionalLocations();
         }
 
-        private List<Location> mapLocations;
+        private List<LocationForMap> mapLocations = new List<LocationForMap>();
 
-        public List<Location> MapLocations
+        public List<LocationForMap> MapLocations
         {
             get
             {
