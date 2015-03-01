@@ -15,5 +15,10 @@ namespace AugmentedSzczecin.ViewModels
         {
             _navigationService.NavigateToViewModel<AboutViewModel>();
         }
+
+        public void NavigateToCurrentMap()
+        {
+            _navigationService.NavigateToViewModel<CurrentMapViewModel>();
+        }
     }
 }

@@ -22,9 +22,10 @@ namespace AugmentedSzczecin
             container = new WinRTContainer();
 
             container.RegisterWinRTServices();
-
+            container.PerRequest<CurrentMapViewModel>();
             container.PerRequest<MainViewModel>();
             container.PerRequest<AboutViewModel>();
+            
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)

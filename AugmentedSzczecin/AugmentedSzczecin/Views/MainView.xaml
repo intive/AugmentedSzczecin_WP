@@ -10,8 +10,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Button Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" HorizontalAlignment="Stretch" />
+            <Button Content="Current Map" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" HorizontalAlignment="Stretch" />
+
         </StackPanel>
     </Grid>
 </Page>

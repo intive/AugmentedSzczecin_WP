@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="AugmentedSzczecin.Views.CurrentMapView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AugmentedSzczecin.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel>
+        <TextBlock TextWrapping="NoWrap" Text="Current Location"
+                   FontSize="36" Margin="8,0,0,16"/>
+        <Maps:MapControl
+            MapServiceToken="{Binding BingKey}"
+            x:Name="BingMap"
+            Height="560"
+            Center="{Binding CenterOfTheMap}"
+            ZoomLevel="{Binding ZoomLevel}"
+            LandmarksVisible="{Binding LandmarksVisible}"
+            
+            Margin="0,0,0,0">
+            <Maps:MapItemsControl ItemsSource="{Binding MapLocations}">
+
+                <Maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Foreground="#FF7A1A1A" Height="45"
+                               Maps:MapControl.Location="{Binding Geopoint}" 
+                               Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}" />
+                    </DataTemplate>
+                </Maps:MapItemsControl.ItemTemplate>
+            </Maps:MapItemsControl>
+
+        </Maps:MapControl>
+
+
+    </StackPanel>
+</Page>
