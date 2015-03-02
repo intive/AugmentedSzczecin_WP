@@ -20,7 +20,7 @@ namespace AugmentedSzczecin.Services
 		private static string _page = "https://patronatwp.azure-mobile.net/tables/Place";
 		public async Task<ObservableCollection<Place>> RunAsync()
 		{
-			ObservableCollection<Place> model = null;
+			ObservableCollection<Place> model = new ObservableCollection<Place>();
 			HttpClient client = new HttpClient();
 
 			HttpResponseMessage response = await client.GetAsync(_page);
