@@ -2,6 +2,7 @@
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Windows.Devices.Geolocation;
 
 namespace AugmentedSzczecin.ViewModels
@@ -12,14 +13,15 @@ namespace AugmentedSzczecin.ViewModels
         public CurrentMapViewModel()
         {
             //setGeolocation();
-            mapLocations = new List<LocationForMap>();
-            showAdditionalLocations();
+            mapLocations = new ObservableCollection<LocationForMap>();
+            //showAdditionalLocations();
         }
 
         protected override void OnActivate()
         {
             setGeolocation();
-            //showAdditionalLocations();
+            //mapLocations = new ObservableCollection<LocationForMap>();
+            showAdditionalLocations();
         }
 
 
@@ -120,13 +122,12 @@ namespace AugmentedSzczecin.ViewModels
                 Latitude = geoposition.Coordinate.Latitude
             };
 
-            CenterOfTheMap = new Geopoint(myLocation);
-            showAdditionalLocations();
+            CenterOfTheMap = new Geopoint(myLocation);        
         }
 
-        private List<LocationForMap> mapLocations;
+        private ObservableCollection<LocationForMap> mapLocations;
 
-        public List<LocationForMap> MapLocations
+        public ObservableCollection<LocationForMap> MapLocations
         {
             get
             {
