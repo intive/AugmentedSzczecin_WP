@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,10 @@ namespace AugmentedSzczecin.Models
 {
 	public class Place : PropertyChangedBase
 	{
+		[JsonProperty(PropertyName = "id")]
 		public string id { get; set; }
 
+		[JsonProperty(PropertyName = "Name")]
 		private string _name;
 		public string Name
 		{
@@ -25,6 +28,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Address")]
 		private string _address;
 		public string Address
 		{
@@ -39,6 +43,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Latitude")]
 		private double _latitude;
 		public double Latitude
 		{
@@ -53,6 +58,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Logitude")]
 		private double _longitude;
 		public double Longitude
 		{
@@ -67,6 +73,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "HasWifi")]
 		private bool _hasWifi;
 		public bool HasWifi
 		{

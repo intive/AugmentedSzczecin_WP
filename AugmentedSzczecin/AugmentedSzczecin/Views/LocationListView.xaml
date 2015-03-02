@@ -9,8 +9,6 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-	<!--<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Location List Augmented Szczecin:"/>-->
-
 	<ListView ItemContainerStyle="{ThemeResource MyLocationListViewStyle}" x:Name="Places">
 		<ListView.ItemTemplate>
 			<DataTemplate>
@@ -31,7 +29,7 @@
 					<StackPanel Grid.Column="1">
 						<TextBlock>
 							<Run Text="{Binding Latitude}" />
-							<Run Text="." />
+							<Run Text=". " />
 							<Run Text="{Binding Longitude}" />
 						</TextBlock>
 						<CheckBox
