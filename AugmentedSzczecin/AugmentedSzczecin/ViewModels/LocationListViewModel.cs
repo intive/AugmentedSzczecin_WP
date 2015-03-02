@@ -3,6 +3,7 @@ using AugmentedSzczecin.Services;
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using Windows.Data.Json;
 
 namespace AugmentedSzczecin.ViewModels
 {
-	public class LocationListViewModel : PropertyChangedBase
+	public class LocationListViewModel : Screen
 	{
 		private DataService Client = new DataService();
 
@@ -24,13 +25,13 @@ namespace AugmentedSzczecin.ViewModels
 			Places = await Client.RunAsync();
 		}
 
-		List<Place> _places = new List<Place>();
-		public List<Place> Places
+		private ObservableCollection<Place> _places = new ObservableCollection<Place>();
+		public ObservableCollection<Place> Places
 		{
-			get {  return _places; }
+			get { return _places; }
 			set
 			{
-				if(_places != value)
+				if (_places != value)
 				{
 					_places = value;
 					NotifyOfPropertyChange(() => Places);

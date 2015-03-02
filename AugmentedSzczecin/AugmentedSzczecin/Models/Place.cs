@@ -9,9 +9,9 @@ namespace AugmentedSzczecin.Models
 {
 	public class Place : PropertyChangedBase
 	{
-		public string Id { get; set; }
+		public string id { get; set; }
 
-		string _name;
+		private string _name;
 		public string Name
 		{
 			get { return _name; }
@@ -25,7 +25,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
-		string _address;
+		private string _address;
 		public string Address
 		{
 			get { return _address; }
@@ -39,7 +39,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
-		double _latitude;
+		private double _latitude;
 		public double Latitude
 		{
 			get { return _latitude; }
@@ -53,7 +53,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
-		double _longitude;
+		private double _longitude;
 		public double Longitude
 		{
 			get { return _longitude; }
@@ -67,7 +67,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
-		bool _hasWifi;
+		private bool _hasWifi;
 		public bool HasWifi
 		{
 			get { return _hasWifi; }
