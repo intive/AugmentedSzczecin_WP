@@ -11,7 +11,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
-        <TextBlock TextWrapping="NoWrap" Text="Current Location"
+        <TextBlock x:Uid="CurrentMapTitle"  TextWrapping="NoWrap" Text=""
                    FontSize="36" Margin="8,0,0,16"/>
         <Maps:MapControl
             MapServiceToken="{Binding BingKey}"

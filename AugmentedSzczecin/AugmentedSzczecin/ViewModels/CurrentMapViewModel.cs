@@ -14,6 +14,8 @@ namespace AugmentedSzczecin.ViewModels
         public CurrentMapViewModel()
         {
             _mapLocations = new ObservableCollection<LocationForMap>();
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var str = loader.GetString("CurrentMapTitle");
         }
 
         protected override void OnActivate()
