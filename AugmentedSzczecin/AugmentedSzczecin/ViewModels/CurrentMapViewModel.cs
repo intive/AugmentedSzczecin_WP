@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.Devices.Geolocation;
+using Windows.UI.Xaml.Controls.Maps;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -12,20 +13,16 @@ namespace AugmentedSzczecin.ViewModels
 
         public CurrentMapViewModel()
         {
-            //setGeolocation();
-            mapLocations = new ObservableCollection<LocationForMap>();
-            //showAdditionalLocations();
+            _mapLocations = new ObservableCollection<LocationForMap>();
         }
 
         protected override void OnActivate()
         {
-            setGeolocation();
-            //mapLocations = new ObservableCollection<LocationForMap>();
-            showAdditionalLocations();
+            SetGeolocation();
+            ShowAdditionalLocations();
         }
 
-
-        private void showAdditionalLocations()
+        private void ShowAdditionalLocations()
         {
             MapLocations.Add(new LocationForMap
             {
@@ -58,55 +55,63 @@ namespace AugmentedSzczecin.ViewModels
             });
         }
 
-        private string bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
+        private string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
         public string BingKey
         {
             get
             {
-                return bingKey;
+                return _bingKey;
             }
         }
 
-        private double zoomLevel = 15;
+        private double _zoomLevel = 13;
 
         public double ZoomLevel
         {
             get
             {
-                return zoomLevel;
+                return _zoomLevel;
+            }
+            set
+            {
+                if(_zoomLevel != value)
+                {
+                    _zoomLevel = value;
+                    NotifyOfPropertyChange(() => ZoomLevel);
+                }
             }
         }
 
-        private bool landmarksVisible = true;
+        private bool _landmarksVisible = true;
 
         public bool LandmarksVisible
         {
             get
             {
-                return landmarksVisible;
+                return _landmarksVisible;
             }
         }
 
-        private Geopoint centerOfTheMap;
+        private Geopoint _centerOfTheMap;
 
         public Geopoint CenterOfTheMap
         {
             get
             {
-                return centerOfTheMap;
+                return _centerOfTheMap;
             }
             set
             {
-                if (centerOfTheMap != value)
+                if (_centerOfTheMap != value)
                 {
-                    centerOfTheMap = value;
+                    _centerOfTheMap = value;
                     NotifyOfPropertyChange(() => CenterOfTheMap);
                 }
             }
         }
 
-        private async void setGeolocation()
+        private async void SetGeolocation()
         {
             Geolocator geolocator = new Geolocator();
             geolocator.DesiredAccuracyInMeters = 50;
@@ -122,22 +127,22 @@ namespace AugmentedSzczecin.ViewModels
                 Latitude = geoposition.Coordinate.Latitude
             };
 
-            CenterOfTheMap = new Geopoint(myLocation);        
+            CenterOfTheMap = new Geopoint(myLocation);
         }
 
-        private ObservableCollection<LocationForMap> mapLocations;
+        private ObservableCollection<LocationForMap> _mapLocations;
 
         public ObservableCollection<LocationForMap> MapLocations
         {
             get
             {
-                return mapLocations;
+                return _mapLocations;
             }
             set
             {
-                if (mapLocations != value)
+                if (_mapLocations != value)
                 {
-                    mapLocations = value;
+                    _mapLocations = value;
                     NotifyOfPropertyChange(() => MapLocations);
                 }
             }

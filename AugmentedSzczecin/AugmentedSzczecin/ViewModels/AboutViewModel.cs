@@ -8,5 +8,10 @@ namespace AugmentedSzczecin.ViewModels
 {
     public class AboutViewModel
     {
+
+        public AboutViewModel()
+        {
+
+        }
     }
 }
