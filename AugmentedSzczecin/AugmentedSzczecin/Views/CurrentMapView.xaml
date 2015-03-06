@@ -19,7 +19,8 @@
             Height="560"
             Center="{Binding CenterOfTheMap}"
             ZoomLevel="{Binding ZoomLevel}"
-            LandmarksVisible="{Binding LandmarksVisible}"            
+            LandmarksVisible="{Binding LandmarksVisible}"
+            caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]"
             Margin="0,0,0,0">  
             <Maps:MapItemsControl ItemsSource="{Binding MapLocations}">
                 
@@ -31,7 +32,8 @@
                     </DataTemplate>
                 </Maps:MapItemsControl.ItemTemplate>
             </Maps:MapItemsControl>
-            
+            <TextBlock x:Name="ScaleText" Text="{Binding ScaleText}" FontSize="14" Foreground="Black" Margin="24,530,0,2" Opacity="0.6" />
+            <Rectangle Name="recScale" Fill="Black" Width="100" Height="4" Margin="24,548,0,0" Opacity="0.6" />
         </Maps:MapControl>
     </StackPanel>
 </Page>

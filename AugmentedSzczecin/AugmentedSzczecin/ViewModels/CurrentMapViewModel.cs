@@ -16,6 +16,7 @@ namespace AugmentedSzczecin.ViewModels
             _mapLocations = new ObservableCollection<LocationForMap>();
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             var str = loader.GetString("CurrentMapTitle");
+            _zoomLevel = 13;
         }
 
         protected override void OnActivate()
@@ -67,7 +68,7 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private double _zoomLevel = 13;
+        private double _zoomLevel = 0;
 
         public double ZoomLevel
         {
@@ -108,6 +109,7 @@ namespace AugmentedSzczecin.ViewModels
                 if (_centerOfTheMap != value)
                 {
                     _centerOfTheMap = value;
+                    ChangeScaleBar(null);
                     NotifyOfPropertyChange(() => CenterOfTheMap);
                 }
             }
@@ -146,6 +148,43 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _mapLocations = value;
                     NotifyOfPropertyChange(() => MapLocations);
+                }
+            }
+        }
+
+        public void ChangeScaleBar(MapControl temporaryMap)
+        {
+            double tempZoomLevel = ZoomLevel;
+            if (temporaryMap != null)
+                tempZoomLevel = temporaryMap.ZoomLevel;
+            double tempLatitude = 0;
+            if (CenterOfTheMap != null)
+                tempLatitude = CenterOfTheMap.Position.Latitude;
+            tempLatitude = tempLatitude * (Math.PI / 180);
+
+            const double BING_MAP_CONSTANT = 156543.04;
+
+            double metersPerPixel = BING_MAP_CONSTANT * Math.Cos(tempLatitude) / Math.Pow(2, tempZoomLevel);
+
+            double scaleDistance = Math.Round(100 * metersPerPixel);
+
+            ScaleText = scaleDistance.ToString() + " m";
+        }
+
+        private string _scaleText = "";
+
+        public string ScaleText
+        {
+            get
+            {
+                return _scaleText;
+            }
+            set
+            {
+                if (_scaleText != value)
+                {
+                    _scaleText = value;
+                    NotifyOfPropertyChange(() => ScaleText);
                 }
             }
         }
