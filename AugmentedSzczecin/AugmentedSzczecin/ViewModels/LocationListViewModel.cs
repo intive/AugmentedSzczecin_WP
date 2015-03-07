@@ -22,7 +22,7 @@ namespace AugmentedSzczecin.ViewModels
 
 		private async void LoadData()
 		{
-			Places = await Client.RunAsync();
+			Places = await Client.HttpGetAsync();
 		}
 
 		private ObservableCollection<Place> _places = new ObservableCollection<Place>();

@@ -84,7 +84,7 @@
     </Compile>
     <Compile Include="Models\Place.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\HttpRequestService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\LocationListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
