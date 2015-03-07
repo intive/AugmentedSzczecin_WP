@@ -1,4 +1,5 @@
-﻿using AugmentedSzczecin.Models;
+﻿using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AugmentedSzczecin.Services
 {
-	public class HttpRequestService
+	public class HttpRequestService : IHttpRequestService
 	{
 		private static string _page = "https://patronatwp.azure-mobile.net/tables/Place";
 		public async Task<string> HttpGetAsync()
