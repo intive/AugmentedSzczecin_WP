@@ -12,10 +12,10 @@ namespace AugmentedSzczecin.Services
 {
 	public class PointOfInterestHandlingService : IPointOfInterestHandlingService
 	{
-		public ObservableCollection<Place> GetPoint(string jsonString)
+		public ObservableCollection<PointOfInterest> GetPointOfInterest(string jsonString)
 		{
-			ObservableCollection<Place> model;
-			model = JsonConvert.DeserializeObject<ObservableCollection<Place>>(jsonString);
+			ObservableCollection<PointOfInterest> model;
+			model = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(jsonString);
 
 			return model;
 		}
