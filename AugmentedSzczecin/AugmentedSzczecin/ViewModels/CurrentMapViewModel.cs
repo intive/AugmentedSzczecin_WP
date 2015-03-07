@@ -1,18 +1,19 @@
-﻿using AugmentedSzczecin.Model;
+﻿using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Model;
 using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.Devices.Geolocation;
-using Windows.UI.Xaml.Controls.Maps;
 
 namespace AugmentedSzczecin.ViewModels
 {
     public class CurrentMapViewModel :  Screen
     {
 
-        public CurrentMapViewModel()
+        private ILocationService _locationService;
+
+        public CurrentMapViewModel(ILocationService locationService)
         {
+            _locationService = locationService;
             _mapLocations = new ObservableCollection<LocationForMap>();
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             var str = loader.GetString("CurrentMapTitle");
@@ -22,6 +23,11 @@ namespace AugmentedSzczecin.ViewModels
         {
             SetGeolocation();
             ShowAdditionalLocations();
+        }
+
+        private async void SetGeolocation()
+        {
+            CenterOfTheMap = await _locationService.SetGeolocation();
         }
 
         private void ShowAdditionalLocations()
@@ -111,25 +117,6 @@ namespace AugmentedSzczecin.ViewModels
                     NotifyOfPropertyChange(() => CenterOfTheMap);
                 }
             }
-        }
-
-        private async void SetGeolocation()
-        {
-            Geolocator geolocator = new Geolocator();
-            geolocator.DesiredAccuracyInMeters = 50;
-
-            Geoposition geoposition = await geolocator.GetGeopositionAsync(
-            maximumAge: TimeSpan.FromMinutes(5),
-            timeout: TimeSpan.FromSeconds(10)
-            );
-
-            BasicGeoposition myLocation = new BasicGeoposition
-            {
-                Longitude = geoposition.Coordinate.Longitude,
-                Latitude = geoposition.Coordinate.Latitude
-            };
-
-            CenterOfTheMap = new Geopoint(myLocation);
         }
 
         private ObservableCollection<LocationForMap> _mapLocations;

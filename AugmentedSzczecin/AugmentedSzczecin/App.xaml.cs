@@ -1,4 +1,6 @@
-﻿using AugmentedSzczecin.ViewModels;
+﻿using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Services;
+using AugmentedSzczecin.ViewModels;
 using AugmentedSzczecin.Views;
 using Caliburn.Micro;
 using System;
@@ -22,10 +24,11 @@ namespace AugmentedSzczecin
             container = new WinRTContainer();
 
             container.RegisterWinRTServices();
-            container.PerRequest<CurrentMapViewModel>();
+            
             container.PerRequest<MainViewModel>();
             container.PerRequest<AboutViewModel>();
-            
+            container.PerRequest<CurrentMapViewModel>();
+            container.PerRequest<ILocationService, LocationService>();
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)
