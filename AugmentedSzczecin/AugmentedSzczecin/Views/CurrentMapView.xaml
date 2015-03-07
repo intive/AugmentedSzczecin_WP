@@ -28,7 +28,7 @@
             <Maps:MapItemsControl >
                 <Image Name="imgMyLocation" Source="Assets/pin.png" Maps:MapControl.Location="{Binding CenterOfTheMap}" Maps:MapControl.NormalizedAnchorPoint="0.25, 0.9" Height="100" Width="100" Visibility="Collapsed"/>
                 <!-- <Maps:MapItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate> 
                         <TextBlock Text="{Binding Name}" Foreground="#FF7A1A1A" Height="45"
                                Maps:MapControl.Location="{Binding Geopoint}" 
                                Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}" />
