@@ -14,7 +14,7 @@
 		x:Name="PointOfInterestList">
 		<ListView.ItemTemplate>
 			<DataTemplate>
-				<Grid Background="White">
+				<Grid Background="White" >
 					<Grid.RowDefinitions>
 						<RowDefinition Height="1*" />
 						<RowDefinition Height="1.2*" />
