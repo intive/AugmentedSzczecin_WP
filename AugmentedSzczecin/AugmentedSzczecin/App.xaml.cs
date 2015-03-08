@@ -23,8 +23,7 @@ namespace AugmentedSzczecin
 
             container.RegisterWinRTServices();
 
-            container.PerRequest<MainViewModel>(); 
-            container.PerRequest<AboutViewModel>();
+            container.PerRequest<MainViewModel>();
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)
