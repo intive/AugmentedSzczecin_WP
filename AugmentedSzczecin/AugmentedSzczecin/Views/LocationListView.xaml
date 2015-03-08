@@ -162,7 +162,7 @@
 					FontStyle="Italic"
 					Foreground="{StaticResource BLStreamBackgroundColorBrush}"
 					Text="{Binding Wikipedia}" />
-							<StackPanel	Background="{StaticResource BLStreamBackgroundColorBrush}">
+							<StackPanel Background="{StaticResource BLStreamBackgroundColorBrush}">
 								<TextBlock
 						Margin="10"
 						HorizontalAlignment="Center"
@@ -171,7 +171,10 @@
 						FontSize="30"
 						Text="{Binding Owner}" />
 							</StackPanel>
-						</StackPanel>
+							<Border
+							BorderThickness="2"
+							BorderBrush="{StaticResource BLStreamForegroundColorBrush}"/>
+						</StackPanel>							
 					</Grid>
 				</Grid>
 			</DataTemplate>
