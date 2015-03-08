@@ -1,5 +1,4 @@
-﻿using AugmentedSzczecin.Interfaces;
-using AugmentedSzczecin.Models;
+﻿using AugmentedSzczecin.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AugmentedSzczecin.Services
 {
-	public class PointOfInterestHandlingService : IPointOfInterestHandlingService
+	public class PointOfInterestHandlingService
 	{
 		public ObservableCollection<Place> GetPoint(string jsonString)
 		{

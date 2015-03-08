@@ -1,6 +1,4 @@
-﻿using AugmentedSzczecin.Interfaces;
-using AugmentedSzczecin.Services;
-using AugmentedSzczecin.ViewModels;
+﻿using AugmentedSzczecin.ViewModels;
 using AugmentedSzczecin.Views;
 using Caliburn.Micro;
 using System;
@@ -28,8 +26,6 @@ namespace AugmentedSzczecin
 			container.PerRequest<LocationListViewModel>();
 			container.PerRequest<MainViewModel>();
 			container.PerRequest<AboutViewModel>();
-			container.PerRequest<IHttpRequestService, HttpRequestService>();
-			container.PerRequest<IPointOfInterestHandlingService, PointOfInterestHandlingService>();
 		}
 
 		protected override void PrepareViewFirst(Frame rootFrame)

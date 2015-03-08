@@ -1,5 +1,4 @@
-﻿using AugmentedSzczecin.Interfaces;
-using AugmentedSzczecin.Models;
+﻿using AugmentedSzczecin.Models;
 using AugmentedSzczecin.Services;
 using Caliburn.Micro;
 using System;
@@ -14,21 +13,16 @@ namespace AugmentedSzczecin.ViewModels
 {
 	public class LocationListViewModel : Screen
 	{
-		private IHttpRequestService _httpRequestService;
-		private IPointOfInterestHandlingService _pointOfInterestHandlingService;
+		private DataService Client = new DataService();
 
-		public LocationListViewModel(IHttpRequestService httpRequestService, IPointOfInterestHandlingService pointOfInterestHandlingService)
+		public LocationListViewModel()
 		{
-			_httpRequestService = httpRequestService;
-			_pointOfInterestHandlingService = pointOfInterestHandlingService;
-
 			LoadData();
 		}
 
 		private async void LoadData()
 		{
-			string jsonString = await _httpRequestService.HttpGetAsync();
-			Places = _pointOfInterestHandlingService.GetPoint(jsonString);
+			Places = await Client.HttpGetAsync();
 		}
 
 		private ObservableCollection<Place> _places = new ObservableCollection<Place>();
