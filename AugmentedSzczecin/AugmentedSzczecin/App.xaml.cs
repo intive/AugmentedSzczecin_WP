@@ -24,9 +24,12 @@ namespace AugmentedSzczecin
             container = new WinRTContainer();
 
             container.RegisterWinRTServices();
-            
+
+			container.PerRequest<LocationListViewModel>();
             container.PerRequest<MainViewModel>();
             container.PerRequest<AboutViewModel>();
+			container.PerRequest<IHttpRequestService, HttpRequestService>();
+			container.PerRequest<IPointOfInterestHandlingService, PointOfInterestHandlingService>();
             container.PerRequest<CurrentMapViewModel>();
             container.PerRequest<ILocationService, LocationService>();
         }
