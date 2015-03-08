@@ -16,26 +16,28 @@
         <TextBlock x:Uid="CurrentMapTitle"  TextWrapping="NoWrap" Text=""
                    FontSize="36" Margin="8,0,0,16"/>
         
-        <Maps:MapControl
+
+         <Maps:MapControl
             MapServiceToken="{Binding BingKey}"
             x:Name="BingMap"
             Height="560"
             Center="{Binding CenterOfTheMap}"
             ZoomLevel="{Binding ZoomLevel}"
             LandmarksVisible="{Binding LandmarksVisible}"            
-            Margin="0,0,0,0"> 
-            
+            Margin="0,0,0,0">
+            <Image Name="ImgMyLocation" Source="/Assets/MyLocationPoint.png" Maps:MapControl.Location="{Binding CenterOfTheMap}" Maps:MapControl.NormalizedAnchorPoint="0.25, 0.9" Height="10" Width="10" Visibility="{Binding MyLocationPointVisibility}"/>
+
             <Maps:MapItemsControl >
-                <Image Name="imgMyLocation" Source="Assets/pin.png" Maps:MapControl.Location="{Binding CenterOfTheMap}" Maps:MapControl.NormalizedAnchorPoint="0.25, 0.9" Height="100" Width="100" Visibility="Collapsed"/>
-                <!-- <Maps:MapItemsControl.ItemTemplate>
+                 <Maps:MapItemsControl.ItemTemplate>
                     <DataTemplate> 
                         <TextBlock Text="{Binding Name}" Foreground="#FF7A1A1A" Height="45"
                                Maps:MapControl.Location="{Binding Geopoint}" 
                                Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}" />
                     </DataTemplate>
-                </Maps:MapItemsControl.ItemTemplate> -->
+                </Maps:MapItemsControl.ItemTemplate> 
             </Maps:MapItemsControl>
             
-        </Maps:MapControl>
+        </Maps:MapControl> 
+
     </StackPanel>
 </Page>

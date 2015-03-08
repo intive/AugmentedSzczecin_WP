@@ -3,6 +3,7 @@ using AugmentedSzczecin.Model;
 using Caliburn.Micro;
 using System.Collections.ObjectModel;
 using Windows.Devices.Geolocation;
+using Windows.UI.Xaml;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -114,7 +115,26 @@ namespace AugmentedSzczecin.ViewModels
                 if (_centerOfTheMap != value)
                 {
                     _centerOfTheMap = value;
+                    MyLocationPointVisibility = Visibility.Visible;
                     NotifyOfPropertyChange(() => CenterOfTheMap);
+                }
+            }
+        }
+
+        private Visibility _myLocationPointVisibility = Visibility.Collapsed;
+
+        public Visibility MyLocationPointVisibility 
+        { 
+            get
+            {
+                return _myLocationPointVisibility;
+            }
+            set
+            {
+                if (value != _myLocationPointVisibility)
+                {
+                    _myLocationPointVisibility = value;
+                    NotifyOfPropertyChange(() => MyLocationPointVisibility);
                 }
             }
         }
