@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace AugmentedSzczecin.Models
 		}
 		public string Id { get; private set; }
 
+		[JsonProperty(PropertyName = "Name")]
 		private string _name;
 		public string Name
 		{
@@ -29,6 +31,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Description")]
 		private string _description;
 		public string Description
 		{
@@ -43,6 +46,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Tags")]
 		private string _tags;
 		public string Tags
 		{
@@ -57,6 +61,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Latitude")]
 		private double _latitude;
 		public double Latitude
 		{
@@ -71,6 +76,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Longitude")]
 		private double _longitude;
 		public double Longitude
 		{
@@ -85,6 +91,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "StreetName")]
 		private string _streetName;
 		public string StreetName
 		{
@@ -99,6 +106,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "PostalCode")]
 		private string _postalCode;
 		public string PostalCode
 		{
@@ -113,6 +121,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Country")]
 		private string _country;
 		public string Country
 		{
@@ -127,6 +136,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Website")]
 		private string _website;
 		public string Website
 		{
@@ -141,6 +151,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Phone")]
 		private string _phone;
 		public string Phone
 		{
@@ -155,6 +166,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Fanpage")]
 		private string _fanpage;
 		public string Fanpage
 		{
@@ -169,6 +181,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Wikipedia")]
 		private string _wikipedia;
 		public string Wikipedia
 		{
@@ -183,6 +196,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "OpeningDays")]
 		private string _openingDays;
 		public string OpeningDays
 		{
@@ -197,6 +211,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "OpeningHours")]
 		private string _openingHours;
 		public string OpeningHours
 		{
@@ -211,6 +226,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Hours")]
 		private string _category;
 		public string Category
 		{
@@ -225,6 +241,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Price")]
 		private string _price;
 		public string Price
 		{
@@ -239,6 +256,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
+		[JsonProperty(PropertyName = "Owner")]
 		private string _owner;
 		public string Owner
 		{
