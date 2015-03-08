@@ -9,35 +9,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-	<ListView ItemContainerStyle="{ThemeResource MyLocationListViewStyle}" x:Name="Places">
+	<ListView ItemContainerStyle="{ThemeResource MyLocationListViewStyle}" x:Name="PointOfInterestList">
 		<ListView.ItemTemplate>
 			<DataTemplate>
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
-
-					<StackPanel Grid.Column="0">
-						<TextBlock
-								Text="{Binding Name}"
-								Style="{ThemeResource BaseTextBlockStyle}" />
-						<TextBlock
-								Text="{Binding Address}"
-								Style="{ThemeResource BaseTextBlockStyle}" />
-					</StackPanel>
-					<StackPanel Grid.Column="1">
-						<TextBlock>
-							<Run Text="{Binding Latitude}" />
-							<Run Text=". " />
-							<Run Text="{Binding Longitude}" />
-						</TextBlock>
-						<CheckBox
-								IsEnabled="False"
-								IsChecked="{Binding HasWifi}"
-								Content="Wi-Fi" />
-					</StackPanel>
-				</Grid>
+				
 			</DataTemplate>
 		</ListView.ItemTemplate>
 	</ListView>
