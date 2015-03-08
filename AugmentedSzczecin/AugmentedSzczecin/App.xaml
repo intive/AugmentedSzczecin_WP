@@ -4,11 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:caliburn="using:Caliburn.Micro">
 
-	<Application.Resources>
-		<Style TargetType="ListViewItem" x:Key="MyLocationListViewStyle">
+	<!--<Application.Resources>
+		<Style TargetType="ListViewItem" x:Key="MyListViewPlaceStyle">
 			<Setter Property="HorizontalAlignment" Value="Stretch" />
 			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		</Style>
-	</Application.Resources>
+	</Application.Resources>-->
 
 </caliburn:CaliburnApplication>
