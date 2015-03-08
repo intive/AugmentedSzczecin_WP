@@ -15,7 +15,7 @@ namespace AugmentedSzczecin.ViewModels
         public CurrentMapViewModel(ILocationService locationService)
         {
             _locationService = locationService;
-            _mapLocations = new ObservableCollection<LocationForMap>();
+            
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             var str = loader.GetString("CurrentMapTitle");
         }
@@ -23,7 +23,7 @@ namespace AugmentedSzczecin.ViewModels
         protected override void OnActivate()
         {
             SetGeolocation();
-            ShowAdditionalLocations();
+            //ShowAdditionalLocations();
         }
 
         private async void SetGeolocation()
@@ -31,38 +31,7 @@ namespace AugmentedSzczecin.ViewModels
             CenterOfTheMap = await _locationService.SetGeolocation();
         }
 
-        private void ShowAdditionalLocations()
-        {
-            MapLocations.Add(new LocationForMap
-            {
-                Geopoint = new Geopoint(new BasicGeoposition
-                {
-                    Longitude = -122.1311156,
-                    Latitude = 47.6785619
-                }),
-                Name = "Redmond"
-            });
-
-            MapLocations.Add(new LocationForMap
-            {
-                Geopoint = new Geopoint(new BasicGeoposition
-                {
-                    Longitude = -122.1381556,
-                    Latitude = 47.6796119
-                }),
-                Name = "Moja ulubiona cukiernia"
-            });
-
-            MapLocations.Add(new LocationForMap
-            {
-                Geopoint = new Geopoint(new BasicGeoposition
-                {
-                    Longitude = 14.536886131390929,
-                    Latitude = 53.469053423032165
-                }),
-                Name = "Moja ulubiona cukiernia"
-            });
-        }
+        
 
         private string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
@@ -139,22 +108,6 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private ObservableCollection<LocationForMap> _mapLocations;
-
-        public ObservableCollection<LocationForMap> MapLocations
-        {
-            get
-            {
-                return _mapLocations;
-            }
-            set
-            {
-                if (_mapLocations != value)
-                {
-                    _mapLocations = value;
-                    NotifyOfPropertyChange(() => MapLocations);
-                }
-            }
-        }
+        
     }
 }
