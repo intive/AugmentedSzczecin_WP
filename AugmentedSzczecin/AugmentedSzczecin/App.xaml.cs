@@ -23,7 +23,7 @@ namespace AugmentedSzczecin
 
             container.RegisterWinRTServices();
 
-            container.PerRequest<MainViewModel>();
+            container.PerRequest<MainViewModel>(); 
             container.PerRequest<AboutViewModel>();
         }
 
