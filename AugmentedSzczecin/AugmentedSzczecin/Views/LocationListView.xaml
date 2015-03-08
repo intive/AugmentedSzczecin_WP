@@ -11,7 +11,8 @@
 
 	<ListView
 		ItemContainerStyle="{ThemeResource MyLocationListViewStyle}"
-		x:Name="PointOfInterestList">
+		x:Name="PointOfInterestList"
+		BorderThickness="2">
 		<ListView.ItemTemplate>
 			<DataTemplate>
 				<Grid Background="White">
