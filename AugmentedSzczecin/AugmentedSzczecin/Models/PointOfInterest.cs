@@ -226,7 +226,7 @@ namespace AugmentedSzczecin.Models
 			}
 		}
 
-		[JsonProperty(PropertyName = "Category")]
+		[JsonProperty(PropertyName = "Hours")]
 		private string _category;
 		public string Category
 		{
