@@ -173,8 +173,8 @@
 							</StackPanel>
 							<Border
 							BorderThickness="3"
-							BorderBrush="{StaticResource BLStreamForegroundColorBrush}"/>
-						</StackPanel>							
+							BorderBrush="Black"/>
+						</StackPanel>
 					</Grid>
 				</Grid>
 			</DataTemplate>
