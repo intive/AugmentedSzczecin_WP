@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AugmentedSzczecin.ViewModels
+namespace AugmentedSzczecin.Interfaces
 {
-	public class AboutViewModel
+	public interface IHttpRequestService
 	{
+		Task<string> HttpGetAsync();
 	}
 }

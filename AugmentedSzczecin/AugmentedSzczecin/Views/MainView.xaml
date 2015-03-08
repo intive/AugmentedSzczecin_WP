@@ -9,10 +9,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Width="150" Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
-			<Button Width="150" Content="Location List" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
-        </StackPanel>
-    </Grid>
+	<Grid>
+		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+			<Button Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
+			<Button Content="Location List" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
+		</StackPanel>
+	</Grid>
 </Page>
