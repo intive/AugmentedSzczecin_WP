@@ -11,7 +11,7 @@ namespace AugmentedSzczecin.ViewModels
     {
 
         private ILocationService _locationService;
-
+         
         public CurrentMapViewModel(ILocationService locationService)
         {
             _locationService = locationService;
