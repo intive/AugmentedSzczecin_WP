@@ -172,7 +172,7 @@
 						Text="{Binding Owner}" />
 							</StackPanel>
 							<Border
-							BorderThickness="3"
+							BorderThickness="2"
 							BorderBrush="{StaticResource BLStreamForegroundColorBrush}"/>
 						</StackPanel>							
 					</Grid>
