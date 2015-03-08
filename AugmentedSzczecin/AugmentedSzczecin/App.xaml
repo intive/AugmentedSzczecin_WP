@@ -9,6 +9,8 @@
 			<Setter Property="HorizontalAlignment" Value="Stretch" />
 			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		</Style>
+		<SolidColorBrush x:Key="BLStreamBackgroundColorBrush" Color="#f9461c" />
+		<SolidColorBrush x:Key="BLStreamForegroundColorBrush" Color="#575757" />
 	</Application.Resources>
 
 </caliburn:CaliburnApplication>

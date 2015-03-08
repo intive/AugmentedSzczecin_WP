@@ -12,7 +12,7 @@ namespace AugmentedSzczecin.Services
 {
 	public class HttpRequestService : IHttpRequestService
 	{
-		private static string _page = "https://patronatwp.azure-mobile.net/tables/Place";
+		private static string _page = "https://augmented-szczecin-test.azure-mobile.net/tables/PointOfInterest";
 		public async Task<string> HttpGetAsync()
 		{
 			HttpClient client = new HttpClient();
