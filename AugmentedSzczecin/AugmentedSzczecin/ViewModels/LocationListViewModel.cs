@@ -28,19 +28,19 @@ namespace AugmentedSzczecin.ViewModels
 		private async void LoadData()
 		{
 			string jsonString = await _httpRequestService.HttpGetAsync();
-			PointOfInterestList = _pointOfInterestHandlingService.GetPointOfInterest(jsonString);
+			Places = _pointOfInterestHandlingService.GetPoint(jsonString);
 		}
 
-		private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
-		public ObservableCollection<PointOfInterest> PointOfInterestList
+		private ObservableCollection<Place> _places = new ObservableCollection<Place>();
+		public ObservableCollection<Place> Places
 		{
-			get { return _pointOfInterestList; }
+			get { return _places; }
 			set
 			{
-				if (_pointOfInterestList != value)
+				if (_places != value)
 				{
-					_pointOfInterestList = value;
-					NotifyOfPropertyChange(() => PointOfInterestList);
+					_places = value;
+					NotifyOfPropertyChange(() => Places);
 				}
 			}
 		}
