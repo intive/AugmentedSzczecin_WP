@@ -31,7 +31,7 @@ namespace AugmentedSzczecin.ViewModels
             CenterOfTheMap = await _locationService.SetGeolocation();
         }
 
-        
+
 
         private string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
@@ -84,6 +84,7 @@ namespace AugmentedSzczecin.ViewModels
                 if (_centerOfTheMap != value)
                 {
                     _centerOfTheMap = value;
+                    ChangeScaleBar(null);
                     MyLocationPointVisibility = Visibility.Visible;
                     NotifyOfPropertyChange(() => CenterOfTheMap);
                 }
@@ -93,7 +94,7 @@ namespace AugmentedSzczecin.ViewModels
         private Visibility _myLocationPointVisibility = Visibility.Collapsed;
 
         public Visibility MyLocationPointVisibility 
-        { 
+        {
             get
             {
                 return _myLocationPointVisibility;
@@ -108,6 +109,41 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        
+        public void ChangeScaleBar(MapControl temporaryMap)
+        {
+            double tempZoomLevel = ZoomLevel;
+            if (temporaryMap != null)
+                tempZoomLevel = temporaryMap.ZoomLevel;
+            double tempLatitude = 0;
+            if (CenterOfTheMap != null)
+                tempLatitude = CenterOfTheMap.Position.Latitude;
+            tempLatitude = tempLatitude * (Math.PI / 180);
+
+            const double BING_MAP_CONSTANT = 156543.04;
+
+            double metersPerPixel = BING_MAP_CONSTANT * Math.Cos(tempLatitude) / Math.Pow(2, tempZoomLevel);
+
+            double scaleDistance = Math.Round(100 * metersPerPixel);
+
+            ScaleText = scaleDistance.ToString() + " m";
+        }
+
+        private string _scaleText = "";
+
+        public string ScaleText
+        {
+            get
+            {
+                return _scaleText;
+            }
+            set
+            {
+                if (_scaleText != value)
+                {
+                    _scaleText = value;
+                    NotifyOfPropertyChange(() => ScaleText);
+                }
+            }
+        }
     }
 }
