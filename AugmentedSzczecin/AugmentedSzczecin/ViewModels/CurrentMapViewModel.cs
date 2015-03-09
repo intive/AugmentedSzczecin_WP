@@ -1,9 +1,12 @@
 ﻿using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Model;
 using Caliburn.Micro;
+using System;
 using System.Collections.ObjectModel;
 using Windows.Devices.Geolocation;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Maps;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -18,12 +21,13 @@ namespace AugmentedSzczecin.ViewModels
             
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             var str = loader.GetString("CurrentMapTitle");
+
+            CountResolution();
         }
 
         protected override void OnActivate()
         {
             SetGeolocation();
-            //ShowAdditionalLocations();
         }
 
         private async void SetGeolocation()
@@ -43,7 +47,21 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private double _zoomLevel = 13;
+        private void CountResolution()
+        {
+            float logicalDpi = DisplayInformation.GetForCurrentView().LogicalDpi;
+            float zoom = 100000 / (logicalDpi * (float)39.37);
+            if (zoom > (float)7.17 && zoom < (float)14.33)
+                ZoomLevel = 14;
+            if (zoom > (float)14.33 && zoom < (float)28.61)
+                ZoomLevel = 13;
+            if (zoom > (float)28.61 && zoom < (float)57.22)
+                ZoomLevel = 12;
+            if (zoom > (float)57.22 && zoom < (float)114.44)
+                ZoomLevel = 11;
+        }
+
+        private double _zoomLevel;
 
         public double ZoomLevel
         {

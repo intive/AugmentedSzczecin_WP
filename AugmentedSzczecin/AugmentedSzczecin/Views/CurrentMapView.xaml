@@ -13,9 +13,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
+        
         <TextBlock x:Uid="CurrentMapTitle"  TextWrapping="NoWrap" Text=""
                    FontSize="36" Margin="8,0,0,16"/>
-        
 
         <Maps:MapControl
             MapServiceToken="{Binding BingKey}"
@@ -26,23 +26,14 @@
             LandmarksVisible="{Binding LandmarksVisible}"            
             caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]"
             Margin="0,0,0,0">  
-            <!--<Image Name="ImgMyLocation" Source="/Assets/MyLocationPoint.png" Maps:MapControl.Location="{Binding CenterOfTheMap}" Maps:MapControl.NormalizedAnchorPoint="0.25, 0.9" Height="10" Width="10" Visibility="{Binding MyLocationPointVisibility}"/> -->
-                
-            <!--<Maps:MapItemsControl ItemsSource="{Binding MapLocations}">
-                <Maps:MapItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Image Source="/Assets/LocationPoint.png" Height="10" Width="10"
-                               Maps:MapControl.Location="{Binding Geopoint}" 
-                        Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}" Visibility="Visible"/> 
-                        <TextBlock Text="{Binding Name}"  Maps:MapControl.Location="{Binding Geopoint}"
-                        Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"/>  
-                        
-                    </DataTemplate>
-                </Maps:MapItemsControl.ItemTemplate>
-            </Maps:MapItemsControl>
+            
+            <Image Name="ImgMyLocation" Source="/Assets/MyLocationPoint.png" Maps:MapControl.Location="{Binding CenterOfTheMap}" Maps:MapControl.NormalizedAnchorPoint="0.25, 0.9" Height="10" Width="10" Visibility="{Binding MyLocationPointVisibility}"/>
+         
             <TextBlock x:Name="ScaleText" Text="{Binding ScaleText}" FontSize="14" Foreground="Black" Margin="24,530,0,2" Opacity="0.6" />
             <Rectangle Name="recScale" Fill="Black" Width="100" Height="4" Margin="24,548,0,0" Opacity="0.6" />
+        
         </Maps:MapControl>
 
     </StackPanel>
+    
 </Page>
