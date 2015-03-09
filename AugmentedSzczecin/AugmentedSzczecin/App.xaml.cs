@@ -32,6 +32,8 @@ namespace AugmentedSzczecin
 			container.PerRequest<IPointOfInterestHandlingService, PointOfInterestHandlingService>();
             container.PerRequest<CurrentMapViewModel>();
             container.PerRequest<ILocationService, LocationService>();
+
+            IoC.GetInstance = this.GetInstance;
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)

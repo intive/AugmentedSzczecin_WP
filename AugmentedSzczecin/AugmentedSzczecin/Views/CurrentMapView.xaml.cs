@@ -1,7 +1,13 @@
-﻿using AugmentedSzczecin.Model;
+﻿using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Model;
+using AugmentedSzczecin.Models;
+using AugmentedSzczecin.Services;
+using AugmentedSzczecin.ViewModels;
+using Caliburn.Micro;
 using System;
 using System.Collections.ObjectModel;
 using Windows.Devices.Geolocation;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -20,56 +26,30 @@ namespace AugmentedSzczecin.Views
     public sealed partial class CurrentMapView : Page
     {
 
-        private ObservableCollection<LocationForMap> _mapLocations;
-
+        private ObservableCollection<PointOfInterest> _mapLocations;
         public CurrentMapView()
         {
             this.InitializeComponent();
-
-            _mapLocations = new ObservableCollection<LocationForMap>()
-                {
-                    new LocationForMap
-                    {
-                        Geopoint = new Geopoint(new BasicGeoposition
-                        {
-                            Longitude = -122.1311156,
-                            Latitude = 47.6785619
-                        }),
-                        Name = "Redmond"
-                    },
-
-                    new LocationForMap
-                    {
-                        Geopoint = new Geopoint(new BasicGeoposition
-                        {
-                            Longitude = -122.1381556,
-                            Latitude = 47.6796119
-                        }),
-                        Name = "Moja ulubiona cukiernia"
-                    },
-
-                    new LocationForMap
-                    {
-                        Geopoint = new Geopoint(new BasicGeoposition
-                        {
-                            Longitude = 14.536886131390929,
-                            Latitude = 53.469053423032165
-                        }),
-                        Name = "Moja ulubiona cukiernia"
-           
-                    }
-                };
+            _mapLocations = new ObservableCollection<PointOfInterest>();
             AddPins();
         }
 
-        private void AddPins()
+        private async void AddPins()
         {
-            foreach (LocationForMap locationForMap in _mapLocations)
+            object servicesFromLocationListViewModel;
+            servicesFromLocationListViewModel = IoC.GetInstance(typeof(LocationListViewModel), null);
+            _mapLocations = await ((LocationListViewModel)servicesFromLocationListViewModel).LoadData();
+            foreach (PointOfInterest pointOfInterest in _mapLocations)
             {
                 var newPin = CreatePin();
                 BingMap.Children.Add(newPin);
-                MapControl.SetLocation(newPin, locationForMap.Geopoint);
-                MapControl.SetNormalizedAnchorPoint(newPin, locationForMap.Anchor);
+                Geopoint geopoint = new Geopoint(new BasicGeoposition
+                        {
+                            Longitude = pointOfInterest.Longitude,
+                            Latitude = pointOfInterest.Latitude
+                        });
+                MapControl.SetLocation(newPin, geopoint);
+                MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
             }
         }
 

@@ -25,12 +25,18 @@ namespace AugmentedSzczecin.ViewModels
 			LoadData();
 		}
 
-		private async void LoadData()
+		public async Task<ObservableCollection<PointOfInterest>> LoadData()
 		{
 			string jsonString = await _httpRequestService.HttpGetAsync();
-			PointOfInterestList = _pointOfInterestHandlingService.GetPointOfInterest(jsonString);
+			return PointOfInterestList = _pointOfInterestHandlingService.GetPointOfInterest(jsonString);
 		}
-
+        /*
+        public async void LoadData()
+        {
+            string jsonString = await _httpRequestService.HttpGetAsync();
+            PointOfInterestList = _pointOfInterestHandlingService.GetPointOfInterest(jsonString);
+        }
+        */
 		private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
 		public ObservableCollection<PointOfInterest> PointOfInterestList
 		{
