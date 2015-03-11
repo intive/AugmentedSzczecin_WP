@@ -2,11 +2,13 @@
 using AugmentedSzczecin.Model;
 using Caliburn.Micro;
 using System;
+using System.Net;
 using System.Collections.ObjectModel;
 using Windows.Devices.Geolocation;
 using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.Networking.Connectivity;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -23,6 +25,39 @@ namespace AugmentedSzczecin.ViewModels
             var str = loader.GetString("CurrentMapTitle");
 
             CountResolution();
+
+            UpdateInternetConnection();
+        }
+
+        private bool _internetConnection;
+
+        public bool InternetConnection
+        {
+            get
+            {
+                return _internetConnection;
+            }
+            set
+            {
+                if (value != _internetConnection)
+                {
+                    _internetConnection = value;
+                    NotifyOfPropertyChange(() => InternetConnection);
+                }
+            }
+        }
+
+        private void UpdateInternetConnection()
+        {
+            ConnectionProfile internetConnectionProfile = Windows.Networking.Connectivity.NetworkInformation.GetInternetConnectionProfile();
+
+            if (internetConnectionProfile == null)
+            {
+                InternetConnection = false;
+                return;
+            }
+
+            InternetConnection = true;
         }
 
         protected override void OnActivate()
