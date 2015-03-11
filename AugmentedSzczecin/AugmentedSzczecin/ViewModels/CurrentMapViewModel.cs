@@ -52,13 +52,13 @@ namespace AugmentedSzczecin.ViewModels
             float logicalDpi = DisplayInformation.GetForCurrentView().LogicalDpi;
             float zoom = 100000 / (logicalDpi * (float)39.37);
             if (zoom > (float)7.17 && zoom < (float)14.33)
-                ZoomLevel = 14;
+                ZoomLevel = 15;
             if (zoom > (float)14.33 && zoom < (float)28.61)
-                ZoomLevel = 13;
+                ZoomLevel = 14;
             if (zoom > (float)28.61 && zoom < (float)57.22)
-                ZoomLevel = 12;
+                ZoomLevel = 13;
             if (zoom > (float)57.22 && zoom < (float)114.44)
-                ZoomLevel = 11;
+                ZoomLevel = 12;
         }
 
         private double _zoomLevel;
@@ -141,7 +141,7 @@ namespace AugmentedSzczecin.ViewModels
 
             double metersPerPixel = BING_MAP_CONSTANT * Math.Cos(tempLatitude) / Math.Pow(2, tempZoomLevel);
 
-            double scaleDistance = Math.Round(100 * metersPerPixel);
+            double scaleDistance = Math.Round(100 * metersPerPixel / 10) * 10;
 
             ScaleText = scaleDistance.ToString() + " m";
         }
