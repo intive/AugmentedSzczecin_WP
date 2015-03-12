@@ -85,14 +85,21 @@
     <Compile Include="Interfaces\IHttpRequestService.cs" />
     <Compile Include="Interfaces\IPointOfInterestHandlingService.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
+    <Compile Include="Interfaces\ILocationService.cs" />
+    <Compile Include="Model\LocationForMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\HttpRequestService.cs" />
     <Compile Include="Services\PointOfInterestHandlingService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\LocationListViewModel.cs" />
+    <Compile Include="ViewModels\CurrentMapViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentMapView.xaml.cs">
+      <DependentUpon>CurrentMapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LocationListView.xaml.cs">
       <DependentUpon>LocationListView.xaml</DependentUpon>
@@ -107,7 +114,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\LocationPoint.png" />
     <Content Include="Assets\Logo.scale-240.png" />
+    <Content Include="Assets\MyLocationPoint.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
@@ -152,9 +161,14 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentMapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
