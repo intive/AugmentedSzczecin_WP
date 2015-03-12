@@ -14,7 +14,7 @@
 		x:Name="PointOfInterestList">
 		<ListView.ItemTemplate>
 			<DataTemplate>
-				<Grid Background="White" >
+				<Grid Margin="0, 0, 0, 10" Background="White" >
 					<Grid.RowDefinitions>
 						<RowDefinition Height="1*" />
 						<RowDefinition Height="1.2*" />
@@ -171,9 +171,6 @@
 						FontSize="30"
 						Text="{Binding Owner}" />
 							</StackPanel>
-							<Border
-							BorderThickness="3"
-							BorderBrush="Black"/>
 						</StackPanel>
 					</Grid>
 				</Grid>

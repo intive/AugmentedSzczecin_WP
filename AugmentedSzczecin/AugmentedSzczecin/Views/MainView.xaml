@@ -11,8 +11,8 @@
 
 	<Grid>
 		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-			<Button Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
-			<Button Content="Location List" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
+			<Button Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" HorizontalAlignment="Stretch"/>
+			<Button Content="Location List" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" HorizontalAlignment="Stretch"/>
 		</StackPanel>
 	</Grid>
 </Page>
