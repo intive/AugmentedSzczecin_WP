@@ -86,7 +86,6 @@
     <Compile Include="Interfaces\IPointOfInterestHandlingService.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
     <Compile Include="Interfaces\ILocationService.cs" />
-    <Compile Include="Model\LocationForMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\HttpRequestService.cs" />
