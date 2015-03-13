@@ -13,7 +13,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Button Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" HorizontalAlignment="Stretch" />
             <Button Content="Current Map" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" HorizontalAlignment="Stretch" />
-			<Button Content="Location List" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" HorizontalAlignment="Stretch"/>
+            <Button Content="Location List" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" HorizontalAlignment="Stretch"/>
         </StackPanel>
     </Grid>
 </Page>

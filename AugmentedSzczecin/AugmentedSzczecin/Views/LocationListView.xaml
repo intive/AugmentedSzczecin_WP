@@ -9,35 +9,35 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-	<ListView
+    <ListView
 		ItemContainerStyle="{ThemeResource MyLocationListViewStyle}"
 		x:Name="PointOfInterestList">
-		<ListView.ItemTemplate>
-			<DataTemplate>
-				<Grid Margin="0, 0, 0, 10" Background="White" >
-					<Grid.RowDefinitions>
-						<RowDefinition Height="1*" />
-						<RowDefinition Height="1.2*" />
-						<RowDefinition Height="3*" />
-					</Grid.RowDefinitions>
-					<Grid Grid.Row="0">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-						<StackPanel
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid Margin="0, 0, 0, 10" Background="White" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1.2*" />
+                        <RowDefinition Height="3*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel
 				Background="{StaticResource BLStreamBackgroundColorBrush}"
 				Grid.Column="0">
-							<TextBlock
+                            <TextBlock
 					TextWrapping="Wrap"
 					Foreground="White"
 					FontWeight="Bold"
 					Margin="10"
 					FontSize="24"
 					Text="{Binding Name}" />
-						</StackPanel>
-						<StackPanel Grid.Column="1">
-							<TextBlock
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock
 					TextWrapping="Wrap"
 					Foreground="{StaticResource BLStreamBackgroundColorBrush}"
 					FontWeight="Light"
@@ -45,7 +45,7 @@
 					FontSize="18"
 					Text="{Binding Tags}"
 					/>
-							<TextBlock
+                            <TextBlock
 					TextWrapping="Wrap"
 					Foreground="{StaticResource BLStreamBackgroundColorBrush}"
 					FontWeight="SemiBold"
@@ -53,11 +53,11 @@
 					FontSize="24"
 					Text="{Binding Category}"
 					/>
-						</StackPanel>
-					</Grid>
-					<Grid Grid.Row="1">
-						<StackPanel>
-							<TextBlock
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackPanel>
+                            <TextBlock
 					TextWrapping="Wrap"
 					Foreground="{StaticResource BLStreamForegroundColorBrush}"
 					FontWeight="SemiLight"
@@ -65,88 +65,88 @@
 					FontSize="18"
 					Text="{Binding Description}"
 				/>
-						</StackPanel>
-					</Grid>
-					<Grid Grid.Row="2">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="*" />
-							<RowDefinition Height="4*" />
-						</Grid.RowDefinitions>
-						<StackPanel
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="4*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel
 				Grid.Row="0"
 				Background="{StaticResource BLStreamForegroundColorBrush}">
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="*" />
-								</Grid.ColumnDefinitions>
-								<StackPanel
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel
 						Margin="10"
 						Grid.Column="0">
-									<TextBlock
+                                    <TextBlock
 							TextWrapping="Wrap"
 							FontSize="16"
 							Text="{Binding StreetName}" />
-									<TextBlock
+                                    <TextBlock
 							TextWrapping="Wrap"
 							FontSize="16"
 							Text="{Binding PostalCode}" />
-									<TextBlock
+                                    <TextBlock
 							TextWrapping="Wrap"
 							FontSize="16"
 							FontWeight="Black"
 							FontStyle="Italic"
 							Foreground="{StaticResource BLStreamBackgroundColorBrush}"
 							Text="{Binding Phone}" />
-								</StackPanel>
-								<StackPanel
+                                </StackPanel>
+                                <StackPanel
 						Margin="10"
 						Grid.Column="1">
-									<TextBlock
+                                    <TextBlock
 							TextWrapping="Wrap"
 							FontSize="16"
 							FontStyle="Italic">
 							<Run Text="{Binding Latitude}"/>
 							<Run Text=", " />
 							<Run Text="{Binding Longitude}" />
-									</TextBlock>
-									<TextBlock
+                                    </TextBlock>
+                                    <TextBlock
 							TextWrapping="Wrap"
 							FontSize="16"
 							Text="{Binding Country}" />
-									<TextBlock
+                                    <TextBlock
 							TextWrapping="Wrap"
 							FontSize="16"
 							FontWeight="Normal"
 							FontStyle="Italic"
 							Foreground="{StaticResource BLStreamBackgroundColorBrush}"
 							Text="{Binding Website}" />
-								</StackPanel>
-							</Grid>
-						</StackPanel>
-						<StackPanel	Grid.Row="1">
-							<TextBlock
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel	Grid.Row="1">
+                            <TextBlock
 					Margin="10, 10, 0, 0"
 					TextWrapping="Wrap"
 					FontSize="18"
 					FontWeight="Bold"
 					Foreground="{StaticResource BLStreamForegroundColorBrush}"
 					Text="{Binding OpeningDays}" />
-							<TextBlock
+                            <TextBlock
 					Margin="10, 0, 0 ,0"
 					TextWrapping="Wrap"
 					FontSize="18"
 					FontWeight="Bold"
 					Foreground="{StaticResource BLStreamForegroundColorBrush}"
 					Text="{Binding OpeningHours}" />
-							<TextBlock
+                            <TextBlock
 					Margin="10"
 					TextWrapping="Wrap"
 					FontSize="16"
 					FontWeight="Normal"
 					Foreground="{StaticResource BLStreamForegroundColorBrush}"
 					Text="{Binding Price}" />
-							<TextBlock
+                            <TextBlock
 					Margin="10, 0, 0, 0"
 					TextWrapping="Wrap"
 					FontSize="16"
@@ -154,7 +154,7 @@
 					FontStyle="Italic"
 					Foreground="{StaticResource BLStreamBackgroundColorBrush}"
 					Text="{Binding Fanpage}" />
-							<TextBlock
+                            <TextBlock
 					Margin="10, 0, 0, 10"
 					TextWrapping="Wrap"
 					FontSize="16"
@@ -162,19 +162,19 @@
 					FontStyle="Italic"
 					Foreground="{StaticResource BLStreamBackgroundColorBrush}"
 					Text="{Binding Wikipedia}" />
-							<StackPanel Background="{StaticResource BLStreamBackgroundColorBrush}">
-								<TextBlock
+                            <StackPanel Background="{StaticResource BLStreamBackgroundColorBrush}">
+                                <TextBlock
 						Margin="10"
 						HorizontalAlignment="Center"
 						VerticalAlignment="Center"
 						FontWeight="SemiBold"
 						FontSize="30"
 						Text="{Binding Owner}" />
-							</StackPanel>
-						</StackPanel>
-					</Grid>
-				</Grid>
-			</DataTemplate>
-		</ListView.ItemTemplate>
-	</ListView>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </Page>

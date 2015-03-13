@@ -19,68 +19,68 @@ using Windows.UI.Xaml.Navigation;
 
 namespace AugmentedSzczecin.Views
 {
-	/// <summary>
-	/// An empty page that can be used on its own or navigated to within a Frame.
-	/// </summary>
-	public sealed partial class CurrentMapView : Page
-	{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class CurrentMapView : Page
+    {
 
-		private ObservableCollection<PointOfInterest> _mapLocations;
-		public CurrentMapView()
-		{
-			this.InitializeComponent();
-			_mapLocations = new ObservableCollection<PointOfInterest>();
-			AddPins();
-		}
+        private ObservableCollection<PointOfInterest> _mapLocations;
+        public CurrentMapView()
+        {
+            this.InitializeComponent();
+            _mapLocations = new ObservableCollection<PointOfInterest>();
+            AddPins();
+        }
 
-		private async void AddPins()
-		{
-			object servicesFromLocationListViewModel;
-			servicesFromLocationListViewModel = IoC.GetInstance(typeof(LocationListViewModel), null);
-			_mapLocations = await ((LocationListViewModel)servicesFromLocationListViewModel).LoadData();
-			foreach (PointOfInterest pointOfInterest in _mapLocations)
-			{
-				var newPin = CreatePin();
-				BingMap.Children.Add(newPin);
-				Geopoint geopoint = new Geopoint(new BasicGeoposition
-				{
-					Longitude = pointOfInterest.Longitude,
-					Latitude = pointOfInterest.Latitude
-				});
-				MapControl.SetLocation(newPin, geopoint);
-				MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
-			}
-		}
+        private async void AddPins()
+        {
+            object servicesFromLocationListViewModel;
+            servicesFromLocationListViewModel = IoC.GetInstance(typeof(LocationListViewModel), null);
+            _mapLocations = await ((LocationListViewModel)servicesFromLocationListViewModel).LoadData();
+            foreach (PointOfInterest pointOfInterest in _mapLocations)
+            {
+                var newPin = CreatePin();
+                BingMap.Children.Add(newPin);
+                Geopoint geopoint = new Geopoint(new BasicGeoposition
+                {
+                    Longitude = pointOfInterest.Longitude,
+                    Latitude = pointOfInterest.Latitude
+                });
+                MapControl.SetLocation(newPin, geopoint);
+                MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
+            }
+        }
 
-		private DependencyObject CreatePin()
-		{
-			var myGrid = new Grid();
-			myGrid.RowDefinitions.Add(new RowDefinition());
-			myGrid.RowDefinitions.Add(new RowDefinition());
-			myGrid.Background = new SolidColorBrush(Colors.Transparent);
+        private DependencyObject CreatePin()
+        {
+            var myGrid = new Grid();
+            myGrid.RowDefinitions.Add(new RowDefinition());
+            myGrid.RowDefinitions.Add(new RowDefinition());
+            myGrid.Background = new SolidColorBrush(Colors.Transparent);
 
-			Uri uri = new Uri("ms-appx:///Assets/Locationpoint.png", UriKind.Absolute);
+            Uri uri = new Uri("ms-appx:///Assets/Locationpoint.png", UriKind.Absolute);
 
-			var image = new Image()
-			{
-				Source = new BitmapImage(uri),
-				Width = 10,
-				Height = 10
-			};
+            var image = new Image()
+            {
+                Source = new BitmapImage(uri),
+                Width = 10,
+                Height = 10
+            };
 
-			myGrid.Children.Add(image);
+            myGrid.Children.Add(image);
 
-			return myGrid;
-		}
+            return myGrid;
+        }
 
 
-		/// <summary>
-		/// Invoked when this page is about to be displayed in a Frame.
-		/// </summary>
-		/// <param name="e">Event data that describes how this page was reached.
-		/// This parameter is typically used to configure the page.</param>
-		protected override void OnNavigatedTo(NavigationEventArgs e)
-		{
-		}
-	}
+        /// <summary>
+        /// Invoked when this page is about to be displayed in a Frame.
+        /// </summary>
+        /// <param name="e">Event data that describes how this page was reached.
+        /// This parameter is typically used to configure the page.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+        }
+    }
 }

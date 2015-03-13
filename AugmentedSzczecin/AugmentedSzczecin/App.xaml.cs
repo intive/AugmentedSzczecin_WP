@@ -25,14 +25,14 @@ namespace AugmentedSzczecin
 
             container.RegisterWinRTServices();
 
-			
+
             container.PerRequest<MainViewModel>();
             container.PerRequest<AboutViewModel>();
             container.PerRequest<CurrentMapViewModel>();
-			container.PerRequest<LocationListViewModel>();
+            container.PerRequest<LocationListViewModel>();
             container.PerRequest<ILocationService, LocationService>();
-			container.PerRequest<IHttpRequestService, HttpRequestService>();
-			container.PerRequest<IPointOfInterestHandlingService, PointOfInterestHandlingService>();
+            container.PerRequest<IHttpRequestService, HttpRequestService>();
+            container.PerRequest<IPointOfInterestHandlingService, PointOfInterestHandlingService>();
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AugmentedSzczecin.Interfaces
 {
-	public interface IHttpRequestService
-	{
-		Task<string> HttpGetAsync();
-	}
+    public interface IHttpRequestService
+    {
+        Task<string> HttpGetAsync();
+    }
 }

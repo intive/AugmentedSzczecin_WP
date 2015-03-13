@@ -21,9 +21,9 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService.NavigateToViewModel<CurrentMapViewModel>();
         }
 
-		public void NavigateToLocationList()
-		{
-			_navigationService.NavigateToViewModel<LocationListViewModel>();
-		}
+        public void NavigateToLocationList()
+        {
+            _navigationService.NavigateToViewModel<LocationListViewModel>();
+        }
     }
 }
