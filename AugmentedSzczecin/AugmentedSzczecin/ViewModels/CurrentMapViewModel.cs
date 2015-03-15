@@ -194,6 +194,21 @@ namespace AugmentedSzczecin.ViewModels
             ScaleText = scaleDistance.ToString() + " m";
         }
 
-        
+        private string _scaleText = "";
+        public string ScaleText
+        {
+            get
+            {
+                return _scaleText;
+            }
+            set
+            {
+                if (_scaleText != value)
+                {
+                    _scaleText = value;
+                    NotifyOfPropertyChange(() => ScaleText);
+                }
+            }
+        }
     }
 }
