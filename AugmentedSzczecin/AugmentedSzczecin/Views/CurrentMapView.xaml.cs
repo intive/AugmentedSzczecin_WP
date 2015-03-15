@@ -63,8 +63,8 @@ namespace AugmentedSzczecin.Views
             myGrid.RowDefinitions.Add(new RowDefinition());
             myGrid.Background = new SolidColorBrush(Colors.Transparent);
 
-            Uri uri = new Uri("ms-appx:///Assets/Locationpoint.png", UriKind.Absolute); 
-            
+            Uri uri = new Uri("ms-appx:///Assets/Locationpoint.png", UriKind.Absolute);
+
             var image = new Image()
             {
                 Source = new BitmapImage(uri),

@@ -24,41 +24,41 @@ namespace AugmentedSzczecin
             container = new WinRTContainer();
 
             container.RegisterWinRTServices();
-            
+
             container.PerRequest<MainViewModel>();
             container.PerRequest<AboutViewModel>();
-			container.PerRequest<IHttpRequestService, HttpRequestService>();
-			container.PerRequest<IPointOfInterestHandlingService, PointOfInterestHandlingService>();
             container.PerRequest<CurrentMapViewModel>();
             container.PerRequest<LocationListViewModel>();
+            container.PerRequest<IHttpRequestService, HttpRequestService>();
+            container.PerRequest<IPointOfInterestHandlingService, PointOfInterestHandlingService>();
             container.PerRequest<ILocationService, LocationService>();
 
             IoC.GetInstance = this.GetInstance;
         }
 
-		protected override void PrepareViewFirst(Frame rootFrame)
-		{
-			container.RegisterNavigationService(rootFrame);
-		}
+        protected override void PrepareViewFirst(Frame rootFrame)
+        {
+            container.RegisterNavigationService(rootFrame);
+        }
 
-		protected override void OnLaunched(LaunchActivatedEventArgs args)
-		{
-			DisplayRootView<MainView>();
-		}
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        {
+            DisplayRootView<MainView>();
+        }
 
-		protected override object GetInstance(Type service, string key)
-		{
-			return container.GetInstance(service, key);
-		}
+        protected override object GetInstance(Type service, string key)
+        {
+            return container.GetInstance(service, key);
+        }
 
-		protected override IEnumerable<object> GetAllInstances(Type service)
-		{
-			return container.GetAllInstances(service);
-		}
+        protected override IEnumerable<object> GetAllInstances(Type service)
+        {
+            return container.GetAllInstances(service);
+        }
 
-		protected override void BuildUp(object instance)
-		{
-			container.BuildUp(instance);
-		}
-	}
+        protected override void BuildUp(object instance)
+        {
+            container.BuildUp(instance);
+        }
+    }
 }

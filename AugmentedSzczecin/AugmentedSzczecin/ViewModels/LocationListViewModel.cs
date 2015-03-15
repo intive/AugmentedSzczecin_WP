@@ -12,37 +12,37 @@ using Windows.Data.Json;
 
 namespace AugmentedSzczecin.ViewModels
 {
-	public class LocationListViewModel : Screen
-	{
-		private IHttpRequestService _httpRequestService;
-		private IPointOfInterestHandlingService _pointOfInterestHandlingService;
+    public class LocationListViewModel : Screen
+    {
+        private IHttpRequestService _httpRequestService;
+        private IPointOfInterestHandlingService _pointOfInterestHandlingService;
 
-		public LocationListViewModel(IHttpRequestService httpRequestService, IPointOfInterestHandlingService pointOfInterestHandlingService)
-		{
-			_httpRequestService = httpRequestService;
-			_pointOfInterestHandlingService = pointOfInterestHandlingService;
+        public LocationListViewModel(IHttpRequestService httpRequestService, IPointOfInterestHandlingService pointOfInterestHandlingService)
+        {
+            _httpRequestService = httpRequestService;
+            _pointOfInterestHandlingService = pointOfInterestHandlingService;
 
-			LoadData();
-		}
+            LoadData();
+        }
 
-		public async Task<ObservableCollection<PointOfInterest>> LoadData()
-		{
-			string jsonString = await _httpRequestService.HttpGetAsync();
-			return PointOfInterestList = _pointOfInterestHandlingService.GetPointOfInterest(jsonString);
-		}
+        public async Task<ObservableCollection<PointOfInterest>> LoadData()
+        {
+            string jsonString = await _httpRequestService.HttpGetAsync();
+            return PointOfInterestList = _pointOfInterestHandlingService.GetPointOfInterest(jsonString);
+        }
 
-		private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
-		public ObservableCollection<PointOfInterest> PointOfInterestList
-		{
-			get { return _pointOfInterestList; }
-			set
-			{
-				if (_pointOfInterestList != value)
-				{
-					_pointOfInterestList = value;
-					NotifyOfPropertyChange(() => PointOfInterestList);
-				}
-			}
-		}
-	}
+        private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
+        public ObservableCollection<PointOfInterest> PointOfInterestList
+        {
+            get { return _pointOfInterestList; }
+            set
+            {
+                if (_pointOfInterestList != value)
+                {
+                    _pointOfInterestList = value;
+                    NotifyOfPropertyChange(() => PointOfInterestList);
+                }
+            }
+        }
+    }
 }

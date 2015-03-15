@@ -16,11 +16,11 @@ namespace AugmentedSzczecin.ViewModels
     {
 
         private ILocationService _locationService;
-         
+
         public CurrentMapViewModel(ILocationService locationService)
         {
             _locationService = locationService;
-            
+
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             var str = loader.GetString("CurrentMapTitle");
 
@@ -64,12 +64,12 @@ namespace AugmentedSzczecin.ViewModels
         {
             if (_locationService.IsGeolocationEnabled())
             {
-            SetGeolocation();
+                SetGeolocation();
             }
             else
             {
                 GeolocationDisabledMsg();
-            }          
+            }
         }
 
         private async void GeolocationDisabledMsg()
@@ -83,7 +83,7 @@ namespace AugmentedSzczecin.ViewModels
             CenterOfTheMap = await _locationService.SetGeolocation();
         }
 
-        
+
 
         private string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
@@ -159,8 +159,8 @@ namespace AugmentedSzczecin.ViewModels
 
         private Visibility _myLocationPointVisibility = Visibility.Collapsed;
 
-        public Visibility MyLocationPointVisibility 
-        { 
+        public Visibility MyLocationPointVisibility
+        {
             get
             {
                 return _myLocationPointVisibility;
