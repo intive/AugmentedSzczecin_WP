@@ -9,6 +9,7 @@ using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Networking.Connectivity;
+using Windows.UI.Popups;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -62,7 +63,20 @@ namespace AugmentedSzczecin.ViewModels
 
         protected override void OnActivate()
         {
-            SetGeolocation();
+            if (_locationService.IsGeolocationEnabled())
+            {
+                SetGeolocation();
+            }
+            else
+            {
+                GeolocationDisabledMsg();
+            }          
+        }
+
+        private async void GeolocationDisabledMsg()
+        {
+            var msg = new MessageDialog("Geolocation disabled.");
+            await msg.ShowAsync();
         }
 
         private async void SetGeolocation()

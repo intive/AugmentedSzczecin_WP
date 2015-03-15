@@ -6,5 +6,6 @@ namespace AugmentedSzczecin.Interfaces
     public interface ILocationService
     {
         Task<Geopoint> SetGeolocation();
+        bool IsGeolocationEnabled();
     }
 }
