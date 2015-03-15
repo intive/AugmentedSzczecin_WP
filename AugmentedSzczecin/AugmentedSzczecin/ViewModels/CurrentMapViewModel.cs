@@ -54,10 +54,17 @@ namespace AugmentedSzczecin.ViewModels
             if (internetConnectionProfile == null)
             {
                 InternetConnection = false;
+                InternetConnectionDisabledMsg();
                 return;
             }
 
             InternetConnection = true;
+        }
+
+        private async void InternetConnectionDisabledMsg()
+        {
+            var msg = new MessageDialog("Internet Connection disabled.");
+            await msg.ShowAsync();
         }
 
         protected override void OnActivate()
