@@ -27,5 +27,11 @@ namespace AugmentedSzczecin.Services
 
             return currentLocation;
         }
+
+        public bool IsGeolocationEnabled()
+        {
+            Geolocator geolocator = new Geolocator();
+            return geolocator.LocationStatus == PositionStatus.Disabled ? false : true;
+        }
     }
 }

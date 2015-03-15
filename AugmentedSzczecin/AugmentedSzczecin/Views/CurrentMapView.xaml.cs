@@ -3,6 +3,10 @@ using AugmentedSzczecin.Models;
 using AugmentedSzczecin.Services;
 using AugmentedSzczecin.ViewModels;
 using Caliburn.Micro;
+using AugmentedSzczecin.Models;
+using AugmentedSzczecin.Services;
+using AugmentedSzczecin.ViewModels;
+using Caliburn.Micro;
 using System;
 using System.Collections.ObjectModel;
 using Windows.Devices.Geolocation;
@@ -43,10 +47,10 @@ namespace AugmentedSzczecin.Views
                 var newPin = CreatePin();
                 BingMap.Children.Add(newPin);
                 Geopoint geopoint = new Geopoint(new BasicGeoposition
-                {
-                    Longitude = pointOfInterest.Longitude,
-                    Latitude = pointOfInterest.Latitude
-                });
+                        {
+                            Longitude = pointOfInterest.Longitude,
+                            Latitude = pointOfInterest.Latitude
+                        });
                 MapControl.SetLocation(newPin, geopoint);
                 MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
             }
@@ -59,8 +63,8 @@ namespace AugmentedSzczecin.Views
             myGrid.RowDefinitions.Add(new RowDefinition());
             myGrid.Background = new SolidColorBrush(Colors.Transparent);
 
-            Uri uri = new Uri("ms-appx:///Assets/Locationpoint.png", UriKind.Absolute);
-
+            Uri uri = new Uri("ms-appx:///Assets/Locationpoint.png", UriKind.Absolute); 
+            
             var image = new Image()
             {
                 Source = new BitmapImage(uri),

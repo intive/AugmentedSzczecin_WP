@@ -90,6 +90,7 @@
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\HttpRequestService.cs" />
     <Compile Include="Services\PointOfInterestHandlingService.cs" />
+    <Compile Include="Services\LocationService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\LocationListViewModel.cs" />
     <Compile Include="ViewModels\CurrentMapViewModel.cs" />
@@ -164,6 +165,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LocationListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
