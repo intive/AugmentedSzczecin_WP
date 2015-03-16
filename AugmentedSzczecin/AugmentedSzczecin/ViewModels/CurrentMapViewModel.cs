@@ -70,6 +70,10 @@ namespace AugmentedSzczecin.ViewModels
         private async void InternetConnectionDisabledMsg()
         {
             var msg = new MessageDialog("Internet Connection disabled.");
+            msg.Commands.Add(new UICommand("Back", new UICommandInvokedHandler(this.BackButtonInvokedHandler)));
+            msg.DefaultCommandIndex = 0;
+            msg.CancelCommandIndex = 0;
+
             await msg.ShowAsync();
         }
 
