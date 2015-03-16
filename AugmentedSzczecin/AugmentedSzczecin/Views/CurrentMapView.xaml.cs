@@ -34,7 +34,20 @@ namespace AugmentedSzczecin.Views
         {
             this.InitializeComponent();
             _mapLocations = new ObservableCollection<PointOfInterest>();
-            AddPins();
+            LoadMap();
+        }
+
+        private void LoadMap()
+        {
+            object serivesFromCurrentMapVieModel;
+            serivesFromCurrentMapVieModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
+            ((CurrentMapViewModel)serivesFromCurrentMapVieModel).UpdateInternetConnection();
+            bool InternetConnection = ((CurrentMapViewModel)serivesFromCurrentMapVieModel).InternetConnection;
+
+            if (InternetConnection)
+                AddPins();
+            else
+                ((CurrentMapViewModel)serivesFromCurrentMapVieModel).InternetConnectionDisabledMsg();
         }
 
         private async void AddPins()

@@ -52,14 +52,13 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private void UpdateInternetConnection()
+        public void UpdateInternetConnection()
         {
             ConnectionProfile internetConnectionProfile = Windows.Networking.Connectivity.NetworkInformation.GetInternetConnectionProfile();
 
             if (internetConnectionProfile == null)
             {
                 InternetConnection = false;
-                InternetConnectionDisabledMsg();
 
                 return;
             }
@@ -67,7 +66,7 @@ namespace AugmentedSzczecin.ViewModels
             InternetConnection = true;
         }
 
-        private async void InternetConnectionDisabledMsg()
+        public async void InternetConnectionDisabledMsg()
         {
             var msg = new MessageDialog("Internet Connection disabled.");
             msg.Commands.Add(new UICommand("Back", new UICommandInvokedHandler(this.BackButtonInvokedHandler)));
