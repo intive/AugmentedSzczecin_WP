@@ -9,16 +9,21 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Networking.Connectivity;
 using Windows.UI.Popups;
+using Windows.Phone.UI.Input;
+using Windows.UI.Xaml.Controls;
 
 namespace AugmentedSzczecin.ViewModels
 {
     public class CurrentMapViewModel : Screen
     {
-
+        private INavigationService _navigationService;
         private ILocationService _locationService;
 
-        public CurrentMapViewModel(ILocationService locationService)
+        public CurrentMapViewModel(ILocationService locationService, INavigationService navigationService)
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            _navigationService = navigationService;
             _locationService = locationService;
 
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
@@ -55,6 +60,7 @@ namespace AugmentedSzczecin.ViewModels
             {
                 InternetConnection = false;
                 InternetConnectionDisabledMsg();
+
                 return;
             }
 
@@ -79,10 +85,42 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        public void NavigateToMain()
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            _navigationService.GoBack();
+        }
+
         private async void GeolocationDisabledMsg()
         {
             var msg = new MessageDialog("Geolocation disabled.");
+            msg.Commands.Add(new UICommand("Back", new UICommandInvokedHandler(this.BackButtonInvokedHandler)));
+            msg.DefaultCommandIndex = 0;
+            msg.CancelCommandIndex = 0;
+
             await msg.ShowAsync();
+        }
+
+        private void BackButtonInvokedHandler(IUICommand command)
+        {
+            if (command.Label == "Back")
+            {
+                HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+                NavigateToMain();
+            }
+            else
+                return;
+        }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame != null && rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
+                e.Handled = true;
+            }
+
         }
 
         private async void SetGeolocation()
