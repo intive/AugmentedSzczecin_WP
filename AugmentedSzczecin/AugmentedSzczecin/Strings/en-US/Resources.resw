@@ -121,7 +121,7 @@
     <value>Current Location</value>
   </data>
   <data name="SignUpButtonSignUp.Content" xml:space="preserve">
-    <value>Zarejestruj</value>
+    <value>Sign Up</value>
   </data>
   <data name="SignUpEmail.Text" xml:space="preserve">
     <value>E-mail</value>
