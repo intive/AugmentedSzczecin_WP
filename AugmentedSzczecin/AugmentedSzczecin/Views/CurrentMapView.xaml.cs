@@ -54,18 +54,26 @@ namespace AugmentedSzczecin.Views
         {
             object servicesFromLocationListViewModel;
             servicesFromLocationListViewModel = IoC.GetInstance(typeof(LocationListViewModel), null);
+
             _mapLocations = await ((LocationListViewModel)servicesFromLocationListViewModel).LoadData();
-            foreach (PointOfInterest pointOfInterest in _mapLocations)
+            
+            if (_mapLocations != null)
+                foreach (PointOfInterest pointOfInterest in _mapLocations)
+                {
+                    var newPin = CreatePin();
+                    BingMap.Children.Add(newPin);
+                    Geopoint geopoint = new Geopoint(new BasicGeoposition
+                            {
+                                Longitude = pointOfInterest.Longitude,
+                                Latitude = pointOfInterest.Latitude
+                            });
+                    MapControl.SetLocation(newPin, geopoint);
+                    MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
+                }
+            else
             {
-                var newPin = CreatePin();
-                BingMap.Children.Add(newPin);
-                Geopoint geopoint = new Geopoint(new BasicGeoposition
-                        {
-                            Longitude = pointOfInterest.Longitude,
-                            Latitude = pointOfInterest.Latitude
-                        });
-                MapControl.SetLocation(newPin, geopoint);
-                MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
+                object serivesFromCurrentMapVieModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
+                ((CurrentMapViewModel)serivesFromCurrentMapVieModel).InternetConnectionDisabledMsg();
             }
         }
 
