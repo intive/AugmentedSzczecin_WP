@@ -120,4 +120,13 @@
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
   </data>
+  <data name="SignUpButtonSignUp.Content" xml:space="preserve">
+    <value>Zarejestruj</value>
+  </data>
+  <data name="SignUpEmail.Text" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="SignUpPassword.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
 </root>

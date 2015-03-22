@@ -8,7 +8,15 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <StackPanel VerticalAlignment="Center">
+        
+        <TextBlock FontSize="15" x:Uid="SignUpEmail"/>
+        <TextBox x:Name="Email" VerticalAlignment="Stretch" />
 
-    </Grid>
+        <TextBlock FontSize="15" x:Uid="SignUpPassword" Margin="0,20,0,0"/>
+        <PasswordBox  x:Name="Password" VerticalAlignment="Stretch"/>
+
+        <Button x:Uid="SignUpButtonSignUp" Margin="0,20,0,0" HorizontalAlignment="Center" />
+
+    </StackPanel>
 </Page>
