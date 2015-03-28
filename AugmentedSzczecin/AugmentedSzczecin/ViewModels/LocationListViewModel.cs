@@ -9,55 +9,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Json;
+using AugmentedSzczecin.Events;
 
 namespace AugmentedSzczecin.ViewModels
 {
     public class LocationListViewModel : Screen
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IHttpRequestService _httpRequestService;
-        private readonly IPointOfInterestHandlingService _pointOfInterestHandlingService;
+        private readonly IPointOfInterestService _pointOfInterestService;
 
-        public LocationListViewModel(IEventAggregator eventAggregator, IHttpRequestService httpRequestService, IPointOfInterestHandlingService pointOfInterestHandlingService)
+        public LocationListViewModel(IEventAggregator eventAggregator, IPointOfInterestService pointOfInterestService)
         {
             _eventAggregator = eventAggregator;
-            _httpRequestService = httpRequestService;
-            _pointOfInterestHandlingService = pointOfInterestHandlingService;
+            _pointOfInterestService = pointOfInterestService;
         }
 
         protected override void OnActivate()
         {
             //EventAggr
+            _pointOfInterestService.Refresh();
+            _eventAggregator.Subscribe(this);
             base.OnActivate();
-            LoadData();
         }
 
         protected override void OnDeactivate(bool close)
         {
+            _eventAggregator.Unsubscribe(this);
             base.OnDeactivate(close);
         }
 
-        public async Task<ObservableCollection<PointOfInterest>> LoadData()
+        public void Handle(PointOfInterestLoadedEvent e)
         {
-            string jsonString = null;
-            try
-            {
-                jsonString = await _httpRequestService.HttpGetAsync();
-            }
-            catch (Exception)
-            {
-                return PointOfInterestList = null;
-            }
-            return PointOfInterestList = _pointOfInterestHandlingService.GetPointOfInterest(jsonString);
+            _pointOfInterestList = e.PointOfInterestList;
         }
 
-        private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
+        public void Handle(PointOfInterestLoadFailedEvent e)
+        {
+
+        }
+
+        private ObservableCollection<PointOfInterest> _pointOfInterestList;
         public ObservableCollection<PointOfInterest> PointOfInterestList
         {
             get { return _pointOfInterestList; }
             set
             {
-                if (_pointOfInterestList != value)
+                if (_pointOfInterestList != null && _pointOfInterestList != value)
                 {
                     _pointOfInterestList = value;
                     NotifyOfPropertyChange(() => PointOfInterestList);

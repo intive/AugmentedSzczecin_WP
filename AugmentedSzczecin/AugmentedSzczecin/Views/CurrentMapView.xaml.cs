@@ -55,7 +55,7 @@ namespace AugmentedSzczecin.Views
             object servicesFromLocationListViewModel;
             servicesFromLocationListViewModel = IoC.GetInstance(typeof(LocationListViewModel), null);
 
-            _mapLocations = await ((LocationListViewModel)servicesFromLocationListViewModel).LoadData();
+            //_mapLocations = await ((LocationListViewModel)servicesFromLocationListViewModel).LoadData();
             
             if (_mapLocations != null)
                 foreach (PointOfInterest pointOfInterest in _mapLocations)
