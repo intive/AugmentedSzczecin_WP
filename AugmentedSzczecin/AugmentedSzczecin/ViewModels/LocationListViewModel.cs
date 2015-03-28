@@ -13,7 +13,7 @@ using AugmentedSzczecin.Events;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class LocationListViewModel : Screen
+    public class LocationListViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent> 
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IPointOfInterestService _pointOfInterestService;
@@ -40,7 +40,7 @@ namespace AugmentedSzczecin.ViewModels
 
         public void Handle(PointOfInterestLoadedEvent e)
         {
-            _pointOfInterestList = e.PointOfInterestList;
+            PointOfInterestList = e.PointOfInterestList;
         }
 
         public void Handle(PointOfInterestLoadFailedEvent e)
@@ -48,7 +48,7 @@ namespace AugmentedSzczecin.ViewModels
 
         }
 
-        private ObservableCollection<PointOfInterest> _pointOfInterestList;
+        private ObservableCollection<PointOfInterest> _pointOfInterestList  = new ObservableCollection<PointOfInterest>();
         public ObservableCollection<PointOfInterest> PointOfInterestList
         {
             get { return _pointOfInterestList; }
