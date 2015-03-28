@@ -31,7 +31,7 @@ namespace AugmentedSzczecin
             container.PerRequest<LocationListViewModel>();
             container.PerRequest<SignUpViewModel>();
             container.PerRequest<IHttpRequestService, HttpRequestService>();
-            container.PerRequest<IPointOfInterestHandlingService, PointOfInterestHandlingService>();
+            container.PerRequest<IPointOfInterestHandlingService, PointOfInterestService>();
             container.PerRequest<ILocationService, LocationService>();
 
             IoC.GetInstance = this.GetInstance;

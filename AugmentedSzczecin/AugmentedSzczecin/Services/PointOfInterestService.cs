@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AugmentedSzczecin.Services
 {
-    public class PointOfInterestHandlingService : IPointOfInterestHandlingService
+    public class PointOfInterestService : IPointOfInterestHandlingService
     {
         public ObservableCollection<PointOfInterest> GetPointOfInterest(string jsonString)
         {
