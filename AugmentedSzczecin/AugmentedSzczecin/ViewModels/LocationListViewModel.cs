@@ -14,15 +14,27 @@ namespace AugmentedSzczecin.ViewModels
 {
     public class LocationListViewModel : Screen
     {
-        private IHttpRequestService _httpRequestService;
-        private IPointOfInterestHandlingService _pointOfInterestHandlingService;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IHttpRequestService _httpRequestService;
+        private readonly IPointOfInterestHandlingService _pointOfInterestHandlingService;
 
-        public LocationListViewModel(IHttpRequestService httpRequestService, IPointOfInterestHandlingService pointOfInterestHandlingService)
+        public LocationListViewModel(IEventAggregator eventAggregator, IHttpRequestService httpRequestService, IPointOfInterestHandlingService pointOfInterestHandlingService)
         {
+            _eventAggregator = eventAggregator;
             _httpRequestService = httpRequestService;
             _pointOfInterestHandlingService = pointOfInterestHandlingService;
+        }
 
+        protected override void OnActivate()
+        {
+            //EventAggr
+            base.OnActivate();
             LoadData();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            base.OnDeactivate(close);
         }
 
         public async Task<ObservableCollection<PointOfInterest>> LoadData()
