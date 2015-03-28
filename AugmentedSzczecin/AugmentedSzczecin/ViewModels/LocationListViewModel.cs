@@ -16,9 +16,9 @@ namespace AugmentedSzczecin.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IHttpRequestService _httpRequestService;
-        private readonly IPointOfInterestService _pointOfInterestHandlingService;
+        private readonly IPointOfInterestHandlingService _pointOfInterestHandlingService;
 
-        public LocationListViewModel(IEventAggregator eventAggregator, IHttpRequestService httpRequestService, IPointOfInterestService pointOfInterestHandlingService)
+        public LocationListViewModel(IEventAggregator eventAggregator, IHttpRequestService httpRequestService, IPointOfInterestHandlingService pointOfInterestHandlingService)
         {
             _eventAggregator = eventAggregator;
             _httpRequestService = httpRequestService;

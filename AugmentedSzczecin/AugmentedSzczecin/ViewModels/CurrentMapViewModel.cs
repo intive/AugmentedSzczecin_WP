@@ -24,8 +24,6 @@ namespace AugmentedSzczecin.ViewModels
             _eventAggregator = eventAggregator;
             _navigationService = navigationService;
             _locationService = locationService;
-
-            _eventAggregator.Subscribe(this);
         }
 
         protected override void OnActivate()

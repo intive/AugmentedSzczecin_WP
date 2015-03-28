@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AugmentedSzczecin.Interfaces
 {
-    public interface IPointOfInterestService
+    public interface IPointOfInterestHandlingService
     {
         ObservableCollection<PointOfInterest> GetPointOfInterest(string jsonString);
     }

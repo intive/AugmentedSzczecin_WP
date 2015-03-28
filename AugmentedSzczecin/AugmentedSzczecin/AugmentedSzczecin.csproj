@@ -82,10 +82,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IPointOfInterestService.cs" />
+    <Compile Include="Interfaces\IHttpRequestService.cs" />
+    <Compile Include="Interfaces\IPointOfInterestHandlingService.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
     <Compile Include="Interfaces\ILocationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\HttpRequestService.cs" />
     <Compile Include="Services\PointOfInterestService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
