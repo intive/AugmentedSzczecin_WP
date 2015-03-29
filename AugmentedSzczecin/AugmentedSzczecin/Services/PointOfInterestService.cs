@@ -15,7 +15,7 @@ namespace AugmentedSzczecin.Services
 {
     public class PointOfInterestService : IPointOfInterestService
     {
-        private IEventAggregator _eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
         public PointOfInterestService(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;

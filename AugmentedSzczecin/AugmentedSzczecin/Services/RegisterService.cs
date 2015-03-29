@@ -12,10 +12,10 @@ namespace AugmentedSzczecin.Services
 {
     public class RegisterService : IRegisterService
     {
-        private IEventAggregator _event;
-        public RegisterService(IEventAggregator events)
+        private IEventAggregator _eventAggregator;
+        public RegisterService(IEventAggregator eventAggregator)
         {
-                
+            _eventAggregator = eventAggregator;
         }
 
         public async void Register(string email, string password)
