@@ -77,6 +77,24 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
+
+        private bool _areControlsEnabled = true;
+
+        public bool AreControlsEnabled
+        {
+            get
+            {
+                return _areControlsEnabled;
+            }
+            set
+            {
+                if (value != _areControlsEnabled)
+                {
+                    _areControlsEnabled = value;
+                    NotifyOfPropertyChange(() => AreControlsEnabled);
+                }
+            }
+        }
         
         private PasswordBox _passwordBox;
 
@@ -222,6 +240,7 @@ namespace AugmentedSzczecin.ViewModels
         {
             if (ValidationCheck)
             {
+                AreControlsEnabled = false;
                 IsProgressRingVisible = Visibility.Visible;
                 IsProgressRingActive = true;
                 _registerService.Register(Email, Password);
@@ -258,12 +277,14 @@ namespace AugmentedSzczecin.ViewModels
 
         public void Handle(RegisterFailedEvent e)
         {
+            AreControlsEnabled = true;
             IsProgressRingVisible = Visibility.Collapsed;
             IsProgressRingActive = false;
         }
 
         public void Handle(RegisterSuccessEvent e)
         {
+            AreControlsEnabled = true;
             IsProgressRingVisible = Visibility.Collapsed;
             IsProgressRingActive = false;
         }
