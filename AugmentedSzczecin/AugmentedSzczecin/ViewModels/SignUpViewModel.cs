@@ -185,20 +185,26 @@ namespace AugmentedSzczecin.ViewModels
 
         private async void WrongValidationMessageDialog()
         {
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var Loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             string Message = "";
-            if (!IsEmailEmptyValid)
-                Message += loader.GetString("SignUpEmailEmpty") + "\n";
+            
+            if (!IsPasswordEmptyValid && !IsEmailEmptyValid)
+                Message += Loader.GetString("SignUpEmptyForm");
+            else 
+            { 
+                if (!IsEmailEmptyValid)
+                    Message += Loader.GetString("SignUpEmailEmpty") + "\n";
 
-            if (!IsEmailMatchValid && IsEmailEmptyValid)
-                Message += loader.GetString("SignUpEmailMatch") + "\n";
+                if (!IsEmailMatchValid && IsEmailEmptyValid)
+                    Message += Loader.GetString("SignUpEmailMatch") + "\n";
 
-            if (!IsPasswordLengthValid && IsPasswordEmptyValid)
-                Message += loader.GetString("SignUpPasswordLength") + "\n";
+                if (!IsPasswordLengthValid && IsPasswordEmptyValid)
+                    Message += Loader.GetString("SignUpPasswordLength") + "\n";
 
-            if (!IsPasswordEmptyValid)
-                Message += loader.GetString("SignUpPasswordEmpty");
-
+                if (!IsPasswordEmptyValid)
+                    Message += Loader.GetString("SignUpPasswordEmpty");
+            }
+           
             var Msg = new MessageDialog(Message);
             await Msg.ShowAsync();
         }
