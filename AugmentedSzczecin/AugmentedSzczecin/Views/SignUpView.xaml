@@ -5,18 +5,19 @@
     xmlns:local="using:AugmentedSzczecin.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:caliburn="using:Caliburn.Micro"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel VerticalAlignment="Center">
-        
+
         <TextBlock FontSize="15" x:Uid="SignUpEmail"/>
-        <TextBox x:Name="Email" VerticalAlignment="Stretch" />
+        <TextBox x:Name="Email" VerticalAlignment="Stretch" caliburn:Message.Attach="[Event TextChanged] = [Action ValidateEmail]" />
 
         <TextBlock FontSize="15" x:Uid="SignUpPassword" Margin="0,20,0,0"/>
         <PasswordBox  x:Name="Password" VerticalAlignment="Stretch"/>
 
-        <Button x:Uid="SignUpButtonSignUp" Margin="0,20,0,0" HorizontalAlignment="Center" />
+        <Button x:Name="Register" x:Uid="SignUpButtonSignUp" Margin="0,20,0,0" HorizontalAlignment="Center" />
 
     </StackPanel>
 </Page>
