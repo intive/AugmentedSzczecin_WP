@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
-using System.Threading.Tasks;
 using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
@@ -21,7 +17,7 @@ namespace AugmentedSzczecin.Services
 
         public async void Register(string email, string password)
         {
-            Uri baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/user");
+            var baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/user");
 
             try
             {
@@ -29,7 +25,7 @@ namespace AugmentedSzczecin.Services
                 {
                     using (
                         var content = new StringContent("{ \"email\": \"" + email + ", \"password\": \"" + password + " }",
-                            System.Text.Encoding.Unicode, "application/json"))
+                            Encoding.Unicode, "application/json"))
                     {
                         using (var response = await httpClient.PostAsync("user", content))
                         {
