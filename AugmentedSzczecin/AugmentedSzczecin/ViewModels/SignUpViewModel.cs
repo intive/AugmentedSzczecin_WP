@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Caliburn.Micro;
 using Windows.UI.Xaml.Controls;
@@ -29,6 +25,11 @@ namespace AugmentedSzczecin.ViewModels
             _eventAggregator.Subscribe(this);
             base.OnActivate();
         }
+        protected override void OnDeactivate(bool close)
+        {
+            _eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
+        }
 
         protected override void OnViewAttached(object view, object context)
         {
@@ -36,21 +37,11 @@ namespace AugmentedSzczecin.ViewModels
             base.OnViewAttached(view, context);
         }
 
-        protected override void OnDeactivate(bool close)
-        {
-            _eventAggregator.Unsubscribe(this);
-            base.OnDeactivate(close);
-        }
-
         private Visibility _isProgressRingVisible = Visibility.Collapsed;
-
         public Visibility IsProgressRingVisible
         {
-            get 
-            {
-                return _isProgressRingVisible; 
-            }
-            set 
+            get { return _isProgressRingVisible; }
+            set
             {
                 if (value != _isProgressRingVisible)
                 {
@@ -60,14 +51,10 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool _isProgressRingActive = false;
-
+        private bool _isProgressRingActive;
         public bool IsProgressRingActive
         {
-            get
-            {
-                return _isProgressRingActive;
-            }
+            get { return _isProgressRingActive; }
             set
             {
                 if (value != _isProgressRingActive)
@@ -79,13 +66,9 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private bool _areControlsEnabled = true;
-
         public bool AreControlsEnabled
         {
-            get
-            {
-                return _areControlsEnabled;
-            }
+            get { return _areControlsEnabled; }
             set
             {
                 if (value != _areControlsEnabled)
@@ -95,16 +78,13 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
-        
+
         private PasswordBox _passwordBox;
 
         private string _password;
         public string Password
         {
-            get
-            {
-                return _password;
-            }
+            get { return _password; }
             set
             {
                 if (value != _password)
@@ -121,10 +101,7 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isPasswordLengthValid;
         public bool IsPasswordLengthValid
         {
-            get
-            {
-                return _isPasswordLengthValid;
-            }
+            get { return _isPasswordLengthValid; }
             set
             {
                 if (value != _isPasswordLengthValid)
@@ -138,10 +115,7 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isPasswordEmptyValid;
         public bool IsPasswordEmptyValid
         {
-            get
-            {
-                return _isPasswordEmptyValid;
-            }
+            get { return _isPasswordEmptyValid; }
             set
             {
                 if (value != _isPasswordEmptyValid)
@@ -251,28 +225,28 @@ namespace AugmentedSzczecin.ViewModels
 
         private async void WrongValidationMessageDialog()
         {
-            var Loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            string Message = "";
-            
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            string message = "";
+
             if (!IsPasswordEmptyValid && !IsEmailEmptyValid)
-                Message += Loader.GetString("SignUpEmptyForm");
-            else 
-            { 
+                message += loader.GetString("SignUpEmptyForm");
+            else
+            {
                 if (!IsEmailEmptyValid)
-                    Message += Loader.GetString("SignUpEmailEmpty") + "\n";
+                    message += loader.GetString("SignUpEmailEmpty") + "\n";
 
                 if (!IsEmailMatchValid && IsEmailEmptyValid)
-                    Message += Loader.GetString("SignUpEmailMatch") + "\n";
+                    message += loader.GetString("SignUpEmailMatch") + "\n";
 
                 if (!IsPasswordLengthValid && IsPasswordEmptyValid)
-                    Message += Loader.GetString("SignUpPasswordLength") + "\n";
+                    message += loader.GetString("SignUpPasswordLength") + "\n";
 
                 if (!IsPasswordEmptyValid)
-                    Message += Loader.GetString("SignUpPasswordEmpty");
+                    message += loader.GetString("SignUpPasswordEmpty");
             }
-           
-            var Msg = new MessageDialog(Message);
-            await Msg.ShowAsync();
+
+            var msg = new MessageDialog(message);
+            await msg.ShowAsync();
         }
 
         public void Handle(RegisterFailedEvent e)
