@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Caliburn.Micro;
 using Windows.UI.Xaml.Controls;
+using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Views;
 
 namespace AugmentedSzczecin.ViewModels
@@ -14,9 +15,11 @@ namespace AugmentedSzczecin.ViewModels
     public class SignUpViewModel : Screen
     {
         private readonly IEventAggregator _eventAggregator;
-        public SignUpViewModel(IEventAggregator eventAggregator)
+        private readonly IRegisterService _registerService;
+        public SignUpViewModel(IEventAggregator eventAggregator, IRegisterService registerService)
         {
             _eventAggregator = eventAggregator;
+            _registerService = registerService;
         }
 
         protected override void OnActivate()
@@ -168,6 +171,7 @@ namespace AugmentedSzczecin.ViewModels
 
         public void Register()
         {
+            _registerService.Register(Email, Password);
         }
     }
 }
