@@ -25,6 +25,8 @@ namespace AugmentedSzczecin
 
             container.RegisterWinRTServices();
 
+            //container.Singleton<IEventAggregator, EventAggregator>();
+            //container.RegisterSingleton(typeof(EventAggregator), "EventAggregator", typeof(EventAggregator));
             container.PerRequest<MainViewModel>();
             container.PerRequest<AboutViewModel>();
             container.PerRequest<CurrentMapViewModel>();
@@ -32,7 +34,6 @@ namespace AugmentedSzczecin
             container.PerRequest<SignUpViewModel>();
             container.PerRequest<IPointOfInterestService, PointOfInterestService>();
             container.PerRequest<ILocationService, LocationService>();
-
             IoC.GetInstance = this.GetInstance;
         }
 

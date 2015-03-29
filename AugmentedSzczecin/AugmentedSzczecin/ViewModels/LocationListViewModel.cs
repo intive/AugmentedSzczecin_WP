@@ -26,10 +26,14 @@ namespace AugmentedSzczecin.ViewModels
 
         protected override void OnActivate()
         {
-            //EventAggr
-            _pointOfInterestService.Refresh();
             _eventAggregator.Subscribe(this);
             base.OnActivate();
+            RefreshPointOfInterestService();
+        }
+
+        public void RefreshPointOfInterestService()
+        {
+            _pointOfInterestService.Refresh();
         }
 
         protected override void OnDeactivate(bool close)

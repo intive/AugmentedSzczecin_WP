@@ -20,15 +20,24 @@ namespace AugmentedSzczecin.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly INavigationService _navigationService;
         private readonly ILocationService _locationService;
-        public CurrentMapViewModel(IEventAggregator eventAggregator, ILocationService locationService, INavigationService navigationService)
+        private readonly IPointOfInterestService _pointOfInterestService;
+
+        public CurrentMapViewModel(IEventAggregator eventAggregator, 
+            ILocationService locationService, IPointOfInterestService pointOfInterestService,
+            INavigationService navigationService)
         {
             _eventAggregator = eventAggregator;
             _navigationService = navigationService;
             _locationService = locationService;
+            _pointOfInterestService = pointOfInterestService;
         }
 
         protected override void OnActivate()
         {
+            _eventAggregator.Subscribe(this);
+            base.OnActivate();
+            RefreshPointOfInterestService();
+            
             CountZoomLevel();
             UpdateInternetConnection();
             
@@ -40,9 +49,14 @@ namespace AugmentedSzczecin.ViewModels
                 GeolocationDisabledMsg();
         }
 
+        public void RefreshPointOfInterestService()
+        {
+            _pointOfInterestService.Refresh();
+        }
+
         protected override void OnDeactivate(bool close)
         {
-
+            _eventAggregator.Unsubscribe(this);
             base.OnDeactivate(close);
         }
         
@@ -67,7 +81,6 @@ namespace AugmentedSzczecin.ViewModels
             if (internetConnectionProfile == null)
             {
                 InternetConnection = false;
-
                 return;
             }
 
@@ -83,8 +96,6 @@ namespace AugmentedSzczecin.ViewModels
 
             await msg.ShowAsync();
         }
-
-
 
         public void NavigateToMain()
         {

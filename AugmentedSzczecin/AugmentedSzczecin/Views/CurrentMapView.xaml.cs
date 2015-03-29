@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using AugmentedSzczecin.Events;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -26,36 +27,42 @@ namespace AugmentedSzczecin.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CurrentMapView : Page
+    public sealed partial class CurrentMapView : Page, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
 
         private ObservableCollection<PointOfInterest> _mapLocations;
+        object EventAgg;
+
         public CurrentMapView()
         {
             this.InitializeComponent();
             _mapLocations = new ObservableCollection<PointOfInterest>();
-            LoadMap();
+
+            EventAgg = IoC.GetInstance(typeof(IEventAggregator), null);
+            ((EventAggregator)EventAgg).Subscribe(this);
+
+            CheckInternetConnection();
         }
 
-        private void LoadMap()
+        ~CurrentMapView()
         {
-            object serivesFromCurrentMapVieModel;
-            serivesFromCurrentMapVieModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
-            ((CurrentMapViewModel)serivesFromCurrentMapVieModel).UpdateInternetConnection();
-            bool InternetConnection = ((CurrentMapViewModel)serivesFromCurrentMapVieModel).InternetConnection;
-
-            if (InternetConnection)
-                AddPins();
-            else
-                ((CurrentMapViewModel)serivesFromCurrentMapVieModel).InternetConnectionDisabledMsg();
+            ((EventAggregator)EventAgg).Unsubscribe(this);
         }
 
-        private async void AddPins()
+        private void CheckInternetConnection()
         {
-            object servicesFromLocationListViewModel;
-            servicesFromLocationListViewModel = IoC.GetInstance(typeof(LocationListViewModel), null);
+            object servicesFromCurrentMapViewModel;
+            servicesFromCurrentMapViewModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
+            ((CurrentMapViewModel)servicesFromCurrentMapViewModel).UpdateInternetConnection();
+            bool InternetConnection = ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnection;
 
-            //_mapLocations = await ((LocationListViewModel)servicesFromLocationListViewModel).LoadData();
+            if (!InternetConnection)
+                ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnectionDisabledMsg();
+        }
+
+        public void Handle(PointOfInterestLoadedEvent e)
+        {
+            _mapLocations = e.PointOfInterestList;
             
             if (_mapLocations != null)
                 foreach (PointOfInterest pointOfInterest in _mapLocations)
@@ -70,11 +77,6 @@ namespace AugmentedSzczecin.Views
                     MapControl.SetLocation(newPin, geopoint);
                     MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
                 }
-            else
-            {
-                object serivesFromCurrentMapVieModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
-                ((CurrentMapViewModel)serivesFromCurrentMapVieModel).InternetConnectionDisabledMsg();
-            }
         }
 
         private DependencyObject CreatePin()
@@ -96,6 +98,11 @@ namespace AugmentedSzczecin.Views
             myGrid.Children.Add(image);
 
             return myGrid;
+        }
+
+        public void Handle(PointOfInterestLoadFailedEvent e)
+        {
+
         }
 
 
