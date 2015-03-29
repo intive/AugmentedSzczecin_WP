@@ -15,7 +15,7 @@
         <TextBox x:Name="Email" VerticalAlignment="Stretch"/>
 
         <TextBlock FontSize="15" x:Uid="SignUpPassword" Margin="0,20,0,0"/>
-        <PasswordBox  x:Name="Password" VerticalAlignment="Stretch"/>
+        <PasswordBox x:FieldModifier="Public" x:Name="Password" VerticalAlignment="Stretch"/>
 
         <Button x:Name="Register" x:Uid="SignUpButtonSignUp" Margin="0,20,0,0" HorizontalAlignment="Center" />
 
