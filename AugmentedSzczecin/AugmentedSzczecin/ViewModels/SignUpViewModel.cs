@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Controls;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Views;
 using AugmentedSzczecin.Events;
+using Windows.UI.Xaml;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -25,6 +26,7 @@ namespace AugmentedSzczecin.ViewModels
 
         protected override void OnActivate()
         {
+            _eventAggregator.Subscribe(this);
             base.OnActivate();
         }
 
@@ -34,6 +36,48 @@ namespace AugmentedSzczecin.ViewModels
             base.OnViewAttached(view, context);
         }
 
+        protected override void OnDeactivate(bool close)
+        {
+            _eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
+        }
+
+        private Visibility _isProgressRingVisible = Visibility.Collapsed;
+
+        public Visibility IsProgressRingVisible
+        {
+            get 
+            {
+                return _isProgressRingVisible; 
+            }
+            set 
+            {
+                if (value != _isProgressRingVisible)
+                {
+                    _isProgressRingVisible = value;
+                    NotifyOfPropertyChange(() => IsProgressRingVisible);
+                }
+            }
+        }
+
+        private bool _isProgressRingActive = false;
+
+        public bool IsProgressRingActive
+        {
+            get
+            {
+                return _isProgressRingActive;
+            }
+            set
+            {
+                if (value != _isProgressRingActive)
+                {
+                    _isProgressRingActive = value;
+                    NotifyOfPropertyChange(() => IsProgressRingActive);
+                }
+            }
+        }
+        
         private PasswordBox _passwordBox;
 
         private string _password;
@@ -178,6 +222,8 @@ namespace AugmentedSzczecin.ViewModels
         {
             if (ValidationCheck)
             {
+                IsProgressRingVisible = Visibility.Visible;
+                IsProgressRingActive = true;
                 _registerService.Register(Email, Password);
             }
             else
@@ -212,12 +258,14 @@ namespace AugmentedSzczecin.ViewModels
 
         public void Handle(RegisterFailedEvent e)
         {
-            throw new NotImplementedException();
+            IsProgressRingVisible = Visibility.Collapsed;
+            IsProgressRingActive = false;
         }
 
         public void Handle(RegisterSuccessEvent e)
         {
-            throw new NotImplementedException();
+            IsProgressRingVisible = Visibility.Collapsed;
+            IsProgressRingActive = false;
         }
     }
 }

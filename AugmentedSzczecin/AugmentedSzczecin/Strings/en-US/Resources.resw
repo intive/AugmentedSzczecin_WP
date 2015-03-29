@@ -144,4 +144,7 @@
   <data name="SignUpPasswordLength" xml:space="preserve">
     <value>Password too short.</value>
   </data>
+  <data name="SignUpProgressRing.Text" xml:space="preserve">
+    <value>Register</value>
+  </data>
 </root>
