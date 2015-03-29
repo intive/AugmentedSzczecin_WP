@@ -12,7 +12,7 @@
     <StackPanel VerticalAlignment="Center">
 
         <TextBlock FontSize="15" x:Uid="SignUpEmail"/>
-        <TextBox x:Name="Email" VerticalAlignment="Stretch" caliburn:Message.Attach="[Event TextChanged] = [Action ValidateEmail]" />
+        <TextBox x:Name="Email" VerticalAlignment="Stretch"/>
 
         <TextBlock FontSize="15" x:Uid="SignUpPassword" Margin="0,20,0,0"/>
         <PasswordBox  x:Name="Password" VerticalAlignment="Stretch"/>

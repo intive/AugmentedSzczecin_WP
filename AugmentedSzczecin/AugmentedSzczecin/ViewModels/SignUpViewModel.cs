@@ -17,13 +17,11 @@ namespace AugmentedSzczecin.ViewModels
             _eventAggregator = eventAggregator;
         }
 
-        private void ValidateEmail()
+        protected override void OnActivate()
         {
-            IsEmailValid = (!String.IsNullOrEmpty(Email) &&
-                            Regex.IsMatch(Email,
-                                @"^(?("")(""[^""]+?""@)|(([0-9a-zA-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-z])@))" +
-                                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-z][-\w]*[0-9a-zA-z]*\.)+[a-zA-z0-9]{2,24}))$"));
+            base.OnActivate();
         }
+
 
         private string _email;
         public string Email
@@ -34,27 +32,58 @@ namespace AugmentedSzczecin.ViewModels
                 if (_email != value)
                 {
                     _email = value;
-                    ValidateEmail();
+                    ValidateEmailMatch();
+                    ValidateEmailEmpty();
                     NotifyOfPropertyChange(() => Email);
                 }
             }
         }
 
-        private bool _isEmailValid;
-        public bool IsEmailValid
+        private bool _isEmailEmptyValid;
+        public bool IsEmailEmptyValid
         {
-            get { return _isEmailValid; }
+            get { return _isEmailEmptyValid; }
             set
             {
-                _isEmailValid = value;
-                NotifyOfPropertyChange(() => IsEmailValid);
-                NotifyOfPropertyChange(() => CanRegister);
+                if (_isEmailEmptyValid != value)
+                {
+                    _isEmailEmptyValid = value;
+                    NotifyOfPropertyChange(() => IsEmailEmptyValid);
+                    NotifyOfPropertyChange(() => CanRegister);
+                }
             }
+        }
+
+        private bool _isEmailMatchValid;
+        public bool IsEmailMatchValid
+        {
+            get { return _isEmailMatchValid; }
+            set
+            {
+                if (_isEmailMatchValid != value)
+                {
+                    _isEmailMatchValid = value;
+                    NotifyOfPropertyChange(() => IsEmailMatchValid);
+                    NotifyOfPropertyChange(() => CanRegister);
+                }
+            }
+        }
+
+        private void ValidateEmailEmpty()
+        {
+            IsEmailEmptyValid = !String.IsNullOrEmpty(Email);
+        }
+
+        private void ValidateEmailMatch()
+        {
+            IsEmailMatchValid = Regex.IsMatch(Email,
+                @"^(?("")(""[^""]+?""@)|(([0-9a-zA-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-z][-\w]*[0-9a-zA-z]*\.)+[a-zA-z0-9]{2,24}))$");
         }
 
         public bool CanRegister
         {
-            get { return IsEmailValid; }
+            get { return (IsEmailEmptyValid && IsEmailMatchValid); }
         }
 
         public void Register()
