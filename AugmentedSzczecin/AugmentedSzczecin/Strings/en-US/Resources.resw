@@ -126,7 +126,19 @@
   <data name="SignUpEmail.Text" xml:space="preserve">
     <value>E-mail</value>
   </data>
+  <data name="SignUpEmailEmpty" xml:space="preserve">
+    <value>E-mail not specified.</value>
+  </data>
+  <data name="SignUpEmailMatch" xml:space="preserve">
+    <value>Invalid E-mail.</value>
+  </data>
   <data name="SignUpPassword.Text" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="SignUpPasswordEmpty" xml:space="preserve">
+    <value>Password not specified.</value>
+  </data>
+  <data name="SignUpPasswordLength" xml:space="preserve">
+    <value>Password too short.</value>
   </data>
 </root>

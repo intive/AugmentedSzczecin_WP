@@ -39,17 +39,18 @@ namespace AugmentedSzczecin.ViewModels
 
         public string Password
         {
-            get
-            {
-                return _password;
+            get 
+            { 
+                return _password; 
             }
-            set
-            {
+            set 
+            { 
                 if (value != _password)
                 {
                     _password = value;
                     ValidatePasswordLength();
                     ValidatePasswordEmpty();
+                    CheckValidation();
                     NotifyOfPropertyChange(() => Password);
                 }
             }
@@ -61,16 +62,15 @@ namespace AugmentedSzczecin.ViewModels
         {
             get
             {
-                return _isPasswordLengthValid;
+                return _isPasswordLengthValid; 
             }
-            set
+            set 
             {
                 if (value != _isPasswordLengthValid)
                 {
                     _isPasswordLengthValid = value;
                     NotifyOfPropertyChange(() => IsPasswordLengthValid);
-                    NotifyOfPropertyChange(() => CanRegister);
-                }
+                } 
             }
         }
 
@@ -88,7 +88,6 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _isPasswordEmptyValid = value;
                     NotifyOfPropertyChange(() => IsPasswordEmptyValid);
-                    NotifyOfPropertyChange(() => CanRegister);
                 }
             }
         }
@@ -102,7 +101,7 @@ namespace AugmentedSzczecin.ViewModels
         {
             IsPasswordEmptyValid = !String.IsNullOrEmpty(_passwordBox.Password);
         }
-
+        
         private string _email;
         public string Email
         {
@@ -114,6 +113,7 @@ namespace AugmentedSzczecin.ViewModels
                     _email = value;
                     ValidateEmailMatch();
                     ValidateEmailEmpty();
+                    CheckValidation();
                     NotifyOfPropertyChange(() => Email);
                 }
             }
@@ -129,7 +129,6 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _isEmailEmptyValid = value;
                     NotifyOfPropertyChange(() => IsEmailEmptyValid);
-                    NotifyOfPropertyChange(() => CanRegister);
                 }
             }
         }
@@ -144,7 +143,6 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _isEmailMatchValid = value;
                     NotifyOfPropertyChange(() => IsEmailMatchValid);
-                    NotifyOfPropertyChange(() => CanRegister);
                 }
             }
         }
@@ -161,17 +159,56 @@ namespace AugmentedSzczecin.ViewModels
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-z][-\w]*[0-9a-zA-z]*\.)+[a-zA-z0-9]{2,24}))$");
         }
 
-        public bool CanRegister
+        private bool _validationCheck;
+
+        public bool ValidationCheck
         {
-            get
-            {
-                return IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid;
+            get 
+            { 
+                return _validationCheck; 
+            }
+            set 
+            { 
+                _validationCheck = value;
+                NotifyOfPropertyChange(() => ValidationCheck);
             }
         }
 
+        private void CheckValidation()
+        {
+            ValidationCheck = IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid;
+        }
+
+        
         public void Register()
         {
-            _registerService.Register(Email, Password);
+            if (ValidationCheck)
+            {
+                _registerService.Register(Email, Password);
+            }
+            else
+                WrongValidationMessageDialog();
+        }
+
+        private async void WrongValidationMessageDialog()
+        {
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            string Message = "";
+            if (!IsEmailEmptyValid)
+                Message += loader.GetString("SignUpEmailEmpty") + "\n";
+
+            if (!IsEmailMatchValid && IsEmailEmptyValid)
+                Message += loader.GetString("SignUpEmailMatch") + "\n";
+
+            if (!IsPasswordLengthValid && IsPasswordEmptyValid)
+                Message += loader.GetString("SignUpPasswordLength") + "\n";
+
+            if (!IsPasswordEmptyValid)
+                Message += loader.GetString("SignUpPasswordEmpty");
+
+            var Msg = new MessageDialog(Message);
+            await Msg.ShowAsync();
+            
         }
     }
 }
