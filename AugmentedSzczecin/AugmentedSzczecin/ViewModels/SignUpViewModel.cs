@@ -9,10 +9,11 @@ using Caliburn.Micro;
 using Windows.UI.Xaml.Controls;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Views;
+using AugmentedSzczecin.Events;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class SignUpViewModel : Screen
+    public class SignUpViewModel : Screen, IHandle<RegisterSuccessEvent>, IHandle<RegisterFailedEvent>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegisterService _registerService;
@@ -207,6 +208,16 @@ namespace AugmentedSzczecin.ViewModels
            
             var Msg = new MessageDialog(Message);
             await Msg.ShowAsync();
+        }
+
+        public void Handle(RegisterFailedEvent e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Handle(RegisterSuccessEvent e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
