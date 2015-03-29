@@ -6,11 +6,18 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using AugmentedSzczecin.Interfaces;
+using Caliburn.Micro;
 
 namespace AugmentedSzczecin.Services
 {
     public class RegisterService : IRegisterService
     {
+        private IEventAggregator _event;
+        public RegisterService(IEventAggregator events)
+        {
+                
+        }
+
         public async void Register(string email, string password)
         {
             Uri baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/");

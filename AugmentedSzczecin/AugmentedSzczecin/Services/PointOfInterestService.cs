@@ -15,11 +15,10 @@ namespace AugmentedSzczecin.Services
 {
     public class PointOfInterestService : IPointOfInterestService
     {
-        private IEventAggregator _events;
-
-        public PointOfInterestService(IEventAggregator events)
+        private IEventAggregator _eventAggregator;
+        public PointOfInterestService(IEventAggregator eventAggregator)
         {
-            _events = events;
+            _eventAggregator = eventAggregator;
         }
 
         public ObservableCollection<PointOfInterest> GetPointOfInterest(string jsonString)
@@ -48,11 +47,11 @@ namespace AugmentedSzczecin.Services
             {
                 var jsonString = await HttpGetAsync();
                 PointOfInterestList = GetPointOfInterest(jsonString);
-                _events.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
+                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
             }
             catch (Exception e)
             {
-                _events.PublishOnUIThread(new PointOfInterestLoadFailedEvent() { PointOfInterestLoadException = e });
+                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadFailedEvent() { PointOfInterestLoadException = e });
             }
         }
 
