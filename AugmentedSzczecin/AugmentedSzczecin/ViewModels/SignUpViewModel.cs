@@ -47,6 +47,7 @@ namespace AugmentedSzczecin.ViewModels
                     _password = value;
                     ValidatePasswordLength();
                     ValidatePasswordEmpty();
+                    CheckValidation();
                     NotifyOfPropertyChange(() => Password);
                 }
             }
@@ -66,7 +67,6 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _isPasswordLengthValid = value;
                     NotifyOfPropertyChange(() => IsPasswordLengthValid);
-                    NotifyOfPropertyChange(() => CanRegister);
                 } 
             }
         }
@@ -85,7 +85,6 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _isPasswordEmptyValid = value;
                     NotifyOfPropertyChange(() => IsPasswordEmptyValid);
-                    NotifyOfPropertyChange(() => CanRegister);
                 }
             }
         }
@@ -111,6 +110,7 @@ namespace AugmentedSzczecin.ViewModels
                     _email = value;
                     ValidateEmailMatch();
                     ValidateEmailEmpty();
+                    CheckValidation();
                     NotifyOfPropertyChange(() => Email);
                 }
             }
@@ -126,7 +126,6 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _isEmailEmptyValid = value;
                     NotifyOfPropertyChange(() => IsEmailEmptyValid);
-                    NotifyOfPropertyChange(() => CanRegister);
                 }
             }
         }
@@ -141,7 +140,6 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _isEmailMatchValid = value;
                     NotifyOfPropertyChange(() => IsEmailMatchValid);
-                    NotifyOfPropertyChange(() => CanRegister);
                 }
             }
         }
@@ -158,16 +156,54 @@ namespace AugmentedSzczecin.ViewModels
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-z][-\w]*[0-9a-zA-z]*\.)+[a-zA-z0-9]{2,24}))$");
         }
 
-        public bool CanRegister
+        private bool _validationCheck;
+
+        public bool ValidationCheck
         {
             get 
             { 
-                return IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid; 
+                return _validationCheck; 
+            }
+            set 
+            { 
+                _validationCheck = value;
+                NotifyOfPropertyChange(() => ValidationCheck);
             }
         }
 
+        private void CheckValidation()
+        {
+            ValidationCheck = IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid;
+        }
+        
+        
         public void Register()
         {
+            if (ValidationCheck)
+            {
+
+            }
+            else
+                WrongValidationMessageDialog();
+        }
+
+        private async void WrongValidationMessageDialog()
+        {
+            string Message = "";
+            if (!IsEmailEmptyValid)
+                Message += "Nie podano adresu e-mail.\n";
+
+            if (!IsEmailMatchValid && IsEmailEmptyValid)
+                Message += "Podano błędny adres e-mail.\n";
+
+            if (!IsPasswordLengthValid && IsPasswordEmptyValid)
+                Message += "Hasło jest za krótkie.\n";
+
+            if (!IsPasswordEmptyValid)
+                Message += "Nie podano hasła.\n";
+
+            var Msg = new MessageDialog(Message);
+            await Msg.ShowAsync();
         }
     }
 }
