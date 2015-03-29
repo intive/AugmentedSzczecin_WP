@@ -100,25 +100,6 @@ namespace AugmentedSzczecin.ViewModels
             IsPasswordEmptyValid = !String.IsNullOrEmpty(_passwordBox.Password);
         }
         
-        public bool CanRegister
-        {
-            get
-            {
-                return IsPasswordLengthValid && IsPasswordEmptyValid;
-            }
-        }
-
-        public void Register()
-        {
-
-        }
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-        }
-
-
         private string _email;
         public string Email
         {
@@ -179,7 +160,10 @@ namespace AugmentedSzczecin.ViewModels
 
         public bool CanRegister
         {
-            get { return (IsEmailEmptyValid && IsEmailMatchValid); }
+            get 
+            { 
+                return IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid; 
+            }
         }
 
         public void Register()
