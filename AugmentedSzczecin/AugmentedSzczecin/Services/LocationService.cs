@@ -7,7 +7,7 @@ namespace AugmentedSzczecin.Services
 {
     public class LocationService : ILocationService
     {
-        public async Task<Geopoint> SetGeolocation()
+        public async Task<Geopoint> GetGeolocation()
         {
             Geolocator geolocator = new Geolocator();
             geolocator.DesiredAccuracyInMeters = 50;

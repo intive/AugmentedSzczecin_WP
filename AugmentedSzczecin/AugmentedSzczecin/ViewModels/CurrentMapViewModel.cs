@@ -136,7 +136,7 @@ namespace AugmentedSzczecin.ViewModels
 
         private async void SetGeolocation()
         {
-            CenterOfTheMap = await _locationService.SetGeolocation();
+            CenterOfTheMap = await _locationService.GetGeolocation();
         }
 
         private string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
