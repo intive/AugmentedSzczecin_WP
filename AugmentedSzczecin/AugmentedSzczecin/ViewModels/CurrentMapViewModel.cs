@@ -11,6 +11,7 @@ using Windows.Networking.Connectivity;
 using Windows.UI.Popups;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml.Controls;
+using AugmentedSzczecin.Helpers;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -28,10 +29,10 @@ namespace AugmentedSzczecin.ViewModels
 
         protected override void OnActivate()
         {
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
-            CountResolution();
+            CountZoomLevel();
             UpdateInternetConnection();
+            
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             if (_locationService.IsGeolocationEnabled())
                 SetGeolocation();
@@ -44,9 +45,7 @@ namespace AugmentedSzczecin.ViewModels
 
             base.OnDeactivate(close);
         }
-
-
-
+        
         private bool _internetConnection;
         public bool InternetConnection
         {
@@ -136,18 +135,9 @@ namespace AugmentedSzczecin.ViewModels
             get { return _bingKey; }
         }
 
-        private void CountResolution()
+        private void CountZoomLevel()
         {
-            float logicalDpi = DisplayInformation.GetForCurrentView().LogicalDpi;
-            float zoom = 100000 / (logicalDpi * (float)39.37);
-            if (zoom > (float)7.17 && zoom < (float)14.33)
-                ZoomLevel = 15;
-            if (zoom > (float)14.33 && zoom < (float)28.61)
-                ZoomLevel = 14;
-            if (zoom > (float)28.61 && zoom < (float)57.22)
-                ZoomLevel = 13;
-            if (zoom > (float)57.22 && zoom < (float)114.44)
-                ZoomLevel = 12;
+            ZoomLevel = ResolutionHelper.CountZoomLevel();
         }
 
         private double _zoomLevel;

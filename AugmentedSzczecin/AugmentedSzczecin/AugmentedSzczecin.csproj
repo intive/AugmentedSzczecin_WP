@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="Events\PointOfInterestLoadedEvent.cs" />
     <Compile Include="Events\PointOfInterestLoadFailedEvent.cs" />
+    <Compile Include="Helpers\ResolutionHelper.cs" />
     <Compile Include="Interfaces\IPointOfInterestService.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
     <Compile Include="Interfaces\ILocationService.cs" />
