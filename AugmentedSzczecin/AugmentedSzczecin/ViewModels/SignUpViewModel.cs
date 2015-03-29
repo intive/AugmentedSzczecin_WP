@@ -25,6 +25,11 @@ namespace AugmentedSzczecin.ViewModels
             _eventAggregator.Subscribe(this);
             base.OnActivate();
         }
+        protected override void OnDeactivate(bool close)
+        {
+            _eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
+        }
 
         protected override void OnViewAttached(object view, object context)
         {
@@ -32,21 +37,11 @@ namespace AugmentedSzczecin.ViewModels
             base.OnViewAttached(view, context);
         }
 
-        protected override void OnDeactivate(bool close)
-        {
-            _eventAggregator.Unsubscribe(this);
-            base.OnDeactivate(close);
-        }
-
         private Visibility _isProgressRingVisible = Visibility.Collapsed;
-
         public Visibility IsProgressRingVisible
         {
-            get 
-            {
-                return _isProgressRingVisible; 
-            }
-            set 
+            get { return _isProgressRingVisible; }
+            set
             {
                 if (value != _isProgressRingVisible)
                 {
@@ -56,14 +51,10 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool _isProgressRingActive = false;
-
+        private bool _isProgressRingActive;
         public bool IsProgressRingActive
         {
-            get
-            {
-                return _isProgressRingActive;
-            }
+            get { return _isProgressRingActive; }
             set
             {
                 if (value != _isProgressRingActive)
@@ -75,13 +66,9 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private bool _areControlsEnabled = true;
-
         public bool AreControlsEnabled
         {
-            get
-            {
-                return _areControlsEnabled;
-            }
+            get { return _areControlsEnabled; }
             set
             {
                 if (value != _areControlsEnabled)
@@ -91,16 +78,13 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
-        
+
         private PasswordBox _passwordBox;
 
         private string _password;
         public string Password
         {
-            get
-            {
-                return _password;
-            }
+            get { return _password; }
             set
             {
                 if (value != _password)
@@ -117,10 +101,7 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isPasswordLengthValid;
         public bool IsPasswordLengthValid
         {
-            get
-            {
-                return _isPasswordLengthValid;
-            }
+            get { return _isPasswordLengthValid; }
             set
             {
                 if (value != _isPasswordLengthValid)
@@ -134,10 +115,7 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isPasswordEmptyValid;
         public bool IsPasswordEmptyValid
         {
-            get
-            {
-                return _isPasswordEmptyValid;
-            }
+            get { return _isPasswordEmptyValid; }
             set
             {
                 if (value != _isPasswordEmptyValid)
@@ -249,11 +227,11 @@ namespace AugmentedSzczecin.ViewModels
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             string message = "";
-            
+
             if (!IsPasswordEmptyValid && !IsEmailEmptyValid)
                 message += loader.GetString("SignUpEmptyForm");
-            else 
-            { 
+            else
+            {
                 if (!IsEmailEmptyValid)
                     message += loader.GetString("SignUpEmailEmpty") + "\n";
 
@@ -266,7 +244,7 @@ namespace AugmentedSzczecin.ViewModels
                 if (!IsPasswordEmptyValid)
                     message += loader.GetString("SignUpPasswordEmpty");
             }
-           
+
             var msg = new MessageDialog(message);
             await msg.ShowAsync();
         }
