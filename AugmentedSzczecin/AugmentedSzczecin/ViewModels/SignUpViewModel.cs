@@ -79,8 +79,6 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private PasswordBox _passwordBox;
-
         private string _password;
         public string Password
         {
@@ -126,6 +124,7 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private PasswordBox _passwordBox;
         private void ValidatePasswordLength()
         {
             IsPasswordLengthValid = _passwordBox.Password.Length >= 6;
@@ -194,7 +193,6 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private bool _validationCheck;
-
         public bool ValidationCheck
         {
             get { return _validationCheck; }

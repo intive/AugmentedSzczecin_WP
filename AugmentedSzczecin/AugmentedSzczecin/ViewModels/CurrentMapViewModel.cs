@@ -76,7 +76,7 @@ namespace AugmentedSzczecin.ViewModels
 
         public void UpdateInternetConnection()
         {
-            ConnectionProfile internetConnectionProfile = Windows.Networking.Connectivity.NetworkInformation.GetInternetConnectionProfile();
+            ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
 
             if (internetConnectionProfile == null)
             {
@@ -211,9 +211,9 @@ namespace AugmentedSzczecin.ViewModels
                 tempLatitude = CenterOfTheMap.Position.Latitude;
             tempLatitude = tempLatitude * (Math.PI / 180);
 
-            const double BING_MAP_CONSTANT = 156543.04;
+            const double bingMapConstant = 156543.04;
 
-            double metersPerPixel = BING_MAP_CONSTANT * Math.Cos(tempLatitude) / Math.Pow(2, tempZoomLevel);
+            double metersPerPixel = bingMapConstant * Math.Cos(tempLatitude) / Math.Pow(2, tempZoomLevel);
 
             double scaleDistance = Math.Round(100 * metersPerPixel / 10) * 10;
 

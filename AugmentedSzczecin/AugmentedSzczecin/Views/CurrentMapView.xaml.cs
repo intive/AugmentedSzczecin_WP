@@ -31,32 +31,31 @@ namespace AugmentedSzczecin.Views
     {
 
         private ObservableCollection<PointOfInterest> _mapLocations;
-        object EventAgg;
+        readonly object _eventAgg;
 
         public CurrentMapView()
         {
             this.InitializeComponent();
             _mapLocations = new ObservableCollection<PointOfInterest>();
 
-            EventAgg = IoC.GetInstance(typeof(IEventAggregator), null);
-            ((EventAggregator)EventAgg).Subscribe(this);
+            _eventAgg = IoC.GetInstance(typeof(IEventAggregator), null);
+            ((EventAggregator)_eventAgg).Subscribe(this);
 
             CheckInternetConnection();
         }
 
         ~CurrentMapView()
         {
-            ((EventAggregator)EventAgg).Unsubscribe(this);
+            ((EventAggregator)_eventAgg).Unsubscribe(this);
         }
 
         private void CheckInternetConnection()
         {
-            object servicesFromCurrentMapViewModel;
-            servicesFromCurrentMapViewModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
+            var servicesFromCurrentMapViewModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
             ((CurrentMapViewModel)servicesFromCurrentMapViewModel).UpdateInternetConnection();
-            bool InternetConnection = ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnection;
+            bool internetConnection = ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnection;
 
-            if (!InternetConnection)
+            if (!internetConnection)
                 ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnectionDisabledMsg();
         }
 
