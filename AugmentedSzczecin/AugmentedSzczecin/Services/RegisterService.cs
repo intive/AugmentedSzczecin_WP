@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
 
@@ -12,7 +13,7 @@ namespace AugmentedSzczecin.Services
 {
     public class RegisterService : IRegisterService
     {
-        private IEventAggregator _eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
         public RegisterService(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
@@ -20,20 +21,29 @@ namespace AugmentedSzczecin.Services
 
         public async void Register(string email, string password)
         {
-            Uri baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/");
+            Uri baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/user");
 
-            using (var httpClient = new HttpClient { BaseAddress = baseAddress })
+            try
             {
-                using (
-                    var content = new StringContent("{ \"email\": \"" + email + ", \"password\": \"" + password + " }",
-                        System.Text.Encoding.Unicode, "application/json"))
+                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
                 {
-                    using (var response = await httpClient.PostAsync("user", content))
+                    using (
+                        var content = new StringContent("{ \"email\": \"" + email + ", \"password\": \"" + password + " }",
+                            System.Text.Encoding.Unicode, "application/json"))
                     {
-                        string responseData = await response.Content.ReadAsStringAsync();
+                        using (var response = await httpClient.PostAsync("user", content))
+                        {
+                            string responseData = await response.Content.ReadAsStringAsync();
+                        }
                     }
                 }
+
             }
+            catch (Exception e)
+            {
+                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = e });
+            }
+           
 
         }
     }

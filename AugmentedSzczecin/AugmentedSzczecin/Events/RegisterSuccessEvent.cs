@@ -8,5 +8,6 @@ namespace AugmentedSzczecin.Events
 {
     public class RegisterSuccessEvent
     {
+        
     }
 }

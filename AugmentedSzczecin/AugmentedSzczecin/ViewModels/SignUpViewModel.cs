@@ -36,15 +36,14 @@ namespace AugmentedSzczecin.ViewModels
         private PasswordBox _passwordBox;
 
         private string _password;
-
         public string Password
         {
-            get 
-            { 
-                return _password; 
+            get
+            {
+                return _password;
             }
-            set 
-            { 
+            set
+            {
                 if (value != _password)
                 {
                     _password = value;
@@ -57,25 +56,23 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private bool _isPasswordLengthValid;
-
         public bool IsPasswordLengthValid
         {
             get
             {
-                return _isPasswordLengthValid; 
+                return _isPasswordLengthValid;
             }
-            set 
+            set
             {
                 if (value != _isPasswordLengthValid)
                 {
                     _isPasswordLengthValid = value;
                     NotifyOfPropertyChange(() => IsPasswordLengthValid);
-                } 
+                }
             }
         }
 
         private bool _isPasswordEmptyValid;
-
         public bool IsPasswordEmptyValid
         {
             get
@@ -101,7 +98,7 @@ namespace AugmentedSzczecin.ViewModels
         {
             IsPasswordEmptyValid = !String.IsNullOrEmpty(_passwordBox.Password);
         }
-        
+
         private string _email;
         public string Email
         {
@@ -163,12 +160,9 @@ namespace AugmentedSzczecin.ViewModels
 
         public bool ValidationCheck
         {
-            get 
-            { 
-                return _validationCheck; 
-            }
-            set 
-            { 
+            get { return _validationCheck; }
+            set
+            {
                 _validationCheck = value;
                 NotifyOfPropertyChange(() => ValidationCheck);
             }
@@ -179,7 +173,6 @@ namespace AugmentedSzczecin.ViewModels
             ValidationCheck = IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid;
         }
 
-        
         public void Register()
         {
             if (ValidationCheck)
@@ -208,7 +201,6 @@ namespace AugmentedSzczecin.ViewModels
 
             var Msg = new MessageDialog(Message);
             await Msg.ShowAsync();
-            
         }
     }
 }
