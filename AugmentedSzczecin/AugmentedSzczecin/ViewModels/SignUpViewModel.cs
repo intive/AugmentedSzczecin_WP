@@ -36,13 +36,13 @@ namespace AugmentedSzczecin.ViewModels
 
         public string Password
         {
-            get 
-            { 
-                return _password; 
+            get
+            {
+                return _password;
             }
-            set 
-            { 
-                if(value != _password)
+            set
+            {
+                if (value != _password)
                 {
                     _password = value;
                     ValidatePasswordLength();
@@ -58,16 +58,16 @@ namespace AugmentedSzczecin.ViewModels
         {
             get
             {
-                return _isPasswordLengthValid; 
+                return _isPasswordLengthValid;
             }
-            set 
+            set
             {
                 if (value != _isPasswordLengthValid)
                 {
                     _isPasswordLengthValid = value;
                     NotifyOfPropertyChange(() => IsPasswordLengthValid);
                     NotifyOfPropertyChange(() => CanRegister);
-                } 
+                }
             }
         }
 
@@ -99,7 +99,7 @@ namespace AugmentedSzczecin.ViewModels
         {
             IsPasswordEmptyValid = !String.IsNullOrEmpty(_passwordBox.Password);
         }
-        
+
         private string _email;
         public string Email
         {
@@ -160,9 +160,9 @@ namespace AugmentedSzczecin.ViewModels
 
         public bool CanRegister
         {
-            get 
-            { 
-                return IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid; 
+            get
+            {
+                return IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid;
             }
         }
 
