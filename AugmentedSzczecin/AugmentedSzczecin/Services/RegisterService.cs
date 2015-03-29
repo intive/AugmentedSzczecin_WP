@@ -37,13 +37,12 @@ namespace AugmentedSzczecin.Services
                         }
                     }
                 }
-
             }
             catch (Exception e)
             {
                 _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = e });
             }
-           
+
 
         }
     }

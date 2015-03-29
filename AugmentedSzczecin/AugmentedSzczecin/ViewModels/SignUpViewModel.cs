@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Caliburn.Micro;
 using Windows.UI.Xaml.Controls;
@@ -251,28 +247,28 @@ namespace AugmentedSzczecin.ViewModels
 
         private async void WrongValidationMessageDialog()
         {
-            var Loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            string Message = "";
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            string message = "";
             
             if (!IsPasswordEmptyValid && !IsEmailEmptyValid)
-                Message += Loader.GetString("SignUpEmptyForm");
+                message += loader.GetString("SignUpEmptyForm");
             else 
             { 
                 if (!IsEmailEmptyValid)
-                    Message += Loader.GetString("SignUpEmailEmpty") + "\n";
+                    message += loader.GetString("SignUpEmailEmpty") + "\n";
 
                 if (!IsEmailMatchValid && IsEmailEmptyValid)
-                    Message += Loader.GetString("SignUpEmailMatch") + "\n";
+                    message += loader.GetString("SignUpEmailMatch") + "\n";
 
                 if (!IsPasswordLengthValid && IsPasswordEmptyValid)
-                    Message += Loader.GetString("SignUpPasswordLength") + "\n";
+                    message += loader.GetString("SignUpPasswordLength") + "\n";
 
                 if (!IsPasswordEmptyValid)
-                    Message += Loader.GetString("SignUpPasswordEmpty");
+                    message += loader.GetString("SignUpPasswordEmpty");
             }
            
-            var Msg = new MessageDialog(Message);
-            await Msg.ShowAsync();
+            var msg = new MessageDialog(message);
+            await msg.ShowAsync();
         }
 
         public void Handle(RegisterFailedEvent e)
