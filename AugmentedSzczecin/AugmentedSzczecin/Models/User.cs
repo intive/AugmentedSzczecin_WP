@@ -11,6 +11,6 @@ namespace AugmentedSzczecin.Models
         public string Password { get; set; }
 
         [JsonProperty(PropertyName = "errorCode")]
-        public string ErrorCode { get; set; }
+        public string ErrorCode { get; set; } 
     }
 }
