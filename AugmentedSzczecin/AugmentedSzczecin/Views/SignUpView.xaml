@@ -8,9 +8,9 @@
     xmlns:caliburn="using:Caliburn.Micro"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
     <StackPanel VerticalAlignment="Center">
-        
+
         <ProgressRing x:Name="SignUpProgressRing" IsActive="{Binding IsProgressRingActive}" Visibility="{Binding IsProgressRingVisible}" Height="10" Width="200" HorizontalAlignment="Center"/>
         <TextBlock x:Uid="SignUpProgressRing" FontSize="15" Visibility="{Binding IsProgressRingVisible}" HorizontalAlignment="Center" Margin="0,10,0,0" />
         <ScrollViewer IsEnabled="{Binding AreControlsEnabled}">
@@ -21,9 +21,9 @@
                 <TextBlock FontSize="15" x:Uid="SignUpPassword" Margin="0,20,0,0"/>
                 <PasswordBox x:FieldModifier="Public" x:Name="Password" VerticalAlignment="Stretch"/>
 
-                <Button x:Name="Register" x:Uid="SignUpButtonSignUp" Visibility="{Binding IsProgressBarVisible;}" Margin="0,0,0,0" HorizontalAlignment="Center" />
+                <Button x:Name="Register" x:Uid="SignUpButtonSignUp" Visibility="{Binding IsProgressBarVisible}" Margin="0,0,0,0" HorizontalAlignment="Center" />
             </StackPanel>
         </ScrollViewer>
     </StackPanel>
-    
+
 </Page>

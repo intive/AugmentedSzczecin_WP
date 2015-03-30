@@ -41,7 +41,7 @@ namespace AugmentedSzczecin.ViewModels
         public Visibility IsProgressRingVisible
         {
             get { return _isProgressRingVisible; }
-            set
+            set 
             {
                 if (value != _isProgressRingVisible)
                 {
@@ -78,7 +78,7 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
-
+        
         private string _password;
         public string Password
         {
@@ -225,11 +225,11 @@ namespace AugmentedSzczecin.ViewModels
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             string message = "";
-
+            
             if (!IsPasswordEmptyValid && !IsEmailEmptyValid)
                 message += loader.GetString("SignUpEmptyForm");
-            else
-            {
+            else 
+            { 
                 if (!IsEmailEmptyValid)
                     message += loader.GetString("SignUpEmailEmpty") + "\n";
 
@@ -242,7 +242,7 @@ namespace AugmentedSzczecin.ViewModels
                 if (!IsPasswordEmptyValid)
                     message += loader.GetString("SignUpPasswordEmpty");
             }
-
+           
             var msg = new MessageDialog(message);
             await msg.ShowAsync();
         }
@@ -252,6 +252,8 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = Visibility.Collapsed;
             IsProgressRingActive = false;
+            var msg = new MessageDialog(e.RegisterFailedException.Message);
+            msg.ShowAsync();
         }
 
         public void Handle(RegisterSuccessEvent e)
@@ -259,6 +261,8 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = Visibility.Collapsed;
             IsProgressRingActive = false;
+            var msg = new MessageDialog(e.SuccessMessage);
+            msg.ShowAsync();
         }
     }
 }

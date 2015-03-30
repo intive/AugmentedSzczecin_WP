@@ -1,15 +1,9 @@
-﻿using AugmentedSzczecin.Interfaces;
-using AugmentedSzczecin.Models;
-using AugmentedSzczecin.Services;
-using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Data.Json;
+﻿using System.Collections.ObjectModel;
+using Windows.UI.Popups;
 using AugmentedSzczecin.Events;
+using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Models;
+using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -49,7 +43,8 @@ namespace AugmentedSzczecin.ViewModels
 
         public void Handle(PointOfInterestLoadFailedEvent e)
         {
-
+            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
+            msg.ShowAsync();
         }
 
         private ObservableCollection<PointOfInterest> _pointOfInterestList  = new ObservableCollection<PointOfInterest>();
