@@ -1,9 +1,16 @@
 ﻿using System;
 using System.Net.Http;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Threading.Tasks;
 using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Models;
 using Caliburn.Micro;
+using Newtonsoft.Json;
 
 namespace AugmentedSzczecin.Services
 {
@@ -17,7 +24,7 @@ namespace AugmentedSzczecin.Services
 
         public async void Register(string email, string password)
         {
-            var baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/user");
+            Uri baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/user");
 
             try
             {
@@ -25,14 +32,31 @@ namespace AugmentedSzczecin.Services
                 {
                     using (
                         var content = new StringContent("{ \"email\": \"" + email + ", \"password\": \"" + password + " }",
-                            Encoding.Unicode, "application/json"))
+                            System.Text.Encoding.Unicode, "application/json"))
                     {
                         using (var response = await httpClient.PostAsync("user", content))
                         {
-                            string responseData = await response.Content.ReadAsStringAsync();
+                            if (response.StatusCode == HttpStatusCode.OK)
+                            {
+                                string responseData = await response.Content.ReadAsStringAsync();
+                                User user = JsonConvert.DeserializeObject<User>(responseData);
+
+                                if (user.ErrorCode != null)
+                                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = new Exception("Back-end Error!") });
+                                else
+                                {
+                                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!"});
+                                }
+
+                            }
+                            else
+                            {
+                                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = new Exception("200 error: Something went wrong!") });
+                            }
                         }
                     }
                 }
+
             }
             catch (Exception e)
             {

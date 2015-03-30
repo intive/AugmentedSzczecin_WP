@@ -254,6 +254,8 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = Visibility.Collapsed;
             IsProgressRingActive = false;
+            var msg = new MessageDialog(e.RegisterFailedException.Message);
+            msg.ShowAsync();
         }
 
         public void Handle(RegisterSuccessEvent e)
@@ -261,6 +263,8 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = Visibility.Collapsed;
             IsProgressRingActive = false;
+            var msg = new MessageDialog(e.SuccessMessage);
+            msg.ShowAsync();
         }
     }
 }
