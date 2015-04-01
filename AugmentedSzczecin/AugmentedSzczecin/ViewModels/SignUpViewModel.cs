@@ -218,7 +218,9 @@ namespace AugmentedSzczecin.ViewModels
                 _registerService.Register(Email, Password);
             }
             else
+            {
                 WrongValidationMessageDialog();
+            }
         }
 
         private async void WrongValidationMessageDialog()
@@ -227,20 +229,28 @@ namespace AugmentedSzczecin.ViewModels
             string message = "";
 
             if (!IsPasswordEmptyValid && !IsEmailEmptyValid)
+            {
                 message += loader.GetString("SignUpEmptyForm");
+            }
             else
             {
                 if (!IsEmailEmptyValid)
+                {
                     message += loader.GetString("SignUpEmailEmpty") + "\n";
-
+                }
                 if (!IsEmailMatchValid && IsEmailEmptyValid)
+                {
                     message += loader.GetString("SignUpEmailMatch") + "\n";
-
+                }
                 if (!IsPasswordLengthValid && IsPasswordEmptyValid)
+                {
                     message += loader.GetString("SignUpPasswordLength") + "\n";
+                }
 
                 if (!IsPasswordEmptyValid)
+                {
                     message += loader.GetString("SignUpPasswordEmpty");
+                }
             }
 
             var msg = new MessageDialog(message);

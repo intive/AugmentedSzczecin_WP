@@ -51,7 +51,9 @@ namespace AugmentedSzczecin.Views
             bool internetConnection = ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnection;
 
             if (!internetConnection)
+            {
                 ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnectionDisabledMsg();
+            }
         }
 
         public void Handle(PointOfInterestLoadedEvent e)
@@ -59,18 +61,22 @@ namespace AugmentedSzczecin.Views
             _mapLocations = e.PointOfInterestList;
 
             if (_mapLocations != null)
+            {
                 foreach (PointOfInterest pointOfInterest in _mapLocations)
                 {
                     var newPin = CreatePin();
                     BingMap.Children.Add(newPin);
+
                     Geopoint geopoint = new Geopoint(new BasicGeoposition
-                            {
-                                Longitude = pointOfInterest.Longitude,
-                                Latitude = pointOfInterest.Latitude
-                            });
+                    {
+                        Longitude = pointOfInterest.Longitude,
+                        Latitude = pointOfInterest.Latitude
+                    });
+
                     MapControl.SetLocation(newPin, geopoint);
                     MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
                 }
+            }
         }
 
         private DependencyObject CreatePin()

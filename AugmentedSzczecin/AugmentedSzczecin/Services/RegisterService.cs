@@ -38,10 +38,18 @@ namespace AugmentedSzczecin.Services
                                 var user = JsonConvert.DeserializeObject<User>(responseData);
 
                                 if (user.ErrorCode != null)
-                                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = new Exception("Back-end Error!") });
+                                {
+                                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent()
+                                    {
+                                        RegisterFailedException = new Exception("Back-end Error!")
+                                    });
+                                }
                                 else
                                 {
-                                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!" });
+                                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent()
+                                    {
+                                        SuccessMessage = "Registration Successful!"
+                                    });
                                 }
                             }
                             else
@@ -51,14 +59,11 @@ namespace AugmentedSzczecin.Services
                         }
                     }
                 }
-
             }
             catch (Exception e)
             {
                 _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = e });
             }
-
-
         }
     }
 }

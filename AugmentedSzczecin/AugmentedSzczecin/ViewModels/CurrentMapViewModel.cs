@@ -43,9 +43,13 @@ namespace AugmentedSzczecin.ViewModels
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             if (_locationService.IsGeolocationEnabled())
+            {
                 SetGeolocation();
+            }
             else
+            {
                 GeolocationDisabledMsg();
+            }
         }
 
         public void RefreshPointOfInterestService()
@@ -204,10 +208,16 @@ namespace AugmentedSzczecin.ViewModels
         {
             double tempZoomLevel = ZoomLevel;
             if (temporaryMap != null)
+            {
                 tempZoomLevel = temporaryMap.ZoomLevel;
+            }
+
             double tempLatitude = 0;
             if (CenterOfTheMap != null)
+            {
                 tempLatitude = CenterOfTheMap.Position.Latitude;
+            }
+
             tempLatitude = tempLatitude * (Math.PI / 180);
 
             const double bingMapConstant = 156543.04;
