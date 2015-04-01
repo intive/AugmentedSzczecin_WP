@@ -1,15 +1,12 @@
-﻿using AugmentedSzczecin.Interfaces;
-using AugmentedSzczecin.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using AugmentedSzczecin.Events;
+using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Models;
 using Caliburn.Micro;
+using Newtonsoft.Json;
 
 namespace AugmentedSzczecin.Services
 {
@@ -29,7 +26,7 @@ namespace AugmentedSzczecin.Services
 
         private readonly string _page = "https://augmented-szczecin-test.azure-mobile.net/tables/PointOfInterest";
 
-        public async Task<string> HttpGetAsync()
+        public async Task<string> GetPointOfInterestsJsonString()
         {
             HttpClient client = new HttpClient();
 
@@ -45,7 +42,7 @@ namespace AugmentedSzczecin.Services
         {
             try
             {
-                var jsonString = await HttpGetAsync();
+                var jsonString = await GetPointOfInterestsJsonString();
                 PointOfInterestList = GetPointOfInterest(jsonString);
                 _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
             }
