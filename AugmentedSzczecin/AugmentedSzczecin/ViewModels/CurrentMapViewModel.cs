@@ -1,22 +1,21 @@
-﻿using AugmentedSzczecin.Interfaces;
-using Caliburn.Micro;
-using System;
-using System.Net;
-using System.Collections.ObjectModel;
+﻿using System;
 using Windows.Devices.Geolocation;
-using Windows.Graphics.Display;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls.Maps;
 using Windows.Networking.Connectivity;
-using Windows.UI.Popups;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
 using AugmentedSzczecin.Helpers;
+using AugmentedSzczecin.Interfaces;
+using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
 {
     public class CurrentMapViewModel : Screen
     {
+        private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
+
         private readonly IEventAggregator _eventAggregator;
         private readonly INavigationService _navigationService;
         private readonly ILocationService _locationService;
@@ -90,7 +89,7 @@ namespace AugmentedSzczecin.ViewModels
         public async void InternetConnectionDisabledMsg()
         {
             var msg = new MessageDialog("Internet Connection disabled.");
-            msg.Commands.Add(new UICommand("Back", new UICommandInvokedHandler(this.BackButtonInvokedHandler)));
+            msg.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
             msg.DefaultCommandIndex = 0;
             msg.CancelCommandIndex = 1;
 
@@ -106,7 +105,7 @@ namespace AugmentedSzczecin.ViewModels
         private async void GeolocationDisabledMsg()
         {
             var msg = new MessageDialog("Geolocation disabled.");
-            msg.Commands.Add(new UICommand("Back", new UICommandInvokedHandler(this.BackButtonInvokedHandler)));
+            msg.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
             msg.DefaultCommandIndex = 0;
             msg.CancelCommandIndex = 1;
 
@@ -115,13 +114,15 @@ namespace AugmentedSzczecin.ViewModels
 
         private void BackButtonInvokedHandler(IUICommand command)
         {
-            if (command.Label == "Back")
+            switch (command.Label)
             {
-                HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-                NavigateToMain();
+                case "Back":
+                    HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+                    NavigateToMain();
+                    break;
+                default:
+                    return;
             }
-            else
-                return;
         }
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -138,8 +139,6 @@ namespace AugmentedSzczecin.ViewModels
         {
             CenterOfTheMap = await _locationService.GetGeolocation();
         }
-
-        private string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
         public string BingKey
         {
@@ -165,7 +164,7 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool _landmarksVisible = true;
+        private readonly bool _landmarksVisible = true;
         public bool LandmarksVisible
         {
             get { return _landmarksVisible; }
