@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Net.Http;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices.ComTypes;
+using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Models;
@@ -24,30 +20,29 @@ namespace AugmentedSzczecin.Services
 
         public async void Register(string email, string password)
         {
-            Uri baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/user");
-
+            var baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/user");
             try
             {
                 using (var httpClient = new HttpClient { BaseAddress = baseAddress })
                 {
-                    using (
-                        var content = new StringContent("{ \"email\": \"" + email + ", \"password\": \"" + password + " }",
-                            System.Text.Encoding.Unicode, "application/json"))
+                    var newUser = new User() { Email = email, ErrorCode = "", Password = password };
+                    var json = JsonConvert.SerializeObject(newUser);
+
+                    using (var content = new StringContent(json, Encoding.Unicode, "application/json"))
                     {
                         using (var response = await httpClient.PostAsync("user", content))
                         {
                             if (response.StatusCode == HttpStatusCode.OK)
                             {
-                                string responseData = await response.Content.ReadAsStringAsync();
-                                User user = JsonConvert.DeserializeObject<User>(responseData);
+                                var responseData = await response.Content.ReadAsStringAsync();
+                                var user = JsonConvert.DeserializeObject<User>(responseData);
 
                                 if (user.ErrorCode != null)
                                     _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = new Exception("Back-end Error!") });
                                 else
                                 {
-                                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!"});
+                                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!" });
                                 }
-
                             }
                             else
                             {
