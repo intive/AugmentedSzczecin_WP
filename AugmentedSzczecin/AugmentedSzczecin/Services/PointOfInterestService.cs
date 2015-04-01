@@ -20,7 +20,7 @@ namespace AugmentedSzczecin.Services
             _eventAggregator = eventAggregator;
         }
 
-        public ObservableCollection<PointOfInterest> GetPointOfInterest(string jsonString)
+        private ObservableCollection<PointOfInterest> GetPointOfInterest(string jsonString)
         {
             var model = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(jsonString);
             return model;

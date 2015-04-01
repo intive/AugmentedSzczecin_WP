@@ -6,6 +6,5 @@ namespace AugmentedSzczecin.Interfaces
     public interface IPointOfInterestService
     {
         void Refresh();
-        ObservableCollection<PointOfInterest> GetPointOfInterest(string jsonString);
     }
 }
