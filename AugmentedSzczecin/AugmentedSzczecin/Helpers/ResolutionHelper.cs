@@ -6,19 +6,24 @@ namespace AugmentedSzczecin.Helpers
     {
         public static byte CountZoomLevel()
         {
-            byte ZoomLevel = 0;
-            float LogicalDpi = DisplayInformation.GetForCurrentView().LogicalDpi;
-            float Zoom = 100000 / (LogicalDpi * (float)39.37);
-            if (Zoom > (float)7.17 && Zoom < (float)14.33)
-                ZoomLevel = 15;
-            if (Zoom > (float)14.33 && Zoom < (float)28.61)
-                ZoomLevel = 14;
-            if (Zoom > (float)28.61 && Zoom < (float)57.22)
-                ZoomLevel = 13;
-            if (Zoom > (float)57.22 && Zoom < (float)114.44)
-                ZoomLevel = 12;
+            byte zoomLevel = 0;
+            float logicalDpi = GetLogicalDpi();
+            float zoom = 100000 / (logicalDpi * (float)39.37);
+            if (zoom > (float)7.17 && zoom < (float)14.33)
+                zoomLevel = 15;
+            if (zoom > (float)14.33 && zoom < (float)28.61)
+                zoomLevel = 14;
+            if (zoom > (float)28.61 && zoom < (float)57.22)
+                zoomLevel = 13;
+            if (zoom > (float)57.22 && zoom < (float)114.44)
+                zoomLevel = 12;
 
-            return ZoomLevel;
+            return zoomLevel;
+        }
+
+        private static float GetLogicalDpi()
+        {
+            return DisplayInformation.GetForCurrentView().LogicalDpi;
         }
     }
 }
