@@ -37,8 +37,8 @@ namespace AugmentedSzczecin.ViewModels
             base.OnViewAttached(view, context);
         }
 
-        private Visibility _isProgressRingVisible = Visibility.Collapsed;
-        public Visibility IsProgressRingVisible
+        private bool _isProgressRingVisible;
+        public bool IsProgressRingVisible
         {
             get { return _isProgressRingVisible; }
             set
@@ -213,7 +213,7 @@ namespace AugmentedSzczecin.ViewModels
             if (ValidationCheck)
             {
                 AreControlsEnabled = false;
-                IsProgressRingVisible = Visibility.Visible;
+                IsProgressRingVisible = true;
                 IsProgressRingActive = true;
                 _registerService.Register(Email, Password);
             }
@@ -260,7 +260,7 @@ namespace AugmentedSzczecin.ViewModels
         public void Handle(RegisterFailedEvent e)
         {
             AreControlsEnabled = true;
-            IsProgressRingVisible = Visibility.Collapsed;
+            IsProgressRingVisible = false;
             IsProgressRingActive = false;
             var msg = new MessageDialog(e.RegisterFailedException.Message);
             msg.ShowAsync();
@@ -269,7 +269,7 @@ namespace AugmentedSzczecin.ViewModels
         public void Handle(RegisterSuccessEvent e)
         {
             AreControlsEnabled = true;
-            IsProgressRingVisible = Visibility.Collapsed;
+            IsProgressRingVisible = false;
             IsProgressRingActive = false;
             var msg = new MessageDialog(e.SuccessMessage);
             msg.ShowAsync();
