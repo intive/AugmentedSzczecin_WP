@@ -7,7 +7,7 @@ namespace AugmentedSzczecin.Models
     {
         public PointOfInterest(string id)
         {
-            this.Id = id;
+            Id = id;
         }
         public string Id { get; private set; }
 

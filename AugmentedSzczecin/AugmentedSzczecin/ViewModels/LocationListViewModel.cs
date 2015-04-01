@@ -7,7 +7,7 @@ using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class LocationListViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent> 
+    public class LocationListViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IPointOfInterestService _pointOfInterestService;
@@ -47,7 +47,7 @@ namespace AugmentedSzczecin.ViewModels
             msg.ShowAsync();
         }
 
-        private ObservableCollection<PointOfInterest> _pointOfInterestList  = new ObservableCollection<PointOfInterest>();
+        private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
         public ObservableCollection<PointOfInterest> PointOfInterestList
         {
             get { return _pointOfInterestList; }

@@ -22,7 +22,7 @@ namespace AugmentedSzczecin.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CurrentMapView : Page, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
+    public sealed partial class CurrentMapView : IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
 
         private ObservableCollection<PointOfInterest> _mapLocations;
@@ -30,7 +30,7 @@ namespace AugmentedSzczecin.Views
 
         public CurrentMapView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             _mapLocations = new ObservableCollection<PointOfInterest>();
 
             _eventAgg = IoC.GetInstance(typeof(IEventAggregator), null);
@@ -80,7 +80,7 @@ namespace AugmentedSzczecin.Views
             myGrid.RowDefinitions.Add(new RowDefinition());
             myGrid.Background = new SolidColorBrush(Colors.Transparent);
 
-            Uri uri = new Uri("ms-appx:///Assets/Locationpoint.png", UriKind.Absolute);
+            var uri = new Uri("ms-appx:///Assets/Locationpoint.png", UriKind.Absolute);
 
             var image = new Image()
             {
