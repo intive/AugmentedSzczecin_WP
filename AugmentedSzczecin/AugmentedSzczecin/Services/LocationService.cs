@@ -9,8 +9,7 @@ namespace AugmentedSzczecin.Services
     {
         public async Task<Geopoint> GetGeolocation()
         {
-            Geolocator geolocator = new Geolocator();
-            geolocator.DesiredAccuracyInMeters = 50;
+            Geolocator geolocator = new Geolocator {DesiredAccuracyInMeters = 50};
 
             Geoposition geoposition = await geolocator.GetGeopositionAsync(
             maximumAge: TimeSpan.FromMinutes(5),
@@ -31,7 +30,7 @@ namespace AugmentedSzczecin.Services
         public bool IsGeolocationEnabled()
         {
             Geolocator geolocator = new Geolocator();
-            return geolocator.LocationStatus == PositionStatus.Disabled ? false : true;
+            return geolocator.LocationStatus != PositionStatus.Disabled;
         }
     }
 }
