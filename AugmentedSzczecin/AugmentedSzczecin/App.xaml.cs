@@ -12,7 +12,7 @@ namespace AugmentedSzczecin
 {
     public sealed partial class App
     {
-        private WinRTContainer container;
+        private WinRTContainer _container;
 
         public App()
         {
@@ -21,26 +21,24 @@ namespace AugmentedSzczecin
 
         protected override void Configure()
         {
-            container = new WinRTContainer();
+            _container = new WinRTContainer();
 
-            container.RegisterWinRTServices();
+            _container.RegisterWinRTServices();
 
-            //container.Singleton<IEventAggregator, EventAggregator>();
-            //container.RegisterSingleton(typeof(EventAggregator), "EventAggregator", typeof(EventAggregator));
-            container.PerRequest<MainViewModel>();
-            container.PerRequest<AboutViewModel>();
-            container.PerRequest<CurrentMapViewModel>();
-            container.PerRequest<LocationListViewModel>();
-            container.PerRequest<SignUpViewModel>();
-            container.PerRequest<IPointOfInterestService, PointOfInterestService>();
-            container.PerRequest<ILocationService, LocationService>();
-            container.PerRequest<IRegisterService, RegisterService>();
-            IoC.GetInstance = this.GetInstance;
+            _container.PerRequest<MainViewModel>();
+            _container.PerRequest<AboutViewModel>();
+            _container.PerRequest<CurrentMapViewModel>();
+            _container.PerRequest<LocationListViewModel>();
+            _container.PerRequest<SignUpViewModel>();
+            _container.PerRequest<IPointOfInterestService, PointOfInterestService>();
+            _container.PerRequest<ILocationService, LocationService>();
+            _container.PerRequest<IRegisterService, RegisterService>();
+            IoC.GetInstance = GetInstance;
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)
         {
-            container.RegisterNavigationService(rootFrame);
+            _container.RegisterNavigationService(rootFrame);
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
@@ -50,17 +48,17 @@ namespace AugmentedSzczecin
 
         protected override object GetInstance(Type service, string key)
         {
-            return container.GetInstance(service, key);
+            return _container.GetInstance(service, key);
         }
 
         protected override IEnumerable<object> GetAllInstances(Type service)
         {
-            return container.GetAllInstances(service);
+            return _container.GetAllInstances(service);
         }
 
         protected override void BuildUp(object instance)
         {
-            container.BuildUp(instance);
+            _container.BuildUp(instance);
         }
     }
 }
