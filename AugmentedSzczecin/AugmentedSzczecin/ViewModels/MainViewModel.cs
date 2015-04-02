@@ -4,7 +4,7 @@ namespace AugmentedSzczecin.ViewModels
 {
     public class MainViewModel : Screen
     {
-        private INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
 
         public MainViewModel(INavigationService navigationService)
         {
@@ -14,6 +14,21 @@ namespace AugmentedSzczecin.ViewModels
         public void NavigateToAbout()
         {
             _navigationService.NavigateToViewModel<AboutViewModel>();
+        }
+
+        public void NavigateToCurrentMap()
+        {
+            _navigationService.NavigateToViewModel<CurrentMapViewModel>();
+        }
+
+        public void NavigateToLocationList()
+        {
+            _navigationService.NavigateToViewModel<LocationListViewModel>();
+        }
+
+        public void NavigateToSignUp()
+        {
+            _navigationService.NavigateToViewModel<SignUpViewModel>();
         }
     }
 }

@@ -4,4 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:caliburn="using:Caliburn.Micro">
 
+    <Application.Resources>
+        <Style TargetType="ListViewItem" x:Key="MyLocationListViewStyle">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <SolidColorBrush x:Key="BLStreamBackgroundColorBrush" Color="#f9461c" />
+        <SolidColorBrush x:Key="BLStreamForegroundColorBrush" Color="#575757" />
+        <caliburn:BooleanToVisibilityConverter x:Key="BoolToVisConv" />
+    </Application.Resources>
+
 </caliburn:CaliburnApplication>
