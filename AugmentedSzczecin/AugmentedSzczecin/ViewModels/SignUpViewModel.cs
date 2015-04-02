@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
-using Caliburn.Micro;
 using Windows.UI.Xaml.Controls;
+using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Views;
-using AugmentedSzczecin.Events;
-using Windows.UI.Xaml;
+using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -225,7 +225,7 @@ namespace AugmentedSzczecin.ViewModels
 
         private async void WrongValidationMessageDialog()
         {
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var loader = new ResourceLoader();
             string message = "";
 
             if (!IsPasswordEmptyValid && !IsEmailEmptyValid)

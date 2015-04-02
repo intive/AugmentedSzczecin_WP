@@ -9,13 +9,10 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Models;
 using AugmentedSzczecin.ViewModels;
 using Caliburn.Micro;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace AugmentedSzczecin.Views
 {
@@ -104,16 +101,6 @@ namespace AugmentedSzczecin.Views
         {
             var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
             msg.ShowAsync();
-        }
-
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
         }
     }
 }

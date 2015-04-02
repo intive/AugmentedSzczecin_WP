@@ -9,7 +9,10 @@ namespace AugmentedSzczecin.Converters
         private object GetVisibility(object value)
         {
             if (!(value is bool))
+            {
                 return Visibility.Collapsed;
+            }
+
             bool objValue = (bool)value;
             if (objValue)
             {
