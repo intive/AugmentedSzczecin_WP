@@ -1,0 +1,180 @@
+﻿<Page
+    x:Class="AugmentedSzczecin.Views.LocationListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AugmentedSzczecin.Views"
+	xmlns:caliburn="using:Caliburn.Micro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ListView
+		ItemContainerStyle="{ThemeResource MyLocationListViewStyle}"
+		x:Name="PointOfInterestList">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid Margin="0, 0, 0, 10" Background="White" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1.2*" />
+                        <RowDefinition Height="3*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel
+				Background="{StaticResource BLStreamBackgroundColorBrush}"
+				Grid.Column="0">
+                            <TextBlock
+					TextWrapping="Wrap"
+					Foreground="White"
+					FontWeight="Bold"
+					Margin="10"
+					FontSize="24"
+					Text="{Binding Name}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock
+					TextWrapping="Wrap"
+					Foreground="{StaticResource BLStreamBackgroundColorBrush}"
+					FontWeight="Light"
+					Margin="10, 10, 0, 0"
+					FontSize="18"
+					Text="{Binding Tags}"
+					/>
+                            <TextBlock
+					TextWrapping="Wrap"
+					Foreground="{StaticResource BLStreamBackgroundColorBrush}"
+					FontWeight="SemiBold"
+					Margin="10, 0, 0, 0"
+					FontSize="24"
+					Text="{Binding Category}"
+					/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackPanel>
+                            <TextBlock
+					TextWrapping="Wrap"
+					Foreground="{StaticResource BLStreamForegroundColorBrush}"
+					FontWeight="SemiLight"
+					Margin="10"
+					FontSize="18"
+					Text="{Binding Description}"
+				/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="4*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel
+				Grid.Row="0"
+				Background="{StaticResource BLStreamForegroundColorBrush}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel
+						Margin="10"
+						Grid.Column="0">
+                                    <TextBlock
+							TextWrapping="Wrap"
+							FontSize="16"
+							Text="{Binding StreetName}" />
+                                    <TextBlock
+							TextWrapping="Wrap"
+							FontSize="16"
+							Text="{Binding PostalCode}" />
+                                    <TextBlock
+							TextWrapping="Wrap"
+							FontSize="16"
+							FontWeight="Black"
+							FontStyle="Italic"
+							Foreground="{StaticResource BLStreamBackgroundColorBrush}"
+							Text="{Binding Phone}" />
+                                </StackPanel>
+                                <StackPanel
+						Margin="10"
+						Grid.Column="1">
+                                    <TextBlock
+							TextWrapping="Wrap"
+							FontSize="16"
+							FontStyle="Italic">
+							<Run Text="{Binding Latitude}"/>
+							<Run Text=", " />
+							<Run Text="{Binding Longitude}" />
+                                    </TextBlock>
+                                    <TextBlock
+							TextWrapping="Wrap"
+							FontSize="16"
+							Text="{Binding Country}" />
+                                    <TextBlock
+							TextWrapping="Wrap"
+							FontSize="16"
+							FontWeight="Normal"
+							FontStyle="Italic"
+							Foreground="{StaticResource BLStreamBackgroundColorBrush}"
+							Text="{Binding Website}" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel	Grid.Row="1">
+                            <TextBlock
+					Margin="10, 10, 0, 0"
+					TextWrapping="Wrap"
+					FontSize="18"
+					FontWeight="Bold"
+					Foreground="{StaticResource BLStreamForegroundColorBrush}"
+					Text="{Binding OpeningDays}" />
+                            <TextBlock
+					Margin="10, 0, 0 ,0"
+					TextWrapping="Wrap"
+					FontSize="18"
+					FontWeight="Bold"
+					Foreground="{StaticResource BLStreamForegroundColorBrush}"
+					Text="{Binding OpeningHours}" />
+                            <TextBlock
+					Margin="10"
+					TextWrapping="Wrap"
+					FontSize="16"
+					FontWeight="Normal"
+					Foreground="{StaticResource BLStreamForegroundColorBrush}"
+					Text="{Binding Price}" />
+                            <TextBlock
+					Margin="10, 0, 0, 0"
+					TextWrapping="Wrap"
+					FontSize="16"
+					FontWeight="Normal"
+					FontStyle="Italic"
+					Foreground="{StaticResource BLStreamBackgroundColorBrush}"
+					Text="{Binding Fanpage}" />
+                            <TextBlock
+					Margin="10, 0, 0, 10"
+					TextWrapping="Wrap"
+					FontSize="16"
+					FontWeight="Normal"
+					FontStyle="Italic"
+					Foreground="{StaticResource BLStreamBackgroundColorBrush}"
+					Text="{Binding Wikipedia}" />
+                            <StackPanel Background="{StaticResource BLStreamBackgroundColorBrush}">
+                                <TextBlock
+						Margin="10"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						FontWeight="SemiBold"
+						FontSize="30"
+						Text="{Binding Owner}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</Page>
