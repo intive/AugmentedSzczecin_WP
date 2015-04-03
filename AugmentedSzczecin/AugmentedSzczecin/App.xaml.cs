@@ -30,6 +30,7 @@ namespace AugmentedSzczecin
             _container.PerRequest<CurrentMapViewModel>();
             _container.PerRequest<LocationListViewModel>();
             _container.PerRequest<SignUpViewModel>();
+            _container.PerRequest<SignInViewModel>();
             _container.PerRequest<IPointOfInterestService, PointOfInterestService>();
             _container.PerRequest<ILocationService, LocationService>();
             _container.PerRequest<IRegisterService, RegisterService>();
