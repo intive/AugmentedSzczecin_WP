@@ -1,4 +1,6 @@
-﻿using AugmentedSzczecin.Views;
+﻿using AugmentedSzczecin.Events;
+using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Views;
 using Caliburn.Micro;
 using System;
 using System.Text.RegularExpressions;
@@ -7,14 +9,16 @@ using Windows.UI.Popups;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class SignInViewModel : Screen
+    public class SignInViewModel : Screen, IHandle<SignInSuccessEvent>, IHandle<SignInFailedEvent>
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly ISignInService _signInService;
         private Windows.UI.Xaml.Controls.PasswordBox _passwordBox;
 
-        public SignInViewModel(IEventAggregator eventAggregator)
+        public SignInViewModel(IEventAggregator eventAggregator, ISignInService signInService)
         {
             _eventAggregator = eventAggregator;
+            _signInService = signInService;
         }
 
         protected override void OnActivate()
@@ -210,6 +214,7 @@ namespace AugmentedSzczecin.ViewModels
                 AreControlsEnabled = false;
                 IsProgressRingVisible = true;
                 IsProgressRingActive = true;
+                _signInService.SignIn(Email, Password);
             }
             else
             {
@@ -249,6 +254,24 @@ namespace AugmentedSzczecin.ViewModels
 
             var msg = new MessageDialog(message);
             await msg.ShowAsync();
+        }
+
+        public void Handle(SignInSuccessEvent e)
+        {
+            AreControlsEnabled = true;
+            IsProgressRingVisible = false;
+            IsProgressRingActive = false;
+            var msg = new MessageDialog(e.SuccessMessage);
+            msg.ShowAsync();
+        }
+
+        public void Handle(SignInFailedEvent e)
+        {
+            AreControlsEnabled = true;
+            IsProgressRingVisible = false;
+            IsProgressRingActive = false;
+            var msg = new MessageDialog(e.SignInFailedException.Message);
+            msg.ShowAsync();
         }
     }
 }
