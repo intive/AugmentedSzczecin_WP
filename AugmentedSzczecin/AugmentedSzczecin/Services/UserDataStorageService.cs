@@ -27,7 +27,10 @@ namespace AugmentedSzczecin.Services
         public void SignOut()
         {
             var vault = new PasswordVault();
-            vault.Remove((vault.RetrieveAll())[0]);
+            if(vault.RetrieveAll().Count != 0)
+            {
+                vault.Remove((vault.RetrieveAll())[0]);
+            }
         }
     }
 }

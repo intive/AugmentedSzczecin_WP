@@ -274,7 +274,9 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = false;
             IsProgressRingActive = false;
-            
+            /******TYLKO DO TESTU****/
+            _userDataStorageService.AddUserData(Email, Password);
+            /************************/
             var msg = new MessageDialog(e.SignInFailedException.Message);
             msg.ShowAsync();
         }
