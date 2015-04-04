@@ -94,6 +94,7 @@
     <Compile Include="Interfaces\IPointOfInterestService.cs" />
     <Compile Include="Interfaces\IRegisterService.cs" />
     <Compile Include="Interfaces\ISignInService.cs" />
+    <Compile Include="Interfaces\IUserDataStorageService.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Services\PointOfInterestService.cs" />
     <Compile Include="Services\RegisterService.cs" />
     <Compile Include="Services\SignInService.cs" />
+    <Compile Include="Services\UserDataStorageService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\CurrentMapViewModel.cs" />
     <Compile Include="ViewModels\LocationListViewModel.cs" />

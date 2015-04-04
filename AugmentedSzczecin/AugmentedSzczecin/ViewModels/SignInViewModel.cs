@@ -5,6 +5,7 @@ using Caliburn.Micro;
 using System;
 using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Resources;
+using Windows.Security.Credentials;
 using Windows.UI.Popups;
 
 namespace AugmentedSzczecin.ViewModels
@@ -13,12 +14,14 @@ namespace AugmentedSzczecin.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly ISignInService _signInService;
+        private readonly IUserDataStorageService _userDataStorageService;
         private Windows.UI.Xaml.Controls.PasswordBox _passwordBox;
 
-        public SignInViewModel(IEventAggregator eventAggregator, ISignInService signInService)
+        public SignInViewModel(IEventAggregator eventAggregator, ISignInService signInService, IUserDataStorageService userDataStorageService)
         {
             _eventAggregator = eventAggregator;
             _signInService = signInService;
+            _userDataStorageService = userDataStorageService;
         }
 
         protected override void OnActivate()
@@ -261,6 +264,7 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = false;
             IsProgressRingActive = false;
+            _userDataStorageService.AddUserData(Email, Password);
             var msg = new MessageDialog(e.SuccessMessage);
             msg.ShowAsync();
         }
@@ -270,6 +274,7 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = false;
             IsProgressRingActive = false;
+            
             var msg = new MessageDialog(e.SignInFailedException.Message);
             msg.ShowAsync();
         }
