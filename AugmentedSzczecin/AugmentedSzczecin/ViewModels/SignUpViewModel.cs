@@ -10,7 +10,7 @@ using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class SignUpViewModel : Screen, IHandle<RegisterSuccessEvent>, IHandle<RegisterFailedEvent>
+    public class SignUpViewModel : BaseAugmentedSzczecinViewModel, IHandle<RegisterSuccessEvent>, IHandle<RegisterFailedEvent>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegisterService _registerService;
@@ -35,34 +35,6 @@ namespace AugmentedSzczecin.ViewModels
         {
             _passwordBox = ((SignUpView)view).Password;
             base.OnViewAttached(view, context);
-        }
-
-        private bool _isProgressRingVisible;
-        public bool IsProgressRingVisible
-        {
-            get { return _isProgressRingVisible; }
-            set
-            {
-                if (value != _isProgressRingVisible)
-                {
-                    _isProgressRingVisible = value;
-                    NotifyOfPropertyChange(() => IsProgressRingVisible);
-                }
-            }
-        }
-
-        private bool _isProgressRingActive;
-        public bool IsProgressRingActive
-        {
-            get { return _isProgressRingActive; }
-            set
-            {
-                if (value != _isProgressRingActive)
-                {
-                    _isProgressRingActive = value;
-                    NotifyOfPropertyChange(() => IsProgressRingActive);
-                }
-            }
         }
 
         private bool _areControlsEnabled = true;

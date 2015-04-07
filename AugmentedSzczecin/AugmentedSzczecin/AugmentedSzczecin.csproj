@@ -98,6 +98,7 @@
     <Compile Include="Services\PointOfInterestService.cs" />
     <Compile Include="Services\RegisterService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\BaseAugmentedSzczecinViewModel.cs" />
     <Compile Include="ViewModels\CurrentMapViewModel.cs" />
     <Compile Include="ViewModels\LocationListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
