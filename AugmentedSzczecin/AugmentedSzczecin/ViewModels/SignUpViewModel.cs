@@ -37,20 +37,6 @@ namespace AugmentedSzczecin.ViewModels
             base.OnViewAttached(view, context);
         }
 
-        private bool _areControlsEnabled = true;
-        public bool AreControlsEnabled
-        {
-            get { return _areControlsEnabled; }
-            set
-            {
-                if (value != _areControlsEnabled)
-                {
-                    _areControlsEnabled = value;
-                    NotifyOfPropertyChange(() => AreControlsEnabled);
-                }
-            }
-        }
-
         private string _password;
         public string Password
         {

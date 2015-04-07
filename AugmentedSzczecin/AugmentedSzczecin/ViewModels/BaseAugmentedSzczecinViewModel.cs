@@ -4,6 +4,20 @@ namespace AugmentedSzczecin.ViewModels
 {
     public class BaseAugmentedSzczecinViewModel : Screen
     {
+        private bool _areControlsEnabled = true;
+        public bool AreControlsEnabled
+        {
+            get { return _areControlsEnabled; }
+            set
+            {
+                if (value != _areControlsEnabled)
+                {
+                    _areControlsEnabled = value;
+                    NotifyOfPropertyChange(() => AreControlsEnabled);
+                }
+            }
+        }
+
         private bool _isProgressRingVisible;
         public bool IsProgressRingVisible
         {
