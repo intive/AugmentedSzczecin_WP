@@ -11,7 +11,7 @@
         </Style>
         <SolidColorBrush x:Key="BLStreamBackgroundColorBrush" Color="#f9461c" />
         <SolidColorBrush x:Key="BLStreamForegroundColorBrush" Color="#575757" />
-        <caliburn:BooleanToVisibilityConverter x:Key="BoolToVisConv" />
+        <caliburn:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Application.Resources>
 
 </caliburn:CaliburnApplication>
