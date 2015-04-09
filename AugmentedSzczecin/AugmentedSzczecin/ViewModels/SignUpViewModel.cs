@@ -14,6 +14,7 @@ namespace AugmentedSzczecin.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IAccountService _accountService;
+        private PasswordBox _passwordBox;
 
         public SignUpViewModel(IEventAggregator eventAggregator, IAccountService accountService)
         {
@@ -21,27 +22,13 @@ namespace AugmentedSzczecin.ViewModels
             _accountService = accountService;
         }
 
-        protected override void OnActivate()
-        {
-            _eventAggregator.Subscribe(this);
-            base.OnActivate();
-        }
-        protected override void OnDeactivate(bool close)
-        {
-            _eventAggregator.Unsubscribe(this);
-            base.OnDeactivate(close);
-        }
-
-        protected override void OnViewAttached(object view, object context)
-        {
-            _passwordBox = ((SignUpView)view).Password;
-            base.OnViewAttached(view, context);
-        }
-
         private bool _isProgressRingVisible;
         public bool IsProgressRingVisible
         {
-            get { return _isProgressRingVisible; }
+            get
+            {
+                return _isProgressRingVisible;
+            }
             set
             {
                 if (value != _isProgressRingVisible)
@@ -55,7 +42,10 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isProgressRingActive;
         public bool IsProgressRingActive
         {
-            get { return _isProgressRingActive; }
+            get
+            {
+                return _isProgressRingActive;
+            }
             set
             {
                 if (value != _isProgressRingActive)
@@ -69,7 +59,10 @@ namespace AugmentedSzczecin.ViewModels
         private bool _areControlsEnabled = true;
         public bool AreControlsEnabled
         {
-            get { return _areControlsEnabled; }
+            get
+            {
+                return _areControlsEnabled;
+            }
             set
             {
                 if (value != _areControlsEnabled)
@@ -83,7 +76,10 @@ namespace AugmentedSzczecin.ViewModels
         private string _password;
         public string Password
         {
-            get { return _password; }
+            get
+            {
+                return _password;
+            }
             set
             {
                 if (value != _password)
@@ -100,7 +96,10 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isPasswordLengthValid;
         public bool IsPasswordLengthValid
         {
-            get { return _isPasswordLengthValid; }
+            get
+            {
+                return _isPasswordLengthValid;
+            }
             set
             {
                 if (value != _isPasswordLengthValid)
@@ -114,7 +113,10 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isPasswordEmptyValid;
         public bool IsPasswordEmptyValid
         {
-            get { return _isPasswordEmptyValid; }
+            get
+            {
+                return _isPasswordEmptyValid;
+            }
             set
             {
                 if (value != _isPasswordEmptyValid)
@@ -125,21 +127,13 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private PasswordBox _passwordBox;
-        private void ValidatePasswordLength()
-        {
-            IsPasswordLengthValid = _passwordBox.Password.Length >= 6;
-        }
-
-        private void ValidatePasswordEmpty()
-        {
-            IsPasswordEmptyValid = !String.IsNullOrEmpty(_passwordBox.Password);
-        }
-
         private string _email;
         public string Email
         {
-            get { return _email; }
+            get
+            {
+                return _email;
+            }
             set
             {
                 if (_email != value)
@@ -156,7 +150,10 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isEmailEmptyValid;
         public bool IsEmailEmptyValid
         {
-            get { return _isEmailEmptyValid; }
+            get
+            {
+                return _isEmailEmptyValid;
+            }
             set
             {
                 if (_isEmailEmptyValid != value)
@@ -170,7 +167,10 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isEmailMatchValid;
         public bool IsEmailMatchValid
         {
-            get { return _isEmailMatchValid; }
+            get
+            {
+                return _isEmailMatchValid;
+            }
             set
             {
                 if (_isEmailMatchValid != value)
@@ -181,22 +181,13 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private void ValidateEmailEmpty()
-        {
-            IsEmailEmptyValid = !String.IsNullOrEmpty(Email);
-        }
-
-        private void ValidateEmailMatch()
-        {
-            IsEmailMatchValid = Regex.IsMatch(Email,
-                @"^(?("")(""[^""]+?""@)|(([0-9a-zA-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-z])@))" +
-                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-z][-\w]*[0-9a-zA-z]*\.)+[a-zA-z0-9]{2,24}))$");
-        }
-
         private bool _validationCheck;
         public bool ValidationCheck
         {
-            get { return _validationCheck; }
+            get
+            {
+                return _validationCheck;
+            }
             set
             {
                 _validationCheck = value;
@@ -204,9 +195,22 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private void CheckValidation()
+        protected override void OnActivate()
         {
-            ValidationCheck = IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid;
+            _eventAggregator.Subscribe(this);
+            base.OnActivate();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            _eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
+        }
+
+        protected override void OnViewAttached(object view, object context)
+        {
+            _passwordBox = ((SignUpView)view).Password;
+            base.OnViewAttached(view, context);
         }
 
         public void Register()
@@ -222,6 +226,51 @@ namespace AugmentedSzczecin.ViewModels
             {
                 WrongValidationMessageDialog();
             }
+        }
+
+        public void Handle(RegisterFailedEvent e)
+        {
+            AreControlsEnabled = true;
+            IsProgressRingVisible = false;
+            IsProgressRingActive = false;
+            var msg = new MessageDialog(e.RegisterFailedException.Message);
+            msg.ShowAsync();
+        }
+
+        public void Handle(RegisterSuccessEvent e)
+        {
+            AreControlsEnabled = true;
+            IsProgressRingVisible = false;
+            IsProgressRingActive = false;
+            var msg = new MessageDialog(e.SuccessMessage);
+            msg.ShowAsync();
+        }
+
+        private void ValidatePasswordLength()
+        {
+            IsPasswordLengthValid = _passwordBox.Password.Length >= 6;
+        }
+
+        private void ValidatePasswordEmpty()
+        {
+            IsPasswordEmptyValid = !String.IsNullOrEmpty(_passwordBox.Password);
+        }
+
+        private void ValidateEmailEmpty()
+        {
+            IsEmailEmptyValid = !String.IsNullOrEmpty(Email);
+        }
+
+        private void ValidateEmailMatch()
+        {
+            IsEmailMatchValid = Regex.IsMatch(Email,
+                @"^(?("")(""[^""]+?""@)|(([0-9a-zA-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-z][-\w]*[0-9a-zA-z]*\.)+[a-zA-z0-9]{2,24}))$");
+        }
+
+        private void CheckValidation()
+        {
+            ValidationCheck = IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid;
         }
 
         private async void WrongValidationMessageDialog()
@@ -256,24 +305,6 @@ namespace AugmentedSzczecin.ViewModels
 
             var msg = new MessageDialog(message);
             await msg.ShowAsync();
-        }
-
-        public void Handle(RegisterFailedEvent e)
-        {
-            AreControlsEnabled = true;
-            IsProgressRingVisible = false;
-            IsProgressRingActive = false;
-            var msg = new MessageDialog(e.RegisterFailedException.Message);
-            msg.ShowAsync();
-        }
-
-        public void Handle(RegisterSuccessEvent e)
-        {
-            AreControlsEnabled = true;
-            IsProgressRingVisible = false;
-            IsProgressRingActive = false;
-            var msg = new MessageDialog(e.SuccessMessage);
-            msg.ShowAsync();
         }
     }
 }
