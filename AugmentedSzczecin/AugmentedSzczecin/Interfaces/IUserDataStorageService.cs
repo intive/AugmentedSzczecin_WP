@@ -2,7 +2,7 @@
 {
     public interface IUserDataStorageService
     {
-        void AddUserData(string email, string password);
+        void AddUserData(string email, string token);
 
         bool IsUserSignedIn();
 

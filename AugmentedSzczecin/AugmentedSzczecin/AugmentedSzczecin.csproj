@@ -91,13 +91,16 @@
     <Compile Include="Events\SignInSuccessEvent.cs" />
     <Compile Include="Helpers\ResolutionHelper.cs" />
     <Compile Include="Interfaces\IAccountService.cs" />
+    <Compile Include="Interfaces\IHttpService.cs" />
     <Compile Include="Interfaces\ILocationService.cs" />
     <Compile Include="Interfaces\IPointOfInterestService.cs" />
     <Compile Include="Interfaces\IUserDataStorageService.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
+    <Compile Include="Models\Token.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\HttpService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\PointOfInterestService.cs" />
     <Compile Include="Services\UserDataStorageService.cs" />

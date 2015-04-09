@@ -12,6 +12,7 @@ namespace AugmentedSzczecin.Services
 {
     public class AccountService : IAccountService
     {
+        private string _uriMock = "http://private-8596e-patronage2015.apiary-mock.com/user";
         private readonly IEventAggregator _eventAggregator;
 
         public AccountService(IEventAggregator eventAggregator)
@@ -21,7 +22,7 @@ namespace AugmentedSzczecin.Services
 
         public async void Register(string email, string password)
         {
-            var baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/user");
+            var baseAddress = new Uri(_uriMock);
             try
             {
                 using (var httpClient = new HttpClient { BaseAddress = baseAddress })
@@ -40,17 +41,11 @@ namespace AugmentedSzczecin.Services
 
                                 if (user.ErrorCode != null)
                                 {
-                                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent()
-                                    {
-                                        RegisterFailedException = new Exception("Back-end Error!")
-                                    });
+                                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = new Exception("Back-end Error!") });
                                 }
                                 else
                                 {
-                                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent()
-                                    {
-                                        SuccessMessage = "Registration Successful!"
-                                    });
+                                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!" });
                                 }
                             }
                             else
@@ -69,7 +64,7 @@ namespace AugmentedSzczecin.Services
 
         public async void SignIn(string email, string password)
         {
-            var baseAddress = new Uri("http://private-8596e-patronage2015.apiary-mock.com/user");
+            var baseAddress = new Uri(_uriMock);
             try
             {
                 using (var httpClient = new HttpClient { BaseAddress = baseAddress })
@@ -84,26 +79,26 @@ namespace AugmentedSzczecin.Services
                             if (response.StatusCode == HttpStatusCode.OK)
                             {
                                 var responseData = await response.Content.ReadAsStringAsync();
-                                var user = JsonConvert.DeserializeObject<User>(responseData);
+                                var token = JsonConvert.DeserializeObject<Token>(responseData);
 
-                                if (user.ErrorCode != null)
+                                if (token.ErrorCode != null)
                                 {
-                                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent()
-                                    {
-                                        SignInFailedException = new Exception("Back-end Error!")
-                                    });
+                                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { SignInFailedException = new Exception("Back-end Error!") });
                                 }
                                 else
                                 {
-                                    _eventAggregator.PublishOnUIThread(new SignInSuccessEvent()
-                                    {
-                                        SuccessMessage = "Signed In successfully!"
-                                    });
+                                    var userDataStorageService = IoC.GetInstance(typeof(IUserDataStorageService), null);
+                                    ((IUserDataStorageService)userDataStorageService).AddUserData(email, token.TokenString);
+                                    _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Signed In successfully!" });
                                 }
                             }
                             else
                             {
-                                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { SignInFailedException = new Exception("200 error: Something went wrong!") });
+                                /**********TYLKO DO TESTU********/
+                                var userDataStorageService = IoC.GetInstance(typeof(IUserDataStorageService), null);
+                                ((IUserDataStorageService)userDataStorageService).AddUserData(email, "test");
+                                /********************************/
+                                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { SignInFailedException = new Exception("Http status code not OK!") });
                             }
                         }
                     }

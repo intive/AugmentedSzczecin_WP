@@ -6,10 +6,11 @@ namespace AugmentedSzczecin.Services
 {
     public class UserDataStorageService : IUserDataStorageService
     {
-        public void AddUserData(string email, string password)
+        public void AddUserData(string email, string token)
         {
             var vault = new PasswordVault();
-            vault.Add(new PasswordCredential("AugmentedSzczecinUserData", email, password));
+            var nr = vault.RetrieveAll().Count;
+            vault.Add(new PasswordCredential("AugmentedSzczecinUserData", email, token));
         }
 
         public bool IsUserSignedIn()

@@ -17,11 +17,10 @@ namespace AugmentedSzczecin.ViewModels
         private readonly IUserDataStorageService _userDataStorageService;
         private Windows.UI.Xaml.Controls.PasswordBox _passwordBox;
 
-        public SignInViewModel(IEventAggregator eventAggregator, IAccountService accountService, IUserDataStorageService userDataStorageService)
+        public SignInViewModel(IEventAggregator eventAggregator, IAccountService accountService)
         {
             _eventAggregator = eventAggregator;
             _accountService = accountService;
-            _userDataStorageService = userDataStorageService;
         }
 
         private bool _isProgressRingVisible;
@@ -198,7 +197,6 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = false;
             IsProgressRingActive = false;
-            _userDataStorageService.AddUserData(Email, Password);
             var msg = new MessageDialog(e.SuccessMessage);
             msg.ShowAsync();
         }
@@ -208,9 +206,6 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = false;
             IsProgressRingActive = false;
-            /******TYLKO DO TESTU****/
-            _userDataStorageService.AddUserData(Email, Password);
-            /************************/
             var msg = new MessageDialog(e.SignInFailedException.Message);
             msg.ShowAsync();
         }
