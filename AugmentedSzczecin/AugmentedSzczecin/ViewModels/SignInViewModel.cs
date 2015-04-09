@@ -92,7 +92,6 @@ namespace AugmentedSzczecin.ViewModels
                 if (value != _password)
                 {
                     _password = value;
-                    ValidatePasswordLength();
                     ValidatePasswordEmpty();
                     NotifyOfPropertyChange(() => Password);
                 }
@@ -113,20 +112,6 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool _isPasswordLengthValid;
-        public bool IsPasswordLengthValid
-        {
-            get { return _isPasswordLengthValid; }
-            set
-            {
-                if (value != _isPasswordLengthValid)
-                {
-                    _isPasswordLengthValid = value;
-                    NotifyOfPropertyChange(() => IsPasswordLengthValid);
-                }
-            }
-        }
-
         private string _email;
         public string Email
         {
@@ -137,7 +122,6 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _email = value;
                     ValidateEmailEmpty();
-                    ValidateEmailMatch();
                     NotifyOfPropertyChange(() => Email);
                 }
             }
@@ -157,20 +141,6 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool _isEmailMatchValid;
-        public bool IsEmailMatchValid
-        {
-            get { return _isEmailMatchValid; }
-            set
-            {
-                if (_isEmailMatchValid != value)
-                {
-                    _isEmailMatchValid = value;
-                    NotifyOfPropertyChange(() => IsEmailMatchValid);
-                }
-            }
-        }
-
         private bool _validationCheck;
         public bool ValidationCheck
         {
@@ -180,11 +150,6 @@ namespace AugmentedSzczecin.ViewModels
                 _validationCheck = value;
                 NotifyOfPropertyChange(() => ValidationCheck);
             }
-        }
-
-        private void ValidatePasswordLength()
-        {
-            IsPasswordLengthValid = _passwordBox.Password.Length >= 6;
         }
 
         private void ValidatePasswordEmpty()
@@ -197,16 +162,9 @@ namespace AugmentedSzczecin.ViewModels
             IsEmailEmptyValid = !String.IsNullOrEmpty(Email);
         }
 
-        private void ValidateEmailMatch()
-        {
-            IsEmailMatchValid = Regex.IsMatch(Email,
-                @"^(?("")(""[^""]+?""@)|(([0-9a-zA-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-z])@))" +
-                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-z][-\w]*[0-9a-zA-z]*\.)+[a-zA-z0-9]{2,24}))$");
-        }
-
         private void CheckValidation()
         {
-            ValidationCheck = IsEmailEmptyValid && IsEmailMatchValid && IsPasswordLengthValid && IsPasswordEmptyValid;
+            ValidationCheck = IsEmailEmptyValid && IsPasswordEmptyValid;
         }
 
         public void SignIn()
@@ -240,15 +198,6 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     message += loader.GetString("SignUpEmailEmpty") + "\n";
                 }
-                if (!IsEmailMatchValid && IsEmailEmptyValid)
-                {
-                    message += loader.GetString("SignUpEmailMatch") + "\n";
-                }
-                if (!IsPasswordLengthValid && IsPasswordEmptyValid)
-                {
-                    message += loader.GetString("SignUpPasswordLength") + "\n";
-                }
-
                 if (!IsPasswordEmptyValid)
                 {
                     message += loader.GetString("SignUpPasswordEmpty");
