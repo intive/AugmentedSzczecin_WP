@@ -33,8 +33,7 @@ namespace AugmentedSzczecin
             _container.PerRequest<SignInViewModel>();
             _container.PerRequest<IPointOfInterestService, PointOfInterestService>();
             _container.PerRequest<ILocationService, LocationService>();
-            _container.PerRequest<IRegisterService, RegisterService>();
-            _container.PerRequest<ISignInService, SignInService>();
+            _container.PerRequest<IAccountService, AccountService>();
             _container.PerRequest<IUserDataStorageService, UserDataStorageService>();
             IoC.GetInstance = GetInstance;
         }

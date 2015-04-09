@@ -13,11 +13,12 @@ namespace AugmentedSzczecin.ViewModels
     public class SignUpViewModel : Screen, IHandle<RegisterSuccessEvent>, IHandle<RegisterFailedEvent>
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IRegisterService _registerService;
-        public SignUpViewModel(IEventAggregator eventAggregator, IRegisterService registerService)
+        private readonly IAccountService _accountService;
+
+        public SignUpViewModel(IEventAggregator eventAggregator, IAccountService accountService)
         {
             _eventAggregator = eventAggregator;
-            _registerService = registerService;
+            _accountService = accountService;
         }
 
         protected override void OnActivate()
@@ -215,7 +216,7 @@ namespace AugmentedSzczecin.ViewModels
                 AreControlsEnabled = false;
                 IsProgressRingVisible = true;
                 IsProgressRingActive = true;
-                _registerService.Register(Email, Password);
+                _accountService.Register(Email, Password);
             }
             else
             {

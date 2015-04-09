@@ -13,14 +13,14 @@ namespace AugmentedSzczecin.ViewModels
     public class SignInViewModel : Screen, IHandle<SignInSuccessEvent>, IHandle<SignInFailedEvent>
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly ISignInService _signInService;
+        private readonly IAccountService _accountService;
         private readonly IUserDataStorageService _userDataStorageService;
         private Windows.UI.Xaml.Controls.PasswordBox _passwordBox;
 
-        public SignInViewModel(IEventAggregator eventAggregator, ISignInService signInService, IUserDataStorageService userDataStorageService)
+        public SignInViewModel(IEventAggregator eventAggregator, IAccountService accountService, IUserDataStorageService userDataStorageService)
         {
             _eventAggregator = eventAggregator;
-            _signInService = signInService;
+            _accountService = accountService;
             _userDataStorageService = userDataStorageService;
         }
 
@@ -185,7 +185,7 @@ namespace AugmentedSzczecin.ViewModels
                 AreControlsEnabled = false;
                 IsProgressRingVisible = true;
                 IsProgressRingActive = true;
-                _signInService.SignIn(Email, Password);
+                _accountService.SignIn(Email, Password);
             }
             else
             {
