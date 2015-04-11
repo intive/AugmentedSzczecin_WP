@@ -3,6 +3,7 @@ using AugmentedSzczecin.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,6 +15,19 @@ namespace AugmentedSzczecin.Services
     public class HttpService : IHttpService
     {
         private string _uriMock = "http://private-8596e-patronage2015.apiary-mock.com/user";
+        private const string TemporaryPointOfInterestDatabaseUri = "https://augmented-szczecin-test.azure-mobile.net/tables/PointOfInterest";
+
+        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestsList()
+        {
+            HttpClient client = new HttpClient();
+
+            HttpResponseMessage response = await client.GetAsync(TemporaryPointOfInterestDatabaseUri);
+            response.EnsureSuccessStatusCode();
+            string jsonString = await response.Content.ReadAsStringAsync();
+            ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(jsonString);
+
+            return PointOfInterestList;
+        }
 
         public async Task<User> CreateAccount(User user)
         {
