@@ -43,15 +43,44 @@ namespace AugmentedSzczecin.Services
 
             if (tokenResponseData.ErrorCode == null)
             {
-                _userDataStorageService.AddUserData(email, password);
-                _userDataStorageService.AddUserData(email, tokenResponseData.TokenString);
+                _userDataStorageService.AddUserData("ASPassword", email, password);
+                _userDataStorageService.AddUserData("ASToken", email, tokenResponseData.TokenString);
                 _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Signed In successfully!" });
             }
             else
             {
+                /******TYLKO DO TESTU**********/
+                _userDataStorageService.AddUserData("ASPassword", email, password);
+                _userDataStorageService.AddUserData("ASToken", email, "test");
+                /******************************/
                 _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = tokenResponseData.ErrorCode });
             }
         }
+    
+        public bool IsUserSignedIn()
+        {
+            bool isUserSignedIn = _userDataStorageService.IsUserSignedIn();
+            
+            return isUserSignedIn;
+        }
+
+        public void SignOut()
+        {
+            _userDataStorageService.SignOut();
+        }
+    
+        public string GetUserEmail()
+        {
+            string email = _userDataStorageService.GetUserEmail();
+
+            return email;
+        }
+
+        public string GetUserToken()
+        {
+            string token = _userDataStorageService.GetUserToken();
+
+            return token;
+        }
     }
 }
-
