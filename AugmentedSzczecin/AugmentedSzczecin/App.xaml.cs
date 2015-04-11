@@ -34,6 +34,7 @@ namespace AugmentedSzczecin
             _container.PerRequest<IPointOfInterestService, PointOfInterestService>();
             _container.PerRequest<ILocationService, LocationService>();
             _container.PerRequest<IAccountService, AccountService>();
+            _container.PerRequest<IHttpService, HttpService>();
             _container.PerRequest<IUserDataStorageService, UserDataStorageService>();
             IoC.GetInstance = GetInstance;
         }

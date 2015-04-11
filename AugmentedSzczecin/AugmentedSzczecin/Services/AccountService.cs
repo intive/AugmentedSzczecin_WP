@@ -1,113 +1,57 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Text;
 using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Models;
 using Caliburn.Micro;
-using Newtonsoft.Json;
 
 namespace AugmentedSzczecin.Services
 {
     public class AccountService : IAccountService
     {
-        private string _uriMock = "http://private-8596e-patronage2015.apiary-mock.com/user";
         private readonly IEventAggregator _eventAggregator;
+        private readonly IHttpService _httpService;
+        private readonly IUserDataStorageService _userDataStorageService;
 
-        public AccountService(IEventAggregator eventAggregator)
+        public AccountService(IEventAggregator eventAggregator, IHttpService httpService, IUserDataStorageService userDataStorageService)
         {
             _eventAggregator = eventAggregator;
+            _httpService = httpService;
+            _userDataStorageService = userDataStorageService;
         }
 
         public async void Register(string email, string password)
         {
-            var baseAddress = new Uri(_uriMock);
-            try
+            var newUser = new User() { Email = email, ErrorCode = "", Password = password };
+
+            User userResponseData = await _httpService.CreateAccount(newUser);
+
+            if(userResponseData.ErrorCode == null)
             {
-                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
-                {
-                    var newUser = new User() { Email = email, ErrorCode = "", Password = password };
-                    var json = JsonConvert.SerializeObject(newUser);
-
-                    using (var content = new StringContent(json, Encoding.Unicode, "application/json"))
-                    {
-                        using (var response = await httpClient.PostAsync("user", content))
-                        {
-                            if (response.StatusCode == HttpStatusCode.OK)
-                            {
-                                var responseData = await response.Content.ReadAsStringAsync();
-                                var user = JsonConvert.DeserializeObject<User>(responseData);
-
-                                if (user.ErrorCode != null)
-                                {
-                                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = new Exception("Back-end Error!") });
-                                }
-                                else
-                                {
-                                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!" });
-                                }
-                            }
-                            else
-                            {
-                                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = new Exception("200 error: Something went wrong!") });
-                            }
-                        }
-                    }
-                }
+                _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!" });
             }
-            catch (Exception e)
+            else
             {
-                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { RegisterFailedException = e });
+                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = userResponseData.ErrorCode });
             }
         }
 
         public async void SignIn(string email, string password)
         {
-            var baseAddress = new Uri(_uriMock);
-            try
+            var newUser = new User() { Email = email, ErrorCode = "", Password = password };
+
+            Token tokenResponseData = await _httpService.SignIn(newUser);
+
+            if (tokenResponseData.ErrorCode == null)
             {
-                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
-                {
-                    var newUser = new User() { Email = email, ErrorCode = "", Password = password };
-                    var json = JsonConvert.SerializeObject(newUser);
-
-                    using (var content = new StringContent(json, Encoding.Unicode, "application/json"))
-                    {
-                        using (var response = await httpClient.PostAsync("user", content))
-                        {
-                            if (response.StatusCode == HttpStatusCode.OK)
-                            {
-                                var responseData = await response.Content.ReadAsStringAsync();
-                                var token = JsonConvert.DeserializeObject<Token>(responseData);
-
-                                if (token.ErrorCode != null)
-                                {
-                                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { SignInFailedException = new Exception("Back-end Error!") });
-                                }
-                                else
-                                {
-                                    var userDataStorageService = IoC.GetInstance(typeof(IUserDataStorageService), null);
-                                    ((IUserDataStorageService)userDataStorageService).AddUserData(email, token.TokenString);
-                                    _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Signed In successfully!" });
-                                }
-                            }
-                            else
-                            {
-                                /**********TYLKO DO TESTU********/
-                                var userDataStorageService = IoC.GetInstance(typeof(IUserDataStorageService), null);
-                                ((IUserDataStorageService)userDataStorageService).AddUserData(email, "test");
-                                /********************************/
-                                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { SignInFailedException = new Exception("Http status code not OK!") });
-                            }
-                        }
-                    }
-                }
+                _userDataStorageService.AddUserData(email, password);
+                _userDataStorageService.AddUserData(email, tokenResponseData.TokenString);
+                _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Signed In successfully!" });
             }
-            catch (Exception e)
+            else
             {
-                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { SignInFailedException = e });
+                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = tokenResponseData.ErrorCode });
             }
         }
     }
 }
+

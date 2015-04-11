@@ -8,6 +8,6 @@ namespace AugmentedSzczecin.Events
 {
     public class SignInFailedEvent
     {
-        public Exception SignInFailedException;
+        public string FailMessage;
     }
 }

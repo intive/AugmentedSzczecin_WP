@@ -233,7 +233,7 @@ namespace AugmentedSzczecin.ViewModels
             AreControlsEnabled = true;
             IsProgressRingVisible = false;
             IsProgressRingActive = false;
-            var msg = new MessageDialog(e.RegisterFailedException.Message);
+            var msg = new MessageDialog(e.FailMessage);
             msg.ShowAsync();
         }
 

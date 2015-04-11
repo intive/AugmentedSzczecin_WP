@@ -34,13 +34,17 @@ namespace AugmentedSzczecin.Services
                                 var responseData = await response.Content.ReadAsStringAsync();
                                 userResponseData = JsonConvert.DeserializeObject<User>(responseData);
                             }
+                            else
+                            {
+                                userResponseData.ErrorCode = "Back-end Error!";
+                            }
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                userResponseData.ErrorCode = e.Message;
             }
 
             return userResponseData;
@@ -64,6 +68,10 @@ namespace AugmentedSzczecin.Services
                             {
                                 var responseData = await response.Content.ReadAsStringAsync();
                                 tokenResponseData = JsonConvert.DeserializeObject<Token>(responseData);
+                            }
+                            else
+                            {
+                                tokenResponseData.ErrorCode = "Back-end Error!";
                             }
                         }
                     }
