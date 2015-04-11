@@ -7,12 +7,12 @@ namespace AugmentedSzczecin.ViewModels
     public class MainViewModel : Screen
     {
         private readonly INavigationService _navigationService;
-        private readonly IUserDataStorageService _userDataStorageService;
+        private readonly IAccountService _accountService;
 
-        public MainViewModel(INavigationService navigationService, IUserDataStorageService userDataStorageService)
+        public MainViewModel(INavigationService navigationService, IAccountService accountService)
         {
             _navigationService = navigationService;
-            _userDataStorageService = userDataStorageService;
+            _accountService = accountService;
         }
 
         public void NavigateToAbout()
@@ -39,7 +39,7 @@ namespace AugmentedSzczecin.ViewModels
         {
             get
             {
-                bool isUserSignedIn = !_userDataStorageService.IsUserSignedIn();
+                bool isUserSignedIn = !_accountService.IsUserSignedIn();
                 return isUserSignedIn;
             }
         }
@@ -51,13 +51,13 @@ namespace AugmentedSzczecin.ViewModels
 
         public void SignOut()
         {
-            _userDataStorageService.SignOut();
+            _accountService.SignOut();
             NotifyOfPropertyChange(() => CanNavigateToSignIn);
         }
 
         public void CheckIfUserSignedIn()
         {
-            bool isUserSignedIn = _userDataStorageService.IsUserSignedIn();
+            bool isUserSignedIn = _accountService.IsUserSignedIn();
             string message = "";
             if (isUserSignedIn)
                 message += "User signed in!";
