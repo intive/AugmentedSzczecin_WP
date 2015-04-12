@@ -24,13 +24,41 @@
             caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]"
             Margin="0,0,0,0">
 
-            <Image Name="ImgMyLocation" Source="/Assets/MyLocationPoint.png" maps:MapControl.Location="{Binding CenterOfTheMap}" maps:MapControl.NormalizedAnchorPoint="0.25, 0.9" Height="10" Width="10" Visibility="{Binding MyLocationPointVisibility}"/>
+            <Image Name="ImgMyLocation" Source="/Assets/MyLocationPoint.png" maps:MapControl.Location="{Binding CenterOfTheMap}" Height="10" Width="10" Visibility="{Binding MyLocationPointVisibility}"/>
 
             <TextBlock x:Name="ScaleText" Text="{Binding ScaleText}" FontSize="14" Foreground="Black" Margin="24,530,0,2" Opacity="0.6" />
             <Rectangle Name="RecScale" Fill="Black" Width="100" Height="4" Margin="24,548,0,0" Opacity="0.6" />
 
+            <maps:MapItemsControl x:Name="POIs">
+                <maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid maps:MapControl.Location="{Binding Location}" Tapped="PushpinTapped">
+                            <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left" />
+                        </Grid>
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
         </maps:MapControl>
 
     </StackPanel>
 
+    <Page.Resources>
+        <Flyout x:Key="Details">
+            <StackPanel Background="Black" Height="100" >
+                <TextBlock Text="Name: " />
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="Latitude: " />
+                <TextBlock Text="{Binding Latitude}" />
+                <TextBlock Text="Longitude: " />
+                <TextBlock Text="{Binding Longitude}" />
+                <TextBlock Text="Street name: " />
+                <TextBlock Text="{Binding StreetName}" />
+                <TextBlock Text="Postal code: " />
+                <TextBlock Text="{Binding PostalCode}" />
+                <TextBlock Text="Category: " />
+                <TextBlock Text="{Binding Category}" />
+            </StackPanel>
+        </Flyout>
+    </Page.Resources>
 </Page>
+

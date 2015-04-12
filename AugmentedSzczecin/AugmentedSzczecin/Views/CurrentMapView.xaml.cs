@@ -13,6 +13,7 @@ using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Models;
 using AugmentedSzczecin.ViewModels;
 using Caliburn.Micro;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AugmentedSzczecin.Views
 {
@@ -56,24 +57,7 @@ namespace AugmentedSzczecin.Views
         public void Handle(PointOfInterestLoadedEvent e)
         {
             _mapLocations = e.PointOfInterestList;
-
-            if (_mapLocations != null)
-            {
-                foreach (PointOfInterest pointOfInterest in _mapLocations)
-                {
-                    var newPin = CreatePin();
-                    BingMap.Children.Add(newPin);
-
-                    Geopoint geopoint = new Geopoint(new BasicGeoposition
-                    {
-                        Longitude = pointOfInterest.Longitude,
-                        Latitude = pointOfInterest.Latitude
-                    });
-
-                    MapControl.SetLocation(newPin, geopoint);
-                    MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
-                }
-            }
+            POIs.ItemsSource = _mapLocations;
         }
 
         private DependencyObject CreatePin()
@@ -97,10 +81,15 @@ namespace AugmentedSzczecin.Views
             return myGrid;
         }
 
-        public void Handle(PointOfInterestLoadFailedEvent e)
+        public async void Handle(PointOfInterestLoadFailedEvent e)
         {
             var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
-            msg.ShowAsync();
+            await msg.ShowAsync();
+        }
+
+        private void PushpinTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
     }
 }
