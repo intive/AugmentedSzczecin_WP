@@ -21,19 +21,6 @@ namespace AugmentedSzczecin.Services
             _httpService = httpService;
         }
 
-        public async void Refresh()
-        {
-            try
-            {
-                PointOfInterestList = await _httpService.GetPointOfInterestsList();
-                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
-            }
-            catch (Exception e)
-            {
-                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadFailedEvent() { PointOfInterestLoadException = e });
-            }
-        }
-
         private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
         public ObservableCollection<PointOfInterest> PointOfInterestList
         {
@@ -44,6 +31,19 @@ namespace AugmentedSzczecin.Services
                 {
                     _pointOfInterestList = value;
                 }
+            }
+        }
+
+        public async void Refresh()
+        {
+            try
+            {
+                PointOfInterestList = await _httpService.GetPointOfInterestsList();
+                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
+            }
+            catch (Exception e)
+            {
+                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadFailedEvent() { PointOfInterestLoadException = e });
             }
         }
     }

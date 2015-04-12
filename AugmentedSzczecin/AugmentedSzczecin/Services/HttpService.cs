@@ -15,13 +15,13 @@ namespace AugmentedSzczecin.Services
     public class HttpService : IHttpService
     {
         private string _uriMock = "http://private-8596e-patronage2015.apiary-mock.com/user";
-        private const string TemporaryPointOfInterestDatabaseUri = "https://augmented-szczecin-test.azure-mobile.net/tables/PointOfInterest";
+        private const string _temporaryPointOfInterestDatabaseUri = "https://augmented-szczecin-test.azure-mobile.net/tables/PointOfInterest";
 
         public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestsList()
         {
             HttpClient client = new HttpClient();
 
-            HttpResponseMessage response = await client.GetAsync(TemporaryPointOfInterestDatabaseUri);
+            HttpResponseMessage response = await client.GetAsync(_temporaryPointOfInterestDatabaseUri);
             response.EnsureSuccessStatusCode();
             string jsonString = await response.Content.ReadAsStringAsync();
             ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(jsonString);
@@ -91,9 +91,9 @@ namespace AugmentedSzczecin.Services
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                tokenResponseData.ErrorCode = e.Message;
             }
 
             return tokenResponseData;
