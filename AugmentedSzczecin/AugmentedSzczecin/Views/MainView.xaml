@@ -15,6 +15,10 @@
             <Button Content="Current Map" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" HorizontalAlignment="Stretch" />
             <Button Content="Location List" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" HorizontalAlignment="Stretch"/>
             <Button Content="Sign Up" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]" HorizontalAlignment="Stretch"/>
+            <Button Content="Sign In" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]" HorizontalAlignment="Stretch"/>
+            <Button Content="Sign Out" caliburn:Message.Attach="[Event Tapped] = [Action SignOut]" HorizontalAlignment="Stretch"/>
+            <Button Content="Is User Signed in" caliburn:Message.Attach="[Event Tapped] = [Action CheckIfUserSignedIn]" HorizontalAlignment="Stretch"/>
+
         </StackPanel>
     </Grid>
 </Page>

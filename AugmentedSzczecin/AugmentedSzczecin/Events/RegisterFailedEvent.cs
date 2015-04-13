@@ -4,6 +4,6 @@ namespace AugmentedSzczecin.Events
 {
     public class RegisterFailedEvent
     {
-        public Exception RegisterFailedException;
+        public string FailMessage;
     }
 }

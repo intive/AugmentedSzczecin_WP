@@ -1,14 +1,18 @@
-﻿using Caliburn.Micro;
+﻿using AugmentedSzczecin.Interfaces;
+using Caliburn.Micro;
+using Windows.UI.Popups;
 
 namespace AugmentedSzczecin.ViewModels
 {
     public class MainViewModel : Screen
     {
         private readonly INavigationService _navigationService;
+        private readonly IAccountService _accountService;
 
-        public MainViewModel(INavigationService navigationService)
+        public MainViewModel(INavigationService navigationService, IAccountService accountService)
         {
             _navigationService = navigationService;
+            _accountService = accountService;
         }
 
         public void NavigateToAbout()
@@ -30,5 +34,39 @@ namespace AugmentedSzczecin.ViewModels
         {
             _navigationService.NavigateToViewModel<SignUpViewModel>();
         }
+
+        public bool CanNavigateToSignIn
+        {
+            get
+            {
+                bool isUserSignedIn = !_accountService.IsUserSignedIn();
+                return isUserSignedIn;
+            }
+        }
+
+        public void NavigateToSignIn()
+        {
+            _navigationService.NavigateToViewModel<SignInViewModel>();
+        }
+
+        public void SignOut()
+        {
+            _accountService.SignOut();
+            NotifyOfPropertyChange(() => CanNavigateToSignIn);
+        }
+
+        public void CheckIfUserSignedIn()
+        {
+            bool isUserSignedIn = _accountService.IsUserSignedIn();
+            string message = "";
+            if (isUserSignedIn)
+                message += "User signed in!";
+            else
+                message += "User signed out!";
+
+            var msg = new MessageDialog(message);
+            msg.ShowAsync();
+        }
+        
     }
 }

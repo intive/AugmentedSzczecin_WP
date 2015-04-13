@@ -21,7 +21,6 @@ namespace AugmentedSzczecin.Views
     /// </summary>
     public sealed partial class CurrentMapView : IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
-
         private ObservableCollection<PointOfInterest> _mapLocations;
         readonly object _eventAgg;
 
@@ -39,18 +38,6 @@ namespace AugmentedSzczecin.Views
         ~CurrentMapView()
         {
             ((EventAggregator)_eventAgg).Unsubscribe(this);
-        }
-
-        private void CheckInternetConnection()
-        {
-            var servicesFromCurrentMapViewModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
-            ((CurrentMapViewModel)servicesFromCurrentMapViewModel).UpdateInternetConnection();
-            bool internetConnection = ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnection;
-
-            if (!internetConnection)
-            {
-                ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnectionDisabledMsg();
-            }
         }
 
         public void Handle(PointOfInterestLoadedEvent e)
@@ -76,6 +63,12 @@ namespace AugmentedSzczecin.Views
             }
         }
 
+        public void Handle(PointOfInterestLoadFailedEvent e)
+        {
+            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
+            msg.ShowAsync();
+        }
+
         private DependencyObject CreatePin()
         {
             var myGrid = new Grid();
@@ -97,10 +90,16 @@ namespace AugmentedSzczecin.Views
             return myGrid;
         }
 
-        public void Handle(PointOfInterestLoadFailedEvent e)
+        private void CheckInternetConnection()
         {
-            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
-            msg.ShowAsync();
+            var servicesFromCurrentMapViewModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
+            ((CurrentMapViewModel)servicesFromCurrentMapViewModel).UpdateInternetConnection();
+            bool internetConnection = ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnection;
+
+            if (!internetConnection)
+            {
+                ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnectionDisabledMsg();
+            }
         }
     }
 }
