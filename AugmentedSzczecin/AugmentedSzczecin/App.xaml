@@ -2,7 +2,8 @@
     x:Class="AugmentedSzczecin.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:caliburn="using:Caliburn.Micro">
+    xmlns:caliburn="using:Caliburn.Micro"
+    xmlns:converters="using:AugmentedSzczecin.Converters">
 
     <Application.Resources>
         <Style TargetType="ListViewItem" x:Key="MyLocationListViewStyle">
@@ -11,7 +12,8 @@
         </Style>
         <SolidColorBrush x:Key="BLStreamBackgroundColorBrush" Color="#f9461c" />
         <SolidColorBrush x:Key="BLStreamForegroundColorBrush" Color="#575757" />
-        <caliburn:BooleanToVisibilityConverter x:Key="BooleanToVisiblityConverter" />       
+        <caliburn:BooleanToVisibilityConverter x:Key="BooleanToVisiblityConverter" />
+        <converters:PoiToGeopointConverter x:Key="PoiToGeopointConverter" />
     </Application.Resources>
 
 </caliburn:CaliburnApplication>

@@ -9,6 +9,26 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+
+    <Page.Resources>
+        <Flyout x:Key="Details">
+            <StackPanel Background="Black" Height="100" >
+                <TextBlock Text="Name: " />
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="Latitude: " />
+                <TextBlock Text="{Binding Latitude}" />
+                <TextBlock Text="Longitude: " />
+                <TextBlock Text="{Binding Longitude}" />
+                <TextBlock Text="Street name: " />
+                <TextBlock Text="{Binding StreetName}" />
+                <TextBlock Text="Postal code: " />
+                <TextBlock Text="{Binding PostalCode}" />
+                <TextBlock Text="Category: " />
+                <TextBlock Text="{Binding Category}" />
+            </StackPanel>
+        </Flyout>
+    </Page.Resources>
+    
     <StackPanel>
 
         <TextBlock x:Uid="CurrentMapTitle"  TextWrapping="NoWrap" Text=""
@@ -32,7 +52,8 @@
             <maps:MapItemsControl x:Name="POIs">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid maps:MapControl.Location="{Binding Location}" Tapped="PushpinTapped">
+                        <Grid maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}" Tapped="PushpinTapped"
+                              FlyoutBase.AttachedFlyout="{StaticResource Details}">
                             <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left" />
                         </Grid>
                     </DataTemplate>
@@ -41,24 +62,5 @@
         </maps:MapControl>
 
     </StackPanel>
-
-    <Page.Resources>
-        <Flyout x:Key="Details">
-            <StackPanel Background="Black" Height="100" >
-                <TextBlock Text="Name: " />
-                <TextBlock Text="{Binding Name}" />
-                <TextBlock Text="Latitude: " />
-                <TextBlock Text="{Binding Latitude}" />
-                <TextBlock Text="Longitude: " />
-                <TextBlock Text="{Binding Longitude}" />
-                <TextBlock Text="Street name: " />
-                <TextBlock Text="{Binding StreetName}" />
-                <TextBlock Text="Postal code: " />
-                <TextBlock Text="{Binding PostalCode}" />
-                <TextBlock Text="Category: " />
-                <TextBlock Text="{Binding Category}" />
-            </StackPanel>
-        </Flyout>
-    </Page.Resources>
 </Page>
 
