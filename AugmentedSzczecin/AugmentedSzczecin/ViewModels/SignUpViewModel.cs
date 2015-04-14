@@ -7,6 +7,8 @@ using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Views;
 using Caliburn.Micro;
+using Windows.System;
+using Windows.UI.Xaml;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -244,6 +246,14 @@ namespace AugmentedSzczecin.ViewModels
             IsProgressRingActive = false;
             var msg = new MessageDialog(e.SuccessMessage);
             msg.ShowAsync();
+        }
+
+        public void EmailTextBoxChangeFocusToPasswordTextBox(ActionExecutionContext context)
+        {
+            if (((Windows.UI.Xaml.Input.KeyRoutedEventArgs)context.EventArgs).Key == VirtualKey.Enter)
+            {
+                _passwordBox.Focus(FocusState.Keyboard);
+            }
         }
 
         private void ValidatePasswordLength()
