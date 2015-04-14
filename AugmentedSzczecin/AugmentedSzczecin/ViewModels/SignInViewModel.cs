@@ -6,7 +6,9 @@ using System;
 using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Resources;
 using Windows.Security.Credentials;
+using Windows.System;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -208,6 +210,14 @@ namespace AugmentedSzczecin.ViewModels
             IsProgressRingActive = false;
             var msg = new MessageDialog(e.FailMessage);
             msg.ShowAsync();
+        }
+
+        public void EmailTextBoxChangeFocusToPasswordTextBox(ActionExecutionContext context)
+        {
+            if (((Windows.UI.Xaml.Input.KeyRoutedEventArgs)context.EventArgs).Key == VirtualKey.Enter)
+            {
+                _passwordBox.Focus(FocusState.Keyboard);           
+            }
         }
 
         private void ValidatePasswordEmpty()
