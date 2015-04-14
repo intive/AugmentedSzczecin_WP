@@ -39,6 +39,7 @@ namespace AugmentedSzczecin.ViewModels
         {
             get
             {
+                NotifyOfPropertyChange(() => CanSignOut);
                 bool isUserSignedIn = !_accountService.IsUserSignedIn();
                 return isUserSignedIn;
             }
@@ -49,24 +50,19 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService.NavigateToViewModel<SignInViewModel>();
         }
 
+        public bool CanSignOut
+        {
+            get
+            {
+                bool isUserSignedIn = _accountService.IsUserSignedIn();
+                return isUserSignedIn;
+            }
+        }
+
         public void SignOut()
         {
             _accountService.SignOut();
             NotifyOfPropertyChange(() => CanNavigateToSignIn);
         }
-
-        public void CheckIfUserSignedIn()
-        {
-            bool isUserSignedIn = _accountService.IsUserSignedIn();
-            string message = "";
-            if (isUserSignedIn)
-                message += "User signed in!";
-            else
-                message += "User signed out!";
-
-            var msg = new MessageDialog(message);
-            msg.ShowAsync();
-        }
-        
     }
 }
