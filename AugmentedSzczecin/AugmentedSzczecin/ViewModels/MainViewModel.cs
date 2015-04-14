@@ -1,5 +1,6 @@
 ﻿using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
 
 namespace AugmentedSzczecin.ViewModels
@@ -60,6 +61,17 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         public void SignOut()
+        {
+            var loader = new ResourceLoader();
+            var msg = new MessageDialog(loader.GetString("SignOutConfirmationText"));
+
+            msg.Commands.Add(new UICommand("Sign out", new UICommandInvokedHandler(SignOutConfirmed)));
+            msg.Commands.Add(new UICommand("Cancel"));
+
+            msg.ShowAsync();
+        }
+
+        private void SignOutConfirmed(IUICommand command)
         {
             _accountService.SignOut();
             NotifyOfPropertyChange(() => CanNavigateToSignIn);
