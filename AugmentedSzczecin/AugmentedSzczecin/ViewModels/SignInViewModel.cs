@@ -16,7 +16,6 @@ namespace AugmentedSzczecin.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IAccountService _accountService;
-        private readonly IUserDataStorageService _userDataStorageService;
         private Windows.UI.Xaml.Controls.PasswordBox _passwordBox;
 
         public SignInViewModel(IEventAggregator eventAggregator, IAccountService accountService)
