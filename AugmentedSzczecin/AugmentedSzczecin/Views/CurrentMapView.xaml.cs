@@ -13,6 +13,7 @@ using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Models;
 using AugmentedSzczecin.ViewModels;
 using Caliburn.Micro;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AugmentedSzczecin.Views
 {
@@ -40,56 +41,6 @@ namespace AugmentedSzczecin.Views
             ((EventAggregator)_eventAgg).Unsubscribe(this);
         }
 
-        public void Handle(PointOfInterestLoadedEvent e)
-        {
-            _mapLocations = e.PointOfInterestList;
-
-            if (_mapLocations != null)
-            {
-                foreach (PointOfInterest pointOfInterest in _mapLocations)
-                {
-                    var newPin = CreatePin();
-                    BingMap.Children.Add(newPin);
-
-                    Geopoint geopoint = new Geopoint(new BasicGeoposition
-                    {
-                        Longitude = pointOfInterest.Longitude,
-                        Latitude = pointOfInterest.Latitude
-                    });
-
-                    MapControl.SetLocation(newPin, geopoint);
-                    MapControl.SetNormalizedAnchorPoint(newPin, new Point(0.5, 1));
-                }
-            }
-        }
-
-        public void Handle(PointOfInterestLoadFailedEvent e)
-        {
-            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
-            msg.ShowAsync();
-        }
-
-        private DependencyObject CreatePin()
-        {
-            var myGrid = new Grid();
-            myGrid.RowDefinitions.Add(new RowDefinition());
-            myGrid.RowDefinitions.Add(new RowDefinition());
-            myGrid.Background = new SolidColorBrush(Colors.Transparent);
-
-            var uri = new Uri("ms-appx:///Assets/Locationpoint.png", UriKind.Absolute);
-
-            var image = new Image()
-            {
-                Source = new BitmapImage(uri),
-                Width = 10,
-                Height = 10
-            };
-
-            myGrid.Children.Add(image);
-
-            return myGrid;
-        }
-
         private void CheckInternetConnection()
         {
             var servicesFromCurrentMapViewModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
@@ -100,6 +51,23 @@ namespace AugmentedSzczecin.Views
             {
                 ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnectionDisabledMsg();
             }
+        }
+
+        public void Handle(PointOfInterestLoadedEvent e)
+        {
+            _mapLocations = e.PointOfInterestList;
+            POIs.ItemsSource = _mapLocations;
+        }
+
+        public void Handle(PointOfInterestLoadFailedEvent e)
+        {
+            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
+            msg.ShowAsync();
+        }
+
+        private void PushpinTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
     }
 }

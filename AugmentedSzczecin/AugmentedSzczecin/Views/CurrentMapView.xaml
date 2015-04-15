@@ -9,6 +9,33 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Flyout x:Key="Details" Placement="Bottom">
+            <Grid Margin="20, 20, 20, 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Name: " />
+                    <TextBlock Text="Latitude: " />
+                    <TextBlock Text="Longitude: " />
+                    <TextBlock Text="Street name: " />
+                    <TextBlock Text="Postal code: " />
+                    <TextBlock Text="Category: " />
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Latitude}" />
+                    <TextBlock Text="{Binding Longitude}" />
+                    <TextBlock Text="{Binding StreetName}" />
+                    <TextBlock Text="{Binding PostalCode}" />
+                    <TextBlock Text="{Binding Category}" />
+                </StackPanel>
+            </Grid>
+        </Flyout>
+    </Page.Resources>
+
     <StackPanel>
 
         <TextBlock x:Uid="CurrentMapTitle"  TextWrapping="NoWrap" Text=""
@@ -24,13 +51,20 @@
             caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]"
             Margin="0,0,0,0">
 
-            <Image Name="ImgMyLocation" Source="/Assets/MyLocationPoint.png" maps:MapControl.Location="{Binding CenterOfTheMap}" maps:MapControl.NormalizedAnchorPoint="0.25, 0.9" Height="10" Width="10" Visibility="{Binding MyLocationPointVisibility}"/>
+            <Image Name="ImgMyLocation" Source="/Assets/MyLocationPoint.png" maps:MapControl.Location="{Binding CenterOfTheMap}" Height="10" Width="10" Visibility="{Binding MyLocationPointVisibility}"/>
 
             <TextBlock x:Name="ScaleText" Text="{Binding ScaleText}" FontSize="14" Foreground="Black" Margin="24,530,0,2" Opacity="0.6" />
             <Rectangle Name="RecScale" Fill="Black" Width="100" Height="4" Margin="24,548,0,0" Opacity="0.6" />
 
+            <maps:MapItemsControl x:Name="POIs">
+                <maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left" maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}" Tapped="PushpinTapped" FlyoutBase.AttachedFlyout="{StaticResource Details}"/>
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
         </maps:MapControl>
 
     </StackPanel>
-
 </Page>
+
