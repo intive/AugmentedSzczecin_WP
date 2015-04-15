@@ -120,11 +120,26 @@
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
   </data>
+  <data name="SignEmail.Text" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="SignInButtonResetPassword.Content" xml:space="preserve">
+    <value>Reset pass</value>
+  </data>
+  <data name="SignInButtonSignIn.Content" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="SignInProgressRing.Text" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="SignOutConfirmationText" xml:space="preserve">
+    <value>Are you sure you want to sign out?</value>
+  </data>
+  <data name="SignPassword.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
   <data name="SignUpButtonSignUp.Content" xml:space="preserve">
     <value>Sign Up</value>
-  </data>
-  <data name="SignUpEmail.Text" xml:space="preserve">
-    <value>E-mail</value>
   </data>
   <data name="SignUpEmailEmpty" xml:space="preserve">
     <value>E-mail not specified.</value>
@@ -134,9 +149,6 @@
   </data>
   <data name="SignUpEmptyForm" xml:space="preserve">
     <value>E-mail and password not specified.</value>
-  </data>
-  <data name="SignUpPassword.Text" xml:space="preserve">
-    <value>Password</value>
   </data>
   <data name="SignUpPasswordEmpty" xml:space="preserve">
     <value>Password not specified.</value>

@@ -9,13 +9,21 @@ namespace AugmentedSzczecin.Models
         {
             Id = id;
         }
-        public string Id { get; private set; }
+
+        public string Id 
+        { 
+            get; 
+            private set; 
+        }
 
         [JsonProperty(PropertyName = "Name")]
         private string _name;
         public string Name
         {
-            get { return _name; }
+            get 
+            { 
+                return _name; 
+            }
             set
             {
                 if (_name != value)
@@ -30,7 +38,10 @@ namespace AugmentedSzczecin.Models
         private string _description;
         public string Description
         {
-            get { return _description; }
+            get 
+            { 
+                return _description; 
+            }
             set
             {
                 if (_description != value)
@@ -45,7 +56,10 @@ namespace AugmentedSzczecin.Models
         private string _tags;
         public string Tags
         {
-            get { return _tags; }
+            get 
+            { 
+                return _tags; 
+            }
             set
             {
                 if (_tags != value)
@@ -60,7 +74,10 @@ namespace AugmentedSzczecin.Models
         private double _latitude;
         public double Latitude
         {
-            get { return _latitude; }
+            get 
+            { 
+                return _latitude; 
+            }
             set
             {
                 if (_latitude != value)
@@ -75,7 +92,10 @@ namespace AugmentedSzczecin.Models
         private double _longitude;
         public double Longitude
         {
-            get { return _longitude; }
+            get 
+            { 
+                return _longitude; 
+            }
             set
             {
                 if (_longitude != value)
@@ -90,7 +110,10 @@ namespace AugmentedSzczecin.Models
         private string _streetName;
         public string StreetName
         {
-            get { return _streetName; }
+            get 
+            { 
+                return _streetName; 
+            }
             set
             {
                 if (_streetName != value)
@@ -105,7 +128,10 @@ namespace AugmentedSzczecin.Models
         private string _postalCode;
         public string PostalCode
         {
-            get { return _postalCode; }
+            get 
+            { 
+                return _postalCode; 
+            }
             set
             {
                 if (_postalCode != value)
@@ -120,7 +146,10 @@ namespace AugmentedSzczecin.Models
         private string _country;
         public string Country
         {
-            get { return _country; }
+            get 
+            { 
+                return _country; 
+            }
             set
             {
                 if (_country != value)
@@ -135,7 +164,10 @@ namespace AugmentedSzczecin.Models
         private string _website;
         public string Website
         {
-            get { return _website; }
+            get 
+            { 
+                return _website; 
+            }
             set
             {
                 if (_website != value)
@@ -150,7 +182,10 @@ namespace AugmentedSzczecin.Models
         private string _phone;
         public string Phone
         {
-            get { return _phone; }
+            get 
+            { 
+                return _phone; 
+            }
             set
             {
                 if (_phone != value)
@@ -165,7 +200,10 @@ namespace AugmentedSzczecin.Models
         private string _fanpage;
         public string Fanpage
         {
-            get { return _fanpage; }
+            get 
+            { 
+                return _fanpage; 
+            }
             set
             {
                 if (_fanpage != value)
@@ -180,7 +218,10 @@ namespace AugmentedSzczecin.Models
         private string _wikipedia;
         public string Wikipedia
         {
-            get { return _wikipedia; }
+            get 
+            { 
+                return _wikipedia; 
+            }
             set
             {
                 if (_wikipedia != value)
@@ -195,7 +236,10 @@ namespace AugmentedSzczecin.Models
         private string _openingDays;
         public string OpeningDays
         {
-            get { return _openingDays; }
+            get 
+            { 
+                return _openingDays; 
+            }
             set
             {
                 if (_openingDays != value)
@@ -210,7 +254,10 @@ namespace AugmentedSzczecin.Models
         private string _openingHours;
         public string OpeningHours
         {
-            get { return _openingHours; }
+            get 
+            { 
+                return _openingHours; 
+            }
             set
             {
                 if (_openingHours != value)
@@ -225,7 +272,10 @@ namespace AugmentedSzczecin.Models
         private string _category;
         public string Category
         {
-            get { return _category; }
+            get 
+            { 
+                return _category; 
+            }
             set
             {
                 if (_category != value)
@@ -240,7 +290,10 @@ namespace AugmentedSzczecin.Models
         private string _price;
         public string Price
         {
-            get { return _price; }
+            get 
+            { 
+                return _price; 
+            }
             set
             {
                 if (_price != value)
@@ -255,7 +308,10 @@ namespace AugmentedSzczecin.Models
         private string _owner;
         public string Owner
         {
-            get { return _owner; }
+            get 
+            { 
+                return _owner; 
+            }
             set
             {
                 if (_owner != value)

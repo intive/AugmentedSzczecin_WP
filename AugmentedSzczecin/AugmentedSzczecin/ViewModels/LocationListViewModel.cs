@@ -18,35 +18,6 @@ namespace AugmentedSzczecin.ViewModels
             _pointOfInterestService = pointOfInterestService;
         }
 
-        protected override void OnActivate()
-        {
-            _eventAggregator.Subscribe(this);
-            base.OnActivate();
-            RefreshPointOfInterestService();
-        }
-
-        public void RefreshPointOfInterestService()
-        {
-            _pointOfInterestService.Refresh();
-        }
-
-        protected override void OnDeactivate(bool close)
-        {
-            _eventAggregator.Unsubscribe(this);
-            base.OnDeactivate(close);
-        }
-
-        public void Handle(PointOfInterestLoadedEvent e)
-        {
-            PointOfInterestList = e.PointOfInterestList;
-        }
-
-        public void Handle(PointOfInterestLoadFailedEvent e)
-        {
-            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
-            msg.ShowAsync();
-        }
-
         private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
         public ObservableCollection<PointOfInterest> PointOfInterestList
         {
@@ -59,6 +30,35 @@ namespace AugmentedSzczecin.ViewModels
                     NotifyOfPropertyChange(() => PointOfInterestList);
                 }
             }
+        }
+
+        protected override void OnActivate()
+        {
+            _eventAggregator.Subscribe(this);
+            base.OnActivate();
+            RefreshPointOfInterestService();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            _eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
+        }
+
+        public void RefreshPointOfInterestService()
+        {
+            _pointOfInterestService.Refresh();
+        }
+
+        public void Handle(PointOfInterestLoadedEvent e)
+        {
+            PointOfInterestList = e.PointOfInterestList;
+        }
+
+        public void Handle(PointOfInterestLoadFailedEvent e)
+        {
+            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
+            msg.ShowAsync();
         }
     }
 }
