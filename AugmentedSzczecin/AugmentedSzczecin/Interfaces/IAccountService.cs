@@ -13,5 +13,7 @@
         string GetUserEmail();
 
         string GetUserToken();
+
+        void ResetPassword(string email);
     }
 }

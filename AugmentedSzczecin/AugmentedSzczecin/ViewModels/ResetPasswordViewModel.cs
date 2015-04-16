@@ -8,7 +8,7 @@ using Windows.UI.Popups;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class ResetPasswordViewModel : Screen
+    public class ResetPasswordViewModel : Screen, IHandle<ResetPasswordSuccessEvent>, IHandle<ResetPasswordFailedEvent>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IAccountService _accountService;
@@ -157,12 +157,31 @@ namespace AugmentedSzczecin.ViewModels
                 AreControlsEnabled = false;
                 IsProgressRingVisible = true;
                 IsProgressRingActive = true;
+                _accountService.ResetPassword(Email);
             }
             else
             {
                 WrongValidationMessageDialog();
             }
 
+        }
+
+        public void Handle(ResetPasswordSuccessEvent e)
+        {
+            AreControlsEnabled = true;
+            IsProgressRingVisible = false;
+            IsProgressRingActive = false;
+            var msg = new MessageDialog(e.SuccessMessage);
+            msg.ShowAsync();
+        }
+
+        public void Handle(ResetPasswordFailedEvent e)
+        {
+            AreControlsEnabled = true;
+            IsProgressRingVisible = false;
+            IsProgressRingActive = false;
+            var msg = new MessageDialog(e.FailMessage);
+            msg.ShowAsync();
         }
 
         private void ValidateEmailEmpty()
