@@ -88,6 +88,8 @@
     <Compile Include="Events\PointOfInterestLoadFailedEvent.cs" />
     <Compile Include="Events\RegisterFailedEvent.cs" />
     <Compile Include="Events\RegisterSuccessEvent.cs" />
+    <Compile Include="Events\ResetPasswordFailedEvent.cs" />
+    <Compile Include="Events\ResetPasswordSuccessEvent.cs" />
     <Compile Include="Events\SignInFailedEvent.cs" />
     <Compile Include="Events\SignInSuccessEvent.cs" />
     <Compile Include="Helpers\ResolutionHelper.cs" />
