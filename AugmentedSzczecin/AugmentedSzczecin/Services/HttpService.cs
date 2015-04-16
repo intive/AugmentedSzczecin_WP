@@ -98,5 +98,40 @@ namespace AugmentedSzczecin.Services
 
             return tokenResponseData;
         }
+
+        public async Task<User> ResetPassword(User user)
+        {
+            var userResponseData = new User();
+            var baseAddress = new Uri(_uriMock);
+            try
+            {
+                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
+                {
+                    var json = JsonConvert.SerializeObject(user);
+
+                    using (var content = new StringContent(json, Encoding.Unicode, "application/json"))
+                    {
+                        using (var response = await httpClient.PostAsync("user", content))
+                        {
+                            if (response.StatusCode == HttpStatusCode.OK)
+                            {
+                                var responseData = await response.Content.ReadAsStringAsync();
+                                userResponseData = JsonConvert.DeserializeObject<User>(responseData);
+                            }
+                            else
+                            {
+                                userResponseData.ErrorCode = "Back-end Error!";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                userResponseData.ErrorCode = e.Message;
+            }
+
+            return userResponseData;
+        }
     }
 }
