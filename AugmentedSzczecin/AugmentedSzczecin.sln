@@ -5,16 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AugmentedSzczecin", "AugmentedSzczecin\AugmentedSzczecin.csproj", "{343535AF-8E92-432C-B76C-E8D185FA9679}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{8DD5D8B5-A7BE-486F-B0E7-BE311C11E026}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimpleAR", "SimpleAR", "{9F782DF0-BA56-4645-90C0-8DF590570F3D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAR", "..\..\..\..\..\Documents\Visual Studio 2013\Projects\SimpleAR\SimpleAR\SimpleAR.csproj", "{ED30546F-9247-42E2-A984-BE4ACCE756B5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Maps.SpatialToolbox.Core", "..\..\..\..\..\Documents\Visual Studio 2013\Other References\Microsoft.Maps.Spatialtoolbox\Source\Microsoft.Maps.SpatialToolbox.Core\Microsoft.Maps.SpatialToolbox.Core.csproj", "{0022220E-283B-44CD-A593-B8516E61685E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Maps.SpatialToolbox.WP8.1", "..\..\..\..\..\Documents\Visual Studio 2013\Other References\Microsoft.Maps.Spatialtoolbox\Source\Microsoft.Maps.SpatialToolbox.WP8.1\Microsoft.Maps.SpatialToolbox.WP8.1.csproj", "{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,52 +33,8 @@ Global
 		{343535AF-8E92-432C-B76C-E8D185FA9679}.Release|x86.ActiveCfg = Release|x86
 		{343535AF-8E92-432C-B76C-E8D185FA9679}.Release|x86.Build.0 = Release|x86
 		{343535AF-8E92-432C-B76C-E8D185FA9679}.Release|x86.Deploy.0 = Release|x86
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Debug|ARM.ActiveCfg = Debug|ARM
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Debug|ARM.Build.0 = Debug|ARM
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Debug|ARM.Deploy.0 = Debug|ARM
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Debug|x86.ActiveCfg = Debug|x86
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Debug|x86.Build.0 = Debug|x86
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Debug|x86.Deploy.0 = Debug|x86
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Release|ARM.ActiveCfg = Release|ARM
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Release|ARM.Build.0 = Release|ARM
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Release|ARM.Deploy.0 = Release|ARM
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Release|x86.ActiveCfg = Release|x86
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Release|x86.Build.0 = Release|x86
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5}.Release|x86.Deploy.0 = Release|x86
-		{0022220E-283B-44CD-A593-B8516E61685E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0022220E-283B-44CD-A593-B8516E61685E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0022220E-283B-44CD-A593-B8516E61685E}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{0022220E-283B-44CD-A593-B8516E61685E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0022220E-283B-44CD-A593-B8516E61685E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0022220E-283B-44CD-A593-B8516E61685E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0022220E-283B-44CD-A593-B8516E61685E}.Release|ARM.ActiveCfg = Release|Any CPU
-		{0022220E-283B-44CD-A593-B8516E61685E}.Release|x86.ActiveCfg = Release|Any CPU
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|ARM.ActiveCfg = Debug|ARM
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|ARM.Build.0 = Debug|ARM
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|x86.ActiveCfg = Debug|x86
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|x86.Build.0 = Debug|x86
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Release|ARM.ActiveCfg = Release|ARM
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Release|ARM.Build.0 = Release|ARM
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Release|x86.ActiveCfg = Release|x86
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{9F782DF0-BA56-4645-90C0-8DF590570F3D} = {8DD5D8B5-A7BE-486F-B0E7-BE311C11E026}
-		{ED30546F-9247-42E2-A984-BE4ACCE756B5} = {9F782DF0-BA56-4645-90C0-8DF590570F3D}
-		{0022220E-283B-44CD-A593-B8516E61685E} = {9F782DF0-BA56-4645-90C0-8DF590570F3D}
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808} = {9F782DF0-BA56-4645-90C0-8DF590570F3D}
 	EndGlobalSection
 EndGlobal
