@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0022220E-283B-44CD-A593-B8516E61685E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Maps.SpatialToolbox.Core</RootNamespace>
+    <AssemblyName>Microsoft.Maps.SpatialToolbox.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Bing\PointCompression.cs" />
+    <Compile Include="Bing\Services\GeoDataServices.cs" />
+    <Compile Include="Bing\Services\NavteqPoiSchema.cs" />
+    <Compile Include="Bing\Services\RestServices.cs" />
+    <Compile Include="IO\BingDataSourceFeed.cs" />
+    <Compile Include="IO\BingDataSourceType.cs" />
+    <Compile Include="DistanceUnits.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Internals\Enums\ByteOrder.cs" />
+    <Compile Include="Internals\Enums\WKBShapeType.cs" />
+    <Compile Include="Internals\NumberReader.cs" />
+    <Compile Include="Internals\XmlUtilities.cs" />
+    <Compile Include="IO\BaseFeed.cs" />
+    <Compile Include="IO\BaseTextFeed.cs" />
+    <Compile Include="IO\DBaseFileReader.cs" />
+    <Compile Include="IO\DelimitedFileReader.cs" />
+    <Compile Include="IO\DelimitedFileWriter.cs" />
+    <Compile Include="IO\GeoJsonFeed.cs" />
+    <Compile Include="IO\GeoRssFeed.cs" />
+    <Compile Include="IO\Gml.cs" />
+    <Compile Include="IO\GpxFeed.cs" />
+    <Compile Include="IO\KmlFeed.cs" />
+    <Compile Include="IO\ServiceHelper.cs" />
+    <Compile Include="IO\ShapefileReader.cs" />
+    <Compile Include="IO\WellKnownBinary.cs" />
+    <Compile Include="IO\WellKnownText.cs" />
+    <Compile Include="Models\DBaseColumnDescription.cs" />
+    <Compile Include="Models\DBaseFile.cs" />
+    <Compile Include="Models\DBaseFileHeader.cs" />
+    <Compile Include="Models\ShapeFileShapeType.cs" />
+    <Compile Include="Models\ShapeMetadata.cs" />
+    <Compile Include="Models\ShapeStyle.cs" />
+    <Compile Include="Models\SpatialDataSet.cs" />
+    <Compile Include="Models\StyleColor.cs" />
+    <Compile Include="OGC Models\BoundingBox.cs" />
+    <Compile Include="OGC Models\Coordinate.cs" />
+    <Compile Include="OGC Models\CoordinateCollection.cs" />
+    <Compile Include="OGC Models\Geometry.cs" />
+    <Compile Include="OGC Models\GeometryCollection.cs" />
+    <Compile Include="OGC Models\GeometryType.cs" />
+    <Compile Include="OGC Models\LineString.cs" />
+    <Compile Include="OGC Models\MultiLineString.cs" />
+    <Compile Include="OGC Models\MultiPoint.cs" />
+    <Compile Include="OGC Models\MultiPolygon.cs" />
+    <Compile Include="OGC Models\Point.cs" />
+    <Compile Include="OGC Models\Polygon.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpatialTools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.1\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression">
+      <HintPath>..\..\packages\Microsoft.Bcl.Compression.3.9.73\lib\portable-net45+win8+wp8\System.IO.Compression.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
