@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F08713BF-ADA1-4855-9DD9-C5FBDDA9BD69}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Maps.SpatialToolbox.WPF</RootNamespace>
+    <AssemblyName>Microsoft.Maps.SpatialToolbox.WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Maps.MapControl.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libaries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.SqlServer.Types.11.0.1\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Animations\PathAnimation.cs">
+      <Link>Bing\Animations\PathAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Animations\PushpinAnimations.cs">
+      <Link>Bing\Animations\PushpinAnimations.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\BingExtensions.cs">
+      <Link>Bing\BingExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ClusteredPoint.cs">
+      <Link>Bing\Clustering\ClusteredPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ClusteringLayer.cs">
+      <Link>Bing\Clustering\ClusteringLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ClusteringType.cs">
+      <Link>Bing\Clustering\ClusteringType.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ItemLocation.cs">
+      <Link>Bing\Clustering\ItemLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ItemLocationCollection.cs">
+      <Link>Bing\Clustering\ItemLocationCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\MapTools.cs">
+      <Link>Bing\MapTools.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\QuadKey.cs">
+      <Link>Bing\QuadKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\StyleTools.cs">
+      <Link>Bing\StyleTools.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\TileMath.cs">
+      <Link>Bing\TileMath.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Extensions.cs">
+      <Link>Extensions.cs</Link>
+    </Compile>
+    <Compile Include="Bing\HeatMapLayer.cs" />
+    <Compile Include="Imaging\DrawingStyle.cs" />
+    <Compile Include="Imaging\HeatMapRenderEngine.cs" />
+    <Compile Include="Imaging\HeatMapStyle.cs" />
+    <Compile Include="Imaging\ImageFormat.cs" />
+    <Compile Include="Imaging\SpatialDataRenderEngine.cs" />
+    <Compile Include="Imaging\ViewInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Maps.SpatialToolbox.Core\Microsoft.Maps.SpatialToolbox.Core.csproj">
+      <Project>{0022220e-283b-44cd-a593-b8516e61685e}</Project>
+      <Name>Microsoft.Maps.SpatialToolbox.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\readme.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
