@@ -5,9 +5,9 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAR", "SimpleAR\SimpleAR.csproj", "{ED30546F-9247-42E2-A984-BE4ACCE756B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Maps.SpatialToolbox.Core", "..\..\Other References\Microsoft.Maps.Spatialtoolbox\Source\Microsoft.Maps.SpatialToolbox.Core\Microsoft.Maps.SpatialToolbox.Core.csproj", "{0022220E-283B-44CD-A593-B8516E61685E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Maps.SpatialToolbox.Core", "..\Microsoft.Maps.SpatialToolbox.Core\Microsoft.Maps.SpatialToolbox.Core.csproj", "{0022220E-283B-44CD-A593-B8516E61685E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Maps.SpatialToolbox.WP8.1", "..\..\Other References\Microsoft.Maps.Spatialtoolbox\Source\Microsoft.Maps.SpatialToolbox.WP8.1\Microsoft.Maps.SpatialToolbox.WP8.1.csproj", "{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Maps.SpatialToolbox.WP8.1", "..\Microsoft.Maps.SpatialToolbox.WP8.1\Microsoft.Maps.SpatialToolbox.WP8.1.csproj", "{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,8 +51,8 @@ Global
 		{0022220E-283B-44CD-A593-B8516E61685E}.Release|ARM.ActiveCfg = Release|Any CPU
 		{0022220E-283B-44CD-A593-B8516E61685E}.Release|x64.ActiveCfg = Release|Any CPU
 		{0022220E-283B-44CD-A593-B8516E61685E}.Release|x86.ActiveCfg = Release|Any CPU
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|Any CPU.Build.0 = Debug|x86
+		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|ARM.ActiveCfg = Debug|ARM
 		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|ARM.Build.0 = Debug|ARM
 		{98E5A41A-3CB9-4569-9A83-F9E1E1E63808}.Debug|x64.ActiveCfg = Debug|Any CPU

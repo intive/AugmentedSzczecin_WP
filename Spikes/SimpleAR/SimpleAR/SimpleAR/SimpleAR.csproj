@@ -119,19 +119,19 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Other References\Microsoft.Maps.Spatialtoolbox\Source\Microsoft.Maps.SpatialToolbox.Core\Microsoft.Maps.SpatialToolbox.Core.csproj">
-      <Project>{0022220e-283b-44cd-a593-b8516e61685e}</Project>
-      <Name>Microsoft.Maps.SpatialToolbox.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Other References\Microsoft.Maps.Spatialtoolbox\Source\Microsoft.Maps.SpatialToolbox.WP8.1\Microsoft.Maps.SpatialToolbox.WP8.1.csproj">
-      <Project>{98e5a41a-3cb9-4569-9a83-f9e1e1e63808}</Project>
-      <Name>Microsoft.Maps.SpatialToolbox.WP8.1</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="Microsoft.VCLibs, Version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows Phone</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Microsoft.Maps.SpatialToolbox.Core\Microsoft.Maps.SpatialToolbox.Core.csproj">
+      <Project>{0022220e-283b-44cd-a593-b8516e61685e}</Project>
+      <Name>Microsoft.Maps.SpatialToolbox.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Microsoft.Maps.SpatialToolbox.WP8.1\Microsoft.Maps.SpatialToolbox.WP8.1.csproj">
+      <Project>{98e5a41a-3cb9-4569-9a83-f9e1e1e63808}</Project>
+      <Name>Microsoft.Maps.SpatialToolbox.WP8.1</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
