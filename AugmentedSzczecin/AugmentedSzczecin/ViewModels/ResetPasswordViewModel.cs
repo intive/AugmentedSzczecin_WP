@@ -36,23 +36,6 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool _isProgressRingActive;
-        public bool IsProgressRingActive
-        {
-            get
-            {
-                return _isProgressRingActive;
-            }
-            set
-            {
-                if (value != _isProgressRingActive)
-                {
-                    _isProgressRingActive = value;
-                    NotifyOfPropertyChange(() => IsProgressRingActive);
-                }
-            }
-        }
-
         private bool _areControlsEnabled = true;
         public bool AreControlsEnabled
         {
@@ -156,7 +139,6 @@ namespace AugmentedSzczecin.ViewModels
             {
                 AreControlsEnabled = false;
                 IsProgressRingVisible = true;
-                IsProgressRingActive = true;
                 _accountService.ResetPassword(Email);
             }
             else
@@ -170,7 +152,6 @@ namespace AugmentedSzczecin.ViewModels
         {
             AreControlsEnabled = true;
             IsProgressRingVisible = false;
-            IsProgressRingActive = false;
             var msg = new MessageDialog(e.SuccessMessage);
             msg.ShowAsync();
         }
@@ -179,7 +160,6 @@ namespace AugmentedSzczecin.ViewModels
         {
             AreControlsEnabled = true;
             IsProgressRingVisible = false;
-            IsProgressRingActive = false;
             var msg = new MessageDialog(e.FailMessage);
             msg.ShowAsync();
         }
