@@ -150,18 +150,20 @@ namespace AugmentedSzczecin.ViewModels
 
         public void Handle(ResetPasswordSuccessEvent e)
         {
-            AreControlsEnabled = true;
-            IsProgressRingVisible = false;
-            var msg = new MessageDialog(e.SuccessMessage);
-            msg.ShowAsync();
+            ShowRelevantMessage(e.SuccessMessage);
         }
 
         public void Handle(ResetPasswordFailedEvent e)
         {
+            ShowRelevantMessage(e.FailMessage);
+        }
+
+        private async void ShowRelevantMessage(string message)
+        {
             AreControlsEnabled = true;
             IsProgressRingVisible = false;
-            var msg = new MessageDialog(e.FailMessage);
-            msg.ShowAsync();
+            var msg = new MessageDialog(message);
+            await msg.ShowAsync();
         }
 
         private void ValidateEmailEmpty()
