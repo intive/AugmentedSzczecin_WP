@@ -11,5 +11,7 @@ namespace AugmentedSzczecin.Interfaces
         Task<User> CreateAccount(User user);
 
         Task<Token> SignIn(User user);
+
+        Task<User> ResetPassword(User user);
     }
 }

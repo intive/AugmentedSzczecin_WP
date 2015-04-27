@@ -88,6 +88,8 @@
     <Compile Include="Events\PointOfInterestLoadFailedEvent.cs" />
     <Compile Include="Events\RegisterFailedEvent.cs" />
     <Compile Include="Events\RegisterSuccessEvent.cs" />
+    <Compile Include="Events\ResetPasswordFailedEvent.cs" />
+    <Compile Include="Events\ResetPasswordSuccessEvent.cs" />
     <Compile Include="Events\SignInFailedEvent.cs" />
     <Compile Include="Events\SignInSuccessEvent.cs" />
     <Compile Include="Helpers\ResolutionHelper.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="ViewModels\CurrentMapViewModel.cs" />
     <Compile Include="ViewModels\LocationListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
@@ -118,6 +121,9 @@
     <Compile Include="Views\LocationListView.xaml.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResetPasswordView.xaml.cs">
+      <DependentUpon>ResetPasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SignInView.xaml.cs">
       <DependentUpon>SignInView.xaml</DependentUpon>
@@ -173,6 +179,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ResetPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -82,5 +82,21 @@ namespace AugmentedSzczecin.Services
 
             return token;
         }
+
+        public async void ResetPassword(string email)
+        {
+            var newUser = new User() { Email = email, ErrorCode = "", Password = "" };
+
+            User userResponseData = await _httpService.ResetPassword(newUser);
+
+            if (userResponseData.ErrorCode == null)
+            {
+                _eventAggregator.PublishOnUIThread(new ResetPasswordSuccessEvent() { SuccessMessage = "New password sent on the email address!" });
+            }
+            else
+            {
+                _eventAggregator.PublishOnUIThread(new ResetPasswordFailedEvent() { FailMessage = userResponseData.ErrorCode });
+            }
+        }
     }
 }

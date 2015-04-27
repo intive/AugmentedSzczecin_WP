@@ -120,6 +120,12 @@
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
   </data>
+  <data name="ResetPasswordButtonReset.Content" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ResetPasswordProgressRing.Text" xml:space="preserve">
+    <value>Sending request</value>
+  </data>
   <data name="SignEmail.Text" xml:space="preserve">
     <value>E-mail</value>
   </data>

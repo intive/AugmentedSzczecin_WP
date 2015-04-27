@@ -16,12 +16,14 @@ namespace AugmentedSzczecin.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IAccountService _accountService;
+        private readonly INavigationService _navigationservice;
         private Windows.UI.Xaml.Controls.PasswordBox _passwordBox;
 
-        public SignInViewModel(IEventAggregator eventAggregator, IAccountService accountService)
+        public SignInViewModel(IEventAggregator eventAggregator, IAccountService accountService, INavigationService navigationservice)
         {
             _eventAggregator = eventAggregator;
             _accountService = accountService;
+            _navigationservice = navigationservice;
         }
 
         private bool _isProgressRingVisible;
@@ -217,6 +219,11 @@ namespace AugmentedSzczecin.ViewModels
             {
                 _passwordBox.Focus(FocusState.Keyboard);           
             }
+        }
+
+        public void ResetPasword()
+        {
+            _navigationservice.NavigateToViewModel<ResetPasswordViewModel>();
         }
 
         private void ValidatePasswordEmpty()
