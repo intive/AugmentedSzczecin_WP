@@ -15,6 +15,7 @@ using System.Net.Http;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Point = Microsoft.Maps.SpatialToolbox.Point;
+using SimpleAR.Models;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -38,7 +39,19 @@ namespace SimpleAR
 
         private Geopoint _currentLocation = null;
         private double _currentHeading = 0;
-        private Result[] _poiLocations = null;
+        //private Result[] _poiLocations = null;
+        private PointOfInterest[] _poiLocations = { 
+                                                    new PointOfInterest("1") {Name = "Point 1", Latitude = 53.429236, Longitude = 14.556504},
+                                                    new PointOfInterest("2") {Name = "Point 2", Latitude = 53.428716, Longitude = 14.556604},
+                                                    new PointOfInterest("3") {Name = "Point 3", Latitude = 53.428419, Longitude = 14.556035},
+                                                    new PointOfInterest("4") {Name = "Point 4", Latitude = 53.428566, Longitude = 14.555177},
+                                                    new PointOfInterest("5") {Name = "Point 5", Latitude = 53.429045, Longitude = 14.555270},
+                                                    new PointOfInterest("6") {Name = "Point 6", Latitude = 53.397248, Longitude = 14.525335},
+                                                    new PointOfInterest("7") {Name = "Point 7", Latitude = 53.397200, Longitude = 14.524005},
+                                                    new PointOfInterest("8") {Name = "Point 8", Latitude = 53.396524, Longitude = 14.523997},
+                                                    new PointOfInterest("9") {Name = "Point 9", Latitude = 53.396329, Longitude = 14.525113},
+                                                    new PointOfInterest("10") {Name = "Point 10", Latitude = 53.396708, Longitude = 14.526167}
+                                                  };
         public MainPage()
         {
             this.InitializeComponent();
@@ -364,12 +377,12 @@ namespace SimpleAR
                                 Longitude = position.Longitude
                             }
                             );
-                        _poiLocations = null;
+                        //_poiLocations = null;
 
                         if (_pinLayer != null)
                         {
                             _pinLayer.Children.Clear();
-
+                            /*
                             var poi =
                                 await
                                     NavteqPoiSearch(new Point(_currentLocation.Position.Latitude,
@@ -379,7 +392,7 @@ namespace SimpleAR
                                 poi.ResultSet.Results.Length > 0)
                             {
                                 _poiLocations = poi.ResultSet.Results;
-
+                            */
                                 foreach (var r in _poiLocations)
                                 {
                                     var loc = new Geopoint(
@@ -397,7 +410,7 @@ namespace SimpleAR
                                 }
 
                                 MyMap.TrySetViewAsync(_currentLocation, 16);
-                            }
+                            //}
 
                             MapControl.SetLocation(_gpsPin, _currentLocation);
 
