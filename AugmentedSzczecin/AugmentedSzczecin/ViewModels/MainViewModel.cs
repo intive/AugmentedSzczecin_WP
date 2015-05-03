@@ -30,5 +30,10 @@ namespace AugmentedSzczecin.ViewModels
         {
             _navigationService.NavigateToViewModel<SignUpViewModel>();
         }
+
+        public void NavigateToAugmentedView()
+        {
+            _navigationService.NavigateToViewModel<AugmentedViewModel>();
+        }
     }
 }

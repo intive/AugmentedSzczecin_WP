@@ -27,6 +27,7 @@ namespace AugmentedSzczecin
 
             _container.PerRequest<MainViewModel>();
             _container.PerRequest<AboutViewModel>();
+            _container.PerRequest<AugmentedViewModel>();
             _container.PerRequest<CurrentMapViewModel>();
             _container.PerRequest<LocationListViewModel>();
             _container.PerRequest<SignUpViewModel>();
