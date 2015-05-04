@@ -37,6 +37,21 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private ObservableCollection<PointOfInterest> _mapLocations;
+        public ObservableCollection<PointOfInterest> MapLocations
+        {
+            get 
+            {
+                return _mapLocations;
+            }
+            set
+            {
+                if (value != _mapLocations)
+                {
+                    _mapLocations = value;
+                    NotifyOfPropertyChange(() => MapLocations);
+                }
+            }
+        }
 
         private MapItemsControl _POIs;
         public MapItemsControl POIs
@@ -234,8 +249,8 @@ namespace AugmentedSzczecin.ViewModels
 
         public void Handle(PointOfInterestLoadedEvent e)
         {
-            _mapLocations = e.PointOfInterestList;
-            POIs.ItemsSource = _mapLocations;
+            MapLocations = e.PointOfInterestList;
+            POIs.ItemsSource = MapLocations;
         }
 
         public void Handle(PointOfInterestLoadFailedEvent e)
