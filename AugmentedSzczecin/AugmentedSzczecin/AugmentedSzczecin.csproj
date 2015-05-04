@@ -117,8 +117,12 @@
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CurrentMapView.xaml.cs" />
-    <Compile Include="Views\LocationListView.xaml.cs" />
+    <Compile Include="Views\CurrentMapView.xaml.cs">
+      <DependentUpon>CurrentMapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LocationListView.xaml.cs">
+      <DependentUpon>LocationListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -128,7 +132,9 @@
     <Compile Include="Views\SignInView.xaml.cs">
       <DependentUpon>SignInView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SignUpView.xaml.cs" />
+    <Compile Include="Views\SignUpView.xaml.cs">
+      <DependentUpon>SignUpView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
