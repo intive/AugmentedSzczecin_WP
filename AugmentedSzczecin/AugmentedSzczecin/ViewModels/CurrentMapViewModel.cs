@@ -9,10 +9,15 @@ using Windows.UI.Xaml.Controls.Maps;
 using AugmentedSzczecin.Helpers;
 using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
+using AugmentedSzczecin.Events;
+using System.Collections.ObjectModel;
+using AugmentedSzczecin.Models;
+using AugmentedSzczecin.Views;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : Screen
+    public class CurrentMapViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
         private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
@@ -29,6 +34,25 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService = navigationService;
             _locationService = locationService;
             _pointOfInterestService = pointOfInterestService;
+        }
+
+        private ObservableCollection<PointOfInterest> _mapLocations;
+
+        private MapItemsControl _POIs;
+        public MapItemsControl POIs
+        {
+            get 
+            {
+                return _POIs;
+            }
+            set
+            {
+                if(value != _POIs)
+                {
+                    _POIs = value;
+                    NotifyOfPropertyChange(() => POIs);
+                }
+            }
         }
 
         private bool _internetConnection;
@@ -118,6 +142,8 @@ namespace AugmentedSzczecin.ViewModels
         {
             _eventAggregator.Subscribe(this);
             base.OnActivate();
+
+            _mapLocations = new ObservableCollection<PointOfInterest>();
             RefreshPointOfInterestService();
 
             CountZoomLevel();
@@ -139,6 +165,12 @@ namespace AugmentedSzczecin.ViewModels
         {
             _eventAggregator.Unsubscribe(this);
             base.OnDeactivate(close);
+        }
+
+        protected override void OnViewAttached(object view, object context)
+        {
+            POIs = ((CurrentMapView)view).POIs;
+            base.OnViewAttached(view, context);
         }
 
         public void ChangeScaleBar(MapControl temporaryMap)
@@ -200,6 +232,18 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService.GoBack();
         }
 
+        public void Handle(PointOfInterestLoadedEvent e)
+        {
+            _mapLocations = e.PointOfInterestList;
+            POIs.ItemsSource = _mapLocations;
+        }
+
+        public void Handle(PointOfInterestLoadFailedEvent e)
+        {
+            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
+            msg.ShowAsync();
+        }
+
         private async void GeolocationDisabledMsg()
         {
             var msg = new MessageDialog("Geolocation disabled.");
@@ -241,6 +285,11 @@ namespace AugmentedSzczecin.ViewModels
         private void CountZoomLevel()
         {
             ZoomLevel = ResolutionHelper.CountZoomLevel();
+        }
+
+        private void PushpinTapped(object sender)
+        {
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
     }
 }
