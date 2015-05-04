@@ -13,13 +13,14 @@ namespace AugmentedSzczecin.Converters
                 return Visibility.Collapsed;
             }
 
-            bool objValue = (bool)value;
+            bool objValue = (bool) value;
             if (objValue)
             {
                 return Visibility.Visible;
             }
             return Visibility.Collapsed;
         }
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             return GetVisibility(value);

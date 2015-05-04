@@ -8,6 +8,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="About Augmented Szczecin:"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="About Augmented Szczecin:" />
     </Grid>
 </Page>

@@ -8,31 +8,35 @@
     xmlns:caliburn="using:Caliburn.Micro"
     xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
->
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
         <StackPanel VerticalAlignment="Center">
 
-            <ProgressRing x:Name="SignInProgressRing" IsActive="{Binding IsProgressRingActive}" Visibility="{Binding IsProgressRingVisible, Converter={StaticResource BoolToVisConv}}" Height="10" Width="200" HorizontalAlignment="Center"/>
-            <TextBlock x:Uid="SignInProgressRing" FontSize="15" Visibility="{Binding IsProgressRingVisible, Converter={StaticResource BoolToVisConv}}" HorizontalAlignment="Center" Margin="0,10,0,0" />
-            
+            <ProgressRing x:Name="SignInProgressRing" IsActive="{Binding IsProgressRingActive}"
+                          Visibility="{Binding IsProgressRingVisible, Converter={StaticResource BoolToVisConv}}"
+                          Height="10" Width="200" HorizontalAlignment="Center" />
+            <TextBlock x:Uid="SignInProgressRing" FontSize="15"
+                       Visibility="{Binding IsProgressRingVisible, Converter={StaticResource BoolToVisConv}}"
+                       HorizontalAlignment="Center" Margin="0,10,0,0" />
+
             <ScrollViewer IsEnabled="{Binding AreControlsEnabled}">
                 <StackPanel>
 
-                    <TextBlock FontSize="15" x:Uid="SignEmail"/>
-                    <TextBox InputScope="5" x:Name="Email" VerticalAlignment="Stretch" 
+                    <TextBlock FontSize="15" x:Uid="SignEmail" />
+                    <TextBox InputScope="5" x:Name="Email" VerticalAlignment="Stretch"
                              caliburn:Message.Attach="[Event KeyDown] = [Action EmailTextBoxChangeFocusToPasswordTextBox($executionContext)]" />
 
-                    <TextBlock FontSize="15" x:Uid="SignPassword" Margin="0,20,0,0"/>
-                    <PasswordBox x:FieldModifier="Public" x:Name="Password" VerticalAlignment="Stretch"/>
-                    
+                    <TextBlock FontSize="15" x:Uid="SignPassword" Margin="0,20,0,0" />
+                    <PasswordBox x:FieldModifier="Public" x:Name="Password" VerticalAlignment="Stretch" />
+
                     <Button x:Name="SignIn" x:Uid="SignInButtonSignIn" Margin="0,0,0,0" HorizontalAlignment="Center" />
-                    <Button x:Name="ResetPasword" x:Uid="SignInButtonResetPassword" Margin="0,0,0,0" HorizontalAlignment="Center" />
+                    <Button x:Name="ResetPasword" x:Uid="SignInButtonResetPassword" Margin="0,0,0,0"
+                            HorizontalAlignment="Center" />
 
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>
-        
+
     </Grid>
 
 </Page>

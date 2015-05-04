@@ -12,7 +12,8 @@ namespace AugmentedSzczecin.Services
         private readonly IHttpService _httpService;
         private readonly IUserDataStorageService _userDataStorageService;
 
-        public AccountService(IEventAggregator eventAggregator, IHttpService httpService, IUserDataStorageService userDataStorageService)
+        public AccountService(IEventAggregator eventAggregator, IHttpService httpService,
+            IUserDataStorageService userDataStorageService)
         {
             _eventAggregator = eventAggregator;
             _httpService = httpService;
@@ -21,23 +22,26 @@ namespace AugmentedSzczecin.Services
 
         public async void Register(string email, string password)
         {
-            var newUser = new User() { Email = email, ErrorCode = "", Password = password };
+            var newUser = new User() {Email = email, ErrorCode = "", Password = password};
 
             User userResponseData = await _httpService.CreateAccount(newUser);
 
-            if(userResponseData.ErrorCode == null)
+            if (userResponseData.ErrorCode == null)
             {
-                _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!" });
+                _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent()
+                {
+                    SuccessMessage = "Registration Successful!"
+                });
             }
             else
             {
-                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = userResponseData.ErrorCode });
+                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() {FailMessage = userResponseData.ErrorCode});
             }
         }
 
         public async void SignIn(string email, string password)
         {
-            var newUser = new User() { Email = email, ErrorCode = "", Password = password };
+            var newUser = new User() {Email = email, ErrorCode = "", Password = password};
 
             Token tokenResponseData = await _httpService.SignIn(newUser);
 
@@ -45,7 +49,7 @@ namespace AugmentedSzczecin.Services
             {
                 _userDataStorageService.AddUserData("ASPassword", email, password);
                 _userDataStorageService.AddUserData("ASToken", email, tokenResponseData.TokenString);
-                _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Signed In successfully!" });
+                _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() {SuccessMessage = "Signed In successfully!"});
             }
             else
             {
@@ -53,14 +57,14 @@ namespace AugmentedSzczecin.Services
                 _userDataStorageService.AddUserData("ASPassword", email, password);
                 _userDataStorageService.AddUserData("ASToken", email, "test");
                 /******************************/
-                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = tokenResponseData.ErrorCode });
+                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() {FailMessage = tokenResponseData.ErrorCode});
             }
         }
-    
+
         public bool IsUserSignedIn()
         {
             bool isUserSignedIn = _userDataStorageService.IsUserSignedIn();
-            
+
             return isUserSignedIn;
         }
 
@@ -68,7 +72,7 @@ namespace AugmentedSzczecin.Services
         {
             _userDataStorageService.SignOut();
         }
-    
+
         public string GetUserEmail()
         {
             string email = _userDataStorageService.GetUserEmail();
@@ -85,17 +89,23 @@ namespace AugmentedSzczecin.Services
 
         public async void ResetPassword(string email)
         {
-            var newUser = new User() { Email = email, ErrorCode = "", Password = "" };
+            var newUser = new User() {Email = email, ErrorCode = "", Password = ""};
 
             User userResponseData = await _httpService.ResetPassword(newUser);
 
             if (userResponseData.ErrorCode == null)
             {
-                _eventAggregator.PublishOnUIThread(new ResetPasswordSuccessEvent() { SuccessMessage = "New password sent on the email address!" });
+                _eventAggregator.PublishOnUIThread(new ResetPasswordSuccessEvent()
+                {
+                    SuccessMessage = "New password sent on the email address!"
+                });
             }
             else
             {
-                _eventAggregator.PublishOnUIThread(new ResetPasswordFailedEvent() { FailMessage = userResponseData.ErrorCode });
+                _eventAggregator.PublishOnUIThread(new ResetPasswordFailedEvent()
+                {
+                    FailMessage = userResponseData.ErrorCode
+                });
             }
         }
     }

@@ -1,8 +1,8 @@
-﻿
-using AugmentedSzczecin.Interfaces;
+﻿using AugmentedSzczecin.Interfaces;
 using System.Collections.Generic;
 using Windows.Security.Credentials;
 using Windows.UI.Popups;
+
 namespace AugmentedSzczecin.Services
 {
     public class UserDataStorageService : IUserDataStorageService
@@ -38,7 +38,7 @@ namespace AugmentedSzczecin.Services
                 }
             }
         }
-    
+
         public string GetUserEmail()
         {
             var vault = new PasswordVault();

@@ -20,29 +20,25 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private bool _isProgressRingVisible;
+
         public bool IsProgressRingVisible
         {
-            get
-            {
-                return _isProgressRingVisible;
-            }
+            get { return _isProgressRingVisible; }
             set
             {
                 if (value != _isProgressRingVisible)
                 {
                     _isProgressRingVisible = value;
-                    NotifyOfPropertyChange(() =>IsProgressRingVisible);
+                    NotifyOfPropertyChange(() => IsProgressRingVisible);
                 }
             }
         }
 
         private bool _areControlsEnabled = true;
+
         public bool AreControlsEnabled
         {
-            get
-            {
-                return _areControlsEnabled;
-            }
+            get { return _areControlsEnabled; }
             set
             {
                 if (value != _areControlsEnabled)
@@ -54,12 +50,10 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private string _email;
+
         public string Email
         {
-            get
-            {
-                return _email;
-            }
+            get { return _email; }
             set
             {
                 if (_email != value)
@@ -73,12 +67,10 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private bool _isEmailEmptyValid;
+
         public bool IsEmailEmptyValid
         {
-            get
-            {
-                return _isEmailEmptyValid;
-            }
+            get { return _isEmailEmptyValid; }
             set
             {
                 if (_isEmailEmptyValid != value)
@@ -90,12 +82,10 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private bool _isEmailMatchValid;
+
         public bool IsEmailMatchValid
         {
-            get
-            {
-                return _isEmailMatchValid;
-            }
+            get { return _isEmailMatchValid; }
             set
             {
                 if (_isEmailMatchValid != value)
@@ -107,12 +97,10 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private bool _validationCheck;
+
         public bool ValidationCheck
         {
-            get
-            {
-                return _validationCheck;
-            }
+            get { return _validationCheck; }
             set
             {
                 _validationCheck = value;
@@ -145,7 +133,6 @@ namespace AugmentedSzczecin.ViewModels
             {
                 WrongValidationMessageDialog();
             }
-
         }
 
         public void Handle(ResetPasswordSuccessEvent e)

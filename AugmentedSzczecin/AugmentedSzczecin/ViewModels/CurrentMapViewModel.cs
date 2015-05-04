@@ -32,6 +32,7 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private bool _internetConnection;
+
         public bool InternetConnection
         {
             get { return _internetConnection; }
@@ -51,6 +52,7 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private double _zoomLevel;
+
         public double ZoomLevel
         {
             get { return _zoomLevel; }
@@ -65,12 +67,14 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private readonly bool _landmarksVisible = true;
+
         public bool LandmarksVisible
         {
             get { return _landmarksVisible; }
         }
 
         private Geopoint _centerOfTheMap;
+
         public Geopoint CenterOfTheMap
         {
             get { return _centerOfTheMap; }
@@ -87,6 +91,7 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private Visibility _myLocationPointVisibility = Visibility.Collapsed;
+
         public Visibility MyLocationPointVisibility
         {
             get { return _myLocationPointVisibility; }
@@ -101,6 +106,7 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private string _scaleText = "";
+
         public string ScaleText
         {
             get { return _scaleText; }
@@ -155,13 +161,13 @@ namespace AugmentedSzczecin.ViewModels
                 tempLatitude = CenterOfTheMap.Position.Latitude;
             }
 
-            tempLatitude = tempLatitude * (Math.PI / 180);
+            tempLatitude = tempLatitude*(Math.PI/180);
 
             const double bingMapConstant = 156543.04;
 
-            double metersPerPixel = bingMapConstant * Math.Cos(tempLatitude) / Math.Pow(2, tempZoomLevel);
+            double metersPerPixel = bingMapConstant*Math.Cos(tempLatitude)/Math.Pow(2, tempZoomLevel);
 
-            double scaleDistance = Math.Round(100 * metersPerPixel / 10) * 10;
+            double scaleDistance = Math.Round(100*metersPerPixel/10)*10;
 
             ScaleText = scaleDistance.ToString() + " m";
         }

@@ -12,9 +12,9 @@ namespace AugmentedSzczecin.Services
             Geolocator geolocator = new Geolocator {DesiredAccuracyInMeters = 50};
 
             Geoposition geoposition = await geolocator.GetGeopositionAsync(
-            maximumAge: TimeSpan.FromMinutes(5),
-            timeout: TimeSpan.FromSeconds(10)
-            );
+                maximumAge: TimeSpan.FromMinutes(5),
+                timeout: TimeSpan.FromSeconds(10)
+                );
 
             BasicGeoposition myLocation = new BasicGeoposition
             {

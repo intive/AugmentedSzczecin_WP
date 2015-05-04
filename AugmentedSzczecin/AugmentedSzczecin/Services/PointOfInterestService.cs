@@ -22,6 +22,7 @@ namespace AugmentedSzczecin.Services
         }
 
         private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
+
         public ObservableCollection<PointOfInterest> PointOfInterestList
         {
             get { return _pointOfInterestList; }
@@ -39,11 +40,17 @@ namespace AugmentedSzczecin.Services
             try
             {
                 PointOfInterestList = await _httpService.GetPointOfInterestsList();
-                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
+                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent()
+                {
+                    PointOfInterestList = PointOfInterestList
+                });
             }
             catch (Exception e)
             {
-                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadFailedEvent() { PointOfInterestLoadException = e });
+                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadFailedEvent()
+                {
+                    PointOfInterestLoadException = e
+                });
             }
         }
     }

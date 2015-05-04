@@ -15,7 +15,9 @@ namespace AugmentedSzczecin.Services
     public class HttpService : IHttpService
     {
         private string _uriMock = "http://private-8596e-patronage2015.apiary-mock.com/user";
-        private const string _temporaryPointOfInterestDatabaseUri = "https://augmented-szczecin-test.azure-mobile.net/tables/PointOfInterest";
+
+        private const string _temporaryPointOfInterestDatabaseUri =
+            "https://augmented-szczecin-test.azure-mobile.net/tables/PointOfInterest";
 
         public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestsList()
         {
@@ -24,7 +26,8 @@ namespace AugmentedSzczecin.Services
             HttpResponseMessage response = await client.GetAsync(_temporaryPointOfInterestDatabaseUri);
             response.EnsureSuccessStatusCode();
             string jsonString = await response.Content.ReadAsStringAsync();
-            ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(jsonString);
+            ObservableCollection<PointOfInterest> PointOfInterestList =
+                JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(jsonString);
 
             return PointOfInterestList;
         }
@@ -35,7 +38,7 @@ namespace AugmentedSzczecin.Services
             var baseAddress = new Uri(_uriMock);
             try
             {
-                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
+                using (var httpClient = new HttpClient {BaseAddress = baseAddress})
                 {
                     var json = JsonConvert.SerializeObject(user);
 
@@ -70,7 +73,7 @@ namespace AugmentedSzczecin.Services
             var baseAddress = new Uri(_uriMock);
             try
             {
-                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
+                using (var httpClient = new HttpClient {BaseAddress = baseAddress})
                 {
                     var json = JsonConvert.SerializeObject(user);
 
@@ -105,7 +108,7 @@ namespace AugmentedSzczecin.Services
             var baseAddress = new Uri(_uriMock);
             try
             {
-                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
+                using (var httpClient = new HttpClient {BaseAddress = baseAddress})
                 {
                     var json = JsonConvert.SerializeObject(user);
 
