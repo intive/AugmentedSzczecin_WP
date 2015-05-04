@@ -25,20 +25,6 @@ namespace AugmentedSzczecin.Views
         public CurrentMapView()
         {
             InitializeComponent();
-            //CheckInternetConnection();
         }
-
-        /*private void CheckInternetConnection()
-        {
-            var servicesFromCurrentMapViewModel = IoC.GetInstance(typeof(CurrentMapViewModel), null);
-            ((CurrentMapViewModel)servicesFromCurrentMapViewModel).UpdateInternetConnection();
-            bool internetConnection = ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnection;
-
-            if (!internetConnection)
-            {
-                ((CurrentMapViewModel)servicesFromCurrentMapViewModel).InternetConnectionDisabledMsg();
-            }
-        }*/
-
     }
 }

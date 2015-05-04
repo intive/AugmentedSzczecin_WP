@@ -158,12 +158,8 @@ namespace AugmentedSzczecin.ViewModels
             _eventAggregator.Subscribe(this);
             base.OnActivate();
 
-            _mapLocations = new ObservableCollection<PointOfInterest>();
-            RefreshPointOfInterestService();
-
             CountZoomLevel();
-            UpdateInternetConnection();
-
+            
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             if (_locationService.IsGeolocationEnabled())
@@ -174,6 +170,15 @@ namespace AugmentedSzczecin.ViewModels
             {
                 GeolocationDisabledMsg();
             }
+
+            UpdateInternetConnection();
+            if (!InternetConnection)
+            {
+                InternetConnectionDisabledMsg();
+            }
+
+            _mapLocations = new ObservableCollection<PointOfInterest>();
+            RefreshPointOfInterestService();
         }
 
         protected override void OnDeactivate(bool close)
