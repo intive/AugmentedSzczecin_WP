@@ -1,7 +1,10 @@
-﻿using AugmentedSzczecin.Models;
+﻿using AugmentedSzczecin.Events;
+using AugmentedSzczecin.Models;
+using Caliburn.Micro;
 using Microsoft.Maps.SpatialToolbox;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -12,6 +15,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Capture;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,58 +26,49 @@ using Windows.UI.Xaml.Navigation;
 
 namespace AugmentedSzczecin.Views
 {
-    public sealed partial class CameraView : Page
+    public sealed partial class AugmentedView : Page, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
         private SimpleOrientationSensor _orientationSensor;
         private Compass _compass;
         private Geolocator _gps;
 
         private uint _movementThreshold = 100;
-        private double _defaultSeatchRadius = 1;
+        private double _defaultSearchRadius = 1;
 
         private Geopoint _currentLocation = null;
         private double _currentHeading = 0;
 
-        private PointOfInterest[] _poiLocations = { 
-                                                    new PointOfInterest("1") {Name = "Point 1", Latitude = 53.429236, Longitude = 14.556504},
-                                                    new PointOfInterest("2") {Name = "Point 2", Latitude = 53.428716, Longitude = 14.556604},
-                                                    new PointOfInterest("3") {Name = "Point 3", Latitude = 53.428419, Longitude = 14.556035},
-                                                    new PointOfInterest("4") {Name = "Point 4", Latitude = 53.428566, Longitude = 14.555177},
-                                                    new PointOfInterest("5") {Name = "Point 5", Latitude = 53.429045, Longitude = 14.555270},
-                                                    new PointOfInterest("6") {Name = "Point 6", Latitude = 53.397248, Longitude = 14.525335},
-                                                    new PointOfInterest("7") {Name = "Point 7", Latitude = 53.397200, Longitude = 14.524005},
-                                                    new PointOfInterest("8") {Name = "Point 8", Latitude = 53.396524, Longitude = 14.523997},
-                                                    new PointOfInterest("9") {Name = "Point 9", Latitude = 53.396329, Longitude = 14.525113},
-                                                    new PointOfInterest("10") {Name = "Point 10", Latitude = 53.396708, Longitude = 14.526167}
-                                                  };
+        private ObservableCollection<PointOfInterest> _poiLocations;
+        readonly object _eventAgg;
+        public AugmentedView()
+        {
+            InitializeComponent();
 
+            _eventAgg = IoC.GetInstance(typeof(IEventAggregator), null);
+            ((EventAggregator)_eventAgg).Subscribe(this);
+        }
+
+        ~AugmentedView()
+        {
+            ((EventAggregator)_eventAgg).Unsubscribe(this);
+        }
         private async Task StartCamera()
         {
             var mediaCapture = new MediaCapture();
-            mediaCapture.SetPreviewRotation(VideoRotation.Clockwise270Degrees);
-            mediaCapture.SetRecordRotation(VideoRotation.Clockwise270Degrees);
-            try
-            {
-                PreviewScreen.Source = mediaCapture;
-                await mediaCapture.StartPreviewAsync();
-            }
-            catch
-            {
-            }
+            (App.Current as App)._mediaCapture = mediaCapture;
+            await mediaCapture.InitializeAsync();
+            PreviewScreen.Source = mediaCapture;
+            await mediaCapture.StartPreviewAsync();
         }
 
         private async void StopCamera()
         {
-            try
+            if (PreviewScreen.Source != null)
             {
-                if (PreviewScreen.Source != null)
-                {
-                    await PreviewScreen.Source.StopPreviewAsync();
-                    PreviewScreen.Source.Dispose();
-                    PreviewScreen.Source = null;
-                }
+                await PreviewScreen.Source.StopPreviewAsync();
+                PreviewScreen.Source.Dispose();
+                PreviewScreen.Source = null;
             }
-            catch { }
         }
 
         private void UpdateARView()
@@ -82,7 +77,7 @@ namespace AugmentedSzczecin.Views
             {
                 ItemCanvas.Children.Clear();
 
-                if (_poiLocations != null && _poiLocations.Length > 0)
+                if (_poiLocations != null && _poiLocations.Count > 0)
                 {
                     var center = new Coordinate(_currentLocation.Position.Latitude,
                         _currentLocation.Position.Longitude);
@@ -118,7 +113,7 @@ namespace AugmentedSzczecin.Views
                                 left = ItemCanvas.ActualWidth / 2 * (1 + -diff / 22.5);
                             }
 
-                            double top = ItemCanvas.ActualHeight * (1 - distance / _defaultSeatchRadius);
+                            double top = ItemCanvas.ActualHeight * (1 - distance / _defaultSearchRadius);
 
                             var tb = new TextBlock()
                             {
@@ -141,78 +136,80 @@ namespace AugmentedSzczecin.Views
         {
             base.OnNavigatedTo(e);
 
-            try
+            await StartCamera();
+
+            _orientationSensor = SimpleOrientationSensor.GetDefault();
+            if (_orientationSensor != null)
             {
-                await StartCamera();
+                _orientationSensor.OrientationChanged += SimpleOrientationSensorReadingChanged;
+                UpdateOrientation(_orientationSensor.GetCurrentOrientation());
+            }
 
-                _orientationSensor = SimpleOrientationSensor.GetDefault();
-                if (_orientationSensor != null)
+            _compass = Compass.GetDefault();
+            if (_compass != null)
+            {
+                _compass.ReadingChanged += CompassReadingChanged;
+                CompassChanged(_compass.GetCurrentReading());
+            }
+
+            _gps = new Geolocator();
+            _gps.MovementThreshold = _movementThreshold;
+            _gps.PositionChanged += GpsPositionChanged;
+
+            if (_gps.LocationStatus == PositionStatus.Ready)
+            {
+                var pos = await _gps.GetGeopositionAsync();
+                if (pos != null && pos.Coordinate != null && pos.Coordinate.Point != null)
                 {
-                    _orientationSensor.OrientationChanged += SimpleOrientationSensorReadingChanged;
-                    UpdateOrientation(_orientationSensor.GetCurrentOrientation());
-                }
-
-                _compass = Compass.GetDefault();
-                if (_compass != null)
-                {
-                    _compass.ReadingChanged += CompassReadingChanged;
-                    CompassChanged(_compass.GetCurrentReading());
-                }
-
-                _gps = new Geolocator();
-                _gps.MovementThreshold = _movementThreshold;
-                _gps.PositionChanged += GpsPositionChanged;
-
-                if (_gps.LocationStatus == PositionStatus.Ready)
-                {
-                    var pos = await _gps.GetGeopositionAsync();
-                    if (pos != null && pos.Coordinate != null && pos.Coordinate.Point != null)
-                    {
-                        GpsChanged(pos.Coordinate.Point.Position);
-                    }
+                    GpsChanged(pos.Coordinate.Point.Position);
                 }
             }
-            catch { }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            _orientationSensor.OrientationChanged -= SimpleOrientationSensorReadingChanged;
+            _compass.ReadingChanged -= CompassReadingChanged;
+            _gps.PositionChanged -= GpsPositionChanged;
+            StopCamera();
         }
 
         private void SimpleOrientationSensorReadingChanged(SimpleOrientationSensor sender, SimpleOrientationSensorOrientationChangedEventArgs args)
         {
-            //UpdateOrientation(args.Orientation);
+            UpdateOrientation(args.Orientation);
         }
 
         private async void UpdateOrientation(SimpleOrientation orientation)
         {
-            try
+            VideoRotation videoRotation = VideoRotation.None;
+
+            switch (orientation)
             {
-                VideoRotation videoRotation = VideoRotation.None;
-
-                switch (orientation)
-                {
-                    case SimpleOrientation.NotRotated:
-                        videoRotation = VideoRotation.None;
-                        break;
-                    case SimpleOrientation.Rotated90DegreesCounterclockwise:
-                        videoRotation = VideoRotation.Clockwise90Degrees;
-                        break;
-                    case SimpleOrientation.Rotated180DegreesCounterclockwise:
-                        videoRotation = VideoRotation.Clockwise180Degrees;
-                        break;
-                    case SimpleOrientation.Rotated270DegreesCounterclockwise:
-                        videoRotation = VideoRotation.Clockwise270Degrees;
-                        break;
-                    default:
-                        break;
-                }
-
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                {
-                    if (PreviewScreen.Source != null)
-                    {
-                        PreviewScreen.Source.SetPreviewRotation(videoRotation);
-                    }
-                });
+                case SimpleOrientation.NotRotated:
+                    videoRotation = VideoRotation.Clockwise90Degrees;
+                    break;
+                case SimpleOrientation.Rotated90DegreesCounterclockwise:
+                    videoRotation = VideoRotation.None;
+                    break;
+                case SimpleOrientation.Rotated180DegreesCounterclockwise:
+                    videoRotation = VideoRotation.Clockwise270Degrees;
+                    break;
+                case SimpleOrientation.Rotated270DegreesCounterclockwise:
+                    videoRotation = VideoRotation.Clockwise180Degrees;
+                    break;
+                default:
+                    break;
             }
-            catch { }
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (PreviewScreen.Source != null)
+                {
+                    PreviewScreen.Source.SetPreviewRotation(videoRotation);
+                }
+            });
+
         }
 
         private void CompassReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
@@ -223,16 +220,12 @@ namespace AugmentedSzczecin.Views
 
         private async void CompassChanged(CompassReading reading)
         {
-            try
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                {
-                    _currentHeading = reading.HeadingMagneticNorth;
+                _currentHeading = reading.HeadingMagneticNorth;
 
-                    UpdateARView();
-                });
-            }
-            catch { }
+                UpdateARView();
+            });
         }
 
         private void GpsPositionChanged(Geolocator sender, PositionChangedEventArgs args)
@@ -245,19 +238,24 @@ namespace AugmentedSzczecin.Views
 
         private async void GpsChanged(BasicGeoposition position)
         {
-            try
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                {
-                    try
-                    {
-                        _currentLocation = new Geopoint(new BasicGeoposition() { Latitude = position.Latitude, Longitude = position.Longitude });
-                        UpdateARView();
-                    }
-                    catch { }
-                });
-            }
-            catch { }
+
+                _currentLocation = new Geopoint(new BasicGeoposition() { Latitude = position.Latitude, Longitude = position.Longitude });
+                UpdateARView();
+
+            });
+        }
+
+        public void Handle(PointOfInterestLoadedEvent e)
+        {
+            _poiLocations = e.PointOfInterestList;
+        }
+
+        public void Handle(PointOfInterestLoadFailedEvent e)
+        {
+            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
+            msg.ShowAsync();
         }
     }
 }
