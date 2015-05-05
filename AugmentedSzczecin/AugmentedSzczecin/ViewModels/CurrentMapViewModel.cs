@@ -53,23 +53,6 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private MapItemsControl _POIs;
-        public MapItemsControl POIs
-        {
-            get 
-            {
-                return _POIs;
-            }
-            set
-            {
-                if(value != _POIs)
-                {
-                    _POIs = value;
-                    NotifyOfPropertyChange(() => POIs);
-                }
-            }
-        }
-
         private bool _internetConnection;
         public bool InternetConnection
         {
@@ -187,12 +170,6 @@ namespace AugmentedSzczecin.ViewModels
             base.OnDeactivate(close);
         }
 
-        protected override void OnViewAttached(object view, object context)
-        {
-            POIs = ((CurrentMapView)view).POIs;
-            base.OnViewAttached(view, context);
-        }
-
         public void ChangeScaleBar(MapControl temporaryMap)
         {
             double tempZoomLevel = ZoomLevel;
@@ -255,7 +232,6 @@ namespace AugmentedSzczecin.ViewModels
         public void Handle(PointOfInterestLoadedEvent e)
         {
             MapLocations = e.PointOfInterestList;
-            POIs.ItemsSource = MapLocations;
         }
 
         public void Handle(PointOfInterestLoadFailedEvent e)

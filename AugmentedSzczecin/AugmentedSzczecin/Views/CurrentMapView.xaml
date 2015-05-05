@@ -56,7 +56,7 @@
             <TextBlock x:Name="ScaleText" Text="{Binding ScaleText}" FontSize="14" Foreground="Black" Margin="24,530,0,2" Opacity="0.6" />
             <Rectangle Name="RecScale" Fill="Black" Width="100" Height="4" Margin="24,548,0,0" Opacity="0.6" />
 
-            <maps:MapItemsControl x:Name="POIs" x:FieldModifier="Public">
+            <maps:MapItemsControl ItemsSource="{Binding MapLocations}">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left" 
