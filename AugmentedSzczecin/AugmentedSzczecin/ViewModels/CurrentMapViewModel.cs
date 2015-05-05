@@ -9,10 +9,15 @@ using Windows.UI.Xaml.Controls.Maps;
 using AugmentedSzczecin.Helpers;
 using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
+using AugmentedSzczecin.Events;
+using System.Collections.ObjectModel;
+using AugmentedSzczecin.Models;
+using AugmentedSzczecin.Views;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : Screen
+    public class CurrentMapViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
         private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
@@ -29,6 +34,23 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService = navigationService;
             _locationService = locationService;
             _pointOfInterestService = pointOfInterestService;
+        }
+
+        private ObservableCollection<PointOfInterest> _mapLocations;
+        public ObservableCollection<PointOfInterest> MapLocations
+        {
+            get 
+            {
+                return _mapLocations;
+            }
+            set
+            {
+                if (value != _mapLocations)
+                {
+                    _mapLocations = value;
+                    NotifyOfPropertyChange(() => MapLocations);
+                }
+            }
         }
 
         private bool _internetConnection;
@@ -118,11 +140,9 @@ namespace AugmentedSzczecin.ViewModels
         {
             _eventAggregator.Subscribe(this);
             base.OnActivate();
-            RefreshPointOfInterestService();
 
             CountZoomLevel();
-            UpdateInternetConnection();
-
+            
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             if (_locationService.IsGeolocationEnabled())
@@ -133,6 +153,15 @@ namespace AugmentedSzczecin.ViewModels
             {
                 GeolocationDisabledMsg();
             }
+
+            UpdateInternetConnection();
+            if (!InternetConnection)
+            {
+                InternetConnectionDisabledMsg();
+            }
+
+            _mapLocations = new ObservableCollection<PointOfInterest>();
+            RefreshPointOfInterestService();
         }
 
         protected override void OnDeactivate(bool close)
@@ -200,6 +229,17 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService.GoBack();
         }
 
+        public void Handle(PointOfInterestLoadedEvent e)
+        {
+            MapLocations = e.PointOfInterestList;
+        }
+
+        public void Handle(PointOfInterestLoadFailedEvent e)
+        {
+            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
+            msg.ShowAsync();
+        }
+
         private async void GeolocationDisabledMsg()
         {
             var msg = new MessageDialog("Geolocation disabled.");
@@ -241,6 +281,11 @@ namespace AugmentedSzczecin.ViewModels
         private void CountZoomLevel()
         {
             ZoomLevel = ResolutionHelper.CountZoomLevel();
+        }
+
+        private void PushpinTapped(object sender)
+        {
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
     }
 }
