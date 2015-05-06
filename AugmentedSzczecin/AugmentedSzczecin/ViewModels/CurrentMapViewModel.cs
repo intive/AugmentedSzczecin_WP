@@ -9,10 +9,15 @@ using Windows.UI.Xaml.Controls.Maps;
 using AugmentedSzczecin.Helpers;
 using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
+using AugmentedSzczecin.Events;
+using System.Collections.ObjectModel;
+using AugmentedSzczecin.Models;
+using AugmentedSzczecin.Views;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : Screen
+    public class CurrentMapViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
         private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
@@ -31,36 +36,21 @@ namespace AugmentedSzczecin.ViewModels
             _pointOfInterestService = pointOfInterestService;
         }
 
-        protected override void OnActivate()
+        private ObservableCollection<PointOfInterest> _mapLocations;
+        public ObservableCollection<PointOfInterest> MapLocations
         {
-            _eventAggregator.Subscribe(this);
-            base.OnActivate();
-            RefreshPointOfInterestService();
-
-            CountZoomLevel();
-            UpdateInternetConnection();
-
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
-            if (_locationService.IsGeolocationEnabled())
+            get 
             {
-                SetGeolocation();
+                return _mapLocations;
             }
-            else
+            set
             {
-                GeolocationDisabledMsg();
+                if (value != _mapLocations)
+                {
+                    _mapLocations = value;
+                    NotifyOfPropertyChange(() => MapLocations);
+                }
             }
-        }
-
-        public void RefreshPointOfInterestService()
-        {
-            _pointOfInterestService.Refresh();
-        }
-
-        protected override void OnDeactivate(bool close)
-        {
-            _eventAggregator.Unsubscribe(this);
-            base.OnDeactivate(close);
         }
 
         private bool _internetConnection;
@@ -77,81 +67,9 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        public void UpdateInternetConnection()
-        {
-            ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
-
-            if (internetConnectionProfile == null)
-            {
-                InternetConnection = false;
-                return;
-            }
-
-            InternetConnection = true;
-        }
-
-        public async void InternetConnectionDisabledMsg()
-        {
-            var msg = new MessageDialog("Internet Connection disabled.");
-            msg.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
-            msg.DefaultCommandIndex = 0;
-            msg.CancelCommandIndex = 1;
-
-            await msg.ShowAsync();
-        }
-
-        public void NavigateToMain()
-        {
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-            _navigationService.GoBack();
-        }
-
-        private async void GeolocationDisabledMsg()
-        {
-            var msg = new MessageDialog("Geolocation disabled.");
-            msg.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
-            msg.DefaultCommandIndex = 0;
-            msg.CancelCommandIndex = 1;
-
-            await msg.ShowAsync();
-        }
-
-        private void BackButtonInvokedHandler(IUICommand command)
-        {
-            switch (command.Label)
-            {
-                case "Back":
-                    HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-                    NavigateToMain();
-                    break;
-                default:
-                    return;
-            }
-        }
-
-        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null && rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-                e.Handled = true;
-            }
-        }
-
-        private async void SetGeolocation()
-        {
-            CenterOfTheMap = await _locationService.GetGeolocation();
-        }
-
         public string BingKey
         {
             get { return _bingKey; }
-        }
-
-        private void CountZoomLevel()
-        {
-            ZoomLevel = ResolutionHelper.CountZoomLevel();
         }
 
         private double _zoomLevel;
@@ -204,6 +122,54 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private string _scaleText = "";
+        public string ScaleText
+        {
+            get { return _scaleText; }
+            set
+            {
+                if (_scaleText != value)
+                {
+                    _scaleText = value;
+                    NotifyOfPropertyChange(() => ScaleText);
+                }
+            }
+        }
+
+        protected override void OnActivate()
+        {
+            _eventAggregator.Subscribe(this);
+            base.OnActivate();
+
+            CountZoomLevel();
+            
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            if (_locationService.IsGeolocationEnabled())
+            {
+                SetGeolocation();
+            }
+            else
+            {
+                GeolocationDisabledMsg();
+            }
+
+            UpdateInternetConnection();
+            if (!InternetConnection)
+            {
+                InternetConnectionDisabledMsg();
+            }
+
+            _mapLocations = new ObservableCollection<PointOfInterest>();
+            RefreshPointOfInterestService();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            _eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
+        }
+
         public void ChangeScaleBar(MapControl temporaryMap)
         {
             double tempZoomLevel = ZoomLevel;
@@ -229,18 +195,97 @@ namespace AugmentedSzczecin.ViewModels
             ScaleText = scaleDistance.ToString() + " m";
         }
 
-        private string _scaleText = "";
-        public string ScaleText
+        public void RefreshPointOfInterestService()
         {
-            get { return _scaleText; }
-            set
+            _pointOfInterestService.Refresh();
+        }
+
+        public void UpdateInternetConnection()
+        {
+            ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
+
+            if (internetConnectionProfile == null)
             {
-                if (_scaleText != value)
-                {
-                    _scaleText = value;
-                    NotifyOfPropertyChange(() => ScaleText);
-                }
+                InternetConnection = false;
+                return;
             }
+
+            InternetConnection = true;
+        }
+
+        public async void InternetConnectionDisabledMsg()
+        {
+            var msg = new MessageDialog("Internet Connection disabled.");
+            msg.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
+            msg.DefaultCommandIndex = 0;
+            msg.CancelCommandIndex = 1;
+
+            await msg.ShowAsync();
+        }
+
+        public void NavigateToMain()
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            _navigationService.GoBack();
+        }
+
+        public void Handle(PointOfInterestLoadedEvent e)
+        {
+            MapLocations = e.PointOfInterestList;
+        }
+
+        public void Handle(PointOfInterestLoadFailedEvent e)
+        {
+            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
+            msg.ShowAsync();
+        }
+
+        private async void GeolocationDisabledMsg()
+        {
+            var msg = new MessageDialog("Geolocation disabled.");
+            msg.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
+            msg.DefaultCommandIndex = 0;
+            msg.CancelCommandIndex = 1;
+
+            await msg.ShowAsync();
+        }
+
+        private void BackButtonInvokedHandler(IUICommand command)
+        {
+            switch (command.Label)
+            {
+                case "Back":
+                    HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+                    NavigateToMain();
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame != null && rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
+                e.Handled = true;
+            }
+        }
+
+        private async void SetGeolocation()
+        {
+            CenterOfTheMap = await _locationService.GetGeolocation();
+        }
+
+        private void CountZoomLevel()
+        {
+            ZoomLevel = ResolutionHelper.CountZoomLevel();
+        }
+
+        private void PushpinTapped(object sender)
+        {
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
     }
 }
