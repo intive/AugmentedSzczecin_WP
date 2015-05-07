@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6EC6E3DB-D226-4D96-9289-DAED65D67331}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Maps.SpatialToolbox.WP8</RootNamespace>
+    <AssemblyName>Microsoft.Maps.SpatialToolbox.WP8</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Animations\PathAnimation.cs">
+      <Link>Bing\Animations\PathAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Animations\PushpinAnimations.cs">
+      <Link>Bing\Animations\PushpinAnimations.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ClusteredPoint.cs">
+      <Link>Bing\Clustering\ClusteredPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ClusteringLayer.cs">
+      <Link>Bing\Clustering\ClusteringLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ClusteringType.cs">
+      <Link>Bing\Clustering\ClusteringType.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ItemLocation.cs">
+      <Link>Bing\Clustering\ItemLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\Clustering\ItemLocationCollection.cs">
+      <Link>Bing\Clustering\ItemLocationCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\HeatMapLayer.cs">
+      <Link>Bing\HeatMapLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\MapTools.cs">
+      <Link>Bing\MapTools.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\QuadKey.cs">
+      <Link>Bing\QuadKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Bing\TileMath.cs">
+      <Link>Bing\TileMath.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Maps.SpatialToolbox.Win8\Extensions.cs">
+      <Link>Extensions.cs</Link>
+    </Compile>
+    <Compile Include="Bing\LocalTileDataSource.cs" />
+    <Compile Include="Bing\MapElementExt.cs" />
+    <Compile Include="Bing\MapShapeExtensions.cs" />
+    <Compile Include="Bing\StyleTools.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Maps.SpatialToolbox.Core\Microsoft.Maps.SpatialToolbox.Core.csproj">
+      <Project>{0022220E-283B-44CD-A593-B8516E61685E}</Project>
+      <Name>Microsoft.Maps.SpatialToolbox.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bing\Assets\alphaMask.png" />
+    <Content Include="Bing\Assets\CanvasHeatMaps.js" />
+    <Content Include="Bing\Assets\ColorizeWebWorker.js" />
+    <Content Include="Bing\Assets\HeatMap.html" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <ProjectExtensions />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -76,5 +76,10 @@ namespace AugmentedSzczecin.ViewModels
             _accountService.SignOut();
             NotifyOfPropertyChange(() => CanNavigateToSignIn);
         }
+
+        public void NavigateToAugmentedView()
+        {
+            _navigationService.NavigateToViewModel<AugmentedViewModel>();
+        }
     }
 }

@@ -6,6 +6,7 @@ using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
+using Windows.Media.Capture;
 using Windows.UI.Xaml.Controls;
 
 namespace AugmentedSzczecin
@@ -13,6 +14,7 @@ namespace AugmentedSzczecin
     public sealed partial class App
     {
         private WinRTContainer _container;
+        public MediaCapture _mediaCapture;
 
         public App()
         {
@@ -27,6 +29,7 @@ namespace AugmentedSzczecin
 
             _container.PerRequest<MainViewModel>();
             _container.PerRequest<AboutViewModel>();
+            _container.PerRequest<AugmentedViewModel>();
             _container.PerRequest<CurrentMapViewModel>();
             _container.PerRequest<LocationListViewModel>();
             _container.PerRequest<SignUpViewModel>();

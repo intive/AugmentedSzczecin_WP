@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AugmentedSzczecin", "AugmentedSzczecin\AugmentedSzczecin.csproj", "{343535AF-8E92-432C-B76C-E8D185FA9679}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Maps.SpatialToolbox.Core", "Microsoft.Maps.SpatialToolbox.Core\Microsoft.Maps.SpatialToolbox.Core.csproj", "{0022220E-283B-44CD-A593-B8516E61685E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,14 @@ Global
 		{343535AF-8E92-432C-B76C-E8D185FA9679}.Release|x86.ActiveCfg = Release|x86
 		{343535AF-8E92-432C-B76C-E8D185FA9679}.Release|x86.Build.0 = Release|x86
 		{343535AF-8E92-432C-B76C-E8D185FA9679}.Release|x86.Deploy.0 = Release|x86
+		{0022220E-283B-44CD-A593-B8516E61685E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0022220E-283B-44CD-A593-B8516E61685E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0022220E-283B-44CD-A593-B8516E61685E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{0022220E-283B-44CD-A593-B8516E61685E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0022220E-283B-44CD-A593-B8516E61685E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0022220E-283B-44CD-A593-B8516E61685E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0022220E-283B-44CD-A593-B8516E61685E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{0022220E-283B-44CD-A593-B8516E61685E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
