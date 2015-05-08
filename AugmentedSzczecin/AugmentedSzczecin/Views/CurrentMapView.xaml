@@ -47,7 +47,7 @@
             Height="560"
             Center="{Binding CenterOfTheMap}"
             ZoomLevel="{Binding ZoomLevel}"
-            LandmarksVisible="{Binding LandmarksVisible}"
+            LandmarksVisible="{Binding LandmarksVisible}"            
             caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]"
             Margin="0,0,0,0">
 
@@ -59,12 +59,13 @@
                        Margin="24,530,0,2" Opacity="0.6" />
             <Rectangle Name="RecScale" Fill="Black" Width="100" Height="4" Margin="24,548,0,0" Opacity="0.6" />
 
-            <maps:MapItemsControl x:Name="POIs">
+            <maps:MapItemsControl ItemsSource="{Binding MapLocations}">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left"
+                        <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left" 
                                maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
-                               Tapped="PushpinTapped" FlyoutBase.AttachedFlyout="{StaticResource Details}" />
+                               caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($source)]"
+                               FlyoutBase.AttachedFlyout="{StaticResource Details}"/>
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>
