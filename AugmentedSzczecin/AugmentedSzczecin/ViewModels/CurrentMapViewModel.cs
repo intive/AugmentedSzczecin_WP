@@ -236,8 +236,8 @@ namespace AugmentedSzczecin.ViewModels
 
         public void Handle(PointOfInterestLoadFailedEvent e)
         {
-            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
-            msg.ShowAsync();
+            //var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
+            //msg.ShowAsync();
         }
 
         private async void GeolocationDisabledMsg()
