@@ -5,94 +5,94 @@
     /// </summary>
     public enum ShapefileShapeType
     {
-            /// <summary>
-            /// Null Shape
-            /// </summary>
-            NullShape = 0,
+        /// <summary>
+        /// Null Shape
+        /// </summary>
+        NullShape = 0,
 
-            /// <summary>
-            /// Point
-            /// </summary>
-            Point = 1,
+        /// <summary>
+        /// Point
+        /// </summary>
+        Point = 1,
 
-            /// <summary>
-            /// LineString
-            /// </summary>
-            LineString = 3,
+        /// <summary>
+        /// LineString
+        /// </summary>
+        LineString = 3,
 
-            /// <summary>
-            /// Polygon
-            /// </summary>
-            Polygon = 5,
+        /// <summary>
+        /// Polygon
+        /// </summary>
+        Polygon = 5,
 
-            /// <summary>
-            /// MultiPoint
-            /// </summary>
-            MultiPoint = 8,
+        /// <summary>
+        /// MultiPoint
+        /// </summary>
+        MultiPoint = 8,
 
-            /// <summary>
-            /// PointMZ
-            /// </summary>
-            PointZM = 11,
+        /// <summary>
+        /// PointMZ
+        /// </summary>
+        PointZM = 11,
 
-            /// <summary>
-            /// PolyLineMZ
-            /// </summary>
-            LineStringZM = 13,
+        /// <summary>
+        /// PolyLineMZ
+        /// </summary>
+        LineStringZM = 13,
 
-            /// <summary>
-            /// PolygonMZ
-            /// </summary>
-            PolygonZM = 15,
+        /// <summary>
+        /// PolygonMZ
+        /// </summary>
+        PolygonZM = 15,
 
-            /// <summary>
-            /// MultiPointMZ
-            /// </summary>
-            MultiPointZM = 18,
+        /// <summary>
+        /// MultiPointMZ
+        /// </summary>
+        MultiPointZM = 18,
 
-            /// <summary>
-            /// PointM
-            /// </summary>
-            PointM = 21,
+        /// <summary>
+        /// PointM
+        /// </summary>
+        PointM = 21,
 
-            /// <summary>
-            /// LineStringM
-            /// </summary>
-            LineStringM = 23,
+        /// <summary>
+        /// LineStringM
+        /// </summary>
+        LineStringM = 23,
 
-            /// <summary>
-            /// PolygonM
-            /// </summary>
-            PolygonM = 25,
+        /// <summary>
+        /// PolygonM
+        /// </summary>
+        PolygonM = 25,
 
-            /// <summary>
-            /// MultiPointM
-            /// </summary>
-            MultiPointM = 28,
+        /// <summary>
+        /// MultiPointM
+        /// </summary>
+        MultiPointM = 28,
 
-            /// <summary>
-            /// MultiPatch
-            /// </summary>
-            MultiPatch = 31,
+        /// <summary>
+        /// MultiPatch
+        /// </summary>
+        MultiPatch = 31,
 
-            /// <summary>
-            /// PointZ
-            /// </summary>
-            PointZ = 9,
+        /// <summary>
+        /// PointZ
+        /// </summary>
+        PointZ = 9,
 
-            /// <summary>
-            /// LineStringZ
-            /// </summary>
-            LineStringZ = 10,
+        /// <summary>
+        /// LineStringZ
+        /// </summary>
+        LineStringZ = 10,
 
-            /// <summary>
-            /// PolygonZ
-            /// </summary>
-            PolygonZ = 19,
+        /// <summary>
+        /// PolygonZ
+        /// </summary>
+        PolygonZ = 19,
 
-            /// <summary>
-            /// MultiPointZ
-            /// </summary>
-            MultiPointZ = 20
+        /// <summary>
+        /// MultiPointZ
+        /// </summary>
+        MultiPointZ = 20
     }
 }

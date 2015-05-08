@@ -20,7 +20,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             Encoding = System.Text.Encoding.UTF8,
             Indent = true,
-            NamespaceHandling = NamespaceHandling.OmitDuplicates            
+            NamespaceHandling = NamespaceHandling.OmitDuplicates
         };
 
         #endregion
@@ -40,7 +40,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             this.stripHtml = stripHtml;
         }
 
-        public BaseTextFeed(double tolerance):base(tolerance)
+        public BaseTextFeed(double tolerance) : base(tolerance)
         {
         }
 
@@ -63,7 +63,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         public abstract Task<SpatialDataSet> ReadAsync(string feed);
 
         public abstract Task<SpatialDataSet> ReadAsync(Uri feedUri);
-                
+
         public abstract Task<string> WriteAsync(SpatialDataSet data);
 
         #endregion
@@ -103,7 +103,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             if (!string.IsNullOrWhiteSpace(uri))
             {
-                if (!uri.StartsWith("http", StringComparison.OrdinalIgnoreCase) 
+                if (!uri.StartsWith("http", StringComparison.OrdinalIgnoreCase)
                     && !uri.StartsWith("ms-appx", StringComparison.OrdinalIgnoreCase))
                 {
                     uri = baseUrl + uri;
@@ -113,7 +113,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     return new Uri(uri);
                 }
-                catch { }                
+                catch
+                {
+                }
             }
 
             return null;

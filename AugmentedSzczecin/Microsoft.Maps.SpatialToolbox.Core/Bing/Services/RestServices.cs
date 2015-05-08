@@ -117,8 +117,8 @@ namespace Microsoft.Maps.SpatialToolbox.Bing.RestServices
     }
 
     [DataContract(Namespace = "http://schemas.microsoft.com/search/local/ws/rest/v1")]
-    [KnownType(typeof(StaticMapMetadata))]
-    [KnownType(typeof(BirdseyeMetadata))]
+    [KnownType(typeof (StaticMapMetadata))]
+    [KnownType(typeof (BirdseyeMetadata))]
     public class ImageryMetadata : Resource
     {
         [DataMember(Name = "imageHeight", EmitDefaultValue = false)]
@@ -156,7 +156,7 @@ namespace Microsoft.Maps.SpatialToolbox.Bing.RestServices
         public string Text { get; set; }
 
         [DataMember(Name = "formattedText", EmitDefaultValue = false)]
-        public string FormattedText { get; set; }        
+        public string FormattedText { get; set; }
     }
 
     [DataContract]
@@ -317,13 +317,13 @@ namespace Microsoft.Maps.SpatialToolbox.Bing.RestServices
     }
 
     [DataContract]
-    [KnownType(typeof(Location))]
-    [KnownType(typeof(Route))]
-    [KnownType(typeof(TrafficIncident))]
-    [KnownType(typeof(ImageryMetadata))]
-    [KnownType(typeof(ElevationData))]
-    [KnownType(typeof(SeaLevelData))]
-    [KnownType(typeof(CompressedPointList))]
+    [KnownType(typeof (Location))]
+    [KnownType(typeof (Route))]
+    [KnownType(typeof (TrafficIncident))]
+    [KnownType(typeof (ImageryMetadata))]
+    [KnownType(typeof (ElevationData))]
+    [KnownType(typeof (SeaLevelData))]
+    [KnownType(typeof (CompressedPointList))]
     public class Resource
     {
         [DataMember(Name = "bbox", EmitDefaultValue = false)]
@@ -450,10 +450,10 @@ namespace Microsoft.Maps.SpatialToolbox.Bing.RestServices
 
         [DataMember(Name = "routeSubLegs", EmitDefaultValue = false)]
         public RouteSubLeg[] RouteSubLegs { get; set; }
-        
+
         //TODO: What is the base class?
         [DataMember(Name = "alternateVias", EmitDefaultValue = false)]
-        public object[] AlternateVias { get; set; }        
+        public object[] AlternateVias { get; set; }
     }
 
     [DataContract]
@@ -502,7 +502,7 @@ namespace Microsoft.Maps.SpatialToolbox.Bing.RestServices
     }
 
     [DataContract]
-    [KnownType(typeof(Point))]
+    [KnownType(typeof (Point))]
     public class Shape
     {
         [DataMember(Name = "boundingBox", EmitDefaultValue = false)]

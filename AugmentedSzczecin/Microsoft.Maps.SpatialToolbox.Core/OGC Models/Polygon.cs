@@ -142,9 +142,9 @@ namespace Microsoft.Maps.SpatialToolbox
         /// Calcualates the bounding box of a Polygon object
         /// </summary>
         /// <returns>A LocationRect object that represents the bounding box of a Polygon object</returns>
-        new public BoundingBox Envelope()
+        public new BoundingBox Envelope()
         {
-           return this.ExteriorRing.Envelope();
+            return this.ExteriorRing.Envelope();
         }
 
         /// <summary>
@@ -199,9 +199,12 @@ namespace Microsoft.Maps.SpatialToolbox
 
             for (int i = 0; i < cc.Count; i++)
             {
-                if (cc[i].Longitude < coord.Longitude && cc[j].Longitude >= coord.Longitude || cc[j].Longitude < coord.Longitude && cc[i].Longitude >= coord.Longitude)
+                if (cc[i].Longitude < coord.Longitude && cc[j].Longitude >= coord.Longitude ||
+                    cc[j].Longitude < coord.Longitude && cc[i].Longitude >= coord.Longitude)
                 {
-                    if (cc[i].Latitude + (coord.Longitude - cc[i].Longitude) / (cc[j].Longitude - cc[i].Longitude) * (cc[j].Latitude - cc[i].Latitude) < coord.Latitude)
+                    if (cc[i].Latitude +
+                        (coord.Longitude - cc[i].Longitude)/(cc[j].Longitude - cc[i].Longitude)*
+                        (cc[j].Latitude - cc[i].Latitude) < coord.Latitude)
                     {
                         inPoly = !inPoly;
                     }

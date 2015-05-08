@@ -65,7 +65,7 @@
         /// Calcualates the bounding box of a Point object
         /// </summary>
         /// <returns>A BoundingBox object that represents the bounding box of a Point object</returns>
-        new public BoundingBox Envelope()
+        public new BoundingBox Envelope()
         {
             return new BoundingBox(Coordinate, 0.001, 0.001);
         }
@@ -78,9 +78,9 @@
         public bool IsValid()
         {
             var lon = Coordinate.NormalizeLongitude(Coordinate.Longitude);
-            return Coordinate != null && !double.IsNaN(Coordinate.Latitude) && !double.IsNaN(lon) 
-                && Coordinate.Latitude <= 90 && Coordinate.Latitude >= -90
-                && lon <= 180 && lon >= -180;
+            return Coordinate != null && !double.IsNaN(Coordinate.Latitude) && !double.IsNaN(lon)
+                   && Coordinate.Latitude <= 90 && Coordinate.Latitude >= -90
+                   && lon <= 180 && lon >= -180;
         }
 
         /// <summary>
@@ -101,6 +101,6 @@
             return 1;
         }
 
-        #endregion        
+        #endregion
     }
 }

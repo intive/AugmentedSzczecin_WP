@@ -13,7 +13,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// <summary>
         /// DBaseFileHeader constructor
         /// </summary>
-        public DBaseFileHeader() 
+        public DBaseFileHeader()
         {
             ColumnDescriptions = new List<DBaseColumnDefinition>();
         }

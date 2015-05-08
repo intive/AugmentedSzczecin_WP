@@ -31,7 +31,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         public WellKnownBinary(double tolerance)
             : base(tolerance)
-        {            
+        {
         }
 
         #endregion
@@ -103,21 +103,21 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             // Get the first Byte in the array. This specifies if the WKB is in
             // XDR (big-endian) format of NDR (little-endian) format.
-            ByteOrder wkbByteOrder = (ByteOrder)reader.ReadByte();
+            ByteOrder wkbByteOrder = (ByteOrder) reader.ReadByte();
 
             // Get the type of this geometry.
-            WKBShapeType type = (WKBShapeType)NumberReader.ReadUInt32(reader, wkbByteOrder);
+            WKBShapeType type = (WKBShapeType) NumberReader.ReadUInt32(reader, wkbByteOrder);
 
             bool includeAltitude = false, includeM = false;
 
             //check to see if the coordinates should include the Z coordinate
-            if (((type > ((WKBShapeType)0x3e8)) && (type < ((WKBShapeType)0x7d0))) || (type > ((WKBShapeType)0xbb8)))
+            if (((type > ((WKBShapeType) 0x3e8)) && (type < ((WKBShapeType) 0x7d0))) || (type > ((WKBShapeType) 0xbb8)))
             {
                 includeAltitude = true;
             }
 
             //check to see if the coordinates should include a Measure
-            if (type > ((WKBShapeType)0x7d0))
+            if (type > ((WKBShapeType) 0x7d0))
             {
                 includeM = true;
             }
@@ -170,7 +170,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         #region Common Coordinate Readers
 
-        private Coordinate ReadCoordinate(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private Coordinate ReadCoordinate(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type,
+            bool includeAltitude, bool includeM)
         {
             double lon = NumberReader.ReadDouble(reader, wkbByteOrder);
             double lat = NumberReader.ReadDouble(reader, wkbByteOrder);
@@ -179,12 +180,12 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
             if (!includeAltitude)
             {
-                coordinate = new Coordinate(lat, lon);                
+                coordinate = new Coordinate(lat, lon);
             }
             else
             {
                 double z = NumberReader.ReadDouble(reader, wkbByteOrder);
-                coordinate = new Coordinate(lat, lon, z);  
+                coordinate = new Coordinate(lat, lon, z);
             }
 
             if (includeM)
@@ -196,10 +197,11 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return coordinate;
         }
 
-        private async Task<CoordinateCollection> ReadCoordinates(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private async Task<CoordinateCollection> ReadCoordinates(BinaryReader reader, ByteOrder wkbByteOrder,
+            WKBShapeType type, bool includeAltitude, bool includeM)
         {
             // Get the number of points in this linestring.
-            int numPoints = (int)NumberReader.ReadUInt32(reader, wkbByteOrder);
+            int numPoints = (int) NumberReader.ReadUInt32(reader, wkbByteOrder);
 
             // Create a new array of coordinates.
             var coords = new CoordinateCollection();
@@ -218,7 +220,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return coords;
         }
 
-        private async Task<CoordinateCollection> ReadLinearRing(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private async Task<CoordinateCollection> ReadLinearRing(BinaryReader reader, ByteOrder wkbByteOrder,
+            WKBShapeType type, bool includeAltitude, bool includeM)
         {
             var ring = await ReadCoordinates(reader, wkbByteOrder, type, includeAltitude, includeM);
 
@@ -237,7 +240,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         #region Geometry Readers
 
-        private async Task<Geometry> ReadGeometry(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private async Task<Geometry> ReadGeometry(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type,
+            bool includeAltitude, bool includeM)
         {
             switch (type)
             {
@@ -277,7 +281,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 case WKBShapeType.WkbGeometryCollectionZM:
                     return await ReadGeometryCollection(reader, wkbByteOrder, type, includeAltitude, includeM);
                 default:
-                    if (!Enum.IsDefined(typeof(WKBShapeType), type))
+                    if (!Enum.IsDefined(typeof (WKBShapeType), type))
                     {
                         throw new ArgumentException("Geometry type not recognized");
                     }
@@ -288,21 +292,24 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             }
         }
 
-        private Point ReadPoint(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private Point ReadPoint(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude,
+            bool includeM)
         {
             return new Point(ReadCoordinate(reader, wkbByteOrder, type, includeAltitude, includeM));
         }
 
-        private async Task<LineString> ReadLineString(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private async Task<LineString> ReadLineString(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type,
+            bool includeAltitude, bool includeM)
         {
             var c = await ReadCoordinates(reader, wkbByteOrder, type, includeAltitude, includeM);
             return new LineString(c);
         }
 
-        private async Task<Polygon> ReadPolygon(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private async Task<Polygon> ReadPolygon(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type,
+            bool includeAltitude, bool includeM)
         {
             // Get the Number of rings in this Polygon.
-            int numRings = (int)NumberReader.ReadUInt32(reader, wkbByteOrder);
+            int numRings = (int) NumberReader.ReadUInt32(reader, wkbByteOrder);
 
             var c = await ReadLinearRing(reader, wkbByteOrder, type, includeAltitude, includeM);
             Polygon shell = new Polygon(c);
@@ -318,10 +325,11 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return shell;
         }
 
-        private MultiPoint ReadMultiPoint(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private MultiPoint ReadMultiPoint(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type,
+            bool includeAltitude, bool includeM)
         {
             // Get the number of points in this multPoint.
-            int numPoints = (int)NumberReader.ReadUInt32(reader, wkbByteOrder);
+            int numPoints = (int) NumberReader.ReadUInt32(reader, wkbByteOrder);
 
             // Create a new array for the points.
             MultiPoint points = new MultiPoint();
@@ -340,10 +348,11 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return points;
         }
 
-        private async Task<MultiLineString> ReadMultiLineString(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private async Task<MultiLineString> ReadMultiLineString(BinaryReader reader, ByteOrder wkbByteOrder,
+            WKBShapeType type, bool includeAltitude, bool includeM)
         {
             // Get the number of linestrings in this multLineString.
-            int numLineStrings = (int)NumberReader.ReadUInt32(reader, wkbByteOrder);
+            int numLineStrings = (int) NumberReader.ReadUInt32(reader, wkbByteOrder);
 
             // Create a new array for the linestrings .
             MultiLineString mline = new MultiLineString(numLineStrings);
@@ -367,10 +376,11 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return mline;
         }
 
-        private async Task<MultiPolygon> ReadMultiPolygon(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private async Task<MultiPolygon> ReadMultiPolygon(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type,
+            bool includeAltitude, bool includeM)
         {
             // Get the number of Polygons.
-            int numPolygons = (int)NumberReader.ReadUInt32(reader, wkbByteOrder);
+            int numPolygons = (int) NumberReader.ReadUInt32(reader, wkbByteOrder);
 
             // Create a new array for the Polygons.
             MultiPolygon polygons = new MultiPolygon(numPolygons);
@@ -394,10 +404,11 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return polygons;
         }
 
-        private async Task<GeometryCollection> ReadGeometryCollection(BinaryReader reader, ByteOrder wkbByteOrder, WKBShapeType type, bool includeAltitude, bool includeM)
+        private async Task<GeometryCollection> ReadGeometryCollection(BinaryReader reader, ByteOrder wkbByteOrder,
+            WKBShapeType type, bool includeAltitude, bool includeM)
         {
             // The next byte in the array tells the number of geometries in this collection.
-            int numGeometries = (int)NumberReader.ReadUInt32(reader, wkbByteOrder);
+            int numGeometries = (int) NumberReader.ReadUInt32(reader, wkbByteOrder);
 
             // Create a new array for the geometries.
             var geographies = new GeometryCollection(numGeometries);
@@ -471,7 +482,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         private static void WriteCoordinates(CoordinateCollection coords, BinaryWriter writer, bool includeAltitude)
         {
-            writer.Write((int)coords.Count);    //write the number of coordinates
+            writer.Write((int) coords.Count); //write the number of coordinates
 
             for (int i = 0; i < coords.Count; i++)
             {
@@ -484,16 +495,16 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             bool includeAltitude = false;
 
             //write the byte order
-            writer.Write((byte)ByteOrder.Ndr);
+            writer.Write((byte) ByteOrder.Ndr);
 
             if (point.Coordinate.Altitude.HasValue)
             {
-                writer.Write((uint)WKBShapeType.WkbPointZ);
+                writer.Write((uint) WKBShapeType.WkbPointZ);
                 includeAltitude = true;
             }
             else
             {
-                writer.Write((uint)WKBShapeType.WkbPoint);
+                writer.Write((uint) WKBShapeType.WkbPoint);
             }
 
             WriteCoordinate(point.Coordinate, writer, includeAltitude);
@@ -504,23 +515,24 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             bool includeAltitude = false;
 
             //write the byte order
-            writer.Write((byte)ByteOrder.Ndr);
+            writer.Write((byte) ByteOrder.Ndr);
 
             if (lineString.Vertices.Count > 0)
             {
                 if (lineString.Vertices[0].Altitude.HasValue)
                 {
-                    writer.Write((uint)WKBShapeType.WkbLineStringZ);
+                    writer.Write((uint) WKBShapeType.WkbLineStringZ);
                     includeAltitude = true;
                 }
                 else
                 {
-                    writer.Write((uint)WKBShapeType.WkbLineString);
+                    writer.Write((uint) WKBShapeType.WkbLineString);
                 }
             }
             else
-            {  //If there is no vertices then default to a standard LineString
-                writer.Write((uint)WKBShapeType.WkbLineString);
+            {
+                //If there is no vertices then default to a standard LineString
+                writer.Write((uint) WKBShapeType.WkbLineString);
             }
 
             WriteCoordinates(lineString.Vertices, writer, includeAltitude);
@@ -531,29 +543,29 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             bool includeAltitude = false;
 
             //write the byte order
-            writer.Write((byte)ByteOrder.Ndr);
+            writer.Write((byte) ByteOrder.Ndr);
 
             if (polygon.ExteriorRing.Count > 0)
             {
                 if (polygon.ExteriorRing[0].Altitude.HasValue)
                 {
-                    writer.Write((uint)WKBShapeType.WkbPolygonZ);
+                    writer.Write((uint) WKBShapeType.WkbPolygonZ);
                     includeAltitude = true;
                 }
                 else
                 {
-                    writer.Write((uint)WKBShapeType.WkbPolygon);
+                    writer.Write((uint) WKBShapeType.WkbPolygon);
                 }
             }
             else
             {
                 //If there is no vertices then default to a standard LineString
-                writer.Write((uint)WKBShapeType.WkbPolygon);
+                writer.Write((uint) WKBShapeType.WkbPolygon);
             }
 
-            writer.Write((int)polygon.InteriorRings.Count + 1);                 //write the number of rings
+            writer.Write((int) polygon.InteriorRings.Count + 1); //write the number of rings
 
-            WriteCoordinates(polygon.ExteriorRing, writer, includeAltitude);         //write the exterior ring
+            WriteCoordinates(polygon.ExteriorRing, writer, includeAltitude); //write the exterior ring
 
             for (int i = 0; i < polygon.InteriorRings.Count; i++)
             {
@@ -564,25 +576,25 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         private static void WriteMultiPoint(MultiPoint points, BinaryWriter writer)
         {
             //write the byte order
-            writer.Write((byte)ByteOrder.Ndr);
+            writer.Write((byte) ByteOrder.Ndr);
 
             if (points.Geometries.Count > 0)
             {
                 if (points.Geometries[0].Coordinate.Altitude != null)
                 {
-                    writer.Write((uint)WKBShapeType.WkbMultiPointZ);
+                    writer.Write((uint) WKBShapeType.WkbMultiPointZ);
                 }
                 else
                 {
-                    writer.Write((uint)WKBShapeType.WkbMultiPoint);
+                    writer.Write((uint) WKBShapeType.WkbMultiPoint);
                 }
             }
             else
             {
-                writer.Write((uint)WKBShapeType.WkbMultiPoint);
+                writer.Write((uint) WKBShapeType.WkbMultiPoint);
             }
 
-            writer.Write((int)points.Geometries.Count);    //write the number of points
+            writer.Write((int) points.Geometries.Count); //write the number of points
 
             for (int i = 0; i < points.Geometries.Count; i++)
             {
@@ -593,25 +605,25 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         private static void WriteMultiLineString(MultiLineString lineStrings, BinaryWriter writer)
         {
             //write the byte order
-            writer.Write((byte)ByteOrder.Ndr);
+            writer.Write((byte) ByteOrder.Ndr);
 
             if (lineStrings.Geometries.Count > 0 && lineStrings.Geometries[0].Vertices.Count > 0)
             {
                 if (lineStrings.Geometries[0].Vertices[0].Altitude.HasValue)
                 {
-                    writer.Write((uint)WKBShapeType.WkbMultiLineStringZ);
+                    writer.Write((uint) WKBShapeType.WkbMultiLineStringZ);
                 }
                 else
                 {
-                    writer.Write((uint)WKBShapeType.WkbMultiLineString);
+                    writer.Write((uint) WKBShapeType.WkbMultiLineString);
                 }
             }
             else
             {
-                writer.Write((uint)WKBShapeType.WkbMultiLineString);
+                writer.Write((uint) WKBShapeType.WkbMultiLineString);
             }
 
-            writer.Write((int)lineStrings.Geometries.Count);    //write the number of LineStrings
+            writer.Write((int) lineStrings.Geometries.Count); //write the number of LineStrings
 
             for (int i = 0; i < lineStrings.Geometries.Count; i++)
             {
@@ -622,25 +634,25 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         private static void WriteMultiPolygon(MultiPolygon polygons, BinaryWriter writer)
         {
             //write the byte order
-            writer.Write((byte)ByteOrder.Ndr);
+            writer.Write((byte) ByteOrder.Ndr);
 
             if (polygons.Geometries.Count > 0 && polygons.Geometries[0].ExteriorRing.Count > 0)
             {
                 if (polygons.Geometries[0].ExteriorRing[0].Altitude.HasValue)
                 {
-                    writer.Write((uint)WKBShapeType.WkbMultiPolygonZ);
+                    writer.Write((uint) WKBShapeType.WkbMultiPolygonZ);
                 }
                 else
                 {
-                    writer.Write((uint)WKBShapeType.WkbMultiPolygon);
+                    writer.Write((uint) WKBShapeType.WkbMultiPolygon);
                 }
             }
             else
             {
-                writer.Write((uint)WKBShapeType.WkbMultiPolygon);
+                writer.Write((uint) WKBShapeType.WkbMultiPolygon);
             }
 
-            writer.Write((int)polygons.Geometries.Count);    //write the number of polygons
+            writer.Write((int) polygons.Geometries.Count); //write the number of polygons
 
             for (int i = 0; i < polygons.Geometries.Count; i++)
             {
@@ -651,11 +663,11 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         private static void WriteGeometryCollection(GeometryCollection<Geometry> geographies, BinaryWriter writer)
         {
             //write the byte order
-            writer.Write((byte)ByteOrder.Ndr);
+            writer.Write((byte) ByteOrder.Ndr);
 
-            writer.Write((uint)WKBShapeType.WkbGeometryCollection);
+            writer.Write((uint) WKBShapeType.WkbGeometryCollection);
 
-            writer.Write((int)geographies.Geometries.Count);           //write the number of geographies
+            writer.Write((int) geographies.Geometries.Count); //write the number of geographies
             for (int i = 0; i < geographies.Geometries.Count; i++)
             {
                 WriteGeometry(geographies.Geometries[i], writer);

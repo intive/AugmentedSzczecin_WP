@@ -1,5 +1,4 @@
-﻿
-namespace Microsoft.Maps.SpatialToolbox
+﻿namespace Microsoft.Maps.SpatialToolbox
 {
     public enum GeometryType
     {

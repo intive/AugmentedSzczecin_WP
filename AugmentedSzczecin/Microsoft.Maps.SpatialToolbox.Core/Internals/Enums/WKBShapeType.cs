@@ -1,5 +1,4 @@
-﻿
-namespace Microsoft.Maps.SpatialToolbox.IO
+﻿namespace Microsoft.Maps.SpatialToolbox.IO
 {
     /// <summary>
     /// This enumerator represents the different types of shapes that can be in a Shapefiles

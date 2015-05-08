@@ -43,21 +43,24 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
         internal static IList<XElement> GetElementsByTagName(XElement node, string nodeName)
         {
             return (from x in node.Elements()
-                    where string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0
-                    select x).ToList();
+                where string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0
+                select x).ToList();
         }
 
         internal static IList<XElement> GetElementsByTagName(XElement node, string nodeName, string ns)
         {
             return (from x in node.Elements(XName.Get(nodeName, ns))
-                    select x).ToList();
+                select x).ToList();
         }
 
         internal static XAttribute GetAttribute(XElement node, string nodeName)
         {
             if (node != null && node.HasAttributes)
             {
-                return node.Attributes().Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                return
+                    node.Attributes()
+                        .Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0)
+                        .FirstOrDefault();
             }
 
             return null;
@@ -88,7 +91,8 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
             }
 
             double tempDouble;
-            if (!string.IsNullOrWhiteSpace(attr.Value) && double.TryParse(attr.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out tempDouble))
+            if (!string.IsNullOrWhiteSpace(attr.Value) &&
+                double.TryParse(attr.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out tempDouble))
             {
                 return tempDouble;
             }
@@ -100,7 +104,10 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
         {
             if (node != null)
             {
-                return node.Elements().Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                return
+                    node.Elements()
+                        .Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0)
+                        .FirstOrDefault();
             }
 
             return null;
@@ -110,7 +117,10 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
         {
             if (node != null)
             {
-                return node.Elements().Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0).ToList();
+                return
+                    node.Elements()
+                        .Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0)
+                        .ToList();
             }
 
             return null;
@@ -163,7 +173,10 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
         {
             if (node != null)
             {
-                var n = node.Elements().Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                var n =
+                    node.Elements()
+                        .Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0)
+                        .FirstOrDefault();
                 return GetBoolean(n, defaultValue);
             }
 
@@ -173,7 +186,8 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
         internal static int GetInt32(XElement node, int defaultValue)
         {
             int temp;
-            if (node != null && int.TryParse(GetString(node, false), NumberStyles.Integer, CultureInfo.InvariantCulture, out temp))
+            if (node != null &&
+                int.TryParse(GetString(node, false), NumberStyles.Integer, CultureInfo.InvariantCulture, out temp))
             {
                 return temp;
             }
@@ -184,7 +198,8 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
         internal static Int64 GetInt64(XElement node, int defaultValue)
         {
             Int64 temp;
-            if (node != null && Int64.TryParse(GetString(node, false), NumberStyles.Integer, CultureInfo.InvariantCulture, out temp))
+            if (node != null &&
+                Int64.TryParse(GetString(node, false), NumberStyles.Integer, CultureInfo.InvariantCulture, out temp))
             {
                 return temp;
             }
@@ -195,7 +210,8 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
         internal static double GetDouble(XElement node, double defaultValue)
         {
             double temp;
-            if (node != null && double.TryParse(GetString(node, false), NumberStyles.Float, CultureInfo.InvariantCulture, out temp))
+            if (node != null &&
+                double.TryParse(GetString(node, false), NumberStyles.Float, CultureInfo.InvariantCulture, out temp))
             {
                 return temp;
             }
@@ -207,7 +223,10 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
         {
             if (node != null)
             {
-                var n = node.Elements().Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                var n =
+                    node.Elements()
+                        .Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0)
+                        .FirstOrDefault();
                 return GetDouble(n, defaultValue);
             }
 
@@ -230,7 +249,10 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
         {
             if (node != null)
             {
-                var n = node.Elements().Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                var n =
+                    node.Elements()
+                        .Where(x => string.Compare(x.Name.LocalName, nodeName, StringComparison.OrdinalIgnoreCase) == 0)
+                        .FirstOrDefault();
                 return GetString(n, stripHtml);
             }
 
@@ -242,7 +264,7 @@ namespace Microsoft.Maps.SpatialToolbox.Internals
             var sDate = GetString(node, false);
             DateTime date;
 
-            if(!string.IsNullOrWhiteSpace(sDate) && DateTime.TryParse(sDate, out date))
+            if (!string.IsNullOrWhiteSpace(sDate) && DateTime.TryParse(sDate, out date))
             {
                 return date;
             }

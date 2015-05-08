@@ -40,37 +40,37 @@ namespace Microsoft.Maps.SpatialToolbox.IO
     public class KmlFeed : BaseTextFeed
     {
         #region Private Properties
-     
+
         private int embeddedStyleCnt = 0;
 
         private const int Max_NetworkLink_Level = 3;
 
         private Regex CoordArtifactRx = new Regex(@"[\n\t]");
-        private string[] SpaceSplitter = new string[] { " " };
-        private string[] CommaSpaceSplitter = new string[] { ",", " " };
+        private string[] SpaceSplitter = new string[] {" "};
+        private string[] CommaSpaceSplitter = new string[] {",", " "};
 
-        private string[] geomTypes = new string[] { "Point", "LineString", "Polygon", "MultiGeometry" };
+        private string[] geomTypes = new string[] {"Point", "LineString", "Polygon", "MultiGeometry"};
 
         private const string KmlNamespace = "http://www.opengis.net/kml/2.2";
         private const string AtomNamespace = "http://www.w3.org/2005/Atom";
 
         #endregion
-                
+
         #region Constructor
 
-        public KmlFeed():
+        public KmlFeed() :
             base()
         {
         }
 
-        public KmlFeed(bool stripHtml):
+        public KmlFeed(bool stripHtml) :
             base(stripHtml)
         {
         }
 
         public KmlFeed(double tolerance)
             : base(tolerance)
-        {            
+        {
         }
 
         public KmlFeed(bool stripHtml, double tolerance)
@@ -177,7 +177,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 if (compress)
                 {
-                    using (var zipFile = new System.IO.Compression.ZipArchive(stream, System.IO.Compression.ZipArchiveMode.Create, false, Encoding.UTF8))
+                    using (
+                        var zipFile = new System.IO.Compression.ZipArchive(stream,
+                            System.IO.Compression.ZipArchiveMode.Create, false, Encoding.UTF8))
                     {
                         var entry = zipFile.CreateEntry("root.kml");
 
@@ -223,7 +225,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         #region Kml Read Methods
 
         private XDocument GetKmlDoc(string kmlString)
-        {            
+        {
             return XDocument.Parse(kmlString);
         }
 
@@ -268,7 +270,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     return GetKmlDoc(stream);
                 }
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 var t = ex.Message;
             }
 
@@ -294,10 +297,10 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             var result = new SpatialDataSet();
 
             var documents = (from x in doc.Elements()
-                             where string.Compare(x.Name.LocalName, "Document", StringComparison.OrdinalIgnoreCase) == 0 ||
-                             string.Compare(x.Name.LocalName, "Folder", StringComparison.OrdinalIgnoreCase) == 0 ||
-                                string.Compare(x.Name.LocalName, "Placemark", StringComparison.OrdinalIgnoreCase) == 0
-                             select x).ToList();
+                where string.Compare(x.Name.LocalName, "Document", StringComparison.OrdinalIgnoreCase) == 0 ||
+                      string.Compare(x.Name.LocalName, "Folder", StringComparison.OrdinalIgnoreCase) == 0 ||
+                      string.Compare(x.Name.LocalName, "Placemark", StringComparison.OrdinalIgnoreCase) == 0
+                select x).ToList();
 
             foreach (var d in documents)
             {
@@ -333,7 +336,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 foreach (var s in styleMaps)
                 {
                     ParseStyleMap(s, kmlStyleMaps);
-                };
+                }
+                ;
 
                 var styles = XmlUtilities.GetElementsByTagName(doc, "Style");
                 string id;
@@ -487,7 +491,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return style;
         }
 
-        private async Task<Geometry> ParsePlacemark(XElement node, string baseUrl, Dictionary<string, string> styleMap, Dictionary<string, ShapeStyle> styles)
+        private async Task<Geometry> ParsePlacemark(XElement node, string baseUrl, Dictionary<string, string> styleMap,
+            Dictionary<string, ShapeStyle> styles)
         {
             //<Placemark id="ID">
             //  <!-- inherited from Feature element -->
@@ -504,7 +509,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
             //  <Geometry>...</Geometry>
             //</Placemark>
-                        
+
             if (node != null)
             {
                 var metadata = new ShapeMetadata();
@@ -527,7 +532,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             break;
                         case "description":
                             metadata.Description = XmlUtilities.GetString(n, stripHtml);
-                            if (!string.IsNullOrWhiteSpace(metadata.Description) && !metadata.Properties.ContainsKey(nodeName))
+                            if (!string.IsNullOrWhiteSpace(metadata.Description) &&
+                                !metadata.Properties.ContainsKey(nodeName))
                             {
                                 metadata.Properties.Add(nodeName, metadata.Description);
                             }
@@ -567,7 +573,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             {
                                 styleKey = id;
                             }
-                            else if(!string.IsNullOrEmpty(styleKey) && styles.ContainsKey(styleKey))
+                            else if (!string.IsNullOrEmpty(styleKey) && styles.ContainsKey(styleKey))
                             {
                                 //Create new Style and merge
                                 tempStyle = styles[styleKey];
@@ -610,8 +616,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     geom.StyleKey = styleKey;
 
-                    if (metadata != null && (!string.IsNullOrEmpty(metadata.Title) || !string.IsNullOrEmpty(metadata.Description) ||
-                        metadata.Properties.Count > 0))
+                    if (metadata != null &&
+                        (!string.IsNullOrEmpty(metadata.Title) || !string.IsNullOrEmpty(metadata.Description) ||
+                         metadata.Properties.Count > 0))
                     {
                         geom.Metadata = metadata;
                     }
@@ -668,7 +675,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             //</Point>
 
             var c = ParseCoordinate(XmlUtilities.GetChildNode(node, "coordinates"));
-            if (!double.IsNaN(c.Latitude) && ! double.IsNaN(c.Longitude))
+            if (!double.IsNaN(c.Latitude) && !double.IsNaN(c.Longitude))
             {
                 return new Point(c);
             }
@@ -746,7 +753,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 Coordinate c = new Coordinate(lat, lon);
 
-                if (vals.Length > 3 
+                if (vals.Length > 3
                     && double.TryParse(vals[2], NumberStyles.Float, CultureInfo.InvariantCulture, out alt))
                 {
                     c = new Coordinate(lat, lon, alt);
@@ -764,7 +771,10 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         private async Task<CoordinateCollection> ParseLinearRing(XElement node)
         {
-            var ring = await ParseCoordinates(XmlUtilities.GetChildNode(XmlUtilities.GetChildNode(node, "LinearRing"), "coordinates"));
+            var ring =
+                await
+                    ParseCoordinates(XmlUtilities.GetChildNode(XmlUtilities.GetChildNode(node, "LinearRing"),
+                        "coordinates"));
 
             if (ring != null && ring.Count >= 3)
             {
@@ -793,11 +803,12 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 foreach (var t in tuples)
                 {
                     var vals = SplitCoordString(t, CoordArtifactRx, CommaSpaceSplitter);
-                    if (vals.Length >= 2 
+                    if (vals.Length >= 2
                         && double.TryParse(vals[1], NumberStyles.Float, CultureInfo.InvariantCulture, out lat)
                         && double.TryParse(vals[0], NumberStyles.Float, CultureInfo.InvariantCulture, out lon))
                     {
-                        if (vals.Length > 3 && double.TryParse(vals[2], NumberStyles.Float, CultureInfo.InvariantCulture, out alt))
+                        if (vals.Length > 3 &&
+                            double.TryParse(vals[2], NumberStyles.Float, CultureInfo.InvariantCulture, out alt))
                         {
                             cc.Add(new Coordinate(lat, lon, alt));
                         }
@@ -955,7 +966,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             if ((val as string).Contains("<"))
                             {
                                 xmlWriter.WriteCData(val as string);
-                            }else{
+                            }
+                            else
+                            {
                                 xmlWriter.WriteString(val as string);
                             }
                             xmlWriter.WriteEndElement();
@@ -969,7 +982,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             break;
                         case "visibility":
                             xmlWriter.WriteStartElement(t.Key);
-                            xmlWriter.WriteString(((bool)val) ? "1" : "0");
+                            xmlWriter.WriteString(((bool) val) ? "1" : "0");
                             xmlWriter.WriteEndElement();
                             break;
                         case "atom:link":
@@ -1047,11 +1060,11 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     xmlWriter.WriteStartElement("width");
                     xmlWriter.WriteString(style.StrokeThickness.ToString());
                     xmlWriter.WriteEndElement();
-                    
+
                     xmlWriter.WriteStartElement("color");
                     xmlWriter.WriteString(style.StrokeColor.Value.ToKmlColor());
                     xmlWriter.WriteEndElement();
-                    
+
                     xmlWriter.WriteEndElement();
                 }
 
@@ -1121,7 +1134,6 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 if (geom is Point)
                 {
                     WritePoint(geom as Point, xmlWriter);
-
                 }
                 else if (geom is LineString)
                 {
@@ -1154,7 +1166,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             xmlWriter.WriteStartElement("Point");
             xmlWriter.WriteStartElement("coordinates");
-            xmlWriter.WriteString(string.Format(CultureInfo.InvariantCulture, "{1:0.#####},{0:0.#####},0", point.Coordinate.Latitude, point.Coordinate.Longitude));
+            xmlWriter.WriteString(string.Format(CultureInfo.InvariantCulture, "{1:0.#####},{0:0.#####},0",
+                point.Coordinate.Latitude, point.Coordinate.Longitude));
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
         }
@@ -1171,7 +1184,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             xmlWriter.WriteStartElement("Polygon");
 
             bool incAlt = polygon.Is3D();
-            
+
             //Write Outer ring
             xmlWriter.WriteStartElement("outerBoundaryIs");
             xmlWriter.WriteStartElement("LinearRing");
@@ -1241,7 +1254,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     WriteGeometry(g, xmlWriter);
                 }
-                else if(g is MultiPoint)
+                else if (g is MultiPoint)
                 {
                     var points = g as MultiPoint;
                     foreach (var p in points.Geometries)
@@ -1270,7 +1283,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             xmlWriter.WriteEndElement();
         }
 
-        private void WriteCoordinates(CoordinateCollection coords, XmlWriter xmlWriter, bool includeAltitude, bool closed)
+        private void WriteCoordinates(CoordinateCollection coords, XmlWriter xmlWriter, bool includeAltitude,
+            bool closed)
         {
             xmlWriter.WriteStartElement("coordinates");
 
@@ -1285,14 +1299,16 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     foreach (var c in coords)
                     {
-                        xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{1:0.#####},{0:0.#####},{2} ", c.Latitude, c.Longitude, c.Altitude.HasValue ? c.Altitude.Value : 0));
+                        xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{1:0.#####},{0:0.#####},{2} ",
+                            c.Latitude, c.Longitude, c.Altitude.HasValue ? c.Altitude.Value : 0));
                     }
                 }
                 else
                 {
                     foreach (var c in coords)
                     {
-                        xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{1:0.#####},{0:0.#####},0 ", c.Latitude, c.Longitude));
+                        xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{1:0.#####},{0:0.#####},0 ",
+                            c.Latitude, c.Longitude));
                     }
                 }
             }

@@ -1,5 +1,4 @@
-﻿
-namespace Microsoft.Maps.SpatialToolbox.IO
+﻿namespace Microsoft.Maps.SpatialToolbox.IO
 {
     /// <summary>
     /// This enumerator represents the two types of byte orders that binary data can have; Big Endian (XDR) and Little Endian (NDR).

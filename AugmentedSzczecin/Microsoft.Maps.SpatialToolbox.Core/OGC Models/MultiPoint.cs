@@ -49,10 +49,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// </summary>
         public bool IsValid
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>

@@ -130,7 +130,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     var doc = XDocument.Parse(dataSource, LoadOptions.SetBaseUri);
                     return await ParseDataSource(doc);
                 }
-                
+
                 using (var reader = new StringReader(dataSource))
                 {
                     return await ParseDelimitedDataSource(reader);
@@ -213,7 +213,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             var result = new SpatialDataSet();
             var geoms = new List<Geometry>();
             string primaryKeyName = string.Empty;
-            var columnInfo = new Dictionary<string,Type>();
+            var columnInfo = new Dictionary<string, Type>();
             var colNames = new List<string>();
 
             try
@@ -231,7 +231,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                             if (row[0].Contains(","))
                             {
-                                var r = row[0].Split(new char[] { ',' });
+                                var r = row[0].Split(new char[] {','});
                                 if (r.Length >= 3)
                                 {
                                     entityName = r[2].Trim();
@@ -259,11 +259,11 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             result.Metadata.Properties.Add(PrimaryKeyNameKey, primaryKeyName);
                         }
 
-                        if (columnInfo.ContainsValue(typeof(Geometry)))
+                        if (columnInfo.ContainsValue(typeof (Geometry)))
                         {
                             foreach (var k in columnInfo.Keys)
                             {
-                                if (columnInfo[k] == typeof(Geometry))
+                                if (columnInfo[k] == typeof (Geometry))
                                 {
                                     result.Metadata.Properties.Add(GeometryColumnNameKey, k);
                                     break;
@@ -301,7 +301,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return result;
         }
 
-        private Dictionary<string, Type> ParseColumnHeader(List<string> row, out List<string> colNames, out string primaryKeyName)
+        private Dictionary<string, Type> ParseColumnHeader(List<string> row, out List<string> colNames,
+            out string primaryKeyName)
         {
             var cols = new Dictionary<string, Type>();
             colNames = new List<String>();
@@ -325,7 +326,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     name = name.Substring(0, name.IndexOf('('));
 
                     //Parse out type name
-                    typeName = row[i].Substring(row[i].IndexOf('(')+1);
+                    typeName = row[i].Substring(row[i].IndexOf('(') + 1);
 
                     if (typeName.Contains(","))
                     {
@@ -364,31 +365,31 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     case "edm.int64":
                     case "int":
                     case "long":
-                        type = typeof(long);
+                        type = typeof (long);
                         break;
                     case "edm.double":
                     case "float":
                     case "double":
-                        type = typeof(double);
+                        type = typeof (double);
                         break;
                     case "edm.boolean":
                     case "bool":
                     case "boolean":
-                        type = typeof(bool);
+                        type = typeof (bool);
                         break;
                     case "edm.datetime":
                     case "date":
                     case "datetime":
-                        type = typeof(DateTime);
+                        type = typeof (DateTime);
                         break;
                     case "edm.geography":
-                        type = typeof(Geometry);
+                        type = typeof (Geometry);
                         break;
                     case "edm.string":
-                    case "varchar":     //Multimap
-                    case "text":        //Multimap
+                    case "varchar": //Multimap
+                    case "text": //Multimap
                     default:
-                        type = typeof(string);
+                        type = typeof (string);
                         break;
                 }
 
@@ -407,7 +408,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return cols;
         }
 
-        private async Task<Geometry> ParseGeometry(List<string> row, List<string> columnNames, Dictionary<string, Type> columnInfo, string primaryKeyName)
+        private async Task<Geometry> ParseGeometry(List<string> row, List<string> columnNames,
+            Dictionary<string, Type> columnInfo, string primaryKeyName)
         {
             Geometry g = null;
             var metadata = new ShapeMetadata();
@@ -427,7 +429,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     {
                         var type = columnInfo[nodeName];
 
-                        if (type == typeof(string))
+                        if (type == typeof (string))
                         {
                             if (string.Compare(nodeName, primaryKeyName, StringComparison.OrdinalIgnoreCase) == 0)
                             {
@@ -436,7 +438,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                             metadata.Properties.Add(nodeName, row[i]);
                         }
-                        else if (type == typeof(long))
+                        else if (type == typeof (long))
                         {
                             if (!long.TryParse(row[i], out tempLong))
                             {
@@ -445,7 +447,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                             metadata.Properties.Add(nodeName, tempLong);
                         }
-                        else if (type == typeof(double))
+                        else if (type == typeof (double))
                         {
                             if (double.TryParse(row[i], out tempDouble))
                             {
@@ -461,7 +463,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 metadata.Properties.Add(nodeName, tempDouble);
                             }
                         }
-                        else if (type == typeof(bool))
+                        else if (type == typeof (bool))
                         {
                             if (!bool.TryParse(row[i], out tempBool))
                             {
@@ -470,14 +472,14 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                             metadata.Properties.Add(nodeName, tempBool);
                         }
-                        else if (type == typeof(DateTime))
+                        else if (type == typeof (DateTime))
                         {
                             if (DateTime.TryParse(row[i], out tempDate))
                             {
                                 metadata.Properties.Add(nodeName, tempDate);
                             }
                         }
-                        else if (type == typeof(Geometry))
+                        else if (type == typeof (Geometry))
                         {
                             if (!string.IsNullOrWhiteSpace(row[i]))
                             {
@@ -496,7 +498,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     g.Metadata = metadata;
                 }
-            }            
+            }
 
             return g;
         }
@@ -510,7 +512,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 var geoms = new List<Geometry>();
                 string primaryKeyName = string.Empty;
                 var columnInfo = new Dictionary<string, Type>();
-                
+
                 var schema = doc.Root.FirstNode as XElement;
 
                 if (schema != null)
@@ -555,18 +557,18 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         result.Metadata.Properties.Add(PrimaryKeyNameKey, primaryKeyName);
                     }
 
-                    if(columnInfo.ContainsValue(typeof(Geometry)))
+                    if (columnInfo.ContainsValue(typeof (Geometry)))
                     {
                         foreach (var k in columnInfo.Keys)
                         {
-                            if (columnInfo[k] == typeof(Geometry))
+                            if (columnInfo[k] == typeof (Geometry))
                             {
                                 result.Metadata.Properties.Add(GeometryColumnNameKey, k);
                                 break;
                             }
-                        }    
+                        }
                     }
-                    
+
                     var n = schema.NextNode;
                     while (n != null)
                     {
@@ -595,7 +597,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return result;
         }
 
-        private async Task<Geometry> ParseGeometry(XElement node, Dictionary<string, Type> columnInfo, string primaryKeyName)
+        private async Task<Geometry> ParseGeometry(XElement node, Dictionary<string, Type> columnInfo,
+            string primaryKeyName)
         {
             XElement n = node.FirstNode as XElement;
 
@@ -603,7 +606,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             var metadata = new ShapeMetadata();
             string nodeName, tempString;
             double lat = double.NaN, lon = double.NaN, tempDouble;
-            
+
             while (n != null)
             {
                 nodeName = n.Name.LocalName;
@@ -612,7 +615,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     var type = columnInfo[nodeName];
 
-                    if (type == typeof(string))
+                    if (type == typeof (string))
                     {
                         tempString = XmlUtilities.GetString(n, false);
 
@@ -623,11 +626,11 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                         metadata.Properties.Add(nodeName, tempString);
                     }
-                    else if (type == typeof(long))
+                    else if (type == typeof (long))
                     {
                         metadata.Properties.Add(nodeName, XmlUtilities.GetInt64(n, 0));
                     }
-                    else if (type == typeof(double))
+                    else if (type == typeof (double))
                     {
                         tempDouble = XmlUtilities.GetDouble(n, double.NaN);
 
@@ -641,15 +644,15 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             {
                                 lon = tempDouble;
                             }
-                            
+
                             metadata.Properties.Add(nodeName, tempDouble);
                         }
                     }
-                    else if (type == typeof(bool))
+                    else if (type == typeof (bool))
                     {
                         metadata.Properties.Add(nodeName, XmlUtilities.GetBoolean(n, false));
                     }
-                    else if (type == typeof(DateTime))
+                    else if (type == typeof (DateTime))
                     {
                         var time = XmlUtilities.GetDateTime(n);
                         if (time.HasValue)
@@ -657,7 +660,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             metadata.Properties.Add(nodeName, time);
                         }
                     }
-                    else if (type == typeof(Geometry))
+                    else if (type == typeof (Geometry))
                     {
                         var sGeom = XmlUtilities.GetString(n, false);
 
@@ -680,7 +683,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 g.Metadata = metadata;
             }
-            
+
             return g;
         }
 
@@ -706,35 +709,36 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     break;
             }
 
-            Dictionary<string, Type> columnInfo;            
+            Dictionary<string, Type> columnInfo;
             bool hasGeometry;
             string dataSourceName, entityTypeName, primaryKeyName, geometryColumnName;
 
-            data = CleanDataSet(data, out columnInfo, out dataSourceName, out entityTypeName, out primaryKeyName, out geometryColumnName, out hasGeometry);
+            data = CleanDataSet(data, out columnInfo, out dataSourceName, out entityTypeName, out primaryKeyName,
+                out geometryColumnName, out hasGeometry);
 
             var colNames = new List<string>(columnInfo.Keys);
 
             if (!columnInfo.ContainsKey(primaryKeyName))
             {
-                columnInfo.Add(primaryKeyName, typeof(string));
+                columnInfo.Add(primaryKeyName, typeof (string));
                 colNames.Insert(0, primaryKeyName);
             }
 
             if (!columnInfo.ContainsKey("Latitude"))
             {
-                columnInfo.Add("Latitude", typeof(double));
+                columnInfo.Add("Latitude", typeof (double));
                 colNames.Add("Latitude");
             }
 
             if (!columnInfo.ContainsKey("Longitude"))
             {
-                columnInfo.Add("Longitude", typeof(double));
+                columnInfo.Add("Longitude", typeof (double));
                 colNames.Add("Longitude");
             }
 
             if (hasGeometry && !columnInfo.ContainsKey(geometryColumnName))
             {
-                columnInfo.Add(geometryColumnName, typeof(string));
+                columnInfo.Add(geometryColumnName, typeof (string));
                 colNames.Add(geometryColumnName);
             }
 
@@ -774,7 +778,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             }
         }
 
-        private void WriteGeometry(Geometry geom, DelimitedFileWriter writer, List<string> colNames, string primaryKeyName, string geometryColumnName, bool hasGeometry)
+        private void WriteGeometry(Geometry geom, DelimitedFileWriter writer, List<string> colNames,
+            string primaryKeyName, string geometryColumnName, bool hasGeometry)
         {
             if (geom.Metadata != null)
             {
@@ -829,7 +834,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 writer.WriteRow(row, true);
             }
         }
-        
+
         private void Write(SpatialDataSet data, XmlWriter xmlWriter)
         {
             //<?xml version="1.0" encoding="UTF-8"?>
@@ -880,30 +885,34 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             bool hasGeometry;
             string dataSourceName, entityTypeName, primaryKeyName, geometryColumnName;
 
-            data = CleanDataSet(data, out columnInfo, out dataSourceName, out entityTypeName, out primaryKeyName, out geometryColumnName, out hasGeometry);
+            data = CleanDataSet(data, out columnInfo, out dataSourceName, out entityTypeName, out primaryKeyName,
+                out geometryColumnName, out hasGeometry);
 
             //Open document
-            xmlWriter.WriteStartDocument(true);           
+            xmlWriter.WriteStartDocument(true);
 
             //Write root tag -> Data Source Name.
             xmlWriter.WriteStartElement(dataSourceName + "Data");
-           
+
             //Write schema info
-            WriteXmlSchema(xmlWriter, columnInfo, dataSourceName, entityTypeName, primaryKeyName, geometryColumnName, hasGeometry);
+            WriteXmlSchema(xmlWriter, columnInfo, dataSourceName, entityTypeName, primaryKeyName, geometryColumnName,
+                hasGeometry);
 
             if (data != null)
             {
                 foreach (var item in data.Geometries)
                 {
-                    WriteXmlGeometry(item, xmlWriter, columnInfo, dataSourceName, entityTypeName, primaryKeyName, geometryColumnName, hasGeometry);
+                    WriteXmlGeometry(item, xmlWriter, columnInfo, dataSourceName, entityTypeName, primaryKeyName,
+                        geometryColumnName, hasGeometry);
                 }
             }
-            
+
             //Close document
             xmlWriter.WriteEndDocument();
         }
 
-        private void WriteXmlSchema(XmlWriter xmlWriter, Dictionary<string, Type> columnInfo, string dataSourceName, string entityTypeName, string primaryKeyName, string geometryColumnName, bool hasGeometry)
+        private void WriteXmlSchema(XmlWriter xmlWriter, Dictionary<string, Type> columnInfo, string dataSourceName,
+            string entityTypeName, string primaryKeyName, string geometryColumnName, bool hasGeometry)
         {
             //  <xs:schema id="DataSourceName" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
             //    <xs:element name="DataSourceName" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
@@ -977,7 +986,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     xmlWriter.WriteAttributeString("type", GetXmlPropertyType(columnInfo[key]));
                     xmlWriter.WriteAttributeString("minOccurs", "0");
 
-                    if(columnInfo[key] == typeof(DateTime)){
+                    if (columnInfo[key] == typeof (DateTime))
+                    {
                         xmlWriter.WriteAttributeString("DateTimeMode", MsDataNamespace, "Utc");
                     }
 
@@ -1042,7 +1052,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             xmlWriter.WriteEndElement();
         }
 
-        private void WriteXmlGeometry(Geometry geom, XmlWriter xmlWriter, Dictionary<string, Type> columnInfo, string dataSourceName, string entityTypeName, string primaryKeyName, string geometryColumnName, bool hasGeometry)
+        private void WriteXmlGeometry(Geometry geom, XmlWriter xmlWriter, Dictionary<string, Type> columnInfo,
+            string dataSourceName, string entityTypeName, string primaryKeyName, string geometryColumnName,
+            bool hasGeometry)
         {
             if (geom.Metadata != null)
             {
@@ -1057,16 +1069,16 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     {
                         //TODO: Consider adding limit to string properties to match limits of API.
 
-                        if (columnInfo[key] == typeof(DateTime) && geom.Metadata.Properties[key] != null)
+                        if (columnInfo[key] == typeof (DateTime) && geom.Metadata.Properties[key] != null)
                         {
-                            tempString = ((DateTime)geom.Metadata.Properties[key]).ToUniversalTime().ToString("O");
+                            tempString = ((DateTime) geom.Metadata.Properties[key]).ToUniversalTime().ToString("O");
                         }
                         else
                         {
                             tempString = geom.Metadata.Properties[key].ToString();
                         }
 
-                        if(!string.IsNullOrWhiteSpace(tempString))
+                        if (!string.IsNullOrWhiteSpace(tempString))
                         {
                             xmlWriter.WriteElementString(key, tempString);
                         }
@@ -1077,7 +1089,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     xmlWriter.WriteElementString(geometryColumnName, geom.ToString());
                 }
-                else if(geom is Point)
+                else if (geom is Point)
                 {
                     var p = geom as Point;
 
@@ -1090,7 +1102,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     else
                     {
                         xmlWriter.WriteElementString("Latitude", "");
-                        xmlWriter.WriteElementString("Longitude", "");                        
+                        xmlWriter.WriteElementString("Longitude", "");
                     }
                 }
                 else
@@ -1109,27 +1121,28 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         private string GetDelimitedPropertyType(Type type)
         {
-            if (type == typeof(string) || type == typeof(String))
+            if (type == typeof (string) || type == typeof (String))
             {
                 return "Edm.String";
             }
-            else if (type == typeof(int) || type == typeof(Int16) || type == typeof(Int32) || type == typeof(Int64) || type == typeof(long))
+            else if (type == typeof (int) || type == typeof (Int16) || type == typeof (Int32) || type == typeof (Int64) ||
+                     type == typeof (long))
             {
                 return "Edm.Int64";
             }
-            else if (type == typeof(bool) || type == typeof(Boolean))
+            else if (type == typeof (bool) || type == typeof (Boolean))
             {
                 return "Edm.Boolean";
             }
-            else if (type == typeof(double) || type == typeof(Double))
+            else if (type == typeof (double) || type == typeof (Double))
             {
                 return "Edm.Double";
             }
-            else if (type == typeof(DateTime))
+            else if (type == typeof (DateTime))
             {
                 return "Edm.dateTime";
             }
-            else if (type == typeof(Geometry))
+            else if (type == typeof (Geometry))
             {
                 return "Edm.Geography";
             }
@@ -1139,27 +1152,28 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         private string GetXmlPropertyType(Type type)
         {
-            if (type == typeof(string) || type == typeof(String))
+            if (type == typeof (string) || type == typeof (String))
             {
                 return "xs:string";
             }
-            else if (type == typeof(int) || type == typeof(Int16) || type == typeof(Int32) || type == typeof(Int64) || type == typeof(long))
+            else if (type == typeof (int) || type == typeof (Int16) || type == typeof (Int32) || type == typeof (Int64) ||
+                     type == typeof (long))
             {
                 return "xs:long";
             }
-            else if (type == typeof(bool) || type == typeof(Boolean))
+            else if (type == typeof (bool) || type == typeof (Boolean))
             {
                 return "xs:boolean";
             }
-            else if (type == typeof(double) || type == typeof(Double))
+            else if (type == typeof (double) || type == typeof (Double))
             {
                 return "xs:double";
             }
-            else if (type == typeof(DateTime))
+            else if (type == typeof (DateTime))
             {
                 return "xs:dateTime";
             }
-            else if (type == typeof(Geometry))
+            else if (type == typeof (Geometry))
             {
                 return "xs:anyType";
             }
@@ -1172,23 +1186,24 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             switch (type.ToLowerInvariant())
             {
                 case "xs:long":
-                    return typeof(long);
+                    return typeof (long);
                 case "xs:boolean":
-                    return typeof(bool);
+                    return typeof (bool);
                 case "xs:double":
-                    return typeof(double);
+                    return typeof (double);
                 case "xs:datetime":
-                    return typeof(DateTime);
+                    return typeof (DateTime);
                 case "xs:anytype":
-                    return typeof(Geometry);
+                    return typeof (Geometry);
                 case "xs:string":
                 default:
-                    return typeof(string);
-
+                    return typeof (string);
             }
         }
 
-        private SpatialDataSet CleanDataSet(SpatialDataSet data, out Dictionary<string, Type> columnInfo, out string dataSourceName, out string entityTypeName, out string primaryKeyName, out string geometryColumnName, out bool hasGeometry)
+        private SpatialDataSet CleanDataSet(SpatialDataSet data, out Dictionary<string, Type> columnInfo,
+            out string dataSourceName, out string entityTypeName, out string primaryKeyName,
+            out string geometryColumnName, out bool hasGeometry)
         {
             columnInfo = new Dictionary<string, Type>();
             hasGeometry = false;
@@ -1196,7 +1211,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             entityTypeName = _entityTypeName;
             primaryKeyName = _primaryKeyName;
             geometryColumnName = _geometryColumnName;
-            
+
             if (data != null)
             {
                 if (data.Metadata != null && data.Metadata.Properties != null)
@@ -1311,7 +1326,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         //• Property names are case-insensitive.
         private bool IsValidPropertyName(string name)
         {
-            return (!string.IsNullOrWhiteSpace(name) && name.Length <= 50 && propertyNameRegex.IsMatch(name) && string.Compare(name, _primaryKeyName, StringComparison.OrdinalIgnoreCase) != 0);
+            return (!string.IsNullOrWhiteSpace(name) && name.Length <= 50 && propertyNameRegex.IsMatch(name) &&
+                    string.Compare(name, _primaryKeyName, StringComparison.OrdinalIgnoreCase) != 0);
         }
 
         #endregion

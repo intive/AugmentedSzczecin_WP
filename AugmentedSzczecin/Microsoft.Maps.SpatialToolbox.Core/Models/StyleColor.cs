@@ -20,7 +20,7 @@ namespace Microsoft.Maps.SpatialToolbox
         {
             if (obj is StyleColor)
             {
-                var s = (StyleColor)obj;
+                var s = (StyleColor) obj;
 
                 return s.A == A && s.B == B && s.G == G && s.R == R;
             }
@@ -30,7 +30,7 @@ namespace Microsoft.Maps.SpatialToolbox
 
         public override string ToString()
         {
-            return string.Format("rgba({1},{2},{3},{0})", ((double)A) / 255, R, G, B);
+            return string.Format("rgba({1},{2},{3},{0})", ((double) A)/255, R, G, B);
         }
 
         public string ToKmlColor()
@@ -78,7 +78,8 @@ namespace Microsoft.Maps.SpatialToolbox
             {
                 chars = string.Format("{0:X2}{1:X2}{2:X2}{3:X2}", A, R, G, B);
             }
-            else {
+            else
+            {
                 chars = string.Format("{0:X2}{1:X2}{2:X2}", R, G, B);
             }
 
@@ -91,9 +92,9 @@ namespace Microsoft.Maps.SpatialToolbox
 
         public static StyleColor FromArgb(byte a, byte r, byte g, byte b)
         {
-            return new StyleColor() { A = a, R = r, G = g, B = b };
+            return new StyleColor() {A = a, R = r, G = g, B = b};
         }
-        
+
         public static StyleColor? FromString(string colorName)
         {
             return FromString(colorName, 255);
@@ -106,39 +107,39 @@ namespace Microsoft.Maps.SpatialToolbox
                 switch (colorName)
                 {
                     case "black":
-                        return new StyleColor() { R = 0, G = 0, B = 0, A = defualtAlpha };
+                        return new StyleColor() {R = 0, G = 0, B = 0, A = defualtAlpha};
                     case "darkred":
-                        return new StyleColor() { R = 139, G = 0, B = 0, A = defualtAlpha };
+                        return new StyleColor() {R = 139, G = 0, B = 0, A = defualtAlpha};
                     case "darkgreen":
-                        return new StyleColor() { R = 0, G = 139, B = 0, A = defualtAlpha };
+                        return new StyleColor() {R = 0, G = 139, B = 0, A = defualtAlpha};
                     case "darkyellow":
-                        return new StyleColor() { R = 204, G = 204, B = 0, A = defualtAlpha };
+                        return new StyleColor() {R = 204, G = 204, B = 0, A = defualtAlpha};
                     case "darkblue":
-                        return new StyleColor() { R = 0, G = 0, B = 139, A = defualtAlpha };
+                        return new StyleColor() {R = 0, G = 0, B = 139, A = defualtAlpha};
                     case "darkmagenta":
-                        return new StyleColor() { R = 139, G = 0, B = 139, A = defualtAlpha };
+                        return new StyleColor() {R = 139, G = 0, B = 139, A = defualtAlpha};
                     case "darkcyan":
-                        return new StyleColor() { R = 0, G = 139, B = 139, A = defualtAlpha };
+                        return new StyleColor() {R = 0, G = 139, B = 139, A = defualtAlpha};
                     case "lightgray":
-                        return new StyleColor() { R = 211, G = 211, B = 211, A = defualtAlpha };
+                        return new StyleColor() {R = 211, G = 211, B = 211, A = defualtAlpha};
                     case "darkgray":
-                        return new StyleColor() { R = 169, G = 169, B = 169, A = defualtAlpha };
+                        return new StyleColor() {R = 169, G = 169, B = 169, A = defualtAlpha};
                     case "red":
-                        return new StyleColor() { R = 255, G = 0, B = 0, A = defualtAlpha };
+                        return new StyleColor() {R = 255, G = 0, B = 0, A = defualtAlpha};
                     case "green":
-                        return new StyleColor() { R = 0, G = 255, B = 0, A = defualtAlpha };
+                        return new StyleColor() {R = 0, G = 255, B = 0, A = defualtAlpha};
                     case "yellow":
-                        return new StyleColor() { R = 255, G = 255, B = 0, A = defualtAlpha };
+                        return new StyleColor() {R = 255, G = 255, B = 0, A = defualtAlpha};
                     case "blue":
-                        return new StyleColor() { R = 0, G = 0, B = 255, A = defualtAlpha };
+                        return new StyleColor() {R = 0, G = 0, B = 255, A = defualtAlpha};
                     case "magenta":
-                        return new StyleColor() { R = 255, G = 0, B = 255, A = defualtAlpha };
+                        return new StyleColor() {R = 255, G = 0, B = 255, A = defualtAlpha};
                     case "cyan":
-                        return new StyleColor() { R = 0, G = 255, B = 255, A = defualtAlpha };
+                        return new StyleColor() {R = 0, G = 255, B = 255, A = defualtAlpha};
                     case "white":
-                        return new StyleColor() { R = 255, G = 255, B = 255, A = defualtAlpha };
+                        return new StyleColor() {R = 255, G = 255, B = 255, A = defualtAlpha};
                     case "transparent":
-                        return new StyleColor() { R = 0, G = 0, B = 0, A = 0 };
+                        return new StyleColor() {R = 0, G = 0, B = 0, A = 0};
                     default:
                         return FromHex(colorName);
                 }
@@ -170,19 +171,19 @@ namespace Microsoft.Maps.SpatialToolbox
                     return new StyleColor()
                     {
                         A = 255,
-                        B = (byte)(abgr >> 16),
-                        G = (byte)(abgr >> 8),
-                        R = (byte)abgr
+                        B = (byte) (abgr >> 16),
+                        G = (byte) (abgr >> 8),
+                        R = (byte) abgr
                     };
                 }
                 else if (max > 6)
                 {
                     return new StyleColor()
                     {
-                        A = (byte)(abgr >> 24),
-                        B = (byte)(abgr >> 16),
-                        G = (byte)(abgr >> 8),
-                        R = (byte)abgr
+                        A = (byte) (abgr >> 24),
+                        B = (byte) (abgr >> 16),
+                        G = (byte) (abgr >> 8),
+                        R = (byte) abgr
                     };
                 }
             }

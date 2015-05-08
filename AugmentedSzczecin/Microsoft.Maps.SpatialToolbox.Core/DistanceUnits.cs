@@ -1,5 +1,4 @@
-﻿
-namespace Microsoft.Maps.SpatialToolbox
+﻿namespace Microsoft.Maps.SpatialToolbox
 {
     /// <summary>
     /// An enumerator of different types of distance units.

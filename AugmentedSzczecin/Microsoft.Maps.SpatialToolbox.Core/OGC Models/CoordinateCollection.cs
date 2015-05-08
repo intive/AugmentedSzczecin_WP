@@ -87,8 +87,8 @@ namespace Microsoft.Maps.SpatialToolbox
             Coordinate coordinate3 = this[num4];
             Coordinate coordinate4 = this[num5];
 
-            double num6 = ((coordinate4.Longitude - coordinate.Longitude) * (coordinate3.Latitude - coordinate.Latitude)) -
-                ((coordinate4.Latitude - coordinate.Latitude) * (coordinate3.Longitude - coordinate.Longitude));
+            double num6 = ((coordinate4.Longitude - coordinate.Longitude)*(coordinate3.Latitude - coordinate.Latitude)) -
+                          ((coordinate4.Latitude - coordinate.Latitude)*(coordinate3.Longitude - coordinate.Longitude));
 
             if (num6 == 0.0)
             {

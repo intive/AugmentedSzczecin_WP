@@ -1,5 +1,4 @@
-﻿
-namespace Microsoft.Maps.SpatialToolbox.IO
+﻿namespace Microsoft.Maps.SpatialToolbox.IO
 {
     public enum BingDataSourceType
     {

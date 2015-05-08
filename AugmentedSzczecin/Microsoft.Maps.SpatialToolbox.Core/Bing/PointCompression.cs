@@ -49,8 +49,8 @@ namespace Microsoft.Maps.SpatialToolbox.Bing
             foreach (var point in points)
             {
                 // step 2
-                var newLatitude = (long)Math.Round(point.Latitude * 100000);
-                var newLongitude = (long)Math.Round(point.Longitude * 100000);
+                var newLatitude = (long) Math.Round(point.Latitude*100000);
+                var newLongitude = (long) Math.Round(point.Longitude*100000);
 
                 // step 3
                 long dy = newLatitude - latitude;
@@ -63,13 +63,13 @@ namespace Microsoft.Maps.SpatialToolbox.Bing
                 dx = (dx << 1) ^ (dx >> 31);
 
                 // step 6
-                long index = ((dy + dx) * (dy + dx + 1) / 2) + dy;
+                long index = ((dy + dx)*(dy + dx + 1)/2) + dy;
 
                 while (index > 0)
                 {
                     // step 7
                     long rem = index & 31;
-                    index = (index - rem) / 32;
+                    index = (index - rem)/32;
 
                     // step 8
                     if (index > 0)
@@ -78,7 +78,7 @@ namespace Microsoft.Maps.SpatialToolbox.Bing
                     }
 
                     // step 9
-                    sb.Append(LookUpTable[(int)rem]);
+                    sb.Append(LookUpTable[(int) rem]);
                 }
             }
 
@@ -101,24 +101,24 @@ namespace Microsoft.Maps.SpatialToolbox.Bing
             int index = 0;
             int xsum = 0, ysum = 0;
 
-            while (index < value.Length)        // While we have more data,
+            while (index < value.Length) // While we have more data,
             {
-                long n = 0;                     // initialize the accumulator
-                int k = 0;                      // initialize the count of bits
+                long n = 0; // initialize the accumulator
+                int k = 0; // initialize the count of bits
 
                 while (true)
                 {
-                    if (index >= value.Length)  // If we ran out of data mid-number
-                        return false;           // indicate failure.
+                    if (index >= value.Length) // If we ran out of data mid-number
+                        return false; // indicate failure.
 
                     int b = LookUpTable.IndexOf(value[index++]);
 
-                    if (b == -1)                // If the character wasn't on the valid list,
-                        return false;           // indicate failure.
+                    if (b == -1) // If the character wasn't on the valid list,
+                        return false; // indicate failure.
 
-                    n |= ((long)b & 31) << k;   // mask off the top bit and append the rest to the accumulator
-                    k += 5;                     // move to the next position
-                    if (b < 32) break;          // If the top bit was not set, we're done with this number.
+                    n |= ((long) b & 31) << k; // mask off the top bit and append the rest to the accumulator
+                    k += 5; // move to the next position
+                    if (b < 32) break; // If the top bit was not set, we're done with this number.
                 }
 
                 // The resulting number encodes an x, y pair in the following way:
@@ -132,13 +132,13 @@ namespace Microsoft.Maps.SpatialToolbox.Bing
                 //  0 1 3 6 10 ---> X
 
                 // determine which diagonal it's on
-                int diagonal = (int)((Math.Sqrt(8 * n + 5) - 1) / 2);
+                int diagonal = (int) ((Math.Sqrt(8*n + 5) - 1)/2);
 
                 // subtract the total number of points from lower diagonals
-                n -= diagonal * (diagonal + 1L) / 2;
+                n -= diagonal*(diagonal + 1L)/2;
 
                 // get the X and Y from what's left over
-                int ny = (int)n;
+                int ny = (int) n;
                 int nx = diagonal - ny;
 
                 // undo the sign encoding
@@ -149,8 +149,8 @@ namespace Microsoft.Maps.SpatialToolbox.Bing
                 xsum += nx;
                 ysum += ny;
 
-                double lat = ysum * 0.00001;
-                double lon = xsum * 0.00001;
+                double lat = ysum*0.00001;
+                double lon = xsum*0.00001;
 
                 //Trim latlong values to supported ranges
                 lat = Math.Max(-85, Math.Min(85, lat));

@@ -47,7 +47,7 @@
             Height="560"
             Center="{Binding CenterOfTheMap}"
             ZoomLevel="{Binding ZoomLevel}"
-            LandmarksVisible="{Binding LandmarksVisible}"            
+            LandmarksVisible="{Binding LandmarksVisible}"
             caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]"
             Margin="0,0,0,0">
 
@@ -62,10 +62,10 @@
             <maps:MapItemsControl ItemsSource="{Binding MapLocations}">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left" 
+                        <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left"
                                maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
                                caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($source)]"
-                               FlyoutBase.AttachedFlyout="{StaticResource Details}"/>
+                               FlyoutBase.AttachedFlyout="{StaticResource Details}" />
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>

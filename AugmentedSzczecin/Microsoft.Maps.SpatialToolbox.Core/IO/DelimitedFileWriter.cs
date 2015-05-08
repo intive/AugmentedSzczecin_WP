@@ -157,7 +157,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             }
 
             string s = item.ToString();
-            if (protectDelimiter && item is string && s.IndexOfAny(protectedDelimiters) > -1) //enclose any unsafe strings with quotes
+            if (protectDelimiter && item is string && s.IndexOfAny(protectedDelimiters) > -1)
+                //enclose any unsafe strings with quotes
             {
                 this.Write("\"" + s.Replace("\"", "\"\"") + "\"");
             }

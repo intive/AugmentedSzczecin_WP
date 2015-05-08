@@ -1,5 +1,6 @@
 ﻿using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
+
 namespace AugmentedSzczecin.ViewModels
 {
     public class AugmentedViewModel : Screen
@@ -7,11 +8,13 @@ namespace AugmentedSzczecin.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IPointOfInterestService _pointOfInterestService;
 
-        public AugmentedViewModel(IEventAggregator eventAggregator, ILocationService locationService, IPointOfInterestService pointOfInterestService, INavigationService navigationService)
+        public AugmentedViewModel(IEventAggregator eventAggregator, ILocationService locationService,
+            IPointOfInterestService pointOfInterestService, INavigationService navigationService)
         {
             _eventAggregator = eventAggregator;
             _pointOfInterestService = pointOfInterestService;
         }
+
         protected override void OnActivate()
         {
             base.OnActivate();
@@ -22,7 +25,7 @@ namespace AugmentedSzczecin.ViewModels
         protected override void OnDeactivate(bool close)
         {
             base.OnDeactivate(close);
-            _eventAggregator.Unsubscribe(this);    
+            _eventAggregator.Unsubscribe(this);
         }
     }
 }

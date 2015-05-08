@@ -19,8 +19,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
         }
 
-        public ShapefileReader(double tolerance):base(tolerance)
-        {            
+        public ShapefileReader(double tolerance) : base(tolerance)
+        {
         }
 
         #endregion
@@ -45,7 +45,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         return await ReadAsync(reader);
                     }
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return null;
             });
@@ -79,7 +81,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         return data;
                     }
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return null;
             });
@@ -107,8 +111,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             using (BinaryReader reader = new BinaryReader(stream))
             {
-               // Read the File Header.
-               ReadFileHeader(reader, out shapeType, out bounds);
+                // Read the File Header.
+                ReadFileHeader(reader, out shapeType, out bounds);
             }
         }
 
@@ -151,7 +155,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                     return true;
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return false;
             });
@@ -245,7 +251,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             reader.BaseStream.Seek(4, SeekOrigin.Current);
 
             // Get the shape type of the shapefile. Note that shapefiles can only contain one type of shape per file
-            var shapeType = (ShapefileShapeType)NumberReader.ReadIntLE(reader);
+            var shapeType = (ShapefileShapeType) NumberReader.ReadIntLE(reader);
 
             // Get the bounding box of the Bounding Box.
             bounds = ReadBoundingBox(reader);
@@ -277,7 +283,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             reader.BaseStream.Seek(4, SeekOrigin.Current);
 
             // Get the shape type of the shapefile. Note that shapefiles can only contain one type of shape per file
-            shapeType = (ShapefileShapeType)NumberReader.ReadIntLE(reader);
+            shapeType = (ShapefileShapeType) NumberReader.ReadIntLE(reader);
 
             // Get the bounding box of the Bounding Box.
             bounds = ReadBoundingBox(reader);
@@ -325,7 +331,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 case ShapefileShapeType.MultiPointZM:
                     items = ReadMultiPointData(reader);
                     break;
-                default:    //throw an error indicating that an unsupported shape type is in the file
+                default: //throw an error indicating that an unsupported shape type is in the file
                     throw new Exception("ShapeType " + shapeType.ToString() + " is not supported.");
             }
 
@@ -375,7 +381,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
             var width = Math.Abs(maxX - minX);
             var height = Math.Abs(maxY - minY);
-            var center = new Coordinate(maxY - height / 2, maxX - width / 2);
+            var center = new Coordinate(maxY - height/2, maxX - width/2);
 
             return new BoundingBox(center, width, height);
         }
@@ -447,13 +453,13 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 numParts = NumberReader.ReadIntLE(reader);
                 numPoints = NumberReader.ReadIntLE(reader);
 
-                int[] parts = ReadParts(reader, numParts, numPoints);    
+                int[] parts = ReadParts(reader, numParts, numPoints);
 
                 //First read all the rings
                 var rings = new List<CoordinateCollection>();
 
                 var multiline = new MultiLineString();
-                for (int ringID =  0; ringID < numParts; ringID++)
+                for (int ringID = 0; ringID < numParts; ringID++)
                 {
                     var line = new LineString();
 
@@ -472,7 +478,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                 if (numParts == 1)
                 {
-                    item = (Geometry)multiline.Geometries[0];
+                    item = (Geometry) multiline.Geometries[0];
                 }
                 else
                 {
@@ -546,7 +552,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                     if (!IsCounterClockWise[i])
                     {
-                        PolygonCount++;     //count the number of polygons
+                        PolygonCount++; //count the number of polygons
                     }
                 }
 
@@ -644,7 +650,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             }
 
             return items;
-        } 
+        }
 
         #endregion
     }

@@ -38,7 +38,7 @@ namespace Microsoft.Maps.SpatialToolbox
         public Coordinate(double latitude, double longitude, double? altitude)
         {
             this.latitude = latitude;
-            this.longitude = longitude;            
+            this.longitude = longitude;
             this.altitude = altitude;
         }
 
@@ -49,17 +49,26 @@ namespace Microsoft.Maps.SpatialToolbox
         /// <summary>
         /// Used to store Logitude coordinates.
         /// </summary>
-        public double Longitude { get { return longitude; } }
+        public double Longitude
+        {
+            get { return longitude; }
+        }
 
         /// <summary>
         /// Used to store Latitude coordinates.
         /// </summary>
-        public double Latitude { get { return latitude; } }
+        public double Latitude
+        {
+            get { return latitude; }
+        }
 
         ///<summary>
         /// Used to store altitude information
         ///</summary>
-        public double? Altitude { get { return altitude; } }
+        public double? Altitude
+        {
+            get { return altitude; }
+        }
 
         #endregion
 
@@ -84,11 +93,11 @@ namespace Microsoft.Maps.SpatialToolbox
         /// <returns>Boolean indicating if coordinates are equal</returns>
         public static bool operator ==(Coordinate p1, Coordinate p2)
         {
-            if ((object)p2 == null && (object)p1 == null)
+            if ((object) p2 == null && (object) p1 == null)
             {
                 return true;
             }
-            else if ((object)p2 == null || (object)p1 == null)
+            else if ((object) p2 == null || (object) p1 == null)
             {
                 return false;
             }
@@ -118,7 +127,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// <returns>A boolean indicating if the two coordinates are equal</returns>
         public override bool Equals(object obj)
         {
-            return ((obj is Coordinate) && (this == ((Coordinate)obj)));
+            return ((obj is Coordinate) && (this == ((Coordinate) obj)));
         }
 
         #endregion
@@ -132,7 +141,7 @@ namespace Microsoft.Maps.SpatialToolbox
         public Coordinate GetInverseCoordinate()
         {
             //by multiplying the latitude by minus 1 we now have the altitude coordinate in the opposite hemisphere.
-            double lat = -1 * Latitude;
+            double lat = -1*Latitude;
 
             //by minusing 180 by the absolute value of the longitude we can calculate the absolute value of the new longitude
             double lon = 180 - Math.Abs(Longitude);
@@ -160,7 +169,7 @@ namespace Microsoft.Maps.SpatialToolbox
                 {
                     return longitude;
                 }
-                return (longitude - (Math.Floor((double)((longitude + 180.0) / 360.0)) * 360.0));
+                return (longitude - (Math.Floor((double) ((longitude + 180.0)/360.0))*360.0));
             }
 
             return double.NaN;

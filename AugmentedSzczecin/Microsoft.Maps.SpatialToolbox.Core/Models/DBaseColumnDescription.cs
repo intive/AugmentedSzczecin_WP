@@ -12,7 +12,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// <summary>
         /// Column Name
         /// </summary>
-        public string Name { get; set;}
+        public string Name { get; set; }
 
         /// <summary>
         /// Column dBase Data Type (L, C, D, I, N, F).
@@ -35,22 +35,22 @@ namespace Microsoft.Maps.SpatialToolbox
                 switch (DBaseType)
                 {
                     case 'L': //boolean
-                        type = typeof(bool);
+                        type = typeof (bool);
                         break;
                     case 'C': //String or character
-                        type = typeof(string);
+                        type = typeof (string);
                         break;
                     case 'D': //Date
-                        type = typeof(DateTime);
+                        type = typeof (DateTime);
                         break;
                     case 'I': //Integer
-                        type = typeof(int);
+                        type = typeof (int);
                         break;
                     case 'N': //Double
-                        type = typeof(double);
+                        type = typeof (double);
                         break;
                     case 'F': //Float
-                        type = typeof(float);
+                        type = typeof (float);
                         break;
                     default:
                         throw new NotSupportedException("Unknown DBaseType {0}" + DBaseType);

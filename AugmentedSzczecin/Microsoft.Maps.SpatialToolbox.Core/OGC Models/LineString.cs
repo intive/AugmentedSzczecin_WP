@@ -55,7 +55,7 @@
         /// Calcualates the bounding box of a LineString object
         /// </summary>
         /// <returns>A BoundingBox object that represents the bounding box of a LineString object</returns>
-        new public BoundingBox Envelope()
+        public new BoundingBox Envelope()
         {
             return this.Vertices.Envelope();
         }

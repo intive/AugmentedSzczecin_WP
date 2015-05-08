@@ -47,7 +47,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// Error message
         /// </summary>
         public string Error { get; set; }
-        
+
         #endregion
 
         #region Public Methods
@@ -82,12 +82,12 @@ namespace Microsoft.Maps.SpatialToolbox
                     }
                 }
 
-                if(!Metadata.HasMetadata())
+                if (!Metadata.HasMetadata())
                 {
                     Metadata = data.Metadata;
                 }
 
-                if(!string.IsNullOrEmpty(data.Error))
+                if (!string.IsNullOrEmpty(data.Error))
                 {
                     if (string.IsNullOrEmpty(Error))
                     {

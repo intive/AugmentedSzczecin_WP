@@ -31,7 +31,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         }
                     }
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return default(T);
             });
@@ -51,8 +53,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 try
                 {
-                    var r = (HttpWebRequest)a.AsyncState;
-                    HttpWebResponse response = (HttpWebResponse)r.EndGetResponse(a);
+                    var r = (HttpWebRequest) a.AsyncState;
+                    HttpWebResponse response = (HttpWebResponse) r.EndGetResponse(a);
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                     {
                         tcs.SetResult(reader.ReadToEnd());
@@ -81,8 +83,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 try
                 {
-                    var r = (HttpWebRequest)a.AsyncState;
-                    HttpWebResponse response = (HttpWebResponse)r.EndGetResponse(a);
+                    var r = (HttpWebRequest) a.AsyncState;
+                    HttpWebResponse response = (HttpWebResponse) r.EndGetResponse(a);
                     tcs.SetResult(response.GetResponseStream());
                 }
                 catch (Exception ex)
@@ -114,7 +116,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 try
                 {
-                    var r = (HttpWebRequest)a.AsyncState;
+                    var r = (HttpWebRequest) a.AsyncState;
 
                     using (var requestStream = r.EndGetRequestStream(a))
                     {
@@ -132,9 +134,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 try
                 {
-                    var r = (HttpWebRequest)a.AsyncState;
+                    var r = (HttpWebRequest) a.AsyncState;
 
-                    using (var response = (HttpWebResponse)r.EndGetResponse(a))
+                    using (var response = (HttpWebResponse) r.EndGetResponse(a))
                     {
                         tcs.SetResult(response.GetResponseStream());
                     }

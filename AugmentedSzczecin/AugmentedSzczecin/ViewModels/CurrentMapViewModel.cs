@@ -17,7 +17,8 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
+    public class CurrentMapViewModel : Screen, IHandle<PointOfInterestLoadedEvent>,
+        IHandle<PointOfInterestLoadFailedEvent>
     {
         private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
@@ -37,12 +38,10 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         private ObservableCollection<PointOfInterest> _mapLocations;
+
         public ObservableCollection<PointOfInterest> MapLocations
         {
-            get 
-            {
-                return _mapLocations;
-            }
+            get { return _mapLocations; }
             set
             {
                 if (value != _mapLocations)
@@ -148,7 +147,7 @@ namespace AugmentedSzczecin.ViewModels
             base.OnActivate();
 
             CountZoomLevel();
-            
+
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             if (_locationService.IsGeolocationEnabled())
@@ -291,7 +290,7 @@ namespace AugmentedSzczecin.ViewModels
 
         private void PushpinTapped(object sender)
         {
-            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement) sender);
         }
     }
 }

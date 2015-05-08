@@ -33,8 +33,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         private static Regex _collectionRx = new Regex(@"GEOMETRYCOLLECTION\(", RegexOptions.IgnoreCase);
         private static Regex _shapeDelimiterRx = new Regex(@"(\)),\s*([a-zA-Z])");
 
-        private static char[] _commonDelimiter = new char[] { ',' };
-        private static char[] _pipeDelimiter = new char[] { '|' };
+        private static char[] _commonDelimiter = new char[] {','};
+        private static char[] _pipeDelimiter = new char[] {'|'};
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         public WellKnownText(double tolerance)
             : base(tolerance)
-        {            
+        {
         }
 
         #endregion
@@ -65,10 +65,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         /// <returns>A Geometry object.</returns>
         public Task<Geometry> ReadAsync(string wellKnownText)
         {
-            return Task.Run<Geometry>(() =>
-            {
-                return ParseGeometry(wellKnownText);
-            });
+            return Task.Run<Geometry>(() => { return ParseGeometry(wellKnownText); });
         }
 
         /// <summary>
@@ -103,7 +100,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         };
                     }
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return null;
             });
@@ -190,7 +189,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             double lat = double.NaN, lon = double.NaN, alt = double.NaN, temp;
 
             int matchCount = 0;
-            
+
             for (var m = _coordRx.Match(wkt); m.Success; m = m.NextMatch())
             {
                 if (double.TryParse(m.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out temp))
@@ -216,7 +215,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
             if (!double.IsNaN(lat) && !double.IsNaN(lon))
             {
-                Coordinate c; 
+                Coordinate c;
 
                 if (double.IsNaN(alt))
                 {
@@ -253,10 +252,10 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 locs = await SpatialTools.VertexReductionAsync(locs, tolerance);
             }
 
-            if(locs.Count > minCoords)
+            if (locs.Count > minCoords)
             {
                 //Ensure the ring is closed
-                if(closed && !locs[0].Equals(locs[locs.Count - 1]))
+                if (closed && !locs[0].Equals(locs[locs.Count - 1]))
                 {
                     locs.Add(locs[0]);
                 }
@@ -274,7 +273,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             var c = ParseCoord(wkt);
 
-            if(c.HasValue)
+            if (c.HasValue)
             {
                 return new Point(c.Value);
             }
@@ -289,7 +288,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             var coords = await ParseRing(wkt, 2, false, optimize);
 
-            if(coords != null){
+            if (coords != null)
+            {
                 return new LineString(coords);
             }
 
@@ -307,14 +307,15 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 var ring = await ParseRing(rings[0], 3, true, optimize);
 
-                if(ring != null)
+                if (ring != null)
                 {
                     var p = new Polygon(ring);
-                    
-                    for(int i = 1; i < rings.Length; i++){
+
+                    for (int i = 1; i < rings.Length; i++)
+                    {
                         ring = await ParseRing(rings[i], 3, true, optimize);
 
-                        if(ring != null)
+                        if (ring != null)
                         {
                             p.InteriorRings.Add(ring);
                         }
@@ -334,12 +335,12 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             var points = await ParseRing(wkt, 1, false, false);
 
-            if(points != null)
+            if (points != null)
             {
                 var mp = new MultiPoint();
                 foreach (var p in points)
                 {
-                    mp.Geometries.Add(new Point(p));                    
+                    mp.Geometries.Add(new Point(p));
                 }
 
                 return mp;
@@ -614,7 +615,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             writer.Write(")");
         }
 
-        private static void WriteGeometryCollection(GeometryCollection GeometryCollection, TextWriter writer, bool includeAltitude)
+        private static void WriteGeometryCollection(GeometryCollection GeometryCollection, TextWriter writer,
+            bool includeAltitude)
         {
             writer.Write("GEOMETRYCOLLECTION(");
 
@@ -648,4 +650,3 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         #endregion
     }
 }
-

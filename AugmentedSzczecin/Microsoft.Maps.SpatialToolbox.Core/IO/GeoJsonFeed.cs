@@ -1,5 +1,4 @@
-﻿
-//http://bingmapsv7modules.codeplex.com/SourceControl/latest#BMv7Plugins/BMv7.GeoJSON/scripts/GeoJSONModule.js
+﻿//http://bingmapsv7modules.codeplex.com/SourceControl/latest#BMv7Plugins/BMv7.GeoJSON/scripts/GeoJSONModule.js
 //http://geojson.org/geojson-spec.html
 
 //Uses JSON.Net library: http://www.nuget.org/packages/Newtonsoft.Json
@@ -34,7 +33,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         public GeoJsonFeed(double tolerance)
             : base(tolerance)
-        {            
+        {
         }
 
         public GeoJsonFeed(bool stripHtml, double tolerance)
@@ -67,7 +66,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         };
                     }
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return null;
             });
@@ -128,7 +129,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         };
                     }
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return null;
             });
@@ -145,7 +148,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 var geoms = new List<Geometry>();
                 geoms.Add(geometry);
-               // return WriteGeometries(geoms);
+                // return WriteGeometries(geoms);
 
                 return string.Empty;
             });
@@ -160,7 +163,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             return Task.Run<string>(() =>
             {
-               // return Write(data);
+                // return Write(data);
 
                 return string.Empty;
             });
@@ -264,7 +267,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             if (jsonArray.Count >= 3)
             {
-                return new Coordinate(jsonArray[1].Value<double>(), jsonArray[0].Value<double>(), jsonArray[2].Value<double>());
+                return new Coordinate(jsonArray[1].Value<double>(), jsonArray[0].Value<double>(),
+                    jsonArray[2].Value<double>());
             }
             else if (jsonArray.Count >= 2)
             {
@@ -382,7 +386,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         private async Task<Geometry> ParseMultiPolygon(JObject json)
         {
-            var polygons = json["coordinates"] ;
+            var polygons = json["coordinates"];
 
             var mp = new MultiPolygon();
 
@@ -435,7 +439,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     return gc;
                 }
-            }           
+            }
 
             return null;
         }
@@ -515,7 +519,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 break;
                         }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
             }
 
@@ -542,7 +548,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             {
                 JObject root;
 
-                if (geometries.Count == 1 && (geometries[0].Metadata == null || geometries[0].Metadata.Properties.Count == 0))
+                if (geometries.Count == 1 &&
+                    (geometries[0].Metadata == null || geometries[0].Metadata.Properties.Count == 0))
                 {
                     root = CreateGeometry(geometries[0]);
                 }

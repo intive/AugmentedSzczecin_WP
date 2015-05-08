@@ -138,9 +138,10 @@ namespace Microsoft.Maps.SpatialToolbox
             {
                 MultiLineString ml = this as MultiLineString;
 
-                for(int i = 0; i < ml.Geometries.Count; i++)
+                for (int i = 0; i < ml.Geometries.Count; i++)
                 {
-                    ml.Geometries[i].Vertices = await SpatialTools.VertexReductionAsync(ml.Geometries[i].Vertices, tolerance);
+                    ml.Geometries[i].Vertices =
+                        await SpatialTools.VertexReductionAsync(ml.Geometries[i].Vertices, tolerance);
                 }
             }
             else if (this is MultiPolygon)
@@ -150,12 +151,14 @@ namespace Microsoft.Maps.SpatialToolbox
                 for (int i = 0; i < mp.Geometries.Count; i++)
                 {
                     //reduce the extrior ring
-                    mp.Geometries[i].ExteriorRing = await SpatialTools.VertexReductionAsync(mp.Geometries[i].ExteriorRing, tolerance);
+                    mp.Geometries[i].ExteriorRing =
+                        await SpatialTools.VertexReductionAsync(mp.Geometries[i].ExteriorRing, tolerance);
 
                     //Reduce the interior rings
                     for (int j = 0; j < mp.Geometries[i].InteriorRings.Count; j++)
                     {
-                        mp.Geometries[i].InteriorRings[j] = await SpatialTools.VertexReductionAsync(mp.Geometries[i].InteriorRings[j], tolerance);
+                        mp.Geometries[i].InteriorRings[j] =
+                            await SpatialTools.VertexReductionAsync(mp.Geometries[i].InteriorRings[j], tolerance);
                     }
 
                     //Makes sure polygon is valid
@@ -361,7 +364,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// Specifies the type of the geometry object as a GeometryType enumerator.
         /// </summary>
         /// <returns>A GeometryType enumerator</returns>
-        public abstract GeometryType STGeometryType(); 
+        public abstract GeometryType STGeometryType();
 
         /// <summary>
         /// Returns the number of child geometries in the shape.

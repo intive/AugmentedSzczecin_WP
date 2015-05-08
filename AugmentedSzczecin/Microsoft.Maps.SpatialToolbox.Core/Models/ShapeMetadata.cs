@@ -50,10 +50,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// </summary>
         public Dictionary<string, object> Properties
         {
-            get
-            {
-                return _properties;
-            }
+            get { return _properties; }
         }
 
         #endregion
@@ -62,7 +59,8 @@ namespace Microsoft.Maps.SpatialToolbox
 
         public bool HasMetadata()
         {
-            return (!string.IsNullOrEmpty(ID) || !string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(Description) || Properties.Count > 0);
+            return (!string.IsNullOrEmpty(ID) || !string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(Description) ||
+                    Properties.Count > 0);
         }
 
         #endregion

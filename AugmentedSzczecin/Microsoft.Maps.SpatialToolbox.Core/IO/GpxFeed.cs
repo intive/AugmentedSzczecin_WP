@@ -79,7 +79,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         public GpxFeed(double tolerance)
             : base(tolerance)
-        {            
+        {
         }
 
         public GpxFeed(bool stripHtml, double tolerance)
@@ -117,7 +117,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     return await ParseGPX(xml);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return null;
             });
@@ -157,10 +159,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         /// <returns>A SpatialDataSet containing the spatial data from the GPX feed.</returns>
         public override Task<SpatialDataSet> ReadAsync(Stream stream)
         {
-            return Task.Run<SpatialDataSet>(() =>
-            {
-                return ParseGPX(stream);
-            });
+            return Task.Run<SpatialDataSet>(() => { return ParseGPX(stream); });
         }
 
         /// <summary>
@@ -198,7 +197,6 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             });
         }
 
-
         #endregion
 
         #region Private Methods
@@ -231,9 +229,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
             var pc = new XmlParserContext(null, nsmgr, null, XmlSpace.None);
 
-            using(var reader = XmlReader.Create(gpxStream, null, pc))
+            using (var reader = XmlReader.Create(gpxStream, null, pc))
             {
-                var doc = XDocument.Load(reader);            
+                var doc = XDocument.Load(reader);
                 return await ParseGPX(doc, string.Empty);
             }
         }
@@ -247,10 +245,10 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 var geoms = new List<Geometry>();
                 var styles = new Dictionary<string, ShapeStyle>();
 
-                var gpx = doc.Root;// XmlUtilities.GetChildNode(doc.Root, "gpx");
+                var gpx = doc.Root; // XmlUtilities.GetChildNode(doc.Root, "gpx");
                 if (gpx != null)
                 {
-                    string nodeName;                    
+                    string nodeName;
 
                     foreach (var n in gpx.Elements())
                     {
@@ -294,7 +292,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 break;
                         }
                     }
-                }                
+                }
 
                 if (geoms.Count > 0)
                 {
@@ -311,8 +309,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     }
                 }
             }
-            catch(Exception ex){
-                result.Error = ex.Message;                
+            catch (Exception ex)
+            {
+                result.Error = ex.Message;
             }
 
             return result;
@@ -345,7 +344,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         var maxLat = XmlUtilities.GetDoubleAttribute(n, "maxlat");
                         var maxLon = XmlUtilities.GetDoubleAttribute(n, "maxlon");
 
-                        if (!double.IsNaN(minLat) && !double.IsNaN(minLon) 
+                        if (!double.IsNaN(minLat) && !double.IsNaN(minLon)
                             && !double.IsNaN(maxLat) && !double.IsNaN(maxLon))
                         {
                             //Not all documents properly order the latitude coordinates. 
@@ -410,7 +409,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         case "fix":
                             SetMetadataString(metadata, nodeName, n, stripHtml);
                             break;
-                        case "sat"://xsd:nonNegativeInteger
+                        case "sat": //xsd:nonNegativeInteger
                         case "dgpsid":
                             var i = XmlUtilities.GetInt32(n, -1);
                             if (i >= 0 && !metadata.Properties.ContainsKey(nodeName))
@@ -442,7 +441,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             var ele = XmlUtilities.GetDouble(n, double.NaN);
                             if (!double.IsNaN(ele))
                             {
-                                point.Coordinate = new Coordinate(point.Coordinate.Latitude, point.Coordinate.Longitude, ele);
+                                point.Coordinate = new Coordinate(point.Coordinate.Latitude, point.Coordinate.Longitude,
+                                    ele);
                             }
                             break;
                         case "time":
@@ -460,7 +460,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     }
                 }
 
-                if (!string.IsNullOrEmpty(metadata.Title) || !string.IsNullOrEmpty(metadata.Description) || metadata.Properties.Count > 0)
+                if (!string.IsNullOrEmpty(metadata.Title) || !string.IsNullOrEmpty(metadata.Description) ||
+                    metadata.Properties.Count > 0)
                 {
                     point.Metadata = metadata;
                 }
@@ -522,7 +523,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     case "type":
                         SetMetadataString(metadata, nodeName, n, stripHtml);
                         break;
-                    case "number"://<number> xsd:nonNegativeInteger </number> [0..1] ?
+                    case "number": //<number> xsd:nonNegativeInteger </number> [0..1] ?
                         var i = XmlUtilities.GetInt32(n, -1);
                         if (i >= 0 && !metadata.Properties.ContainsKey(nodeName))
                         {
@@ -552,7 +553,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 }
             }
 
-            if (!string.IsNullOrEmpty(metadata.Title) || !string.IsNullOrEmpty(metadata.Description) || metadata.Properties.Count > 0)
+            if (!string.IsNullOrEmpty(metadata.Title) || !string.IsNullOrEmpty(metadata.Description) ||
+                metadata.Properties.Count > 0)
             {
                 lines.Metadata = metadata;
             }
@@ -565,7 +567,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 lines.StyleKey = styleKey;
             }
 
-            if(lines.Geometries.Count > 0)
+            if (lines.Geometries.Count > 0)
             {
                 return lines;
             }
@@ -625,7 +627,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     case "type":
                         SetMetadataString(metadata, nodeName, n, stripHtml);
                         break;
-                    case "number"://<number> xsd:nonNegativeInteger </number> [0..1] ?
+                    case "number": //<number> xsd:nonNegativeInteger </number> [0..1] ?
                         var i = XmlUtilities.GetInt32(n, -1);
                         if (i >= 0 && !metadata.Properties.ContainsKey(nodeName))
                         {
@@ -664,7 +666,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 }
             }
 
-            if (!string.IsNullOrEmpty(metadata.Title) || !string.IsNullOrEmpty(metadata.Description) || metadata.Properties.Count > 0)
+            if (!string.IsNullOrEmpty(metadata.Title) || !string.IsNullOrEmpty(metadata.Description) ||
+                metadata.Properties.Count > 0)
             {
                 line.Metadata = metadata;
             }
@@ -876,7 +879,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             xmlWriter.WriteAttributeString("version", "1.1");
             xmlWriter.WriteAttributeString("xmlns", "gpxx", "http://www.w3.org/2000/xmlns/", GpxxNamespace);
             xmlWriter.WriteAttributeString("xmlns", "xsi", "http://www.w3.org/2000/xmlns/", XsiNamespace);
-            xmlWriter.WriteAttributeString("xsi", "schemaLocation", XsiNamespace, "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
+            xmlWriter.WriteAttributeString("xsi", "schemaLocation", XsiNamespace,
+                "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
             //Write document metadata.
             WriteDocumentMetadata(data, xmlWriter);
@@ -898,11 +902,13 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             xmlWriter.WriteStartElement("metadata");
 
             var bounds = data.BoundingBox;
-            if(bounds == null){
-                bounds = ((List<Geometry>)data.Geometries).Envelope();
+            if (bounds == null)
+            {
+                bounds = ((List<Geometry>) data.Geometries).Envelope();
             }
 
-            if(bounds != null){
+            if (bounds != null)
+            {
                 //Write bounds            
                 xmlWriter.WriteStartElement("bounds");
                 xmlWriter.WriteAttributeString("maxlat", bounds.MaxY.ToString("N5"));
@@ -943,14 +949,14 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 xmlWriter.WriteValue(val as string);
                                 xmlWriter.WriteEndElement();
                                 break;
-                            case "link":    //   <link href="http://example.org/"/>
+                            case "link": //   <link href="http://example.org/"/>
                                 xmlWriter.WriteStartElement(t.Key);
                                 xmlWriter.WriteAttributeString("href", val as string);
                                 xmlWriter.WriteEndElement();
                                 break;
                             case "time":
                                 xmlWriter.WriteStartElement(t.Key);
-                                xmlWriter.WriteValue(((DateTime)val).ToString());
+                                xmlWriter.WriteValue(((DateTime) val).ToString());
                                 xmlWriter.WriteEndElement();
                                 break;
                             default:
@@ -1004,20 +1010,20 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 xmlWriter.WriteValue(val as string);
                                 xmlWriter.WriteEndElement();
                                 break;
-                            case "link":    //   <link href="http://example.org/"/>
+                            case "link": //   <link href="http://example.org/"/>
                                 xmlWriter.WriteStartElement(t.Key);
                                 xmlWriter.WriteAttributeString("href", val as string);
                                 xmlWriter.WriteEndElement();
                                 break;
                             case "time":
                                 xmlWriter.WriteStartElement(t.Key);
-                                xmlWriter.WriteValue(((DateTime)val).ToString());
+                                xmlWriter.WriteValue(((DateTime) val).ToString());
                                 xmlWriter.WriteEndElement();
                                 break;
-                            case "sat"://xsd:nonNegativeInteger
+                            case "sat": //xsd:nonNegativeInteger
                             case "dgpsid":
                                 xmlWriter.WriteStartElement(t.Key);
-                                xmlWriter.WriteValue(((int)val).ToString());
+                                xmlWriter.WriteValue(((int) val).ToString());
                                 xmlWriter.WriteEndElement();
                                 break;
                             case "magvar":
@@ -1027,7 +1033,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             case "ageofdgpsdata":
                             case "geoidheight":
                                 xmlWriter.WriteStartElement(t.Key);
-                                xmlWriter.WriteValue(((double)val).ToString());
+                                xmlWriter.WriteValue(((double) val).ToString());
                                 xmlWriter.WriteEndElement();
                                 break;
                             case "streetaddress":
@@ -1052,7 +1058,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     }
                 }
 
-                if(extensions.Count > 0)
+                if (extensions.Count > 0)
                 {
                     xmlWriter.WriteStartElement("extensions");
 
@@ -1132,7 +1138,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             //  <name>10 Downing Street</name>
             //</wpt>
 
-            if(point != null)
+            if (point != null)
             {
                 xmlWriter.WriteStartElement("wpt");
                 xmlWriter.WriteAttributeString("lat", point.Coordinate.Latitude.ToString("N5"));
@@ -1149,7 +1155,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     WriteMetadata(point.Metadata, xmlWriter);
                 }
-                
+
                 xmlWriter.WriteEndElement();
             }
         }

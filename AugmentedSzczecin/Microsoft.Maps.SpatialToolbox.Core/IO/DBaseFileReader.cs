@@ -64,7 +64,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         /// <returns>A DBaseFile object containing the data from the DBF file</returns>
         public static DBaseFile Read(Stream stream, int numberOfRows, bool[] colRules)
         {
-             //Create binary reader out of file stream
+            //Create binary reader out of file stream
             using (BinaryReader reader = new BinaryReader(stream))
             {
                 return Read(reader, numberOfRows, colRules);
@@ -141,9 +141,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             if (reader.ReadByte() == requiredFileType)
             {
                 //Read the date parameters
-                int year = (int)reader.ReadByte() + 1900;
-                int month = (int)reader.ReadByte();
-                int day = (int)reader.ReadByte();
+                int year = (int) reader.ReadByte() + 1900;
+                int month = (int) reader.ReadByte();
+                int day = (int) reader.ReadByte();
                 header.LastUpdateDate = new DateTime(year, month, day);
 
                 //Read the number of records.
@@ -159,7 +159,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 reader.BaseStream.Seek(20, SeekOrigin.Current);
 
                 //Calculate the number of columns in the header
-                header.NumColumns = (header.HeaderLength - fileDescriptionSize - 1) / fileDescriptionSize;
+                header.NumColumns = (header.HeaderLength - fileDescriptionSize - 1)/fileDescriptionSize;
 
                 //Inialize the ColumDescriptions List
                 header.ColumnDescriptions = new List<DBaseColumnDefinition>(header.NumColumns);
@@ -174,13 +174,13 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     columnDescription.Name = new string(buffer).Replace("\0", String.Empty);
 
                     //Read the column dBase data type
-                    columnDescription.DBaseType = (char)reader.ReadByte();
+                    columnDescription.DBaseType = (char) reader.ReadByte();
 
                     //Skip the column data address
                     reader.ReadInt32();
 
                     //Read the column length in bytes
-                    int columnLength = (int)reader.ReadByte();
+                    int columnLength = (int) reader.ReadByte();
 
                     //Make sure the length is positive
                     if (columnLength < 0)
@@ -226,7 +226,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         /// <param name="colRules">List of column indices to skip</param>
         /// <param name="numValidRulesCols">Number of columns that are marked true in the column rules array</param>
         /// <returns>A Dictionary of objects</returns>
-        internal static Dictionary<string, object> ReadRow(DBaseFileHeader header, BinaryReader reader, bool[] colRules, int numValidRulesCols)
+        internal static Dictionary<string, object> ReadRow(DBaseFileHeader header, BinaryReader reader, bool[] colRules,
+            int numValidRulesCols)
         {
             Dictionary<string, object> row = null;
 
@@ -239,13 +240,13 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 row = new Dictionary<string, object>();
 
                 //Read the deleted flag
-                char deletedFlag = (char)reader.ReadChar();
+                char deletedFlag = (char) reader.ReadChar();
 
                 //Read the row length
                 int rowLength = 1; // for the deleted character just read.
 
-                char[] buffer;  //a reusable character array used for holding characters
-                string tempString;  //a resuable variable for string a string
+                char[] buffer; //a reusable character array used for holding characters
+                string tempString; //a resuable variable for string a string
                 object cellObject;
 
                 //Read the rows
@@ -263,8 +264,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         //Switch on the DBaseType of the cell
                         switch (header.ColumnDescriptions[j].DBaseType)
                         {
-                            case 'L':   //boolean
-                                char tempChar = (char)reader.ReadByte();
+                            case 'L': //boolean
+                                char tempChar = (char) reader.ReadByte();
 
                                 // Check DBase boolean characters (T,t,F,f,Y,y,N,n)
                                 if (char.ToUpper(tempChar) == 'T' || char.ToUpper(tempChar) == 'Y')
@@ -277,7 +278,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 }
                                 break;
 
-                            case 'C':   //String or character
+                            case 'C': //String or character
                                 buffer = new char[cellLength];
                                 buffer = reader.ReadChars(cellLength);
 
@@ -285,7 +286,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 cellObject = new string(buffer).Trim().Replace("\0", String.Empty);
                                 break;
 
-                            case 'D':   //Date YYYYMMDD
+                            case 'D': //Date YYYYMMDD
                                 buffer = new char[8];
                                 buffer = reader.ReadChars(8);
 
@@ -298,7 +299,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 cellObject = new DateTime(year, month, day);
                                 break;
 
-                            case 'I':   //Integer
+                            case 'I': //Integer
                                 buffer = new char[cellLength];
                                 buffer = reader.ReadChars(cellLength);
                                 tempString = new string(buffer).Trim();
@@ -306,7 +307,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 int intNumber;
 
                                 //Try and parse the integer
-                                if (int.TryParse(tempString, NumberStyles.Integer, CultureInfo.InvariantCulture, out intNumber))
+                                if (int.TryParse(tempString, NumberStyles.Integer, CultureInfo.InvariantCulture,
+                                    out intNumber))
                                 {
                                     cellObject = intNumber;
                                 }
@@ -320,7 +322,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 double doubleNumber;
 
                                 //Try and parse the double
-                                if (double.TryParse(tempString, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleNumber))
+                                if (double.TryParse(tempString, NumberStyles.AllowDecimalPoint,
+                                    CultureInfo.InvariantCulture, out doubleNumber))
                                 {
                                     cellObject = doubleNumber;
                                 }
@@ -333,7 +336,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                                 float floatNumber;
 
                                 //Try and parse the float
-                                if (float.TryParse(tempString, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out floatNumber))
+                                if (float.TryParse(tempString, NumberStyles.AllowDecimalPoint,
+                                    CultureInfo.InvariantCulture, out floatNumber))
                                 {
                                     cellObject = floatNumber;
                                 }
@@ -367,7 +371,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
             return row;
         }
-		
-		#endregion	
-	}
+
+        #endregion
+    }
 }

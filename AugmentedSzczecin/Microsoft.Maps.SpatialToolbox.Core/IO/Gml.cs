@@ -73,7 +73,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         private static Regex SpacesRx = new Regex(@"[\s]{2,}");
         private static Regex CoordArtifactRx = new Regex(@"[\n\t,]");
-        private static string[] SpaceSplitter = new string[] { " " };
+        private static string[] SpaceSplitter = new string[] {" "};
 
         internal const string GmlNamespace = "http://www.opengis.net/gml";
         private static XNamespace gmlNS = XNamespace.Get(GmlNamespace);
@@ -239,7 +239,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     case "multipoint":
                         var mp = new MultiPoint();
                         geoms = await ParseGmlMembers(node, optimize, tolerance);
-                        foreach(var p in geoms){
+                        foreach (var p in geoms)
+                        {
                             if (p is Point)
                             {
                                 mp.Geometries.Add(p as Point);
@@ -250,7 +251,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     case "multilintstring":
                         var mline = new MultiLineString();
                         geoms = await ParseGmlMembers(node, optimize, tolerance);
-                        foreach(var p in geoms){
+                        foreach (var p in geoms)
+                        {
                             if (p is LineString)
                             {
                                 mline.Geometries.Add(p as LineString);
@@ -261,7 +263,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     case "multipolygon":
                         var mpoly = new MultiPolygon();
                         geoms = await ParseGmlMembers(node, optimize, tolerance);
-                        foreach(var p in geoms){
+                        foreach (var p in geoms)
+                        {
                             if (p is Polygon)
                             {
                                 mpoly.Geometries.Add(p as Polygon);
@@ -318,7 +321,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
             foreach (var c in rings.Elements())
             {
-                if (c.Name.Namespace == gmlNS && string.Compare(c.Name.LocalName, "linearring", StringComparison.OrdinalIgnoreCase) == 0)
+                if (c.Name.Namespace == gmlNS &&
+                    string.Compare(c.Name.LocalName, "linearring", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     foreach (var cc in c.Elements())
                     {
@@ -343,19 +347,21 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         private static async Task<CoordinateCollection> ParsePosList(XElement node, bool optimize, double tolerance)
         {
-            if (node.Name.Namespace == gmlNS && (string.Compare(node.Name.LocalName, "poslist", StringComparison.OrdinalIgnoreCase) == 0 ||
-                string.Compare(node.Name.LocalName, "coordinates", StringComparison.OrdinalIgnoreCase) == 0))
+            if (node.Name.Namespace == gmlNS &&
+                (string.Compare(node.Name.LocalName, "poslist", StringComparison.OrdinalIgnoreCase) == 0 ||
+                 string.Compare(node.Name.LocalName, "coordinates", StringComparison.OrdinalIgnoreCase) == 0))
             {
                 var dimension = XmlUtilities.GetDoubleAttribute(node, "dimension");
                 int dim = 2;
 
                 if (!double.IsNaN(dimension) && dimension > 2)
                 {
-                    dim = (int)dimension;
+                    dim = (int) dimension;
                 }
 
                 var sCoord = XmlUtilities.GetString(node, false);
-                var vals = CoordArtifactRx.Replace(sCoord, " ").Split(SpaceSplitter, StringSplitOptions.RemoveEmptyEntries);
+                var vals = CoordArtifactRx.Replace(sCoord, " ")
+                    .Split(SpaceSplitter, StringSplitOptions.RemoveEmptyEntries);
 
                 var c = new CoordinateCollection();
                 double lat, lon, alt;
@@ -376,7 +382,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     for (var i = 0; i < vals.Length; i = i + 2)
                     {
-                        if (double.TryParse(vals[i], NumberStyles.Float, CultureInfo.InvariantCulture, out lat) 
+                        if (double.TryParse(vals[i], NumberStyles.Float, CultureInfo.InvariantCulture, out lat)
                             && double.TryParse(vals[i + 1], NumberStyles.Float, CultureInfo.InvariantCulture, out lon))
                         {
                             c.Add(new Coordinate(lat, lon));
@@ -471,11 +477,13 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             if (dimension == 3)
             {
                 xmlWriter.WriteAttributeString("dimension", "3");
-                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####},{1:0.#####},{2}", coord.Latitude, coord.Longitude, coord.Altitude.Value));
+                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####},{1:0.#####},{2}",
+                    coord.Latitude, coord.Longitude, coord.Altitude.Value));
             }
             else
             {
-                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####},{1:0.#####}", coord.Latitude, coord.Longitude));
+                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####},{1:0.#####}",
+                    coord.Latitude, coord.Longitude));
             }
             xmlWriter.WriteEndElement();
         }
@@ -494,7 +502,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                 foreach (var c in coords)
                 {
-                    xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####},{1:0.#####} ", c.Latitude, c.Longitude));
+                    xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####},{1:0.#####} ",
+                        c.Latitude, c.Longitude));
                 }
             }
             else
@@ -507,7 +516,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
                 foreach (var c in coords)
                 {
-                    xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####},{1:0.#####},{2} ", c.Latitude, c.Longitude, c.Altitude.HasValue ? c.Altitude.Value : 0));
+                    xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####},{1:0.#####},{2} ",
+                        c.Latitude, c.Longitude, c.Altitude.HasValue ? c.Altitude.Value : 0));
                 }
             }
 

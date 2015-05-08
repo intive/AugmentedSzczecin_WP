@@ -84,7 +84,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// </summary>
         public List<T> Geometries { get; set; }
 
-        #endregion 
+        #endregion
 
         #region Public Methods
 
@@ -101,7 +101,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// Calculates an Bounding Box that encompasses all Geometry objects in a Geometry collection
         /// </summary>
         /// <returns>A BoundingBox object of the bounding box that encompassess the Geometry Collection</returns>
-        new public BoundingBox Envelope()
+        public new BoundingBox Envelope()
         {
             if ((this == null) || (this.Geometries.Count == 0))
             {

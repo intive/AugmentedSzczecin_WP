@@ -66,14 +66,8 @@ namespace Microsoft.Maps.SpatialToolbox
         /// </summary>
         public bool FillPolygon
         {
-            get
-            {
-                return _fillPolygon;
-            }
-            set
-            {
-                _fillPolygon = value;
-            }
+            get { return _fillPolygon; }
+            set { _fillPolygon = value; }
         }
 
         /// <summary>
@@ -81,14 +75,8 @@ namespace Microsoft.Maps.SpatialToolbox
         /// </summary>
         public bool OutlinePolygon
         {
-            get
-            {
-                return _outlinePolygon;
-            }
-            set
-            {
-                _outlinePolygon = value;
-            }
+            get { return _outlinePolygon; }
+            set { _outlinePolygon = value; }
         }
 
         #endregion
@@ -172,23 +160,32 @@ namespace Microsoft.Maps.SpatialToolbox
             {
                 var s = obj as ShapeStyle;
 
-                bool iconUrlEq = (s.IconUrl == IconUrl || (s.IconUrl != null && IconUrl != null && string.Compare(s.IconUrl.OriginalString, IconUrl.OriginalString, StringComparison.OrdinalIgnoreCase) == 0));
-                bool iconColorEq = ((s.IconColor.HasValue && IconColor.HasValue && IconColor.Value.Equals(s.IconColor.Value)) || (!s.IconColor.HasValue && !IconColor.HasValue));
-                bool strokeColorEq = ((s.StrokeColor.HasValue && StrokeColor.HasValue && StrokeColor.Value.Equals(s.StrokeColor.Value)) || (!s.StrokeColor.HasValue && !StrokeColor.HasValue));
-                bool fillColorEq = ((s.FillColor.HasValue && FillColor.HasValue && FillColor.Value.Equals(s.FillColor.Value)) || (!s.FillColor.HasValue && !FillColor.HasValue));
+                bool iconUrlEq = (s.IconUrl == IconUrl ||
+                                  (s.IconUrl != null && IconUrl != null &&
+                                   string.Compare(s.IconUrl.OriginalString, IconUrl.OriginalString,
+                                       StringComparison.OrdinalIgnoreCase) == 0));
+                bool iconColorEq = ((s.IconColor.HasValue && IconColor.HasValue &&
+                                     IconColor.Value.Equals(s.IconColor.Value)) ||
+                                    (!s.IconColor.HasValue && !IconColor.HasValue));
+                bool strokeColorEq = ((s.StrokeColor.HasValue && StrokeColor.HasValue &&
+                                       StrokeColor.Value.Equals(s.StrokeColor.Value)) ||
+                                      (!s.StrokeColor.HasValue && !StrokeColor.HasValue));
+                bool fillColorEq = ((s.FillColor.HasValue && FillColor.HasValue &&
+                                     FillColor.Value.Equals(s.FillColor.Value)) ||
+                                    (!s.FillColor.HasValue && !FillColor.HasValue));
 
                 return fillColorEq &&
-                    s.FillPolygon == FillPolygon &&
-                    iconColorEq &&
-                    s.IconHeading == IconHeading &&
-                    s.IconScale == IconScale &&
-                    iconUrlEq &&
-                    s.OutlinePolygon == OutlinePolygon &&
-                    strokeColorEq &&
-                    s.StrokeThickness == StrokeThickness;
+                       s.FillPolygon == FillPolygon &&
+                       iconColorEq &&
+                       s.IconHeading == IconHeading &&
+                       s.IconScale == IconScale &&
+                       iconUrlEq &&
+                       s.OutlinePolygon == OutlinePolygon &&
+                       strokeColorEq &&
+                       s.StrokeThickness == StrokeThickness;
             }
 
- 	        return base.Equals(obj);
+            return base.Equals(obj);
         }
 
         #endregion

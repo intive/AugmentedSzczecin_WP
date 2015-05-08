@@ -32,10 +32,10 @@ namespace Microsoft.Maps.SpatialToolbox
         public BoundingBox(double minX, double maxY, double maxX, double minY)
         {
             Height = maxY - minY;
-            Width = (maxX - minX) % 360;
+            Width = (maxX - minX)%360;
 
-            var cLat = maxY - Height / 2;
-            var cLon = minX + Width / 2;
+            var cLat = maxY - Height/2;
+            var cLon = minX + Width/2;
 
             if (cLon > 180)
             {
@@ -56,22 +56,34 @@ namespace Microsoft.Maps.SpatialToolbox
         /// <summary>
         /// North Latitude Coordinate
         /// </summary>
-        public double MaxY { get { return Center.Latitude + Height/2; } }
+        public double MaxY
+        {
+            get { return Center.Latitude + Height/2; }
+        }
 
         /// <summary>
         /// South Latitude Coordinate
         /// </summary>
-        public double MinY { get { return Center.Latitude - Height/2; } }
+        public double MinY
+        {
+            get { return Center.Latitude - Height/2; }
+        }
 
         /// <summary>
         /// Most Easterly Longitude Coordinate (right side of bounding box)
         /// </summary>
-        public double MaxX { get { return Center.Longitude + Width/2; } }
+        public double MaxX
+        {
+            get { return Center.Longitude + Width/2; }
+        }
 
         /// <summary>
         /// Most Westerly Longitude Coordinate (left side of bounding box)
         /// </summary>
-        public double MinX { get { return Center.Longitude - Width/2; } }
+        public double MinX
+        {
+            get { return Center.Longitude - Width/2; }
+        }
 
         /// <summary>
         /// Width of the bounding box in degress
@@ -90,10 +102,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// </summary>
         public Coordinate TopLeft
         {
-            get
-            {
-                return new Coordinate(this.MaxY, this.MinX);
-            }
+            get { return new Coordinate(this.MaxY, this.MinX); }
         }
 
         /// <summary>
@@ -101,10 +110,7 @@ namespace Microsoft.Maps.SpatialToolbox
         /// </summary>
         public Coordinate BottomRight
         {
-            get
-            {
-                return new Coordinate(this.MinY, this.MaxX);
-            }
+            get { return new Coordinate(this.MinY, this.MaxX); }
         }
 
         #endregion
@@ -137,13 +143,13 @@ namespace Microsoft.Maps.SpatialToolbox
             double top = Math.Max(this.MaxY, boundingBox.MaxY);
             double bottom = Math.Min(this.MinY, boundingBox.MinY);
             double height = top - bottom;
-            double lat = top - height / 2;
+            double lat = top - height/2;
 
             double right = Math.Max(this.MaxX, boundingBox.MaxX);
             double left = Math.Min(this.MinX, boundingBox.MinX);
-            double width = (right - left) % 360;
-           
-            double lon = left + width / 2;
+            double width = (right - left)%360;
+
+            double lon = left + width/2;
 
             if (lon > 180)
             {
@@ -171,11 +177,13 @@ namespace Microsoft.Maps.SpatialToolbox
             if (dx > 180)
             {
                 dx -= 360;
-            }else if (dx < -180){
+            }
+            else if (dx < -180)
+            {
                 dx += 360;
             }
 
-            return (dx <= Width / 2 && dy <= Height / 2);
+            return (dx <= Width/2 && dy <= Height/2);
         }
 
         /// <summary>
@@ -195,8 +203,8 @@ namespace Microsoft.Maps.SpatialToolbox
         /// <returns>A boolean indicating if the two bounding boxes intersect</returns>
         public bool Intersects(BoundingBox rect)
         {
-            double height = Math.Abs((double)(this.Center.Latitude - rect.Center.Latitude));
-            double width = Math.Abs((double)(this.Center.Longitude - rect.Center.Longitude));
+            double height = Math.Abs((double) (this.Center.Latitude - rect.Center.Latitude));
+            double width = Math.Abs((double) (this.Center.Longitude - rect.Center.Longitude));
             if (width > 180.0)
             {
                 width = 360.0 - width;
@@ -214,12 +222,12 @@ namespace Microsoft.Maps.SpatialToolbox
         {
             if (this.Intersects(rect2))
             {
-                double left = this.Center.Longitude - this.Width / 2;
-                double left2 = rect2.Center.Longitude - rect2.Width / 2;
-                double right = this.Center.Longitude + this.Width / 2;
-                double right2 = rect2.Center.Longitude + rect2.Width / 2;
+                double left = this.Center.Longitude - this.Width/2;
+                double left2 = rect2.Center.Longitude - rect2.Width/2;
+                double right = this.Center.Longitude + this.Width/2;
+                double right2 = rect2.Center.Longitude + rect2.Width/2;
 
-                if (Math.Abs((double)(this.Center.Longitude - rect2.Center.Longitude)) > 180.0)
+                if (Math.Abs((double) (this.Center.Longitude - rect2.Center.Longitude)) > 180.0)
                 {
                     if (this.Center.Longitude < rect2.Center.Longitude)
                     {
@@ -238,7 +246,11 @@ namespace Microsoft.Maps.SpatialToolbox
                 double closestNorth = Math.Min(this.MaxY, rect2.MaxY);
                 double closestSouth = Math.Max(this.MinY, rect2.MinY);
 
-                return new BoundingBox(new Coordinate((closestNorth + closestSouth) / 2.0, Coordinate.NormalizeLongitude((closestLeft + closestRight) / 2.0)), closestRight - closestLeft, closestNorth - closestSouth);
+                return
+                    new BoundingBox(
+                        new Coordinate((closestNorth + closestSouth)/2.0,
+                            Coordinate.NormalizeLongitude((closestLeft + closestRight)/2.0)), closestRight - closestLeft,
+                        closestNorth - closestSouth);
             }
 
             return null;

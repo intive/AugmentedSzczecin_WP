@@ -45,7 +45,7 @@ namespace Microsoft.Maps.SpatialToolbox.Bing.GeoDataServices
 
             foreach (var p in Primitives)
             {
-                var rings = p.Shape.Split(new char[] { ',' });
+                var rings = p.Shape.Split(new char[] {','});
 
                 var poly = new Polygon();
 
@@ -61,7 +61,7 @@ namespace Microsoft.Maps.SpatialToolbox.Bing.GeoDataServices
                         else
                         {
                             poly.InteriorRings.Add(cc);
-                        }                        
+                        }
                     }
                 }
 
@@ -102,7 +102,8 @@ namespace Microsoft.Maps.SpatialToolbox.Bing.GeoDataServices
                     var southEast = mp.Geometries[0].Coordinate;
                     var northWest = mp.Geometries[1].Coordinate;
 
-                    return new BoundingBox(northWest.Longitude, northWest.Latitude, southEast.Longitude, southEast.Latitude);
+                    return new BoundingBox(northWest.Longitude, northWest.Latitude, southEast.Longitude,
+                        southEast.Latitude);
                 }
             }
 

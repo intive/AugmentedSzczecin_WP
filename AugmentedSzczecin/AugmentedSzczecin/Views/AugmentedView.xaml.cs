@@ -26,7 +26,8 @@ using Windows.UI.Xaml.Navigation;
 
 namespace AugmentedSzczecin.Views
 {
-    public sealed partial class AugmentedView : Page, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
+    public sealed partial class AugmentedView : Page, IHandle<PointOfInterestLoadedEvent>,
+        IHandle<PointOfInterestLoadFailedEvent>
     {
         private SimpleOrientationSensor _orientationSensor;
         private Compass _compass;
@@ -39,19 +40,21 @@ namespace AugmentedSzczecin.Views
         private double _currentHeading = 0;
 
         private ObservableCollection<PointOfInterest> _poiLocations;
-        readonly object _eventAgg;
+        private readonly object _eventAgg;
+
         public AugmentedView()
         {
             InitializeComponent();
 
-            _eventAgg = IoC.GetInstance(typeof(IEventAggregator), null);
-            ((EventAggregator)_eventAgg).Subscribe(this);
+            _eventAgg = IoC.GetInstance(typeof (IEventAggregator), null);
+            ((EventAggregator) _eventAgg).Subscribe(this);
         }
 
         ~AugmentedView()
         {
-            ((EventAggregator)_eventAgg).Unsubscribe(this);
+            ((EventAggregator) _eventAgg).Unsubscribe(this);
         }
+
         private async Task StartCamera()
         {
             var mediaCapture = new MediaCapture();
@@ -84,7 +87,6 @@ namespace AugmentedSzczecin.Views
 
                     foreach (var poi in _poiLocations)
                     {
-
                         var c = new Coordinate(poi.Latitude, poi.Longitude);
                         var poiHeading = SpatialTools.CalculateHeading(center, c);
                         var diff = _currentHeading - poiHeading;
@@ -106,14 +108,14 @@ namespace AugmentedSzczecin.Views
 
                             if (diff > 0)
                             {
-                                left = ItemCanvas.ActualWidth / 2 * ((22.5 - diff) / 22.5);
+                                left = ItemCanvas.ActualWidth/2*((22.5 - diff)/22.5);
                             }
                             else
                             {
-                                left = ItemCanvas.ActualWidth / 2 * (1 + -diff / 22.5);
+                                left = ItemCanvas.ActualWidth/2*(1 + -diff/22.5);
                             }
 
-                            double top = ItemCanvas.ActualHeight * (1 - distance / _defaultSearchRadius);
+                            double top = ItemCanvas.ActualHeight*(1 - distance/_defaultSearchRadius);
 
                             var tb = new TextBlock()
                             {
@@ -132,7 +134,7 @@ namespace AugmentedSzczecin.Views
             }
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
@@ -175,7 +177,8 @@ namespace AugmentedSzczecin.Views
             StopCamera();
         }
 
-        private void SimpleOrientationSensorReadingChanged(SimpleOrientationSensor sender, SimpleOrientationSensorOrientationChangedEventArgs args)
+        private void SimpleOrientationSensorReadingChanged(SimpleOrientationSensor sender,
+            SimpleOrientationSensorOrientationChangedEventArgs args)
         {
             UpdateOrientation(args.Orientation);
         }
@@ -209,7 +212,6 @@ namespace AugmentedSzczecin.Views
                     PreviewScreen.Source.SetPreviewRotation(videoRotation);
                 }
             });
-
         }
 
         private void CompassReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
@@ -240,10 +242,9 @@ namespace AugmentedSzczecin.Views
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-
-                _currentLocation = new Geopoint(new BasicGeoposition() { Latitude = position.Latitude, Longitude = position.Longitude });
+                _currentLocation =
+                    new Geopoint(new BasicGeoposition() {Latitude = position.Latitude, Longitude = position.Longitude});
                 UpdateARView();
-
             });
         }
 

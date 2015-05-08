@@ -63,7 +63,8 @@ namespace Microsoft.Maps.SpatialToolbox
         /// </summary>
         public async Task MakeValidAsync()
         {
-            await Task.Run(async ()=>{
+            await Task.Run(async () =>
+            {
                 try
                 {
                     foreach (Polygon polygon in this.Geometries)
@@ -71,7 +72,9 @@ namespace Microsoft.Maps.SpatialToolbox
                         await polygon.MakeValidAsync();
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             });
         }
 

@@ -61,7 +61,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         private Regex SpacesRx = new Regex(@"\s{2,}");
         private Regex CoordArtifactRx = new Regex(@"[\n\t,]");
-        private string[] SpaceSplitter = new string[] { " " };
+        private string[] SpaceSplitter = new string[] {" "};
 
         private const string GeoRssNamespace = "http://www.georss.org/georss";
         private const string MapPointNamespace = "http://virtualearth.msn.com/apis/annotate#";
@@ -74,19 +74,19 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         #region Constructor
 
-        public GeoRssFeed():
+        public GeoRssFeed() :
             base()
         {
         }
 
-        public GeoRssFeed(bool stripHtml):
+        public GeoRssFeed(bool stripHtml) :
             base(stripHtml)
         {
         }
 
         public GeoRssFeed(double tolerance)
             : base(tolerance)
-        {            
+        {
         }
 
         public GeoRssFeed(bool stripHtml, double tolerance)
@@ -106,7 +106,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         /// <returns>A SpatialDataSet containing the spatial data from the GeoRSS feed.</returns>
         public override Task<SpatialDataSet> ReadAsync(string xml)
         {
-            return Task.Run<SpatialDataSet>(async() =>
+            return Task.Run<SpatialDataSet>(async () =>
             {
                 var doc = XDocument.Parse(xml, LoadOptions.SetBaseUri);
                 return await ParseGeoRSS(doc, string.Empty);
@@ -154,7 +154,9 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                     var doc = XDocument.Load(stream);
                     return await ParseGeoRSS(doc, string.Empty);
                 }
-                catch { }
+                catch
+                {
+                }
 
                 return null;
             });
@@ -260,7 +262,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             return result;
         }
 
-        private async Task<Geometry> ParseGeoRSSItem(XElement node, string baseUri, Dictionary<string, ShapeStyle> styles)
+        private async Task<Geometry> ParseGeoRSSItem(XElement node, string baseUri,
+            Dictionary<string, ShapeStyle> styles)
         {
             Geometry geom = null;
             var metadata = new ShapeMetadata();
@@ -306,7 +309,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                         geom = gm;
                     }
                 }
-                else if (n.Name.Namespace == mapPointNS && string.Compare(nodeName, "icon", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (n.Name.Namespace == mapPointNS &&
+                         string.Compare(nodeName, "icon", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     var s = XmlUtilities.GetString(n, stripHtml);
 
@@ -451,7 +455,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             var sCoord = XmlUtilities.GetString(node, false);
             var vals = SplitCoordString(sCoord, CoordArtifactRx, SpaceSplitter);
 
-            if (vals.Length >= 2 && double.TryParse(vals[0], NumberStyles.Float, CultureInfo.InvariantCulture, out lat) 
+            if (vals.Length >= 2 && double.TryParse(vals[0], NumberStyles.Float, CultureInfo.InvariantCulture, out lat)
                 && double.TryParse(vals[1], NumberStyles.Float, CultureInfo.InvariantCulture, out lon))
             {
                 return;
@@ -463,39 +467,39 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         private async Task<Geometry> ParseGeometry(XElement node)
         {
-            if(node.Name.Namespace == geoRssNS)
-            switch (node.Name.LocalName)
-            {
-                case "point":
-                    double tLat = double.NaN, tLon = double.NaN;
-                    ParseCoordinate(node, out tLat, out tLon);
-                    if (!double.IsNaN(tLat) && !double.IsNaN(tLon))
-                    {
-                        return new Point(tLat, tLon);
-                    }
-                    break;
-                case "line":
-                    return await ParseLineString(node);
-                case "polygon":
-                    return await ParsePolygon(node);
-                case "circle":
-                    var sCoord = XmlUtilities.GetString(node, false);
-                    var vals = SplitCoordString(sCoord, CoordArtifactRx, SpaceSplitter);
+            if (node.Name.Namespace == geoRssNS)
+                switch (node.Name.LocalName)
+                {
+                    case "point":
+                        double tLat = double.NaN, tLon = double.NaN;
+                        ParseCoordinate(node, out tLat, out tLon);
+                        if (!double.IsNaN(tLat) && !double.IsNaN(tLon))
+                        {
+                            return new Point(tLat, tLon);
+                        }
+                        break;
+                    case "line":
+                        return await ParseLineString(node);
+                    case "polygon":
+                        return await ParsePolygon(node);
+                    case "circle":
+                        var sCoord = XmlUtilities.GetString(node, false);
+                        var vals = SplitCoordString(sCoord, CoordArtifactRx, SpaceSplitter);
 
-                    double lon, lat, r;
+                        double lon, lat, r;
 
-                    if (vals.Length >= 2
-                        && double.TryParse(vals[0], NumberStyles.Float, CultureInfo.InvariantCulture, out lat)
-                        && double.TryParse(vals[1], NumberStyles.Float, CultureInfo.InvariantCulture, out lon) 
-                        && double.TryParse(vals[2], NumberStyles.Float, CultureInfo.InvariantCulture, out r))
-                    {
-                        var c = new Coordinate(lat, lon);
-                        return new Polygon(SpatialTools.GenerateRegularPolygon(c, r, DistanceUnits.Meters, 25, 0.0));
-                    }
-                    break;
-                default:
-                    break;
-            }
+                        if (vals.Length >= 2
+                            && double.TryParse(vals[0], NumberStyles.Float, CultureInfo.InvariantCulture, out lat)
+                            && double.TryParse(vals[1], NumberStyles.Float, CultureInfo.InvariantCulture, out lon)
+                            && double.TryParse(vals[2], NumberStyles.Float, CultureInfo.InvariantCulture, out r))
+                        {
+                            var c = new Coordinate(lat, lon);
+                            return new Polygon(SpatialTools.GenerateRegularPolygon(c, r, DistanceUnits.Meters, 25, 0.0));
+                        }
+                        break;
+                    default:
+                        break;
+                }
 
             return null;
         }
@@ -543,7 +547,7 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                 {
                     for (int i = 0; i < vals.Length; i = i + 2)
                     {
-                        if (double.TryParse(vals[i], NumberStyles.Float, CultureInfo.InvariantCulture, out lat) 
+                        if (double.TryParse(vals[i], NumberStyles.Float, CultureInfo.InvariantCulture, out lat)
                             && double.TryParse(vals[i + 1], NumberStyles.Float, CultureInfo.InvariantCulture, out lon))
                         {
                             c.Add(new Coordinate(lat, lon));
@@ -649,24 +653,24 @@ namespace Microsoft.Maps.SpatialToolbox.IO
                             case "subtitle":
                             case "content":
                             case "summary":
-                            case "icon": 
+                            case "icon":
                                 xmlWriter.WriteStartElement(m.Key);
                                 xmlWriter.WriteValue(m.Value as string);
                                 xmlWriter.WriteEndElement();
                                 break;
                             case "mappoint:icon":
-                                 xmlWriter.WriteStartElement("icon", MapPointNamespace);
+                                xmlWriter.WriteStartElement("icon", MapPointNamespace);
                                 xmlWriter.WriteValue(m.Value as string);
                                 xmlWriter.WriteEndElement();
                                 break;
-                            case "link":    //   <link href="http://example.org/"/>
+                            case "link": //   <link href="http://example.org/"/>
                                 xmlWriter.WriteStartElement(m.Key);
                                 xmlWriter.WriteAttributeString("href", m.Value as string);
                                 xmlWriter.WriteEndElement();
                                 break;
                             case "updated":
                                 xmlWriter.WriteStartElement(m.Key);
-                                xmlWriter.WriteValue(((DateTime)m.Value).ToString());
+                                xmlWriter.WriteValue(((DateTime) m.Value).ToString());
                                 xmlWriter.WriteEndElement();
                                 break;
                             default:
@@ -750,11 +754,13 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             if (coord.Altitude.HasValue)
             {
-                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####} {1:0.#####} {2}", coord.Latitude, coord.Longitude, coord.Altitude.Value));
+                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####} {1:0.#####} {2}",
+                    coord.Latitude, coord.Longitude, coord.Altitude.Value));
             }
             else
             {
-                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####} {1:0.#####}", coord.Latitude, coord.Longitude));
+                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####} {1:0.#####}",
+                    coord.Latitude, coord.Longitude));
             }
         }
 
@@ -762,14 +768,15 @@ namespace Microsoft.Maps.SpatialToolbox.IO
         {
             foreach (var c in coords)
             {
-                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####} {1:0.#####} ", c.Latitude, c.Longitude));
+                xmlWriter.WriteValue(string.Format(CultureInfo.InvariantCulture, "{0:0.#####} {1:0.#####} ", c.Latitude,
+                    c.Longitude));
             }
         }
 
         private void WritePoint(Point point, XmlWriter xmlWriter)
         {
             //<georss:point>45.256 -71.92</georss:point>
-            xmlWriter.WriteStartElement("point", GeoRssNamespace);            
+            xmlWriter.WriteStartElement("point", GeoRssNamespace);
             WriteCoordinate(point.Coordinate, xmlWriter);
             xmlWriter.WriteEndElement();
         }
@@ -848,7 +855,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             }
         }
 
-        private void WriteMultiLineString(MultiLineString linestrings, XmlWriter xmlWriter, Dictionary<string, ShapeStyle> styles)
+        private void WriteMultiLineString(MultiLineString linestrings, XmlWriter xmlWriter,
+            Dictionary<string, ShapeStyle> styles)
         {
             //GeoRSS only handles a subset of GML, break up complex gemoetries into simple geoms
 
@@ -870,7 +878,8 @@ namespace Microsoft.Maps.SpatialToolbox.IO
             }
         }
 
-        private void WriteGeometryCollection(GeometryCollection geoms, XmlWriter xmlWriter, Dictionary<string, ShapeStyle> styles)
+        private void WriteGeometryCollection(GeometryCollection geoms, XmlWriter xmlWriter,
+            Dictionary<string, ShapeStyle> styles)
         {
             //GeoRSS only handles a subset of GML, break up complex gemoetries into simple geoms
 
@@ -883,6 +892,6 @@ namespace Microsoft.Maps.SpatialToolbox.IO
 
         #endregion
 
-        #endregion        
+        #endregion
     }
 }
