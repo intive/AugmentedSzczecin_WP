@@ -108,20 +108,22 @@ namespace AugmentedSzczecin.PointBasedClustering
 
         internal UIElement GetPin(object item)
         {
-            if (CreateItemPushpin != null)
-            {
-                return CreateItemPushpin(item);
-            }
+            //todo !!!
+            //if (CreateItemPushpin != null)
+            //{
+            //    return CreateItemPushpin(item);
+            //}
 
             return null;
         }
 
         internal UIElement GetClustedPin(ClusteredPoint clusterInfo)
         {
-            if (CreateItemPushpin != null)
-            {
-                return CreateClusteredItemPushpin(clusterInfo);
-            }
+            //todo !!!
+            //if (CreateItemPushpin != null)
+            //{
+            //    return CreateClusteredItemPushpin(clusterInfo);
+            //}
 
             return null;
         }

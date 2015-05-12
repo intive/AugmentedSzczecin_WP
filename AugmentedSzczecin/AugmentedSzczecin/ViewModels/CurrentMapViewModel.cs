@@ -301,36 +301,39 @@ namespace AugmentedSzczecin.ViewModels
             MapLocations.Clear();
 
             var layer = new PointBasedClusteredLayer();
-            layer.CreateItemPushpin += CreateItemPushpin;
-            layer.CreateClusteredItemPushpin += CreateClusteredItemPushpin;
+            //todo !!!
+            //layer.CreateItemPushpin += CreateItemPushpin;
+            //layer.CreateClusteredItemPushpin += CreateClusteredItemPushpin;
 
-            MapLocations.Add(layer);
+            //MapLocations.Add(layer);
         }
 
-        private UIElement CreateItemPushpin(object item)
-        {
-            var pin = new Pushpin()
-            {
-                Tag = item
-            };
+        //todo !!!
+        //private UIElement CreateItemPushpin(object item)
+        //{
+        //    var pin = new Pushpin()
+        //    {
+        //        Tag = item
+        //    };
 
-            pin.Tapped += pin_Tapped;
+        //    pin.Tapped += pin_Tapped;
 
-            return pin;
-        }
+        //    return pin;
+        //}
 
-        private UIElement CreateClusteredItemPushpin(ClusteredPoint clusterInfo)
-        {
-            var pin = new Pushpin()
-            {
-                Background = new SolidColorBrush(Colors.Red),
-                Text = "+",
-                Tag = clusterInfo
-            };
+        //todo !!!
+        //private UIElement CreateClusteredItemPushpin(ClusteredPoint clusterInfo)
+        //{
+        //    var pin = new Pushpin()
+        //    {
+        //        Background = new SolidColorBrush(Colors.Red),
+        //        Text = "+",
+        //        Tag = clusterInfo
+        //    };
 
-            pin.Tapped += pin_Tapped;
+        //    pin.Tapped += pin_Tapped;
 
-            return pin;
-        }
+        //    return pin;
+        //}
     }
 }
