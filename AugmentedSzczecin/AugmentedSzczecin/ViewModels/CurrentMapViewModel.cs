@@ -11,9 +11,12 @@ using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
 using AugmentedSzczecin.Events;
 using System.Collections.ObjectModel;
+using Windows.UI;
 using AugmentedSzczecin.Models;
 using AugmentedSzczecin.Views;
 using Windows.UI.Xaml.Controls.Primitives;
+using AugmentedSzczecin.PointBasedClustering;
+using Microsoft.Maps.SpatialToolbox.Bing.RestServices;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -189,13 +192,13 @@ namespace AugmentedSzczecin.ViewModels
                 tempLatitude = CenterOfTheMap.Position.Latitude;
             }
 
-            tempLatitude = tempLatitude*(Math.PI/180);
+            tempLatitude = tempLatitude * (Math.PI / 180);
 
             const double bingMapConstant = 156543.04;
 
-            double metersPerPixel = bingMapConstant*Math.Cos(tempLatitude)/Math.Pow(2, tempZoomLevel);
+            double metersPerPixel = bingMapConstant * Math.Cos(tempLatitude) / Math.Pow(2, tempZoomLevel);
 
-            double scaleDistance = Math.Round(100*metersPerPixel/10)*10;
+            double scaleDistance = Math.Round(100 * metersPerPixel / 10) * 10;
 
             ScaleText = scaleDistance.ToString() + " m";
         }
@@ -290,7 +293,44 @@ namespace AugmentedSzczecin.ViewModels
 
         private void PushpinTapped(object sender)
         {
-            FlyoutBase.ShowAttachedFlyout((FrameworkElement) sender);
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+        }
+
+        private void ClusterPoints()
+        {
+            MapLocations.Clear();
+
+            var layer = new PointBasedClusteredLayer();
+            layer.CreateItemPushpin += CreateItemPushpin;
+            layer.CreateClusteredItemPushpin += CreateClusteredItemPushpin;
+
+            MapLocations.Add(layer);
+        }
+
+        private UIElement CreateItemPushpin(object item)
+        {
+            var pin = new Pushpin()
+            {
+                Tag = item
+            };
+
+            pin.Tapped += pin_Tapped;
+
+            return pin;
+        }
+
+        private UIElement CreateClusteredItemPushpin(ClusteredPoint clusterInfo)
+        {
+            var pin = new Pushpin()
+            {
+                Background = new SolidColorBrush(Colors.Red),
+                Text = "+",
+                Tag = clusterInfo
+            };
+
+            pin.Tapped += pin_Tapped;
+
+            return pin;
         }
     }
 }

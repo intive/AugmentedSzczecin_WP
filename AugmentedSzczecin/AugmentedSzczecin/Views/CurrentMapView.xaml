@@ -69,7 +69,21 @@
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>
+
         </maps:MapControl>
 
+
     </StackPanel>
+
+    <!-- TEST AREA START! BEWARE! -->
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal" Opacity="1">
+            <AppBarButton
+                caliburn:Message.Attach="[Event Tapped] = [Action ClusterPoints]"
+                HorizontalAlignment="Center"
+                Label="Cluster"
+                Icon="MapPin" />
+        </CommandBar>
+    </Page.BottomAppBar>
+    <!-- TEST AREA END! BEWARE! -->
 </Page>

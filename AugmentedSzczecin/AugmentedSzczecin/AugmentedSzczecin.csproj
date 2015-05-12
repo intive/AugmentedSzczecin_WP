@@ -101,6 +101,21 @@
     <Compile Include="Models\PointOfInterest.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="PointBasedClustering\BaseClusteredLayer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PointBasedClustering\ClusteredPoint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PointBasedClustering\ItemLocation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PointBasedClustering\ItemLocationCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PointBasedClustering\PointBasedClusteredLayer.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\HttpService.cs" />
@@ -218,6 +233,11 @@
       <Project>{0022220e-283b-44cd-a593-b8516e61685e}</Project>
       <Name>Microsoft.Maps.SpatialToolbox.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.Advertising.Mobile.Display, Version=8.1">
+      <Name>Microsoft Advertising SDK for Windows Phone 8.1 %28XAML%29</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
