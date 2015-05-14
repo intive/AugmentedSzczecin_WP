@@ -3,5 +3,7 @@
     public interface IPointOfInterestService
     {
         void Refresh();
+
+        void Refresh(string latitude, string longitude, string radius);
     }
 }

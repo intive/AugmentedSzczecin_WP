@@ -21,39 +21,34 @@ namespace AugmentedSzczecin.Services
 
         public async void Register(string email, string password)
         {
-            var newUser = new User() { Email = email, ErrorCode = "", Password = password };
+            var newUser = new User() { Email = email, Password = password };
 
-            User userResponseData = await _httpService.CreateAccount(newUser);
+            bool status = await _httpService.CreateAccount(newUser);
 
-            if(userResponseData.ErrorCode == null)
+            if(status)
             {
                 _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!" });
             }
             else
             {
-                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = userResponseData.ErrorCode });
+                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Backend error" });
             }
         }
 
         public async void SignIn(string email, string password)
         {
-            var newUser = new User() { Email = email, ErrorCode = "", Password = password };
+            var newUser = new User() { Email = email, Password = password };
 
-            Token tokenResponseData = await _httpService.SignIn(newUser);
+            var status = await _httpService.SignIn(newUser);
 
-            if (tokenResponseData.ErrorCode == null)
+            if (status)
             {
                 _userDataStorageService.AddUserData("ASPassword", email, password);
-                _userDataStorageService.AddUserData("ASToken", email, tokenResponseData.TokenString);
                 _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Signed In successfully!" });
             }
             else
             {
-                /******TYLKO DO TESTU**********/
-                _userDataStorageService.AddUserData("ASPassword", email, password);
-                _userDataStorageService.AddUserData("ASToken", email, "test");
-                /******************************/
-                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = tokenResponseData.ErrorCode });
+                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Backend error" });
             }
         }
     
@@ -85,17 +80,17 @@ namespace AugmentedSzczecin.Services
 
         public async void ResetPassword(string email)
         {
-            var newUser = new User() { Email = email, ErrorCode = "", Password = "" };
+            var newUser = new User() { Email = email, Password = "" };
 
-            User userResponseData = await _httpService.ResetPassword(newUser);
+            var status = await _httpService.ResetPassword(newUser);
 
-            if (userResponseData.ErrorCode == null)
+            if (status)
             {
                 _eventAggregator.PublishOnUIThread(new ResetPasswordSuccessEvent() { SuccessMessage = "New password sent on the email address!" });
             }
             else
             {
-                _eventAggregator.PublishOnUIThread(new ResetPasswordFailedEvent() { FailMessage = userResponseData.ErrorCode });
+                _eventAggregator.PublishOnUIThread(new ResetPasswordFailedEvent() { FailMessage = "Backend error" });
             }
         }
     }

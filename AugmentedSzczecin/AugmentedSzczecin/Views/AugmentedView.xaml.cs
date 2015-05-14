@@ -85,7 +85,7 @@ namespace AugmentedSzczecin.Views
                     foreach (var poi in _poiLocations)
                     {
 
-                        var c = new Coordinate(poi.Latitude, poi.Longitude);
+                        var c = new Coordinate(poi.Location.Latitude, poi.Location.Longitude);
                         var poiHeading = SpatialTools.CalculateHeading(center, c);
                         var diff = _currentHeading - poiHeading;
 

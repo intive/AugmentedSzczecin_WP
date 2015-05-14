@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,124 +15,64 @@ namespace AugmentedSzczecin.Services
 {
     public class HttpService : IHttpService
     {
-        private string _uriMock = "http://private-8596e-patronage2015.apiary-mock.com/user";
-        private const string _temporaryPointOfInterestDatabaseUri = "https://augmented-szczecin-test.azure-mobile.net/tables/PointOfInterest";
+        private HttpClient _client = new HttpClient() { BaseAddress = new Uri("http://78.133.154.62:1080/") };
 
-        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestsList()
+        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList()
         {
-            HttpClient client = new HttpClient();
-
-            HttpResponseMessage response = await client.GetAsync(_temporaryPointOfInterestDatabaseUri);
+            HttpResponseMessage response = await _client.GetAsync("places");
             response.EnsureSuccessStatusCode();
-            string jsonString = await response.Content.ReadAsStringAsync();
-            ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(jsonString);
-
+            string json = await response.Content.ReadAsStringAsync();
+            ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(json);
             return PointOfInterestList;
         }
 
-        public async Task<User> CreateAccount(User user)
+        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(string latitude, string longitude, string radius)
         {
-            var userResponseData = new User();
-            var baseAddress = new Uri(_uriMock);
-            try
-            {
-                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
-                {
-                    var json = JsonConvert.SerializeObject(user);
-
-                    using (var content = new StringContent(json, Encoding.Unicode, "application/json"))
-                    {
-                        using (var response = await httpClient.PostAsync("user", content))
-                        {
-                            if (response.StatusCode == HttpStatusCode.OK)
-                            {
-                                var responseData = await response.Content.ReadAsStringAsync();
-                                userResponseData = JsonConvert.DeserializeObject<User>(responseData);
-                            }
-                            else
-                            {
-                                userResponseData.ErrorCode = "Back-end Error!";
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                userResponseData.ErrorCode = e.Message;
-            }
-
-            return userResponseData;
+            HttpResponseMessage response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}", latitude, longitude, radius));
+            response.EnsureSuccessStatusCode();
+            string json = await response.Content.ReadAsStringAsync();
+            ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(json);
+            return PointOfInterestList;
         }
 
-        public async Task<Token> SignIn(User user)
+        public async Task<bool> CreateAccount(User user)
         {
-            var tokenResponseData = new Token();
-            var baseAddress = new Uri(_uriMock);
-            try
+            var json = JsonConvert.SerializeObject(user);
+            var content = new StringContent(json, Encoding.Unicode, "application/json");
+            var response = await _client.PostAsync("users", content);
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
-                {
-                    var json = JsonConvert.SerializeObject(user);
-
-                    using (var content = new StringContent(json, Encoding.Unicode, "application/json"))
-                    {
-                        using (var response = await httpClient.PostAsync("user", content))
-                        {
-                            if (response.StatusCode == HttpStatusCode.OK)
-                            {
-                                var responseData = await response.Content.ReadAsStringAsync();
-                                tokenResponseData = JsonConvert.DeserializeObject<Token>(responseData);
-                            }
-                            else
-                            {
-                                tokenResponseData.ErrorCode = "Back-end Error!";
-                            }
-                        }
-                    }
-                }
+                return true;
             }
-            catch (Exception e)
-            {
-                tokenResponseData.ErrorCode = e.Message;
-            }
-
-            return tokenResponseData;
+            return false;
         }
 
-        public async Task<User> ResetPassword(User user)
+        public async Task<bool> SignIn(User user)
         {
-            var userResponseData = new User();
-            var baseAddress = new Uri(_uriMock);
-            try
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.Unicode.GetBytes(string.Format("{0}:{1}", user.Email, user.Password))));
+            var response = await _client.GetAsync("places");
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                using (var httpClient = new HttpClient { BaseAddress = baseAddress })
-                {
-                    var json = JsonConvert.SerializeObject(user);
-
-                    using (var content = new StringContent(json, Encoding.Unicode, "application/json"))
-                    {
-                        using (var response = await httpClient.PostAsync("user", content))
-                        {
-                            if (response.StatusCode == HttpStatusCode.OK)
-                            {
-                                var responseData = await response.Content.ReadAsStringAsync();
-                                userResponseData = JsonConvert.DeserializeObject<User>(responseData);
-                            }
-                            else
-                            {
-                                userResponseData.ErrorCode = "Back-end Error!";
-                            }
-                        }
-                    }
-                }
+                return true;
             }
-            catch (Exception e)
+            return false;
+        }
+
+        public async Task<bool> ResetPassword(User user)
+        {
+            return false;
+        }
+
+        public async Task<bool> AddPointOfInterest(PointOfInterest poi)
+        {
+            var json = JsonConvert.SerializeObject(poi);
+            var content = new StringContent(json, Encoding.Unicode, "application/json");
+            var response = await _client.PostAsync("places", content);
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                userResponseData.ErrorCode = e.Message;
+                return true;
             }
-
-            return userResponseData;
+            return false;
         }
     }
 }
