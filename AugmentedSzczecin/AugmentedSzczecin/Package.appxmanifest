@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="54cbd9ce-1555-4bf4-ac88-c49a9fd30743" Publisher="CN=scyw" Version="1.0.0.0" />
+  <Identity Name="54cbd9ce-1555-4bf4-ac88-c49a9fd30743" Publisher="CN=scyw" Version="1.0.0.4" />
   <mp:PhoneIdentity PhoneProductId="54cbd9ce-1555-4bf4-ac88-c49a9fd30743" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>AugmentedSzczecin</DisplayName>
@@ -20,7 +20,7 @@
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
-        </m3:VisualElements>
+      </m3:VisualElements>
     </Application>
   </Applications>
   <Capabilities>
