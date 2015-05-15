@@ -6,12 +6,16 @@ namespace AugmentedSzczecin.Interfaces
 {
     public interface IHttpService
     {
-        Task<ObservableCollection<PointOfInterest>> GetPointOfInterestsList();
+        Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList();
 
-        Task<User> CreateAccount(User user);
+        Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(string latitude, string longitude, string radius);
 
-        Task<Token> SignIn(User user);
+        Task<bool> CreateAccount(User user);
 
-        Task<User> ResetPassword(User user);
+        Task<bool> SignIn(User user);
+
+        Task<bool> ResetPassword(User user);
+
+        Task<bool> AddPointOfInterest(PointOfInterest poi);
     }
 }

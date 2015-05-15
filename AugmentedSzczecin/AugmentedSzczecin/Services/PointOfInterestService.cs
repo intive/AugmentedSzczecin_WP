@@ -38,7 +38,20 @@ namespace AugmentedSzczecin.Services
         {
             try
             {
-                PointOfInterestList = await _httpService.GetPointOfInterestsList();
+                PointOfInterestList = await _httpService.GetPointOfInterestList();
+                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
+            }
+            catch (Exception e)
+            {
+                _eventAggregator.PublishOnUIThread(new PointOfInterestLoadFailedEvent() { PointOfInterestLoadException = e });
+            }
+        }
+
+        public async void Refresh(string latitude, string longitude, string radius)
+        {
+            try
+            {
+                PointOfInterestList = await _httpService.GetPointOfInterestList(latitude, longitude, radius);
                 _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
             }
             catch (Exception e)

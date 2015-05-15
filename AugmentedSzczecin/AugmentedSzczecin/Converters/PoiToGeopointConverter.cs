@@ -11,7 +11,7 @@ namespace AugmentedSzczecin.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             PointOfInterest poi = (PointOfInterest)value;
-            return new Geopoint(new BasicGeoposition() { Latitude = poi.Latitude, Longitude = poi.Longitude });
+            return new Geopoint(new BasicGeoposition() { Latitude = poi.Location.Latitude, Longitude = poi.Location.Longitude });
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

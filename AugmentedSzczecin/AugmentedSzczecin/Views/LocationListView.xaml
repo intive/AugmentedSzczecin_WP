@@ -106,9 +106,9 @@
 							TextWrapping="Wrap"
 							FontSize="16"
 							FontStyle="Italic">
-							<Run Text="{Binding Latitude}"/>
+							<Run Text="{Binding Location.Latitude}"/>
 							<Run Text=", " />
-							<Run Text="{Binding Longitude}" />
+							<Run Text="{Binding Location.Longitude}" />
                                     </TextBlock>
                                     <TextBlock
 							TextWrapping="Wrap"

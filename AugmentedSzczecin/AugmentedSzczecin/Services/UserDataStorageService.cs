@@ -1,5 +1,4 @@
-﻿
-using AugmentedSzczecin.Interfaces;
+﻿using AugmentedSzczecin.Interfaces;
 using System.Collections.Generic;
 using Windows.Security.Credentials;
 using Windows.UI.Popups;
@@ -21,7 +20,6 @@ namespace AugmentedSzczecin.Services
             {
                 return true;
             }
-
             return false;
         }
 

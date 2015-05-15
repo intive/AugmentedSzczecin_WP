@@ -17,12 +17,5 @@ namespace AugmentedSzczecin.Models
             get; 
             set; 
         }
-
-        [JsonProperty(PropertyName = "errorCode")]
-        public string ErrorCode 
-        { 
-            get; 
-            set; 
-        }
     }
 }

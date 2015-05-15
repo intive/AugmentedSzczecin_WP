@@ -3,6 +3,45 @@ using Newtonsoft.Json;
 
 namespace AugmentedSzczecin.Models
 {
+    public class Location : PropertyChangedBase
+    {
+        [JsonProperty(PropertyName = "Latitude")]
+        private double _latitude;
+        public double Latitude
+        {
+            get
+            {
+                return _latitude;
+            }
+            set
+            {
+                if (_latitude != value)
+                {
+                    _latitude = value;
+                    NotifyOfPropertyChange(() => Latitude);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "Longitude")]
+        private double _longitude;
+        public double Longitude
+        {
+            get
+            {
+                return _longitude;
+            }
+            set
+            {
+                if (_longitude != value)
+                {
+                    _longitude = value;
+                    NotifyOfPropertyChange(() => Longitude);
+                }
+            }
+        }
+    }
+
     public class PointOfInterest : PropertyChangedBase
     {
         public PointOfInterest(string id)
@@ -30,6 +69,24 @@ namespace AugmentedSzczecin.Models
                 {
                     _name = value;
                     NotifyOfPropertyChange(() => Name);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "Location")]
+        private Location _location;
+        public Location Location
+        {
+            get
+            {
+                return _location;
+            }
+            set
+            {
+                if (_location != value)
+                {
+                    _location = value;
+                    NotifyOfPropertyChange(() => Location);
                 }
             }
         }
@@ -66,42 +123,6 @@ namespace AugmentedSzczecin.Models
                 {
                     _tags = value;
                     NotifyOfPropertyChange(() => Tags);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Latitude")]
-        private double _latitude;
-        public double Latitude
-        {
-            get 
-            { 
-                return _latitude; 
-            }
-            set
-            {
-                if (_latitude != value)
-                {
-                    _latitude = value;
-                    NotifyOfPropertyChange(() => Latitude);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Longitude")]
-        private double _longitude;
-        public double Longitude
-        {
-            get 
-            { 
-                return _longitude; 
-            }
-            set
-            {
-                if (_longitude != value)
-                {
-                    _longitude = value;
-                    NotifyOfPropertyChange(() => Longitude);
                 }
             }
         }
