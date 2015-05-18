@@ -13,6 +13,7 @@ using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.Media.Capture;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -43,7 +44,7 @@ namespace AugmentedSzczecin.Views
         public AugmentedView()
         {
             InitializeComponent();
-
+            
             _eventAgg = IoC.GetInstance(typeof(IEventAggregator), null);
             ((EventAggregator)_eventAgg).Subscribe(this);
         }
@@ -100,7 +101,7 @@ namespace AugmentedSzczecin.Views
 
                         if (Math.Abs(diff) <= 22.5)
                         {
-                            var distance = SpatialTools.HaversineDistance(center, c, DistanceUnits.KM);
+                            var distance = SpatialTools.HaversineDistance(center, c, DistanceUnits.Meters);
 
                             double left = 0;
 
@@ -135,16 +136,16 @@ namespace AugmentedSzczecin.Views
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
             await StartCamera();
-
+            /*
             _orientationSensor = SimpleOrientationSensor.GetDefault();
             if (_orientationSensor != null)
             {
                 _orientationSensor.OrientationChanged += SimpleOrientationSensorReadingChanged;
                 UpdateOrientation(_orientationSensor.GetCurrentOrientation());
             }
-
+            */
             _compass = Compass.GetDefault();
             if (_compass != null)
             {
@@ -173,6 +174,7 @@ namespace AugmentedSzczecin.Views
             _compass.ReadingChanged -= CompassReadingChanged;
             _gps.PositionChanged -= GpsPositionChanged;
             StopCamera();
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.None;
         }
 
         private void SimpleOrientationSensorReadingChanged(SimpleOrientationSensor sender, SimpleOrientationSensorOrientationChangedEventArgs args)
@@ -223,7 +225,7 @@ namespace AugmentedSzczecin.Views
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 _currentHeading = reading.HeadingMagneticNorth;
-
+                heading.Text = _currentHeading.ToString();
                 UpdateARView();
             });
         }

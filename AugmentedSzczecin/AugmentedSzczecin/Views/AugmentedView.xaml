@@ -11,5 +11,7 @@
     <Grid>
         <CaptureElement Name="PreviewScreen" Stretch="UniformToFill" />
         <Canvas Name="ItemCanvas" />
+        <Slider Orientation="Vertical" Minimum="100" Maximum="1000" LargeChange="100" SmallChange="100" Value="100" HorizontalAlignment="Right" Margin="0,10" TickFrequency="100" StepFrequency="100" TickPlacement="Inline"/>
+        <TextBlock Name="heading" Text="Witam" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" />
     </Grid>
 </Page>
