@@ -118,6 +118,9 @@
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddPointOfInterestView.xaml.cs">
+      <DependentUpon>AddPointOfInterestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AugmentedView.xaml.cs">
       <DependentUpon>AugmentedView.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddPointOfInterestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
