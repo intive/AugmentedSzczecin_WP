@@ -108,6 +108,7 @@
     <Compile Include="Services\PointOfInterestService.cs" />
     <Compile Include="Services\UserDataStorageService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\AddPointOfInterestViewModel.cs" />
     <Compile Include="ViewModels\AugmentedViewModel.cs" />
     <Compile Include="ViewModels\CurrentMapViewModel.cs" />
     <Compile Include="ViewModels\LocationListViewModel.cs" />
