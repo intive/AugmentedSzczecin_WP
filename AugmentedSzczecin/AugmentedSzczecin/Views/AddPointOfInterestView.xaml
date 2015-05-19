@@ -21,7 +21,7 @@
             Center="{Binding CenterOfTheMap}"
             ZoomLevel="{Binding ZoomLevel}"
             LandmarksVisible="{Binding LandmarksVisible}"            
-            caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]; [Event MapTapped] = [Action GetTappedPosition($source, $eventArgs)]"
+            caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]; [Event MapTapped] = [Action GetTappedPosition($source)]"
             Margin="0,0,0,0">
             
             <Image

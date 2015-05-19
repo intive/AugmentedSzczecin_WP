@@ -1,7 +1,9 @@
 ﻿using System;
 using Windows.Devices.Geolocation;
+using Windows.Devices.Input;
 using Windows.Networking.Connectivity;
 using Windows.Phone.UI.Input;
+using Windows.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -238,9 +240,9 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService.GoBack();
         }
 
-        public void GetTappedPosition()
+        public void GetTappedPosition(object sender)
         {
-            
+            var tappedPosition = ((MapControl)sender).Center.Position;
         }
     }
 }
