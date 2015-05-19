@@ -237,5 +237,10 @@ namespace AugmentedSzczecin.ViewModels
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
             _navigationService.GoBack();
         }
+
+        public void GetTappedPosition()
+        {
+            
+        }
     }
 }

@@ -15,14 +15,13 @@
                    FontSize="36" Margin="8,0,0,16"/>
 
         <maps:MapControl
-            MapTapped="BingMap_OnMapTapped"
             MapServiceToken="{Binding BingKey}"
             x:Name="BingMap"
             Height="560"
             Center="{Binding CenterOfTheMap}"
             ZoomLevel="{Binding ZoomLevel}"
             LandmarksVisible="{Binding LandmarksVisible}"            
-            caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)], [Event MapTapped] = [Action GetTappedPosition]"
+            caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]; [Event MapTapped] = [Action GetTappedPosition($source, $eventArgs)]"
             Margin="0,0,0,0">
             
             <Image
