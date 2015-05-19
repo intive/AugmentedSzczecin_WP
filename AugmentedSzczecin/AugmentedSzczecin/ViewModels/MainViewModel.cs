@@ -81,5 +81,10 @@ namespace AugmentedSzczecin.ViewModels
         {
             _navigationService.NavigateToViewModel<AugmentedViewModel>();
         }
+
+        public void NavigateToAddPointOfInterest()
+        {
+            _navigationService.NavigateToViewModel<AddPointOfInterestViewModel>();
+        }
     }
 }
