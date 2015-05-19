@@ -41,6 +41,7 @@ namespace AugmentedSzczecin.ViewModels
             get
             {
                 NotifyOfPropertyChange(() => CanSignOut);
+                NotifyOfPropertyChange(() => CanNavigateToAddPointOfInterest);
                 bool isUserSignedIn = !_accountService.IsUserSignedIn();
                 return isUserSignedIn;
             }
@@ -52,6 +53,15 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         public bool CanSignOut
+        {
+            get
+            {
+                bool isUserSignedIn = _accountService.IsUserSignedIn();
+                return isUserSignedIn;
+            }
+        }
+
+        public bool CanNavigateToAddPointOfInterest
         {
             get
             {
