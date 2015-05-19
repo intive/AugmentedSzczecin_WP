@@ -12,12 +12,11 @@ using Caliburn.Micro;
 using AugmentedSzczecin.Events;
 using System.Collections.ObjectModel;
 using AugmentedSzczecin.Models;
-using AugmentedSzczecin.Views;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
+    public class CurrentMapViewModel : ISideMenuFilter, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
         private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
