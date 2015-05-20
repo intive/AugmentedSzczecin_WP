@@ -60,9 +60,9 @@
     </StackPanel>
     
     <Page.BottomAppBar>
-        <CommandBar Visibility="{Binding TappedPointVisibility}" x:Name="ConfirmNewPointOfInterestAppBar">
+        <CommandBar Visibility="{Binding TappedPointVisibility}">
             <AppBarButton
-                x:Name="ConfirmNewPointOfInterestAppBarButton"
+                caliburn:Message.Attach="[Event Click] = [Action ConfirmNewPointOfInterestClick]"
                 x:Uid="ConfirmNewPointOfInterest"
                 Icon="Pin" />
         </CommandBar>

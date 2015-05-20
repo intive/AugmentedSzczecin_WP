@@ -290,6 +290,9 @@ namespace AugmentedSzczecin.ViewModels
             TappedLocation = tappedPosition;
         }
 
-
+        public void ConfirmNewPointOfInterestClick()
+        {
+            
+        }
     }
 }
