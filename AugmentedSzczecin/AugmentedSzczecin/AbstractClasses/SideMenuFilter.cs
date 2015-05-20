@@ -1,8 +1,8 @@
 ﻿using Caliburn.Micro;
 
-namespace AugmentedSzczecin.Interfaces
+namespace AugmentedSzczecin.AbstractClasses
 {
-    public class ISideMenuFilter : Screen
+    public abstract class SideMenuFilter : Screen
     {
         private string _selectedCategory;
         public string SelectedCategory
@@ -16,10 +16,12 @@ namespace AugmentedSzczecin.Interfaces
                 if (value != _selectedCategory)
                 {
                     _selectedCategory = value;
+                    RefreshPOIFilteredByCategory();
                     NotifyOfPropertyChange(() => SelectedCategory);
                 }
             }
         }
 
+        protected abstract void RefreshPOIFilteredByCategory();
     }
 }

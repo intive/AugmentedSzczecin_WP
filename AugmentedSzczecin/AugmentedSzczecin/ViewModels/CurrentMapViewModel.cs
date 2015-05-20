@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using AugmentedSzczecin.Helpers;
 using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.AbstractClasses;
 using Caliburn.Micro;
 using AugmentedSzczecin.Events;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : ISideMenuFilter, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
+    public class CurrentMapViewModel : SideMenuFilter, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
         private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
@@ -38,7 +39,7 @@ namespace AugmentedSzczecin.ViewModels
         private ObservableCollection<PointOfInterest> _mapLocations;
         public ObservableCollection<PointOfInterest> MapLocations
         {
-            get 
+            get
             {
                 return _mapLocations;
             }
@@ -138,13 +139,13 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isFilterPanelVisible = false;
         public bool IsFilterPanelVisible
         {
-            get 
+            get
             {
-                return _isFilterPanelVisible; 
+                return _isFilterPanelVisible;
             }
             set
             {
-                if(value != _isFilterPanelVisible)
+                if (value != _isFilterPanelVisible)
                 {
                     _isFilterPanelVisible = value;
                     NotifyOfPropertyChange(() => IsFilterPanelVisible);
@@ -152,13 +153,24 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private string _radius = "1000";
+
+        public string Radius
+        {
+            get 
+            { 
+                return _radius; 
+            }
+        }
+        
+
         protected override void OnActivate()
         {
             _eventAggregator.Subscribe(this);
             base.OnActivate();
 
             CountZoomLevel();
-            
+
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             if (_locationService.IsGeolocationEnabled())
@@ -303,10 +315,39 @@ namespace AugmentedSzczecin.ViewModels
         {
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
-    
-        public void Filter()
+
+        private void Filter()
         {
-            IsFilterPanelVisible = true;
+            if (IsFilterPanelVisible == false)
+            {
+                IsFilterPanelVisible = true;
+            }
+            else
+            {
+                IsFilterPanelVisible = false;
+            }
         }
-    }
+
+        protected override void RefreshPOIFilteredByCategory()
+        {
+            IsFilterPanelVisible = false;
+            string category = null;
+            switch(SelectedCategory)
+            {
+                case "Miejsca Publiczne":
+                    category = "PLACE";
+                    break;
+                case "Firmy I Usługi":
+                    category = "POI";
+                    break;
+                case "Wydarzenia":
+                    category = "EVENT";
+                    break;
+                case "Znajomi":
+                    category = "PERSON";
+                    break;
+            }
+            _pointOfInterestService.Refresh(CenterOfTheMap.Position.Latitude.ToString(), CenterOfTheMap.Position.Longitude.ToString(), Radius, category);
+        }
+    }  
 }

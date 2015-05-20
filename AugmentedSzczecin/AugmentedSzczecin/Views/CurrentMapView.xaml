@@ -36,13 +36,13 @@
         </Flyout>
     </Page.Resources>
     
-    <Grid >
-        <StackPanel  >
-
+    <Grid>
+        
+        <StackPanel>
             <TextBlock x:Uid="CurrentMapTitle"  TextWrapping="NoWrap" Text=""
-                       FontSize="36" Margin="8,0,0,16"/>
+                        FontSize="36" Margin="8,0,0,16"/>
 
-            <maps:MapControl 
+            <maps:MapControl
                 MapServiceToken="{Binding BingKey}"
                 x:Name="BingMap"
                 Height="560"
@@ -60,28 +60,32 @@
                 <maps:MapItemsControl ItemsSource="{Binding MapLocations}">
                     <maps:MapItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left" 
-                                   maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
-                                   caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($source)]"
-                                   FlyoutBase.AttachedFlyout="{StaticResource Details}"/>
+                            <Image Source="/Assets/LocationPoint.png" Height="20" Width="20" HorizontalAlignment="Left" 
+                                    maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
+                                    caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($source)]"
+                                    FlyoutBase.AttachedFlyout="{StaticResource Details}"/>
                         </DataTemplate>
                     </maps:MapItemsControl.ItemTemplate>
                 </maps:MapItemsControl>
             </maps:MapControl>
-            </StackPanel>
-               
+        </StackPanel>
+        
         <Grid Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BoolToVisConv}}" >
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="5*" />
             </Grid.RowDefinitions>
-            <Border Grid.Column="0" Grid.RowSpan="2" Background="Black" />
-            <UserControls:SideMenuFilter Grid.Column="0" Grid.Row="1" x:Name="SelectedValue" SelectedCategory="{Binding SelectedCategory, Mode=TwoWay}" />
+            <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource PhoneChromeBrush}" />
+            <Border Grid.Column="4" Grid.RowSpan="2" Background="Black" Opacity="0.5" />
+            <UserControls:SideMenuFilter Grid.Column="1" Grid.Row="1" x:Name="SelectedValue" SelectedCategory="{Binding SelectedCategory, Mode=TwoWay}" />
         </Grid>
+        
     </Grid>
 
     <Page.BottomAppBar>
