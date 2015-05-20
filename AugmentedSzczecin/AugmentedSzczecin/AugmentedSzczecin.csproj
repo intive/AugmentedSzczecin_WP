@@ -83,7 +83,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\PoiToGeopointConverter.cs" />
-    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Events\PointOfInterestLoadedEvent.cs" />
     <Compile Include="Events\PointOfInterestLoadFailedEvent.cs" />
     <Compile Include="Events\RegisterFailedEvent.cs" />
