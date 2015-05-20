@@ -124,6 +124,9 @@
     <Compile Include="Views\AugmentedView.xaml.cs">
       <DependentUpon>AugmentedView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CreatePointOfInterestView.xaml.cs">
+      <DependentUpon>CreatePointOfInterestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CurrentMapView.xaml.cs">
       <DependentUpon>CurrentMapView.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AugmentedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreatePointOfInterestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
