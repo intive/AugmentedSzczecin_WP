@@ -20,6 +20,8 @@
             <!-- Nazwa -->
             <TextBlock FontSize="15" x:Uid="NewPoiName"/>
             <TextBox
+                TabIndex="0"
+                InputScope="0"
                 x:Uid="NewPoiNameBox"
                 x:Name="Name"
                 MaxLength="50"
@@ -36,30 +38,75 @@
             <!-- Opis -->
             <TextBlock FontSize="15" x:Uid="NewPoiDescription"/>
             <TextBox
+                TabIndex="1"
+                InputScope="0"
                 x:Uid="NewPoiDescriptionBox"
                 Height="150"
                 MaxLength="500"
                 x:Name="Description"
+                TextWrapping="Wrap"
+                TextAlignment="Left"
                 VerticalAlignment="Stretch" />
 
             <!-- Tagi -->
             <TextBlock FontSize="15" x:Uid="NewPoiTags"/>
             <TextBox
+                TabIndex="2"
                 x:Uid="NewPoiTagsBox"
                 MaxLength="30"
                 x:Name="Tags"
                 VerticalAlignment="Stretch" />
 
             <!-- Adres -->
-            <TextBlock FontSize="15" x:Uid="NewPoiAddress"/>
+            <TextBlock Margin="0, 0, 0, 5" FontSize="15" x:Uid="NewPoiAddress"/>
+
+            <!-- Adres Ulica -->
+            <TextBlock FontSize="12" x:Uid="NewPoiAddressStreet"/>
             <TextBox
-                x:Uid="NewPoiAddressBox"
-                x:Name="Address"
+                TabIndex="3"
+                MaxLength="60"
+                x:Uid="NewPoiAddressStreetBox"
+                x:Name="AddressStreet"
+                VerticalAlignment="Stretch" />
+
+            <!-- Adres Kod Pocztowy -->
+            <TextBlock FontSize="12" x:Uid="NewPoiAddressPostalCode"/>
+            <TextBox
+                TabIndex="4"
+                x:Uid="NewPoiAddressPostalCodeBox"
+                x:Name="AddressPostalCode"
+                VerticalAlignment="Stretch" />
+
+            <!-- Adres Miasto -->
+            <TextBlock FontSize="12" x:Uid="NewPoiAddressCity"/>
+            <TextBox
+                TabIndex="5"
+                MaxLength="30"
+                x:Uid="NewPoiAddressCityBox"
+                x:Name="AddressCity"
+                VerticalAlignment="Stretch" />
+
+            <!-- Adres Nr budynku -->
+            <TextBlock FontSize="12" x:Uid="NewPoiAddressHouse"/>
+            <TextBox
+                TabIndex="6"
+                MaxLength="10"
+                x:Uid="NewPoiAddressHouseBox"
+                x:Name="AddressHouse"
+                VerticalAlignment="Stretch" />
+
+            <!-- Adres Nr lokalu -->
+            <TextBlock FontSize="12" x:Uid="NewPoiAddressPlace"/>
+            <TextBox
+                TabIndex="7"
+                MaxLength="5"
+                x:Uid="NewPoiAddressPlaceBox"
+                x:Name="AddressPlace"
                 VerticalAlignment="Stretch" />
 
             <!-- Kategoria -->
             <TextBlock Text="Category" FontSize="15" x:Uid="NewPoiCategory"/>
-            <ComboBox x:Uid="NewPoiCategoryBox" x:Name="Category">
+            <ComboBox TabIndex="8" x:Uid="NewPoiCategoryBox" x:Name="Category">
                 <ComboBoxItem x:Uid="NewPoiCategoryFirst" />
                 <ComboBoxItem x:Uid="NewPoiCategorySecond" />
                 <ComboBoxItem x:Uid="NewPoiCategoryThird" />
