@@ -9,8 +9,79 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock
+                x:Uid="CreatePointOfInterestTitle"
+                TextWrapping="NoWrap"
+                FontSize="36"
+                Margin="8,0,0,16"/>
 
-    </Grid>
+            <!-- Nazwa -->
+            <TextBlock FontSize="15" x:Uid="NewPoiName"/>
+            <TextBox
+                x:Uid="NewPoiNameBox"
+                x:Name="Name"
+                MaxLength="50"
+                VerticalAlignment="Stretch" />
+
+            <!-- Latitude -->
+            <TextBlock FontSize="15" x:Uid="NewPoiLatitude"/>
+            <TextBox IsEnabled="False" x:Name="Latitude" VerticalAlignment="Stretch" />
+
+            <!-- Longitude -->
+            <TextBlock FontSize="15" x:Uid="NewPoiLongitude"/>
+            <TextBox IsEnabled="False" x:Name="Longitude" VerticalAlignment="Stretch" />
+
+            <!-- Opis -->
+            <TextBlock FontSize="15" x:Uid="NewPoiDescription"/>
+            <TextBox
+                x:Uid="NewPoiDescriptionBox"
+                Height="150"
+                MaxLength="500"
+                x:Name="Description"
+                VerticalAlignment="Stretch" />
+
+            <!-- Tagi -->
+            <TextBlock FontSize="15" x:Uid="NewPoiTags"/>
+            <TextBox
+                x:Uid="NewPoiTagsBox"
+                MaxLength="30"
+                x:Name="Tags"
+                VerticalAlignment="Stretch" />
+
+            <!-- Adres -->
+            <TextBlock FontSize="15" x:Uid="NewPoiAddress"/>
+            <TextBox
+                x:Uid="NewPoiAddressBox"
+                x:Name="Address"
+                VerticalAlignment="Stretch" />
+
+            <!-- Kategoria -->
+            <TextBlock Text="Category" FontSize="15" x:Uid="NewPoiCategory"/>
+            <ComboBox x:Uid="NewPoiCategoryBox" x:Name="Category">
+                <ComboBoxItem x:Uid="NewPoiCategoryFirst" />
+                <ComboBoxItem x:Uid="NewPoiCategorySecond" />
+                <ComboBoxItem x:Uid="NewPoiCategoryThird" />
+                <ComboBoxItem x:Uid="NewPoiCategoryFourth" />
+            </ComboBox>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    x:Uid="CancelAddingPointOfInterest"
+                    HorizontalAlignment="Center"
+                    Grid.Column="0" />
+                <Button
+                    x:Uid="AddNewPointOfInterest"
+                    HorizontalAlignment="Center"
+                    Grid.Column="1" />
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
-   
+
