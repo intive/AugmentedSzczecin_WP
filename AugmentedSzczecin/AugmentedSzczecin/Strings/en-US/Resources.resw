@@ -117,14 +117,59 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddNewPointOfInterest.Content" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="AddPointOfInterestTitle.Text" xml:space="preserve">
     <value>Tap to add POI on the map</value>
+  </data>
+  <data name="CancelAddingPointOfInterest.Content" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="ConfirmNewPointOfInterest.Label" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="CreatePointOfInterestTitle.Text" xml:space="preserve">
+    <value>Creating POI</value>
+  </data>
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
+  </data>
+  <data name="NewPoiCategory.PlaceholderText" xml:space="preserve">
+    <value>Choose category...</value>
+  </data>
+  <data name="NewPoiCategory.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="NewPoiCategoryFirst.Content" xml:space="preserve">
+    <value>Public Place</value>
+  </data>
+  <data name="NewPoiCategoryFourth.Content" xml:space="preserve">
+    <value>Friend</value>
+  </data>
+  <data name="NewPoiCategorySecond.Content" xml:space="preserve">
+    <value>Company &amp; Service</value>
+  </data>
+  <data name="NewPoiCategoryThird.Content" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="NewPoiDescription.PlaceholderText" xml:space="preserve">
+    <value>Add some description...</value>
+  </data>
+  <data name="NewPoiDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="NewPoiName.PlaceholderText" xml:space="preserve">
+    <value>Add some name...</value>
+  </data>
+  <data name="NewPoiName.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewPoiTags.PlaceholderText" xml:space="preserve">
+    <value>Add some tags...</value>
+  </data>
+  <data name="NewPoiTags.Text" xml:space="preserve">
+    <value>Tags</value>
   </data>
   <data name="ResetPasswordButtonReset.Content" xml:space="preserve">
     <value>Reset password</value>
