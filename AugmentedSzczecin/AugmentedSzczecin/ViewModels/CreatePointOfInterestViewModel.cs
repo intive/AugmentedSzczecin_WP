@@ -5,6 +5,14 @@ namespace AugmentedSzczecin.ViewModels
 {
     public class CreatePointOfInterestViewModel : Screen
     {
+        private readonly INavigationService _navigationService;
+
+        public CreatePointOfInterestViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
+
+
         public Geopoint Parameter { get; set; }
 
         private double _latitude;
@@ -39,6 +47,11 @@ namespace AugmentedSzczecin.ViewModels
         {
             Latitude = Parameter.Position.Latitude;
             Longitude = Parameter.Position.Longitude;
+        }
+
+        public void CancelNewPointOfInterestClick()
+        {
+            _navigationService.NavigateToViewModel<AddPointOfInterestViewModel>(Parameter);
         }
 
     }

@@ -27,6 +27,13 @@ namespace AugmentedSzczecin.Services
             return currentLocation;
         }
 
+        public async Task<Geopoint> GetGeolocation(Geopoint geoParameter)
+        {
+            Geopoint currentLocation = geoParameter;
+
+            return currentLocation;
+        }
+
         public bool IsGeolocationEnabled()
         {
             Geolocator geolocator = new Geolocator();

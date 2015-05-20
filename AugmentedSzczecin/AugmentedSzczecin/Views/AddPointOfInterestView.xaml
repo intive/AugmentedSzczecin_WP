@@ -27,7 +27,7 @@
             <Image
                 Name="ImgMyLocation"
                 Source="/Assets/MyLocationPoint.png"
-                maps:MapControl.Location="{Binding CenterOfTheMap}"
+                maps:MapControl.Location="{Binding MyLocation}"
                 Height="10" Width="10"
                 Visibility="{Binding MyLocationPointVisibility}" />
 

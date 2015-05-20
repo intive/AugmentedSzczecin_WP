@@ -73,6 +73,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button
+                    caliburn:Message.Attach="[Event Click] = [Action CancelNewPointOfInterestClick]"
                     x:Uid="CancelAddingPointOfInterest"
                     HorizontalAlignment="Center"
                     Grid.Column="0" />
