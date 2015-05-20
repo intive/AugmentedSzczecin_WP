@@ -70,7 +70,7 @@
             </maps:MapControl>
             </StackPanel>
                
-        <Grid Visibility="Visible" >
+        <Grid Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BoolToVisConv}}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
@@ -83,5 +83,14 @@
             <UserControls:SideMenuFilter Grid.Column="0" Grid.Row="1" x:Name="SelectedValue" SelectedCategory="{Binding SelectedCategory, Mode=TwoWay}" />
         </Grid>
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="Filter" Icon="Filter" IsCompact="False" Label="Filrowanie"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
 </Page>
 

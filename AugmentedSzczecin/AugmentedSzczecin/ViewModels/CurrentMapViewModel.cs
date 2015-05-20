@@ -135,6 +135,23 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private bool _isFilterPanelVisible = false;
+        public bool IsFilterPanelVisible
+        {
+            get 
+            {
+                return _isFilterPanelVisible; 
+            }
+            set
+            {
+                if(value != _isFilterPanelVisible)
+                {
+                    _isFilterPanelVisible = value;
+                    NotifyOfPropertyChange(() => IsFilterPanelVisible);
+                }
+            }
+        }
+
         protected override void OnActivate()
         {
             _eventAggregator.Subscribe(this);
@@ -285,6 +302,11 @@ namespace AugmentedSzczecin.ViewModels
         private void PushpinTapped(object sender)
         {
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+        }
+    
+        public void Filter()
+        {
+            IsFilterPanelVisible = true;
         }
     }
 }
