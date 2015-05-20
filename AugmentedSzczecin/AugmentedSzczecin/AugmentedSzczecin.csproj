@@ -109,6 +109,7 @@
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\AddPointOfInterestViewModel.cs" />
     <Compile Include="ViewModels\AugmentedViewModel.cs" />
+    <Compile Include="ViewModels\CreatePointOfInterestViewModel.cs" />
     <Compile Include="ViewModels\CurrentMapViewModel.cs" />
     <Compile Include="ViewModels\LocationListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
