@@ -135,11 +135,17 @@
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
   </data>
-  <data name="NewPoiCategory.PlaceholderText" xml:space="preserve">
-    <value>Choose category...</value>
+  <data name="NewPoiAddress.Text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="NewPoiAddressBox.PlaceholderText" xml:space="preserve">
+    <value>Add some address...</value>
   </data>
   <data name="NewPoiCategory.Text" xml:space="preserve">
     <value>Category</value>
+  </data>
+  <data name="NewPoiCategoryBox.PlaceholderText" xml:space="preserve">
+    <value>Choose category...</value>
   </data>
   <data name="NewPoiCategoryFirst.Content" xml:space="preserve">
     <value>Public Place</value>
@@ -153,23 +159,29 @@
   <data name="NewPoiCategoryThird.Content" xml:space="preserve">
     <value>Event</value>
   </data>
-  <data name="NewPoiDescription.PlaceholderText" xml:space="preserve">
-    <value>Add some description...</value>
-  </data>
   <data name="NewPoiDescription.Text" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="NewPoiName.PlaceholderText" xml:space="preserve">
-    <value>Add some name...</value>
+  <data name="NewPoiDescriptionBox.PlaceholderText" xml:space="preserve">
+    <value>Add some description...</value>
+  </data>
+  <data name="NewPoiLatitude.Text" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="NewPoiLongitude.Text" xml:space="preserve">
+    <value>Longitude</value>
   </data>
   <data name="NewPoiName.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="NewPoiTags.PlaceholderText" xml:space="preserve">
-    <value>Add some tags...</value>
+  <data name="NewPoiNameBox.PlaceholderText" xml:space="preserve">
+    <value>Add some name...</value>
   </data>
   <data name="NewPoiTags.Text" xml:space="preserve">
     <value>Tags</value>
+  </data>
+  <data name="NewPoiTagsBox.PlaceholderText" xml:space="preserve">
+    <value>Add some tags...</value>
   </data>
   <data name="ResetPasswordButtonReset.Content" xml:space="preserve">
     <value>Reset password</value>
