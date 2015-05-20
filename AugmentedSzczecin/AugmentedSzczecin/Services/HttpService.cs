@@ -26,7 +26,7 @@ namespace AugmentedSzczecin.Services
             return PointOfInterestList;
         }
 
-        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(string latitude, string longitude, string radius)
+        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(double latitude, double longitude, int radius)
         {
             HttpResponseMessage response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}", latitude, longitude, radius));
             response.EnsureSuccessStatusCode();
@@ -60,6 +60,11 @@ namespace AugmentedSzczecin.Services
 
         public async Task<bool> ResetPassword(User user)
         {
+            var response = await _client.GetAsync(string.Format("users/{0}/resetpassword", user.Email));
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -67,7 +72,7 @@ namespace AugmentedSzczecin.Services
         {
             var json = JsonConvert.SerializeObject(poi);
             var content = new StringContent(json, Encoding.Unicode, "application/json");
-            var response = await _client.PostAsync("places", content);
+            var response = await _client.PutAsync("places", content);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 return true;

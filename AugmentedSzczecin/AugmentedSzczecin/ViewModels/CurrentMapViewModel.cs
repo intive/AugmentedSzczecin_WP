@@ -197,7 +197,7 @@ namespace AugmentedSzczecin.ViewModels
 
         public void RefreshPointOfInterestService()
         {
-            _pointOfInterestService.Refresh();
+            _pointOfInterestService.LoadPlaces();
         }
 
         public void UpdateInternetConnection()
