@@ -7,8 +7,8 @@ namespace AugmentedSzczecin.ViewModels
     {
         public Geopoint Parameter { get; set; }
 
-        private string _latitude;
-        public string Latitude
+        private double _latitude;
+        public double Latitude
         {
             get { return _latitude; }
             set
@@ -21,8 +21,8 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private string _longitude;
-        public string Longitude
+        private double _longitude;
+        public double Longitude
         {
             get { return _longitude; }
             set
@@ -37,8 +37,8 @@ namespace AugmentedSzczecin.ViewModels
 
         protected override void OnActivate()
         {
-            Latitude = Parameter.Position.Latitude.ToString();
-            Longitude = Parameter.Position.Longitude.ToString();
+            Latitude = Parameter.Position.Latitude;
+            Longitude = Parameter.Position.Longitude;
         }
 
     }
