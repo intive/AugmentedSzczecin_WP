@@ -55,5 +55,12 @@
                 Visibility="{Binding TappedPointVisibility}" />
             
         </maps:MapControl>
+        
+        <AppBar Name="ConfirmNewPointOfInterestAppBar">
+            <AppBarButton
+                x:Name="ConfirmNewPointOfInterestAppBarButton"
+                x:Uid="ConfirmNewPointOfInterest"
+                />
+        </AppBar>
     </StackPanel>
 </Page>
