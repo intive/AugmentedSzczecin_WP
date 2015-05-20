@@ -70,6 +70,21 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private Geopoint _tappedLocation;
+        public Geopoint TappedLocation
+        {
+            get { return _tappedLocation; }
+            set
+            {
+                if (_tappedLocation != value)
+                {
+                    _tappedLocation = value;
+                    TappedPointVisibility = Visibility.Visible;
+                    NotifyOfPropertyChange(() => TappedLocation);
+                }
+            }
+        }
+
         private Visibility _myLocationPointVisibility = Visibility.Collapsed;
         public Visibility MyLocationPointVisibility
         {
@@ -80,6 +95,20 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _myLocationPointVisibility = value;
                     NotifyOfPropertyChange(() => MyLocationPointVisibility);
+                }
+            }
+        }
+
+        private Visibility _tappedPointVisibility = Visibility.Collapsed;
+        public Visibility TappedPointVisibility
+        {
+            get { return _tappedPointVisibility; }
+            set
+            {
+                if (value != _tappedPointVisibility)
+                {
+                    _tappedPointVisibility = value;
+                    NotifyOfPropertyChange(() => TappedPointVisibility);
                 }
             }
         }
@@ -240,9 +269,17 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService.GoBack();
         }
 
-        public void GetTappedPosition(object sender)
+        public void GetTappedPosition(MapInputEventArgs e)
         {
-            var tappedPosition = ((MapControl)sender).Center.Position;
+            var tappedPosition = e.Location;
+            DrawTappedPoint(tappedPosition);
         }
+
+        private void DrawTappedPoint(Geopoint tappedPosition)
+        {
+            TappedLocation = tappedPosition;
+        }
+
+
     }
 }
