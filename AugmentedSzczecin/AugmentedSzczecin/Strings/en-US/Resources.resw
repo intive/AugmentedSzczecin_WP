@@ -120,6 +120,9 @@
   <data name="AddPointOfInterestTitle.Text" xml:space="preserve">
     <value>Tap to add POI on the map</value>
   </data>
+  <data name="ConfirmNewPointOfInterest" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
   </data>
