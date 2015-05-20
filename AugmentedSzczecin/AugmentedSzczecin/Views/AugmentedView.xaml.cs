@@ -85,7 +85,10 @@ namespace AugmentedSzczecin.Views
 
                     foreach (var poi in _poiLocations)
                     {
-
+                        if (Math.Abs(poi.Location.Latitude) > 90 || Math.Abs(poi.Location.Longitude) > 180)
+                        {
+                            continue;
+                        }
                         var c = new Coordinate(poi.Location.Latitude, poi.Location.Longitude);
                         var poiHeading = SpatialTools.CalculateHeading(center, c);
                         var diff = _currentHeading - poiHeading;
@@ -114,7 +117,7 @@ namespace AugmentedSzczecin.Views
                                 left = ItemCanvas.ActualWidth / 2 * (1 + -diff / 22.5);
                             }
 
-                            double top = ItemCanvas.ActualHeight * (1 - distance / _defaultSearchRadius);
+                            double top = (ItemCanvas.ActualHeight - 50) * (1 - distance / _defaultSearchRadius) + 50;
 
                             var tb = new TextBlock()
                             {
