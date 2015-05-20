@@ -141,6 +141,16 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        public bool CanConfirmNewPointOfInterestAppBarButton
+        {
+            get
+            {
+                bool isPoiTapped = false;
+                return isPoiTapped;
+            }
+        }
+
+
         public void ChangeScaleBar(MapControl temporaryMap)
         {
             double tempZoomLevel = ZoomLevel;

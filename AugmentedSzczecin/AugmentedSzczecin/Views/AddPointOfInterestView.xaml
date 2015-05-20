@@ -60,10 +60,11 @@
     </StackPanel>
     
     <Page.BottomAppBar>
-        <CommandBar Name="ConfirmNewPointOfInterestAppBar">
+        <CommandBar Visibility="{Binding TappedPointVisibility}" x:Name="ConfirmNewPointOfInterestAppBar">
             <AppBarButton
                 x:Name="ConfirmNewPointOfInterestAppBarButton"
-                x:Uid="ConfirmNewPointOfInterest" />
+                x:Uid="ConfirmNewPointOfInterest"
+                Icon="Pin" />
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
