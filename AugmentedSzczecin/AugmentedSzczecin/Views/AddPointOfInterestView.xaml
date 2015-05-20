@@ -56,10 +56,14 @@
             
         </maps:MapControl>
         
+        
+    </StackPanel>
+    
+    <Page.BottomAppBar>
         <AppBar Name="ConfirmNewPointOfInterestAppBar">
             <AppBarButton
                 x:Name="ConfirmNewPointOfInterestAppBarButton"
                 x:Uid="ConfirmNewPointOfInterest" />
         </AppBar>
-    </StackPanel>
+    </Page.BottomAppBar>
 </Page>
