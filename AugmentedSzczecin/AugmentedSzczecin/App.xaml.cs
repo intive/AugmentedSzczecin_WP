@@ -36,6 +36,7 @@ namespace AugmentedSzczecin
             _container.PerRequest<SignInViewModel>();
             _container.PerRequest<ResetPasswordViewModel>();
             _container.PerRequest<AddPointOfInterestViewModel>();
+            _container.PerRequest<CreatePointOfInterestViewModel>();
             _container.PerRequest<IPointOfInterestService, PointOfInterestService>();
             _container.PerRequest<ILocationService, LocationService>();
             _container.PerRequest<IAccountService, AccountService>();
