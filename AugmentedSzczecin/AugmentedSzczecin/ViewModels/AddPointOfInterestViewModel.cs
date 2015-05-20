@@ -292,7 +292,7 @@ namespace AugmentedSzczecin.ViewModels
 
         public void ConfirmNewPointOfInterestClick()
         {
-            
+            _navigationService.NavigateToViewModel<CreatePointOfInterestViewModel>(TappedLocation);
         }
     }
 }
