@@ -141,6 +141,36 @@
   <data name="NewPoiAddressBox.PlaceholderText" xml:space="preserve">
     <value>Add some address...</value>
   </data>
+  <data name="NewPoiAddressCity.Text" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="NewPoiAddressCityBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. Szczecin</value>
+  </data>
+  <data name="NewPoiAddressHouse.Text" xml:space="preserve">
+    <value>Building number</value>
+  </data>
+  <data name="NewPoiAddressHouseBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. 11</value>
+  </data>
+  <data name="NewPoiAddressPlace.Text" xml:space="preserve">
+    <value>Door number</value>
+  </data>
+  <data name="NewPoiAddressPlaceBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. 3</value>
+  </data>
+  <data name="NewPoiAddressPostalCode.Text" xml:space="preserve">
+    <value>Postal code</value>
+  </data>
+  <data name="NewPoiAddressPostalCodeBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. 71-696</value>
+  </data>
+  <data name="NewPoiAddressStreet.Text" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="NewPoiAddressStreetBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. Kormoranów</value>
+  </data>
   <data name="NewPoiCategory.Text" xml:space="preserve">
     <value>Category</value>
   </data>
