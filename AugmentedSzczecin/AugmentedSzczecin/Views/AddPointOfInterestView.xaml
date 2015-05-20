@@ -59,8 +59,7 @@
         <AppBar Name="ConfirmNewPointOfInterestAppBar">
             <AppBarButton
                 x:Name="ConfirmNewPointOfInterestAppBarButton"
-                x:Uid="ConfirmNewPointOfInterest"
-                />
+                x:Uid="ConfirmNewPointOfInterest" />
         </AppBar>
     </StackPanel>
 </Page>
