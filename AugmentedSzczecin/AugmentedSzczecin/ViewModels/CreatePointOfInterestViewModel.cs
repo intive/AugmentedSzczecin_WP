@@ -197,6 +197,13 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService.NavigateToViewModel<AddPointOfInterestViewModel>(Parameter);
         }
 
+        public void AddNewPointOfInterestClick()
+        {
+
+
+            _navigationService.NavigateToViewModel<CurrentMapViewModel>(Parameter);
+        }
+
         public void ExtraFieldsChecked()
         {
             ExtraFieldsVisibility = Visibility.Visible;
