@@ -20,8 +20,9 @@
             <!-- Nazwa -->
             <TextBlock FontSize="15" x:Uid="NewPoiName"/>
             <TextBox
+                Margin="0, 0, 0, 10"
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
                 TabIndex="0"
-                InputScope="0"
                 x:Uid="NewPoiNameBox"
                 x:Name="Name"
                 MaxLength="50"
@@ -29,17 +30,18 @@
 
             <!-- Latitude -->
             <TextBlock FontSize="15" x:Uid="NewPoiLatitude"/>
-            <TextBox IsEnabled="False" x:Name="Latitude" VerticalAlignment="Stretch" />
+            <TextBox Margin="0, 0, 0, 10" IsEnabled="False" x:Name="Latitude" VerticalAlignment="Stretch" />
 
             <!-- Longitude -->
             <TextBlock FontSize="15" x:Uid="NewPoiLongitude"/>
-            <TextBox IsEnabled="False" x:Name="Longitude" VerticalAlignment="Stretch" />
+            <TextBox Margin="0, 0, 0, 10" IsEnabled="False" x:Name="Longitude" VerticalAlignment="Stretch" />
 
             <!-- Opis -->
             <TextBlock FontSize="15" x:Uid="NewPoiDescription"/>
             <TextBox
+                Margin="0, 0, 0, 10"
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
                 TabIndex="1"
-                InputScope="0"
                 x:Uid="NewPoiDescriptionBox"
                 Height="150"
                 MaxLength="500"
@@ -51,6 +53,8 @@
             <!-- Tagi -->
             <TextBlock FontSize="15" x:Uid="NewPoiTags"/>
             <TextBox
+                Margin="0, 0, 0, 10"
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
                 TabIndex="2"
                 x:Uid="NewPoiTagsBox"
                 MaxLength="30"
@@ -63,6 +67,8 @@
             <!-- Adres Ulica -->
             <TextBlock FontSize="12" x:Uid="NewPoiAddressStreet"/>
             <TextBox
+                Margin="0, 0, 0, 10"
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
                 TabIndex="3"
                 MaxLength="60"
                 x:Uid="NewPoiAddressStreetBox"
@@ -72,6 +78,8 @@
             <!-- Adres Kod Pocztowy -->
             <TextBlock FontSize="12" x:Uid="NewPoiAddressPostalCode"/>
             <TextBox
+                Margin="0, 0, 0, 10"
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
                 TabIndex="4"
                 x:Uid="NewPoiAddressPostalCodeBox"
                 x:Name="AddressPostalCode"
@@ -80,38 +88,72 @@
             <!-- Adres Miasto -->
             <TextBlock FontSize="12" x:Uid="NewPoiAddressCity"/>
             <TextBox
+                Margin="0, 0, 0, 10"
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
                 TabIndex="5"
                 MaxLength="30"
                 x:Uid="NewPoiAddressCityBox"
                 x:Name="AddressCity"
                 VerticalAlignment="Stretch" />
 
-            <!-- Adres Nr budynku -->
-            <TextBlock FontSize="12" x:Uid="NewPoiAddressHouse"/>
-            <TextBox
-                TabIndex="6"
-                MaxLength="10"
-                x:Uid="NewPoiAddressHouseBox"
-                x:Name="AddressHouse"
-                VerticalAlignment="Stretch" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <!-- Adres Nr lokalu -->
-            <TextBlock FontSize="12" x:Uid="NewPoiAddressPlace"/>
-            <TextBox
-                TabIndex="7"
-                MaxLength="5"
-                x:Uid="NewPoiAddressPlaceBox"
-                x:Name="AddressPlace"
-                VerticalAlignment="Stretch" />
+                <!-- Adres Nr budynku -->
+                <TextBlock Grid.Column="0" FontSize="12" x:Uid="NewPoiAddressHouse"/>
+                <TextBox
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    Margin="0, 15, 5, 5"
+                    Grid.Column="0"
+                    TabIndex="6"
+                    MaxLength="10"
+                    x:Uid="NewPoiAddressHouseBox"
+                    x:Name="AddressHouse"
+                    VerticalAlignment="Stretch" />
+
+                <!-- Adres Nr lokalu -->
+                <TextBlock Margin="5, 0, 0, 0"  Grid.Column="1" FontSize="12" x:Uid="NewPoiAddressPlace"/>
+                <TextBox
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    Margin="5, 15, 0, 5"
+                    Grid.Column="1"
+                    TabIndex="7"
+                    MaxLength="5"
+                    x:Uid="NewPoiAddressPlaceBox"
+                    x:Name="AddressPlace"
+                    VerticalAlignment="Stretch" />
+            </Grid>
 
             <!-- Kategoria -->
-            <TextBlock Text="Category" FontSize="15" x:Uid="NewPoiCategory"/>
-            <ComboBox TabIndex="8" x:Uid="NewPoiCategoryBox" x:Name="Category">
-                <ComboBoxItem x:Uid="NewPoiCategoryFirst" />
-                <ComboBoxItem x:Uid="NewPoiCategorySecond" />
-                <ComboBoxItem x:Uid="NewPoiCategoryThird" />
-                <ComboBoxItem x:Uid="NewPoiCategoryFourth" />
-            </ComboBox>
+            <TextBlock FontSize="15" x:Uid="NewPoiCategory"/>
+            <ComboBox
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                TabIndex="8"
+                x:Uid="NewPoiCategoryBox"
+                x:Name="CategoryItems" />
+
+            <!-- Podkategoria -->
+            <TextBlock Visibility="{Binding SubCategoryVisibility}" FontSize="15" x:Uid="NewPoiSubCategory"/>
+            <ComboBox
+                Visibility="{Binding SubCategoryVisibility}"
+                x:Uid="NewPoiSubCategoryBox"
+                x:Name="SubCategoryItems" />
+
+            <CheckBox
+                caliburn:Message.Attach="[Event Checked] = [Action ExtraFieldsChecked]; [Event Unchecked] = [Action ExtraFieldsUnchecked]"
+                Content="Extra Fields" />
+            
+
+            <Grid Visibility="{Binding ExtraFieldsVisibility}">
+                <TextBlock
+                x:Uid="CreatePointOfInterestExtraTitle"
+                TextWrapping="NoWrap"
+                FontSize="36"
+                Margin="8,0,0,16"/>
+            </Grid>
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -123,10 +165,12 @@
                     caliburn:Message.Attach="[Event Click] = [Action CancelNewPointOfInterestClick]"
                     x:Uid="CancelAddingPointOfInterest"
                     HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     Grid.Column="0" />
                 <Button
                     x:Uid="AddNewPointOfInterest"
                     HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     Grid.Column="1" />
             </Grid>
         </StackPanel>
