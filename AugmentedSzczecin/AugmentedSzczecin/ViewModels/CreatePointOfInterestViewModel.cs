@@ -13,13 +13,23 @@ namespace AugmentedSzczecin.ViewModels
 {
     public class CreatePointOfInterestViewModel : Screen
     {
+        #region Private & Public Fields
+
         private readonly INavigationService _navigationService;
-        private ResourceLoader _loader = new ResourceLoader();
+        private readonly ResourceLoader _loader = new ResourceLoader();
+
+        #endregion
+
+        #region Constructors
 
         public CreatePointOfInterestViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
         }
+
+        #endregion
+
+        #region Properties
 
         public BindableCollection<string> CategoryItems
         {
@@ -34,7 +44,7 @@ namespace AugmentedSzczecin.ViewModels
                 });
             }
         }
-        
+
         private string _selectedCategoryItem;
         public string SelectedCategoryItem
         {
@@ -168,11 +178,19 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        #endregion
+
+        #region Override Methods
+
         protected override void OnActivate()
         {
             Latitude = Parameter.Position.Latitude;
             Longitude = Parameter.Position.Longitude;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void CancelNewPointOfInterestClick()
         {
@@ -196,5 +214,13 @@ namespace AugmentedSzczecin.ViewModels
                 FocusManager.TryMoveFocus(FocusNavigationDirection.Next);
             }
         }
+
+        #endregion
+
+        #region Private Methods
+
+
+
+        #endregion
     }
 }
