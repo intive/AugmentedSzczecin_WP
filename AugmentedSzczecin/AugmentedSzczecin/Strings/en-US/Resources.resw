@@ -177,16 +177,16 @@
   <data name="NewPoiCategoryBox.PlaceholderText" xml:space="preserve">
     <value>Choose category...</value>
   </data>
-  <data name="NewPoiCategoryFirst.Content" xml:space="preserve">
+  <data name="NewPoiCategoryFirst" xml:space="preserve">
     <value>Public Place</value>
   </data>
-  <data name="NewPoiCategoryFourth.Content" xml:space="preserve">
+  <data name="NewPoiCategoryFourth" xml:space="preserve">
     <value>Friend</value>
   </data>
-  <data name="NewPoiCategorySecond.Content" xml:space="preserve">
+  <data name="NewPoiCategorySecond" xml:space="preserve">
     <value>Company &amp; Service</value>
   </data>
-  <data name="NewPoiCategoryThird.Content" xml:space="preserve">
+  <data name="NewPoiCategoryThird" xml:space="preserve">
     <value>Event</value>
   </data>
   <data name="NewPoiDescription.Text" xml:space="preserve">
@@ -206,6 +206,39 @@
   </data>
   <data name="NewPoiNameBox.PlaceholderText" xml:space="preserve">
     <value>Add some name...</value>
+  </data>
+  <data name="NewPoiSubCategory.Text" xml:space="preserve">
+    <value>Subcategory</value>
+  </data>
+  <data name="NewPoiSubCategoryEighth" xml:space="preserve">
+    <value>Railway Station</value>
+  </data>
+  <data name="NewPoiSubCategoryFifth" xml:space="preserve">
+    <value>Museum</value>
+  </data>
+  <data name="NewPoiSubCategoryFirst" xml:space="preserve">
+    <value>School</value>
+  </data>
+  <data name="NewPoiSubCategoryFourth" xml:space="preserve">
+    <value>Monument</value>
+  </data>
+  <data name="NewPoiSubCategoryNinth" xml:space="preserve">
+    <value>Post Office</value>
+  </data>
+  <data name="NewPoiSubCategorySecond" xml:space="preserve">
+    <value>Hospital</value>
+  </data>
+  <data name="NewPoiSubCategorySeventh" xml:space="preserve">
+    <value>Bus Station</value>
+  </data>
+  <data name="NewPoiSubCategorySixth" xml:space="preserve">
+    <value>Office</value>
+  </data>
+  <data name="NewPoiSubCategoryTenth" xml:space="preserve">
+    <value>Church</value>
+  </data>
+  <data name="NewPoiSubCategoryThird" xml:space="preserve">
+    <value>Park</value>
   </data>
   <data name="NewPoiTags.Text" xml:space="preserve">
     <value>Tags</value>
