@@ -129,17 +129,23 @@
   <data name="ConfirmNewPointOfInterest.Label" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="CreatePointOfInterestExtraTitle.Text" xml:space="preserve">
+    <value>Extra Fields</value>
+  </data>
   <data name="CreatePointOfInterestTitle.Text" xml:space="preserve">
     <value>Creating POI</value>
   </data>
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
   </data>
+  <data name="Friday.Content" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="Monday.Content" xml:space="preserve">
+    <value>Monday</value>
+  </data>
   <data name="NewPoiAddress.Text" xml:space="preserve">
     <value>Address</value>
-  </data>
-  <data name="NewPoiAddressBox.PlaceholderText" xml:space="preserve">
-    <value>Add some address...</value>
   </data>
   <data name="NewPoiAddressCity.Text" xml:space="preserve">
     <value>City</value>
@@ -195,6 +201,12 @@
   <data name="NewPoiDescriptionBox.PlaceholderText" xml:space="preserve">
     <value>Add some description...</value>
   </data>
+  <data name="NewPoiFanpage.Text" xml:space="preserve">
+    <value>Fanpage</value>
+  </data>
+  <data name="NewPoiFanpageBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. fb.com/BLStreamPatronage</value>
+  </data>
   <data name="NewPoiLatitude.Text" xml:space="preserve">
     <value>Latitude</value>
   </data>
@@ -205,7 +217,25 @@
     <value>Name</value>
   </data>
   <data name="NewPoiNameBox.PlaceholderText" xml:space="preserve">
-    <value>Add some name...</value>
+    <value>e.g. My new POI</value>
+  </data>
+  <data name="NewPoiOpeningDays.Text" xml:space="preserve">
+    <value>Opening Days</value>
+  </data>
+  <data name="NewPoiOpeningHours.Text" xml:space="preserve">
+    <value>Opening Hours</value>
+  </data>
+  <data name="NewPoiPhone.Text" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="NewPoiPhoneBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. 123456789</value>
+  </data>
+  <data name="NewPoiPrice.Text" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="NewPoiPriceBox.PlaceholderText" xml:space="preserve">
+    <value>Payable/Free</value>
   </data>
   <data name="NewPoiSubCategory.Text" xml:space="preserve">
     <value>Subcategory</value>
@@ -244,13 +274,40 @@
     <value>Tags</value>
   </data>
   <data name="NewPoiTagsBox.PlaceholderText" xml:space="preserve">
-    <value>Add some tags...</value>
+    <value>e.g. best, epic, rare, ...</value>
+  </data>
+  <data name="NewPoiWebsite.Text" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="NewPoiWebsiteBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. www.blstream.com</value>
+  </data>
+  <data name="NewPoiWikipedia.Text" xml:space="preserve">
+    <value>Wikipedia</value>
+  </data>
+  <data name="NewPoiWikipediaBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. wikipedia.org/wiki/Microsoft</value>
+  </data>
+  <data name="OpeningHoursFrom.Text" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="OpeningHoursTo.Text" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="PriceFree" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="PricePayable" xml:space="preserve">
+    <value>Payable</value>
   </data>
   <data name="ResetPasswordButtonReset.Content" xml:space="preserve">
     <value>Reset password</value>
   </data>
   <data name="ResetPasswordProgressRing.Text" xml:space="preserve">
     <value>Sending request</value>
+  </data>
+  <data name="Saturday.Content" xml:space="preserve">
+    <value>Saturday</value>
   </data>
   <data name="SignEmail.Text" xml:space="preserve">
     <value>E-mail</value>
@@ -290,5 +347,17 @@
   </data>
   <data name="SignUpProgressRing.Text" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="Sunday.Content" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="Thursday.Content" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="Tuesday.Content" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="Wednesday.Content" xml:space="preserve">
+    <value>Wednesday</value>
   </data>
 </root>
