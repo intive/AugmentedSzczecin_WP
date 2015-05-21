@@ -262,7 +262,6 @@
                     VerticalAlignment="Center"
                     Grid.Column="0" />
                 <Button
-                    caliburn:Message.Attach="[Event Click] = [Action AddNewPointOfInterestClick]"
                     x:Uid="AddNewPointOfInterest"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
