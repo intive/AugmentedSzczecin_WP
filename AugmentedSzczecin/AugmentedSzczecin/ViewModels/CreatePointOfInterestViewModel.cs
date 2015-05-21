@@ -216,11 +216,5 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         #endregion
-
-        #region Private Methods
-
-
-
-        #endregion
     }
 }
