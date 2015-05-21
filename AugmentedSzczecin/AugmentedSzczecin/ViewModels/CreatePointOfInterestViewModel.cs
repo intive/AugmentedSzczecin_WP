@@ -34,7 +34,7 @@ namespace AugmentedSzczecin.ViewModels
                 });
             }
         }
-
+        
         private string _selectedCategoryItem;
         public string SelectedCategoryItem
         {
@@ -85,6 +85,30 @@ namespace AugmentedSzczecin.ViewModels
                 NotifyOfPropertyChange(() => SelectedSubCategoryItem);
             }
         }
+
+        public BindableCollection<string> FeeOptions
+        {
+            get
+            {
+                return new BindableCollection<string>(new string[]
+                {
+                    _loader.GetString("PricePayable"),
+                    _loader.GetString("PriceFree"),
+                });
+            }
+        }
+
+        private string _selectedFeeOption;
+        public string SelectedFeeOption
+        {
+            get { return _selectedFeeOption; }
+            set
+            {
+                _selectedFeeOption = value;
+                NotifyOfPropertyChange(() => SelectedFeeOption);
+            }
+        }
+
 
         public Geopoint Parameter { get; set; }
 

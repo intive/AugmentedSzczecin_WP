@@ -78,9 +78,11 @@
             <!-- Adres Kod Pocztowy -->
             <TextBlock FontSize="12" x:Uid="NewPoiAddressPostalCode"/>
             <TextBox
+                InputScope="32"
                 Margin="0, 0, 0, 10"
                 caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
                 TabIndex="4"
+                MaxLength="6"
                 x:Uid="NewPoiAddressPostalCodeBox"
                 x:Name="AddressPostalCode"
                 VerticalAlignment="Stretch" />
@@ -130,8 +132,6 @@
             <!-- Kategoria -->
             <TextBlock FontSize="15" x:Uid="NewPoiCategory"/>
             <ComboBox
-                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
-                TabIndex="8"
                 x:Uid="NewPoiCategoryBox"
                 x:Name="CategoryItems" />
 
@@ -145,15 +145,109 @@
             <CheckBox
                 caliburn:Message.Attach="[Event Checked] = [Action ExtraFieldsChecked]; [Event Unchecked] = [Action ExtraFieldsUnchecked]"
                 Content="Extra Fields" />
-            
 
-            <Grid Visibility="{Binding ExtraFieldsVisibility}">
+
+            <StackPanel Visibility="{Binding ExtraFieldsVisibility}">
                 <TextBlock
-                x:Uid="CreatePointOfInterestExtraTitle"
-                TextWrapping="NoWrap"
-                FontSize="36"
-                Margin="8,0,0,16"/>
-            </Grid>
+                    x:Uid="CreatePointOfInterestExtraTitle"
+                    TextWrapping="NoWrap"
+                    FontSize="36"
+                    Margin="8,0,0,16"/>
+
+                <!-- Adres WWW -->
+                <TextBlock FontSize="15" x:Uid="NewPoiWebsite"/>
+                <TextBox
+                    InputScope="1"
+                    Margin="0, 0, 0, 10"
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    TabIndex="8"
+                    x:Uid="NewPoiWebsiteBox"
+                    x:Name="Website"
+                    MaxLength="100"
+                    VerticalAlignment="Stretch" />
+
+                <!-- Numer telefonu -->
+                <TextBlock FontSize="15" x:Uid="NewPoiPhone"/>
+                <TextBox
+                    InputScope="32"
+                    Margin="0, 0, 0, 10"
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    TabIndex="9"
+                    x:Uid="NewPoiPhoneBox"
+                    x:Name="Phone"
+                    MaxLength="9"
+                    VerticalAlignment="Stretch" />
+
+                <!-- Wikipedia -->
+                <TextBlock FontSize="15" x:Uid="NewPoiWikipedia"/>
+                <TextBox
+                    InputScope="1"
+                    Margin="0, 0, 0, 10"
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    TabIndex="10"
+                    x:Uid="NewPoiWikipediaBox"
+                    x:Name="Wikipedia"
+                    MaxLength="100"
+                    VerticalAlignment="Stretch" />
+
+                <!-- Fanpage -->
+                <TextBlock FontSize="15" x:Uid="NewPoiFanpage"/>
+                <TextBox
+                    InputScope="1"
+                    Margin="0, 0, 0, 10"
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    TabIndex="11"
+                    x:Uid="NewPoiFanpageBox"
+                    x:Name="Fanpage"
+                    MaxLength="100"
+                    VerticalAlignment="Stretch" />
+
+                <!-- Dni otwarcia -->
+                <TextBlock FontSize="15" x:Uid="NewPoiOpeningDays"/>
+                <Grid Background="{StaticResource GridViewItemPlaceholderBackgroundThemeBrush}" Margin="0, 0, 0, 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <CheckBox Grid.Row="0" Grid.Column="0" Content="Monday" x:Name="Monday" x:Uid="Monday" />
+                    <CheckBox Grid.Row="0" Grid.Column="1" Content="Tuesday" x:Name="Tuesday" x:Uid="Tuesday" />
+                    <CheckBox Grid.Row="0" Grid.Column="2" Content="Wednesday" x:Name="Wednesday" x:Uid="Wednesday" />
+
+                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Thursday" x:Name="Thursday" x:Uid="Thursday" />
+                    <CheckBox Grid.Row="1" Grid.Column="1" Content="Friday" x:Name="Friday" x:Uid="Friday" />
+                    <CheckBox Grid.Row="1" Grid.Column="2" Content="Sturday" x:Name="Saturday" x:Uid="Saturday" />
+
+                    <CheckBox Grid.Row="2" Grid.Column="1" Content="Sunday"  x:Name="Sunday" x:Uid="Sunday" />
+                </Grid>
+
+                <!-- Godziny otwarcia -->
+                <TextBlock FontSize="15" x:Uid="NewPoiOpeningHours"/>
+                <Grid Background="{StaticResource GridViewItemPlaceholderBackgroundThemeBrush}" Margin="0, 0, 0, 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Grid.Column="0" FontSize="12" x:Uid="OpeningHoursFrom" />
+                    <TimePicker x:Name="OpenFrom"  Margin="0, 5, 0, 0" Time="8:00" ClockIdentifier="24HourClock" HorizontalAlignment="Center" Grid.Column="0" />
+
+                    <TextBlock HorizontalAlignment="Center" Grid.Column="1" FontSize="12" x:Uid="OpeningHoursTo" />
+                    <TimePicker x:Name="OpenTo"  Margin="0, 5, 0, 0" Time="16:00" ClockIdentifier="24HourClock" HorizontalAlignment="Center" Grid.Column="1"  />
+                </Grid>
+
+                <!-- Cena -->
+                <TextBlock FontSize="15" x:Uid="NewPoiPrice"/>
+                <ComboBox
+                    x:Uid="NewPoiPriceBox"
+                    x:Name="FeeOptions" />
+
+            </StackPanel>
 
             <Grid>
                 <Grid.ColumnDefinitions>
