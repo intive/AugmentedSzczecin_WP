@@ -2,7 +2,7 @@
 
 namespace AugmentedSzczecin.AbstractClasses
 {
-    public abstract class SideMenuFilter : Screen
+    public abstract class FilteredPOIViewBase : Screen
     {
         private string _selectedCategory;
         public string SelectedCategory

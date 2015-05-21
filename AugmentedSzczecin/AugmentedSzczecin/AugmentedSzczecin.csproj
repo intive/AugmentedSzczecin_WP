@@ -98,7 +98,7 @@
     <Compile Include="Interfaces\IHttpService.cs" />
     <Compile Include="Interfaces\ILocationService.cs" />
     <Compile Include="Interfaces\IPointOfInterestService.cs" />
-    <Compile Include="AbstractClasses\SideMenuFilter.cs" />
+    <Compile Include="AbstractClasses\FilteredPOIViewBase.cs" />
     <Compile Include="Interfaces\IUserDataStorageService.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
     <Compile Include="Models\Token.cs" />

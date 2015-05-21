@@ -21,7 +21,7 @@ namespace AugmentedSzczecin.UserControls
         {
             this.InitializeComponent();
             Categories = CategoriesToChoose;
-            (this.Content as FrameworkElement).DataContext = this;
+            //SideMenuFilterRoot.DataContext = this;
         }
 
         public static readonly DependencyProperty CategoriesProperty = DependencyProperty.Register(

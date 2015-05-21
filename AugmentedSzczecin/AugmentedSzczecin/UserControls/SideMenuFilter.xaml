@@ -1,4 +1,5 @@
 ﻿<UserControl
+    x:Name="SideMenuFilterRoot"
     x:Class="AugmentedSzczecin.UserControls.SideMenuFilter"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,7 +11,7 @@
     d:DesignWidth="400">
 
     <StackPanel>
-        <ComboBox x:Name="ListOfCategories" ItemsSource="{Binding Categories, Mode=TwoWay, Converter={StaticResource EnumTypeToListConverter}}" SelectionChanged="ListOfCategories_SelectionChanged" SelectedItem="{Binding SelectedCategory}">
+        <ComboBox x:Name="ListOfCategories" ItemsSource="{Binding Categories, ElementName=SideMenuFilterRoot, Mode=TwoWay, Converter={StaticResource EnumTypeToListConverter}}" SelectionChanged="ListOfCategories_SelectionChanged" SelectedItem="{Binding SelectedCategory}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

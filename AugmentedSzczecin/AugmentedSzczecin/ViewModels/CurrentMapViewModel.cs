@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : SideMenuFilter, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
+    public class CurrentMapViewModel : FilteredPOIViewBase, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
         private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
