@@ -49,19 +49,19 @@ namespace AugmentedSzczecin.Models
             Id = id;
         }
 
-        public string Id 
-        { 
-            get; 
-            private set; 
+        public string Id
+        {
+            get;
+            private set;
         }
 
         [JsonProperty(PropertyName = "Name")]
         private string _name;
         public string Name
         {
-            get 
-            { 
-                return _name; 
+            get
+            {
+                return _name;
             }
             set
             {
@@ -95,9 +95,9 @@ namespace AugmentedSzczecin.Models
         private string _description;
         public string Description
         {
-            get 
-            { 
-                return _description; 
+            get
+            {
+                return _description;
             }
             set
             {
@@ -113,9 +113,9 @@ namespace AugmentedSzczecin.Models
         private string _tags;
         public string Tags
         {
-            get 
-            { 
-                return _tags; 
+            get
+            {
+                return _tags;
             }
             set
             {
@@ -131,9 +131,9 @@ namespace AugmentedSzczecin.Models
         private string _streetName;
         public string StreetName
         {
-            get 
-            { 
-                return _streetName; 
+            get
+            {
+                return _streetName;
             }
             set
             {
@@ -149,9 +149,9 @@ namespace AugmentedSzczecin.Models
         private string _postalCode;
         public string PostalCode
         {
-            get 
-            { 
-                return _postalCode; 
+            get
+            {
+                return _postalCode;
             }
             set
             {
@@ -167,9 +167,9 @@ namespace AugmentedSzczecin.Models
         private string _country;
         public string Country
         {
-            get 
-            { 
-                return _country; 
+            get
+            {
+                return _country;
             }
             set
             {
@@ -185,9 +185,9 @@ namespace AugmentedSzczecin.Models
         private string _website;
         public string Website
         {
-            get 
-            { 
-                return _website; 
+            get
+            {
+                return _website;
             }
             set
             {
@@ -203,9 +203,9 @@ namespace AugmentedSzczecin.Models
         private string _phone;
         public string Phone
         {
-            get 
-            { 
-                return _phone; 
+            get
+            {
+                return _phone;
             }
             set
             {
@@ -221,9 +221,9 @@ namespace AugmentedSzczecin.Models
         private string _fanpage;
         public string Fanpage
         {
-            get 
-            { 
-                return _fanpage; 
+            get
+            {
+                return _fanpage;
             }
             set
             {
@@ -239,9 +239,9 @@ namespace AugmentedSzczecin.Models
         private string _wikipedia;
         public string Wikipedia
         {
-            get 
-            { 
-                return _wikipedia; 
+            get
+            {
+                return _wikipedia;
             }
             set
             {
@@ -257,9 +257,9 @@ namespace AugmentedSzczecin.Models
         private string _openingDays;
         public string OpeningDays
         {
-            get 
-            { 
-                return _openingDays; 
+            get
+            {
+                return _openingDays;
             }
             set
             {
@@ -275,9 +275,9 @@ namespace AugmentedSzczecin.Models
         private string _openingHours;
         public string OpeningHours
         {
-            get 
-            { 
-                return _openingHours; 
+            get
+            {
+                return _openingHours;
             }
             set
             {
@@ -293,9 +293,9 @@ namespace AugmentedSzczecin.Models
         private string _category;
         public string Category
         {
-            get 
-            { 
-                return _category; 
+            get
+            {
+                return _category;
             }
             set
             {
@@ -311,9 +311,9 @@ namespace AugmentedSzczecin.Models
         private string _price;
         public string Price
         {
-            get 
-            { 
-                return _price; 
+            get
+            {
+                return _price;
             }
             set
             {
@@ -329,9 +329,9 @@ namespace AugmentedSzczecin.Models
         private string _owner;
         public string Owner
         {
-            get 
-            { 
-                return _owner; 
+            get
+            {
+                return _owner;
             }
             set
             {
