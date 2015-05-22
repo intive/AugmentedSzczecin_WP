@@ -9,7 +9,7 @@ namespace AugmentedSzczecin.ViewModels
         private readonly IPointOfInterestService _pointOfInterestService;
         private readonly ILocationService _locationService;
 
-        private int _radius = 200;
+        private int _radius;
         public int Radius
         {
             get
@@ -20,6 +20,7 @@ namespace AugmentedSzczecin.ViewModels
             {
                 _radius = value;
                 NotifyOfPropertyChange(() => Radius);
+                LoadPoIs();
             }
         }
 
@@ -28,19 +29,24 @@ namespace AugmentedSzczecin.ViewModels
             _eventAggregator = eventAggregator;
             _pointOfInterestService = pointOfInterestService;
             _locationService = locationService;
+            Radius = 300;
         }
-        protected override async void OnActivate()
+        protected override void OnActivate()
         {
             base.OnActivate();
             _eventAggregator.Subscribe(this);
-            Geopoint point = await _locationService.GetGeolocation();
-            _pointOfInterestService.LoadPoIs(point.Position.Latitude, point.Position.Longitude, Radius);
         }
 
         protected override void OnDeactivate(bool close)
         {
             base.OnDeactivate(close);
             _eventAggregator.Unsubscribe(this);    
+        }
+
+        public async void LoadPoIs()
+        {
+            Geopoint point = await _locationService.GetGeolocation();
+            _pointOfInterestService.LoadPoIs(point.Position.Latitude, point.Position.Longitude, Radius);
         }
     }
 }
