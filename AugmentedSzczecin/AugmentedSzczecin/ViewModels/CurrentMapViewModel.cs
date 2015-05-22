@@ -1,27 +1,27 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
 using Windows.Networking.Connectivity;
 using Windows.Phone.UI.Input;
+using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Controls.Primitives;
+using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Helpers;
 using AugmentedSzczecin.Interfaces;
-using Caliburn.Micro;
-using AugmentedSzczecin.Events;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources;
 using AugmentedSzczecin.Models;
-using AugmentedSzczecin.Views;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.System;
+using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
 {
     public class CurrentMapViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
+        #region Private & Public Fields
+
         private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
 
         private readonly IEventAggregator _eventAggregator;
@@ -29,15 +29,23 @@ namespace AugmentedSzczecin.ViewModels
         private readonly ILocationService _locationService;
         private readonly IPointOfInterestService _pointOfInterestService;
 
+        #endregion
+
+        #region Constructors
+
         public CurrentMapViewModel(IEventAggregator eventAggregator,
-            ILocationService locationService, IPointOfInterestService pointOfInterestService,
-            INavigationService navigationService)
+                    ILocationService locationService, IPointOfInterestService pointOfInterestService,
+                    INavigationService navigationService)
         {
             _eventAggregator = eventAggregator;
             _navigationService = navigationService;
             _locationService = locationService;
             _pointOfInterestService = pointOfInterestService;
         }
+
+        #endregion
+
+        #region Properties
 
         private ObservableCollection<PointOfInterest> _mapLocations;
         public ObservableCollection<PointOfInterest> MapLocations
@@ -153,6 +161,10 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        #endregion
+
+        #region Override Methods
+
         protected override void OnActivate()
         {
             _eventAggregator.Subscribe(this);
@@ -173,26 +185,9 @@ namespace AugmentedSzczecin.ViewModels
             base.OnDeactivate(close);
         }
 
-        private void CheckConnectionsAvailability()
-        {
-            if (!InternetConnection && !GeolocationEnabled)
-            {
-                BothConnectionDisabledMessage();
-            }
-            if (!InternetConnection && GeolocationEnabled)
-            {
-                InternetConnectionDisabledMessage();
-            }
-            if (InternetConnection && !GeolocationEnabled)
-            {
-                GeolocationDisabledMessage();
-            }
-            if (!InternetConnection || !GeolocationEnabled) return;
+        #endregion
 
-            SetGeolocation();
-            _mapLocations = new ObservableCollection<PointOfInterest>();
-            RefreshPointOfInterestService();
-        }
+        #region Public Methods
 
         public void ChangeScaleBar(MapControl temporaryMap)
         {
@@ -237,6 +232,62 @@ namespace AugmentedSzczecin.ViewModels
             InternetConnection = true;
         }
 
+        public void RefreshConnectionClick()
+        {
+            UpdateInternetConnection();
+            UpdateGeolocationEnabled();
+            CheckConnectionsAvailability();
+        }
+
+        public void InternetConnectionDisabledMessage()
+        {
+            var loader = new ResourceLoader();
+            var internetConnectionDisabledMessage = loader.GetString("InternetConnectionDisabledMessage");
+            ShowConnectionDisabledMessage(internetConnectionDisabledMessage, "1");
+        }
+
+        public void NavigateToMain()
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            _navigationService.GoBack();
+        }
+
+        public void Handle(PointOfInterestLoadedEvent e)
+        {
+            MapLocations = e.PointOfInterestList;
+        }
+
+        public async void Handle(PointOfInterestLoadFailedEvent e)
+        {
+            var message = new MessageDialog(e.PointOfInterestLoadException.Message);
+            await message.ShowAsync();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void CheckConnectionsAvailability()
+        {
+            if (!InternetConnection && !GeolocationEnabled)
+            {
+                BothConnectionDisabledMessage();
+            }
+            if (!InternetConnection && GeolocationEnabled)
+            {
+                InternetConnectionDisabledMessage();
+            }
+            if (InternetConnection && !GeolocationEnabled)
+            {
+                GeolocationDisabledMessage();
+            }
+            if (!InternetConnection || !GeolocationEnabled) return;
+
+            SetGeolocation();
+            _mapLocations = new ObservableCollection<PointOfInterest>();
+            RefreshPointOfInterestService();
+        }
+
         private void UpdateGeolocationEnabled()
         {
             var isGeolocationEnabled = _locationService.IsGeolocationEnabled();
@@ -250,25 +301,11 @@ namespace AugmentedSzczecin.ViewModels
             GeolocationEnabled = true;
         }
 
-        public void RefreshConnectionClick()
-        {
-            UpdateInternetConnection();
-            UpdateGeolocationEnabled();
-            CheckConnectionsAvailability();
-        }
-
         private void BothConnectionDisabledMessage()
         {
             var loader = new ResourceLoader();
             var bothConnectionDisabledMessage = loader.GetString("BothConnectionDisabledMessage");
             ShowConnectionDisabledMessage(bothConnectionDisabledMessage, "2");
-        }
-
-        public void InternetConnectionDisabledMessage()
-        {
-            var loader = new ResourceLoader();
-            var internetConnectionDisabledMessage = loader.GetString("InternetConnectionDisabledMessage");
-            ShowConnectionDisabledMessage(internetConnectionDisabledMessage, "1");
         }
 
         private void GeolocationDisabledMessage()
@@ -289,23 +326,6 @@ namespace AugmentedSzczecin.ViewModels
             message.ShowAsync();
         }
 
-        public void NavigateToMain()
-        {
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-            _navigationService.GoBack();
-        }
-
-        public void Handle(PointOfInterestLoadedEvent e)
-        {
-            MapLocations = e.PointOfInterestList;
-        }
-
-        public async void Handle(PointOfInterestLoadFailedEvent e)
-        {
-            var message = new MessageDialog(e.PointOfInterestLoadException.Message);
-            await message.ShowAsync();
-        }
-
         private void BackButtonInvokedHandler(IUICommand command)
         {
             switch (command.Label)
@@ -315,7 +335,7 @@ namespace AugmentedSzczecin.ViewModels
                     NavigateToMain();
                     break;
                 case "Settings":
-                    if(ReferenceEquals(command.Id, "2"))
+                    if (ReferenceEquals(command.Id, "2"))
                         Launcher.LaunchUriAsync(new Uri("ms-settings-wifi://"));
                     if (ReferenceEquals(command.Id, "1"))
                         Launcher.LaunchUriAsync(new Uri("ms-settings-wifi://"));
@@ -351,5 +371,7 @@ namespace AugmentedSzczecin.ViewModels
         {
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
+
+        #endregion
     }
 }
