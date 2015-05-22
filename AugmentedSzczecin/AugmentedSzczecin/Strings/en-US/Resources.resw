@@ -183,6 +183,9 @@
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
   </data>
+  <data name="ExtraFieldsCheckBox.Content" xml:space="preserve">
+    <value>Extra Fields</value>
+  </data>
   <data name="Friday.Content" xml:space="preserve">
     <value>Friday</value>
   </data>
@@ -267,9 +270,6 @@
   <data name="NewPoiOpeningDays.Text" xml:space="preserve">
     <value>Opening Days</value>
   </data>
-  <data name="NewPoiOpeningHours.Text" xml:space="preserve">
-    <value>Opening Hours</value>
-  </data>
   <data name="NewPoiPhone.Text" xml:space="preserve">
     <value>Phone</value>
   </data>
@@ -335,6 +335,9 @@
   </data>
   <data name="NewPoiWikipediaBox.PlaceholderText" xml:space="preserve">
     <value>e.g. wikipedia.org/wiki/Microsoft</value>
+  </data>
+  <data name="OpeningHoursCheckBox.Content" xml:space="preserve">
+    <value>Opening Hours</value>
   </data>
   <data name="OpeningHoursFrom.Text" xml:space="preserve">
     <value>From</value>
