@@ -169,6 +169,8 @@ namespace AugmentedSzczecin.ViewModels
             }
 
             UpdateInternetConnection();
+            UpdateGeolocationEnabled();
+
             if (!InternetConnection)
             {
                 InternetConnectionDisabledMsg();
@@ -227,6 +229,19 @@ namespace AugmentedSzczecin.ViewModels
             }
 
             InternetConnection = true;
+        }
+
+        private void UpdateGeolocationEnabled()
+        {
+            var isGeolocationEnabled = _locationService.IsGeolocationEnabled();
+
+            if (!isGeolocationEnabled)
+            {
+                GeolocationEnabled = false;
+                return;
+            }
+
+            GeolocationEnabled = true;
         }
 
         public async void InternetConnectionDisabledMsg()
