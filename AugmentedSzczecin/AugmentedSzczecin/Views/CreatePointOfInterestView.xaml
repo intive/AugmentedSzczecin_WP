@@ -15,10 +15,10 @@
                 x:Uid="CreatePointOfInterestTitle"
                 TextWrapping="NoWrap"
                 FontSize="36"
-                Margin="8,0,0,16"/>
+                Margin="8,0,0,16" />
 
             <!-- Nazwa -->
-            <TextBlock FontSize="15" x:Uid="NewPoiName"/>
+            <TextBlock FontSize="15" x:Uid="NewPoiName" />
             <TextBox
                 Background="{StaticResource TextBoxPlaceholderTextThemeBrush}"
                 x:FieldModifier="Public"
@@ -31,15 +31,15 @@
                 VerticalAlignment="Stretch" />
 
             <!-- Latitude -->
-            <TextBlock FontSize="15" x:Uid="NewPoiLatitude"/>
+            <TextBlock FontSize="15" x:Uid="NewPoiLatitude" />
             <TextBox Margin="0, 0, 0, 10" IsEnabled="False" x:Name="Latitude" VerticalAlignment="Stretch" />
 
             <!-- Longitude -->
-            <TextBlock FontSize="15" x:Uid="NewPoiLongitude"/>
+            <TextBlock FontSize="15" x:Uid="NewPoiLongitude" />
             <TextBox Margin="0, 0, 0, 10" IsEnabled="False" x:Name="Longitude" VerticalAlignment="Stretch" />
 
             <!-- Opis -->
-            <TextBlock FontSize="15" x:Uid="NewPoiDescription"/>
+            <TextBlock FontSize="15" x:Uid="NewPoiDescription" />
             <TextBox
                 x:FieldModifier="Public"
                 Margin="0, 0, 0, 10"
@@ -54,7 +54,7 @@
                 VerticalAlignment="Stretch" />
 
             <!-- Tagi -->
-            <TextBlock FontSize="15" x:Uid="NewPoiTags"/>
+            <TextBlock FontSize="15" x:Uid="NewPoiTags" />
             <TextBox
                 x:FieldModifier="Public"
                 Margin="0, 0, 0, 10"
@@ -66,10 +66,10 @@
                 VerticalAlignment="Stretch" />
 
             <!-- Adres -->
-            <TextBlock Margin="0, 0, 0, 5" FontSize="15" x:Uid="NewPoiAddress"/>
+            <TextBlock Margin="0, 0, 0, 5" FontSize="15" x:Uid="NewPoiAddress" />
 
             <!-- Adres Ulica -->
-            <TextBlock FontSize="12" x:Uid="NewPoiAddressStreet"/>
+            <TextBlock FontSize="12" x:Uid="NewPoiAddressStreet" />
             <TextBox
                 x:FieldModifier="Public"
                 Margin="0, 0, 0, 10"
@@ -81,7 +81,7 @@
                 VerticalAlignment="Stretch" />
 
             <!-- Adres Kod Pocztowy -->
-            <TextBlock FontSize="12" x:Uid="NewPoiAddressPostalCode"/>
+            <TextBlock FontSize="12" x:Uid="NewPoiAddressPostalCode" />
             <TextBox
                 x:FieldModifier="Public"
                 InputScope="32"
@@ -94,7 +94,7 @@
                 VerticalAlignment="Stretch" />
 
             <!-- Adres Miasto -->
-            <TextBlock FontSize="12" x:Uid="NewPoiAddressCity"/>
+            <TextBlock FontSize="12" x:Uid="NewPoiAddressCity" />
             <TextBox
                 x:FieldModifier="Public"
                 Margin="0, 0, 0, 10"
@@ -112,7 +112,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Adres Nr budynku -->
-                <TextBlock Grid.Column="0" FontSize="12" x:Uid="NewPoiAddressHouse"/>
+                <TextBlock Grid.Column="0" FontSize="12" x:Uid="NewPoiAddressHouse" />
                 <TextBox
                     x:FieldModifier="Public"
                     caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
@@ -239,7 +239,7 @@
                 </Grid>
 
                 <!-- Godziny otwarcia -->
-                <TextBlock FontSize="15" x:Uid="NewPoiOpeningHours"/>
+                <TextBlock FontSize="15" x:Uid="NewPoiOpeningHours" />
                 <Grid Background="{StaticResource GridViewItemPlaceholderBackgroundThemeBrush}" Margin="0, 0, 0, 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -253,7 +253,7 @@
                 </Grid>
 
                 <!-- Cena -->
-                <TextBlock FontSize="15" x:Uid="NewPoiPrice"/>
+                <TextBlock FontSize="15" x:Uid="NewPoiPrice" />
                 <ComboBox
                     x:Uid="NewPoiPriceBox"
                     x:Name="FeeOptions" />
