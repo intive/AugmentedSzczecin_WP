@@ -26,10 +26,10 @@ namespace AugmentedSzczecin.Services
             return PointOfInterestList;
         }
 
-        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(string latitude, string longitude, string radius, string category)
+        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(string latitude, string longitude, string radius, CategoryType category)
         {
             HttpResponseMessage response = null;
-            if (category == Category.ALL.ToString())
+            if (category == CategoryType.ALL)
             {
                 response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}", latitude, longitude, radius));
             }

@@ -6,16 +6,7 @@ using System.Threading.Tasks;
 
 namespace AugmentedSzczecin.Models
 {
-    public enum Category
-    {
-        PLACE,
-        POI,
-        EVENT,
-        PERSON,
-        ALL
-    }
-
-    public class Categories
+    public class Category
     {
         private string _text;
         public string Text
@@ -33,8 +24,8 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-        private Category _enumCategory;
-        public Category EnumCategory
+        private CategoryType _enumCategory;
+        public CategoryType EnumCategory
         {
             get
             {

@@ -136,25 +136,7 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool _isFilterPanelVisible = false;
-        public bool IsFilterPanelVisible
-        {
-            get
-            {
-                return _isFilterPanelVisible;
-            }
-            set
-            {
-                if (value != _isFilterPanelVisible)
-                {
-                    _isFilterPanelVisible = value;
-                    NotifyOfPropertyChange(() => IsFilterPanelVisible);
-                }
-            }
-        }
-
         private string _radius = "1000";
-
         public string Radius
         {
             get 
@@ -316,22 +298,14 @@ namespace AugmentedSzczecin.ViewModels
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
 
-        private void Filter()
+        private void ToggleFilter()
         {
-            if (IsFilterPanelVisible == false)
-            {
-                IsFilterPanelVisible = true;
-            }
-            else
-            {
-                IsFilterPanelVisible = false;
-            }
+            IsFilterPanelVisible = !IsFilterPanelVisible;
         }
 
         protected override void RefreshPOIFilteredByCategory()
         {
-            IsFilterPanelVisible = false;
-            _pointOfInterestService.Refresh(CenterOfTheMap.Position.Latitude.ToString(), CenterOfTheMap.Position.Longitude.ToString(), Radius, SelectedValue.ToString());
+            _pointOfInterestService.Refresh(CenterOfTheMap.Position.Latitude.ToString(), CenterOfTheMap.Position.Longitude.ToString(), Radius, SelectedValue);
         }
     }  
 }

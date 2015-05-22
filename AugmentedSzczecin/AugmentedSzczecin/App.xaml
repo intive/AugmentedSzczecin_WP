@@ -14,7 +14,6 @@
         <SolidColorBrush x:Key="BLStreamForegroundColorBrush" Color="#575757" />
         <caliburn:BooleanToVisibilityConverter x:Key="BoolToVisConv" />
         <converters:PoiToGeopointConverter x:Key="PoiToGeopointConverter" />
-        <converters:EnumTypeToListConverter x:Key="EnumTypeToListConverter" />
     </Application.Resources>
 
 </caliburn:CaliburnApplication>

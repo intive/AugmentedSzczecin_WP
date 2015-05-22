@@ -1,23 +1,21 @@
 ﻿using Caliburn.Micro;
 using AugmentedSzczecin.Models;
-using System;
 using System.Collections.Generic;
-using Windows.ApplicationModel.Resources;
 
 namespace AugmentedSzczecin.AbstractClasses
 {
     public abstract class FilteredPOIViewBase : Screen
     {
-        private List<Categories> _listOfCategories = new List<Categories>()
+        private List<Category> _listOfCategories = new List<Category>()
                                                     {
-                                                        new Categories() {Text = "Miejsca publiczne", EnumCategory = Category.PLACE},
-                                                        new Categories() {Text = "Firmy i usługi", EnumCategory = Category.POI},
-                                                        new Categories() {Text = "Wydarzenia", EnumCategory = Category.EVENT},
-                                                        new Categories() {Text = "Znajomi", EnumCategory = Category.PERSON},
-                                                        new Categories() {Text = "Wszystkie", EnumCategory = Category.ALL},
+                                                        new Category() {Text = "Miejsca publiczne", EnumCategory = CategoryType.PLACE},
+                                                        new Category() {Text = "Firmy i usługi", EnumCategory = CategoryType.POI},
+                                                        new Category() {Text = "Wydarzenia", EnumCategory = CategoryType.EVENT},
+                                                        new Category() {Text = "Znajomi", EnumCategory = CategoryType.PERSON},
+                                                        new Category() {Text = "Wszystkie", EnumCategory = CategoryType.ALL},
                                                     };
 
-        public List<Categories> ListOfCategories
+        public List<Category> ListOfCategories
         {
             get
             {
@@ -33,25 +31,8 @@ namespace AugmentedSzczecin.AbstractClasses
             }
         }
 
-        private string _selectedValuePath = "EnumCategory";
-        public string SelectedValuePath
-        {
-            get
-            {
-                return _selectedValuePath;
-            }
-            set
-            {
-                if (value != _selectedValuePath)
-                {
-                    _selectedValuePath = value;
-                    NotifyOfPropertyChange(() => SelectedValuePath);
-                }
-            }
-        }
-
-        private Category _selectedValue;
-        public Category SelectedValue
+        private CategoryType _selectedValue;
+        public CategoryType SelectedValue
         {
             get
             {
@@ -62,10 +43,33 @@ namespace AugmentedSzczecin.AbstractClasses
                 if (value != _selectedValue)
                 {
                     _selectedValue = value;
-                    RefreshPOIFilteredByCategory();
+                    FilterByCategory();
                     NotifyOfPropertyChange(() => SelectedValue);
                 }
             }
+        }
+
+        private bool _isFilterPanelVisible = false;
+        public bool IsFilterPanelVisible
+        {
+            get
+            {
+                return _isFilterPanelVisible;
+            }
+            set
+            {
+                if (value != _isFilterPanelVisible)
+                {
+                    _isFilterPanelVisible = value;
+                    NotifyOfPropertyChange(() => IsFilterPanelVisible);
+                }
+            }
+        }
+
+        protected void FilterByCategory()
+        {
+            IsFilterPanelVisible = false;
+            RefreshPOIFilteredByCategory();
         }
 
         protected abstract void RefreshPOIFilteredByCategory();

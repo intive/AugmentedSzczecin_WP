@@ -8,7 +8,7 @@ namespace AugmentedSzczecin.Interfaces
     {
         Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList();
 
-        Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(string latitude, string longitude, string radius, string category = null);
+        Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(string latitude, string longitude, string radius, CategoryType category);
 
         Task<bool> CreateAccount(User user);
 

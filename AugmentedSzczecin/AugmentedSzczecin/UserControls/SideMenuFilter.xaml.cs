@@ -20,7 +20,7 @@ namespace AugmentedSzczecin.UserControls
 
         public static readonly DependencyProperty CategoriesProperty = DependencyProperty.Register(
                                           "ItemsSourceCategories",
-                                          typeof(List<Categories>),
+                                          typeof(List<Category>),
                                           typeof(SideMenuFilter),
                                           new PropertyMetadata(""));
 
@@ -30,17 +30,11 @@ namespace AugmentedSzczecin.UserControls
                                           typeof(SideMenuFilter),
                                           new PropertyMetadata(""));
 
-        public static readonly DependencyProperty SelectedCategoryPathProperty = DependencyProperty.Register(
-                                          "SelectedCategoryPath",
-                                          typeof(string),
-                                          typeof(SideMenuFilter),
-                                          new PropertyMetadata(""));
-
-        public List<Categories> ItemsSourceCategories
+        public List<Category> ItemsSourceCategories
         {
             get
             {
-                return GetValue(CategoriesProperty) as List<Categories>;
+                return GetValue(CategoriesProperty) as List<Category>;
             }
             set
             {
@@ -61,18 +55,6 @@ namespace AugmentedSzczecin.UserControls
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs("SelectedCategory"));
                 }
-            }
-        }
-
-        public string SelectedCategoryPath
-        {
-            get
-            {
-                return (string)GetValue(SelectedCategoryPathProperty);
-            }
-            set
-            {
-                SetValue(SelectedCategoryPathProperty, value);
             }
         }
     }

@@ -117,21 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CategoryALL" xml:space="preserve">
-    <value>Wszystkie</value>
-  </data>
-  <data name="CategoryEVENT" xml:space="preserve">
-    <value>Wydarzenia</value>
-  </data>
-  <data name="CategoryPERSON" xml:space="preserve">
-    <value>Znajomi</value>
-  </data>
-  <data name="CategoryPLACE" xml:space="preserve">
-    <value>Miejsca publiczne</value>
-  </data>
-  <data name="CategoryPOI" xml:space="preserve">
-    <value>Firmy i usługi</value>
-  </data>
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
   </data>
