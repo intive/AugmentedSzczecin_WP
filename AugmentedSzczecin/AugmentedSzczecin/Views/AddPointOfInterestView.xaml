@@ -23,7 +23,7 @@
             LandmarksVisible="{Binding LandmarksVisible}"            
             caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]; [Event MapTapped] = [Action GetTappedPosition($eventArgs)]"
             Margin="0,0,0,0">
-            
+
             <Image
                 Name="ImgMyLocation"
                 Source="/Assets/MyLocationPoint.png"
@@ -45,20 +45,19 @@
                 Height="4"
                 Margin="24,548,0,0"
                 Opacity="0.6" />
-            
-            
+
+
             <Image 
                 Name="TappedLocationImage"
                 Source="/Assets/LocationPoint.png"
                 maps:MapControl.Location="{Binding TappedLocation}"
                 Height="20" Width="20"
                 Visibility="{Binding TappedPointVisibility}" />
-            
+
         </maps:MapControl>
-        
-        
+
     </StackPanel>
-    
+
     <Page.BottomAppBar>
         <CommandBar Visibility="{Binding TappedPointVisibility}">
             <AppBarButton
