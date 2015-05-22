@@ -67,6 +67,20 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private bool _geolocationEnabled;
+        public bool GeolocationEnabled
+        {
+            get { return _geolocationEnabled; }
+            set
+            {
+                if (value != _geolocationEnabled)
+                {
+                    _geolocationEnabled = value;
+                    NotifyOfPropertyChange(() => GeolocationEnabled);
+                }
+            }
+        }
+
         public string BingKey
         {
             get { return _bingKey; }
