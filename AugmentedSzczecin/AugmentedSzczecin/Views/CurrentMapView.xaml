@@ -69,5 +69,16 @@
         </maps:MapControl>
 
     </StackPanel>
+    
+    <Page.BottomAppBar>
+        <CommandBar
+            IsOpen="False"
+            ClosedDisplayMode="Minimal">
+            <AppBarButton
+                caliburn:Message.Attach="[Event Click] = [Action RefreshConnectionClick]"
+                x:Uid="RefreshConnection"
+                Icon="Refresh" />
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
 
