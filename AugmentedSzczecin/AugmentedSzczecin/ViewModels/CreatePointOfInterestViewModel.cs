@@ -9,6 +9,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Models;
 using AugmentedSzczecin.Views;
 using Caliburn.Micro;
 
@@ -19,6 +21,7 @@ namespace AugmentedSzczecin.ViewModels
         #region Private & Public Fields
 
         private readonly INavigationService _navigationService;
+        private readonly IHttpService _httpService;
         private readonly ResourceLoader _loader = new ResourceLoader();
 
         private TextBox _nameBox,
@@ -37,9 +40,10 @@ namespace AugmentedSzczecin.ViewModels
 
         #region Constructors
 
-        public CreatePointOfInterestViewModel(INavigationService navigationService)
+        public CreatePointOfInterestViewModel(INavigationService navigationService, IHttpService httpService)
         {
             _navigationService = navigationService;
+            _httpService = httpService;
         }
 
         #endregion
@@ -488,6 +492,7 @@ namespace AugmentedSzczecin.ViewModels
 
             //    IsObligatoryFieldsValid =
             //        IsExtraFieldsValid =
+
             IsObligatoryFieldsValid = IsNameEmptyValid
                 && IsDescriptionEmptyValid
                 && IsTagsEmptyValid && IsTagsMatchValid
@@ -497,6 +502,8 @@ namespace AugmentedSzczecin.ViewModels
                 && IsHouseEmptyValid
                 && IsPlaceEmptyValid
                 && IsCategorySelected && IsSubcategorySelected;
+
+            //IsExtraFieldsValid = 
 
             ValidationCheck = IsObligatoryFieldsValid;
         }

@@ -155,7 +155,7 @@
 
             <CheckBox
                 caliburn:Message.Attach="[Event Checked] = [Action ExtraFieldsChecked]; [Event Unchecked] = [Action ExtraFieldsUnchecked]"
-                Content="Extra Fields" />
+                x:Uid="ExtraFieldsCheckBox" />
 
 
             <StackPanel Visibility="{Binding ExtraFieldsVisibility}">
@@ -239,7 +239,9 @@
                 </Grid>
 
                 <!-- Godziny otwarcia -->
-                <TextBlock FontSize="15" x:Uid="NewPoiOpeningHours" />
+                <CheckBox
+                caliburn:Message.Attach="[Event Checked] = [Action ExtraFieldsChecked]; [Event Unchecked] = [Action ExtraFieldsUnchecked]"
+                x:Uid="OpeningHoursCheckBox" />
                 <Grid Background="{StaticResource GridViewItemPlaceholderBackgroundThemeBrush}" Margin="0, 0, 0, 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
