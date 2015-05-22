@@ -129,8 +129,53 @@
   <data name="ConfirmNewPointOfInterest.Label" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="CreatePointOfInterestCategoryNotSelected" xml:space="preserve">
+    <value>Choose Category.</value>
+  </data>
+  <data name="CreatePointOfInterestCityEmpty" xml:space="preserve">
+    <value>Fill City field.</value>
+  </data>
+  <data name="CreatePointOfInterestCityMatch" xml:space="preserve">
+    <value>Fill City field properly.</value>
+  </data>
+  <data name="CreatePointOfInterestDescriptionEmpty" xml:space="preserve">
+    <value>Fill Description field.</value>
+  </data>
+  <data name="CreatePointOfInterestEmptyForm" xml:space="preserve">
+    <value>Fill the fields.</value>
+  </data>
   <data name="CreatePointOfInterestExtraTitle.Text" xml:space="preserve">
     <value>Extra Fields</value>
+  </data>
+  <data name="CreatePointOfInterestHouseEmpty" xml:space="preserve">
+    <value>Fill House field.</value>
+  </data>
+  <data name="CreatePointOfInterestNameEmpty" xml:space="preserve">
+    <value>Fill Name field.</value>
+  </data>
+  <data name="CreatePointOfInterestPlaceEmpty" xml:space="preserve">
+    <value>Fill Place field.</value>
+  </data>
+  <data name="CreatePointOfInterestPostalCodeEmpty" xml:space="preserve">
+    <value>Fill Postal Code field.</value>
+  </data>
+  <data name="CreatePointOfInterestPostalCodeMatch" xml:space="preserve">
+    <value>Fill Postal Code properly.</value>
+  </data>
+  <data name="CreatePointOfInterestStreetEmpty" xml:space="preserve">
+    <value>Fill Street field.</value>
+  </data>
+  <data name="CreatePointOfInterestStreetMatch" xml:space="preserve">
+    <value>Fill Street field properly.</value>
+  </data>
+  <data name="CreatePointOfInterestSubcategoryNotSelected" xml:space="preserve">
+    <value>Choose Subcategory.</value>
+  </data>
+  <data name="CreatePointOfInterestTagsEmpty" xml:space="preserve">
+    <value>Fill Tags field.</value>
+  </data>
+  <data name="CreatePointOfInterestTagsMatch" xml:space="preserve">
+    <value>Fill Tags field properly.</value>
   </data>
   <data name="CreatePointOfInterestTitle.Text" xml:space="preserve">
     <value>Creating POI</value>
@@ -237,37 +282,40 @@
   <data name="NewPoiPriceBox.PlaceholderText" xml:space="preserve">
     <value>Payable/Free</value>
   </data>
-  <data name="NewPoiSubCategory.Text" xml:space="preserve">
+  <data name="NewPoiSubcategory.Text" xml:space="preserve">
     <value>Subcategory</value>
   </data>
-  <data name="NewPoiSubCategoryEighth" xml:space="preserve">
+  <data name="NewPoiSubcategoryBox.PlaceholderText" xml:space="preserve">
+    <value>Choose subcategory...</value>
+  </data>
+  <data name="NewPoiSubcategoryEighth" xml:space="preserve">
     <value>Railway Station</value>
   </data>
-  <data name="NewPoiSubCategoryFifth" xml:space="preserve">
+  <data name="NewPoiSubcategoryFifth" xml:space="preserve">
     <value>Museum</value>
   </data>
-  <data name="NewPoiSubCategoryFirst" xml:space="preserve">
+  <data name="NewPoiSubcategoryFirst" xml:space="preserve">
     <value>School</value>
   </data>
-  <data name="NewPoiSubCategoryFourth" xml:space="preserve">
+  <data name="NewPoiSubcategoryFourth" xml:space="preserve">
     <value>Monument</value>
   </data>
-  <data name="NewPoiSubCategoryNinth" xml:space="preserve">
+  <data name="NewPoiSubcategoryNinth" xml:space="preserve">
     <value>Post Office</value>
   </data>
-  <data name="NewPoiSubCategorySecond" xml:space="preserve">
+  <data name="NewPoiSubcategorySecond" xml:space="preserve">
     <value>Hospital</value>
   </data>
-  <data name="NewPoiSubCategorySeventh" xml:space="preserve">
+  <data name="NewPoiSubcategorySeventh" xml:space="preserve">
     <value>Bus Station</value>
   </data>
-  <data name="NewPoiSubCategorySixth" xml:space="preserve">
+  <data name="NewPoiSubcategorySixth" xml:space="preserve">
     <value>Office</value>
   </data>
-  <data name="NewPoiSubCategoryTenth" xml:space="preserve">
+  <data name="NewPoiSubcategoryTenth" xml:space="preserve">
     <value>Church</value>
   </data>
-  <data name="NewPoiSubCategoryThird" xml:space="preserve">
+  <data name="NewPoiSubcategoryThird" xml:space="preserve">
     <value>Park</value>
   </data>
   <data name="NewPoiTags.Text" xml:space="preserve">
