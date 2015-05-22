@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using Newtonsoft.Json;
 
 namespace AugmentedSzczecin.Models
@@ -42,19 +43,140 @@ namespace AugmentedSzczecin.Models
         }
     }
 
+    public class Address : PropertyChangedBase
+    {
+        [JsonProperty(PropertyName = "City")]
+        private string _city;
+        public string City
+        {
+            get
+            {
+                return _city;
+            }
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    NotifyOfPropertyChange(() => City);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "Street")]
+        private string _street;
+        public string Street
+        {
+            get
+            {
+                return _street;
+            }
+            set
+            {
+                if (_street != value)
+                {
+                    _street = value;
+                    NotifyOfPropertyChange(() => Street);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "StreetNumber")]
+        private string _streetNumber;
+        public string StreetNumber
+        {
+            get
+            {
+                return _streetNumber;
+            }
+            set
+            {
+                if (_streetNumber != value)
+                {
+                    _streetNumber = value;
+                    NotifyOfPropertyChange(() => StreetNumber);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "ZipCode")]
+        private string _zipCode;
+        public string ZipCode
+        {
+            get
+            {
+                return _zipCode;
+            }
+            set
+            {
+                if (_zipCode != value)
+                {
+                    _zipCode = value;
+                    NotifyOfPropertyChange(() => ZipCode);
+                }
+            }
+        }
+    }
+
+    public class Opening : PropertyChangedBase
+    {
+        [JsonProperty(PropertyName = "Day")]
+        private DayOfWeek _day;
+        public DayOfWeek Day
+        {
+            get
+            {
+                return _day;
+            }
+            set
+            {
+                if (_day != value)
+                {
+                    _day = value;
+                    NotifyOfPropertyChange(() => Day);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "Open")]
+        private string _open;
+        public string Open
+        {
+            get
+            {
+                return _open;
+            }
+            set
+            {
+                if (_open != value)
+                {
+                    _open = value;
+                    NotifyOfPropertyChange(() => Open);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "Close")]
+        private string _close;
+        public string Close
+        {
+            get
+            {
+                return _close;
+            }
+            set
+            {
+                if (_close != value)
+                {
+                    _close = value;
+                    NotifyOfPropertyChange(() => Close);
+                }
+            }
+        }
+    }
+
     public class PointOfInterest : PropertyChangedBase
     {
-        public PointOfInterest(string id)
-        {
-            Id = id;
-        }
-
-        public string Id
-        {
-            get;
-            private set;
-        }
-
         [JsonProperty(PropertyName = "Name")]
         private string _name;
         public string Name
@@ -91,6 +213,42 @@ namespace AugmentedSzczecin.Models
             }
         }
 
+        [JsonProperty(PropertyName = "Address")]
+        private Address _address;
+        public Address Address
+        {
+            get
+            {
+                return _address;
+            }
+            set
+            {
+                if (_address != value)
+                {
+                    _address = value;
+                    NotifyOfPropertyChange(() => Address);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "Opening")]
+        private Opening _opening;
+        public Opening Opening
+        {
+            get
+            {
+                return _opening;
+            }
+            set
+            {
+                if (_opening != value)
+                {
+                    _opening = value;
+                    NotifyOfPropertyChange(() => Opening);
+                }
+            }
+        }
+
         [JsonProperty(PropertyName = "Description")]
         private string _description;
         public string Description
@@ -110,8 +268,8 @@ namespace AugmentedSzczecin.Models
         }
 
         [JsonProperty(PropertyName = "Tags")]
-        private string _tags;
-        public string Tags
+        private string[] _tags;
+        public string[] Tags
         {
             get
             {
@@ -127,74 +285,20 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-        [JsonProperty(PropertyName = "StreetName")]
-        private string _streetName;
-        public string StreetName
+        [JsonProperty(PropertyName = "Www")]
+        private string _www;
+        public string Www
         {
             get
             {
-                return _streetName;
+                return _www;
             }
             set
             {
-                if (_streetName != value)
+                if (_www != value)
                 {
-                    _streetName = value;
-                    NotifyOfPropertyChange(() => StreetName);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "PostalCode")]
-        private string _postalCode;
-        public string PostalCode
-        {
-            get
-            {
-                return _postalCode;
-            }
-            set
-            {
-                if (_postalCode != value)
-                {
-                    _postalCode = value;
-                    NotifyOfPropertyChange(() => PostalCode);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Country")]
-        private string _country;
-        public string Country
-        {
-            get
-            {
-                return _country;
-            }
-            set
-            {
-                if (_country != value)
-                {
-                    _country = value;
-                    NotifyOfPropertyChange(() => Country);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Website")]
-        private string _website;
-        public string Website
-        {
-            get
-            {
-                return _website;
-            }
-            set
-            {
-                if (_website != value)
-                {
-                    _website = value;
-                    NotifyOfPropertyChange(() => Website);
+                    _www = value;
+                    NotifyOfPropertyChange(() => Www);
                 }
             }
         }
@@ -253,42 +357,6 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-        [JsonProperty(PropertyName = "OpeningDays")]
-        private string _openingDays;
-        public string OpeningDays
-        {
-            get
-            {
-                return _openingDays;
-            }
-            set
-            {
-                if (_openingDays != value)
-                {
-                    _openingDays = value;
-                    NotifyOfPropertyChange(() => OpeningDays);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "OpeningHours")]
-        private string _openingHours;
-        public string OpeningHours
-        {
-            get
-            {
-                return _openingHours;
-            }
-            set
-            {
-                if (_openingHours != value)
-                {
-                    _openingHours = value;
-                    NotifyOfPropertyChange(() => OpeningHours);
-                }
-            }
-        }
-
         [JsonProperty(PropertyName = "Category")]
         private string _category;
         public string Category
@@ -303,6 +371,24 @@ namespace AugmentedSzczecin.Models
                 {
                     _category = value;
                     NotifyOfPropertyChange(() => Category);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "Subcategory")]
+        private string _subcategory;
+        public string Subcategory
+        {
+            get
+            {
+                return _subcategory;
+            }
+            set
+            {
+                if (_subcategory != value)
+                {
+                    _subcategory = value;
+                    NotifyOfPropertyChange(() => Subcategory);
                 }
             }
         }
