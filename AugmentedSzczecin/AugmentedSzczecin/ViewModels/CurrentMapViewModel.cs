@@ -11,9 +11,12 @@ using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
 using AugmentedSzczecin.Events;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using AugmentedSzczecin.Models;
 using AugmentedSzczecin.Views;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.System;
 
 namespace AugmentedSzczecin.ViewModels
 {
@@ -159,33 +162,36 @@ namespace AugmentedSzczecin.ViewModels
 
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
-            if (_locationService.IsGeolocationEnabled())
-            {
-                SetGeolocation();
-            }
-            else
-            {
-                GeolocationDisabledMsg();
-            }
-
             UpdateInternetConnection();
             UpdateGeolocationEnabled();
-
-            if (!InternetConnection)
-            {
-                InternetConnectionDisabledMsg();
-            }
-            else
-            {
-                _mapLocations = new ObservableCollection<PointOfInterest>();
-                RefreshPointOfInterestService();
-            }
+            CheckConnectionsAvailability();
         }
 
         protected override void OnDeactivate(bool close)
         {
             _eventAggregator.Unsubscribe(this);
             base.OnDeactivate(close);
+        }
+
+        private void CheckConnectionsAvailability()
+        {
+            if (!InternetConnection && !GeolocationEnabled)
+            {
+                BothConnectionDisabledMessage();
+            }
+            if (!InternetConnection && GeolocationEnabled)
+            {
+                InternetConnectionDisabledMessage();
+            }
+            if (InternetConnection && !GeolocationEnabled)
+            {
+                GeolocationDisabledMessage();
+            }
+            if (!InternetConnection || !GeolocationEnabled) return;
+
+            SetGeolocation();
+            _mapLocations = new ObservableCollection<PointOfInterest>();
+            RefreshPointOfInterestService();
         }
 
         public void ChangeScaleBar(MapControl temporaryMap)
@@ -244,14 +250,43 @@ namespace AugmentedSzczecin.ViewModels
             GeolocationEnabled = true;
         }
 
-        public async void InternetConnectionDisabledMsg()
+        public void RefreshConnectionClick()
         {
-            var msg = new MessageDialog("Internet Connection disabled.");
-            msg.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
-            msg.DefaultCommandIndex = 0;
-            msg.CancelCommandIndex = 1;
+            UpdateInternetConnection();
+            UpdateGeolocationEnabled();
+            CheckConnectionsAvailability();
+        }
 
-            await msg.ShowAsync();
+        private void BothConnectionDisabledMessage()
+        {
+            var loader = new ResourceLoader();
+            var bothConnectionDisabledMessage = loader.GetString("BothConnectionDisabledMessage");
+            ShowConnectionDisabledMessage(bothConnectionDisabledMessage, "2");
+        }
+
+        public void InternetConnectionDisabledMessage()
+        {
+            var loader = new ResourceLoader();
+            var internetConnectionDisabledMessage = loader.GetString("InternetConnectionDisabledMessage");
+            ShowConnectionDisabledMessage(internetConnectionDisabledMessage, "1");
+        }
+
+        private void GeolocationDisabledMessage()
+        {
+            var loader = new ResourceLoader();
+            var geolocationDisabledMessage = loader.GetString("GeolocationDisabledMessage");
+            ShowConnectionDisabledMessage(geolocationDisabledMessage, "0");
+        }
+
+        private void ShowConnectionDisabledMessage(string connectionDisabledMessage, object id)
+        {
+            var message = new MessageDialog(connectionDisabledMessage);
+            message.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
+            message.Commands.Add(new UICommand("Settings", BackButtonInvokedHandler, id));
+            message.DefaultCommandIndex = 0;
+            message.CancelCommandIndex = 1;
+
+            message.ShowAsync();
         }
 
         public void NavigateToMain()
@@ -265,20 +300,10 @@ namespace AugmentedSzczecin.ViewModels
             MapLocations = e.PointOfInterestList;
         }
 
-        public void Handle(PointOfInterestLoadFailedEvent e)
+        public async void Handle(PointOfInterestLoadFailedEvent e)
         {
-            var msg = new MessageDialog(e.PointOfInterestLoadException.Message);
-            msg.ShowAsync();
-        }
-
-        private async void GeolocationDisabledMsg()
-        {
-            var msg = new MessageDialog("Geolocation disabled.");
-            msg.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
-            msg.DefaultCommandIndex = 0;
-            msg.CancelCommandIndex = 1;
-
-            await msg.ShowAsync();
+            var message = new MessageDialog(e.PointOfInterestLoadException.Message);
+            await message.ShowAsync();
         }
 
         private void BackButtonInvokedHandler(IUICommand command)
@@ -288,6 +313,14 @@ namespace AugmentedSzczecin.ViewModels
                 case "Back":
                     HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
                     NavigateToMain();
+                    break;
+                case "Settings":
+                    if(ReferenceEquals(command.Id, "2"))
+                        Launcher.LaunchUriAsync(new Uri("ms-settings-wifi://"));
+                    if (ReferenceEquals(command.Id, "1"))
+                        Launcher.LaunchUriAsync(new Uri("ms-settings-wifi://"));
+                    if (ReferenceEquals(command.Id, "0"))
+                        Launcher.LaunchUriAsync(new Uri("ms-settings-location://"));
                     break;
                 default:
                     return;
