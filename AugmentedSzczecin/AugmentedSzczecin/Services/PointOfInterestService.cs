@@ -47,7 +47,7 @@ namespace AugmentedSzczecin.Services
             }
         }
 
-        public async void Refresh(string latitude, string longitude, string radius, string category = null)
+        public async void Refresh(string latitude, string longitude, string radius, string category)
         {
             try
             {

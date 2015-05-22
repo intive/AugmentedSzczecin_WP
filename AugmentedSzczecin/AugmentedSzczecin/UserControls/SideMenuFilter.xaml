@@ -11,7 +11,7 @@
     d:DesignWidth="400">
 
     <StackPanel>
-        <ComboBox x:Name="ListOfCategories" ItemsSource="{Binding Categories, ElementName=SideMenuFilterRoot, Mode=TwoWay, Converter={StaticResource EnumTypeToListConverter}}" SelectionChanged="ListOfCategories_SelectionChanged" SelectedItem="{Binding SelectedCategory}">
+        <ComboBox ItemsSource="{Binding ItemsSourceCategories, ElementName=SideMenuFilterRoot, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding SelectedCategory, Mode=TwoWay, ElementName=SideMenuFilterRoot}" SelectedValuePath="{Binding SelectedCategoryPath, ElementName=SideMenuFilterRoot}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

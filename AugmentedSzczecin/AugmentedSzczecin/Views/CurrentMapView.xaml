@@ -83,7 +83,9 @@
             </Grid.RowDefinitions>
             <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource PhoneChromeBrush}" />
             <Border Grid.Column="4" Grid.RowSpan="2" Background="Black" Opacity="0.3" />
-            <UserControls:SideMenuFilter Grid.Column="1" Grid.Row="1" x:Name="SelectedValue" SelectedCategory="{Binding SelectedCategory, Mode=TwoWay}" />
+
+            <UserControls:SideMenuFilter Grid.Column="1" Grid.Row="1" ItemsSourceCategories="{Binding ListOfCategories}" SelectedCategory="{Binding SelectedValue, Mode=TwoWay}" SelectedCategoryPath="{Binding SelectedValuePath, Mode=TwoWay}"/>
+       
         </Grid>
         
     </Grid>
@@ -91,7 +93,7 @@
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="Filter" Icon="Filter" IsCompact="False" Label="Filtrowaniee"/>
+                <AppBarButton x:Name="Filter" Icon="Filter" IsCompact="False" Label="Filtrowanie"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

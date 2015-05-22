@@ -4,6 +4,6 @@
     {
         void Refresh();
 
-        void Refresh(string latitude, string longitude, string radius, string category = null);
+        void Refresh(string latitude, string longitude, string radius, string category);
     }
 }

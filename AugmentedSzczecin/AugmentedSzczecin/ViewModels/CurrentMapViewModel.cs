@@ -331,23 +331,7 @@ namespace AugmentedSzczecin.ViewModels
         protected override void RefreshPOIFilteredByCategory()
         {
             IsFilterPanelVisible = false;
-            string category = null;
-            switch(SelectedCategory)
-            {
-                case "Miejsca Publiczne":
-                    category = "PLACE";
-                    break;
-                case "Firmy I Usługi":
-                    category = "POI";
-                    break;
-                case "Wydarzenia":
-                    category = "EVENT";
-                    break;
-                case "Znajomi":
-                    category = "PERSON";
-                    break;
-            }
-            _pointOfInterestService.Refresh(CenterOfTheMap.Position.Latitude.ToString(), CenterOfTheMap.Position.Longitude.ToString(), Radius, category);
+            _pointOfInterestService.Refresh(CenterOfTheMap.Position.Latitude.ToString(), CenterOfTheMap.Position.Longitude.ToString(), Radius, SelectedValue.ToString());
         }
     }  
 }
