@@ -1,4 +1,4 @@
-﻿<Page
+﻿<Page xmlns:UserControls="using:AugmentedSzczecin.UserControls" 
     x:Class="AugmentedSzczecin.Views.CurrentMapView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -36,8 +36,9 @@
         </Flyout>
     </Page.Resources>
 
-    <StackPanel>
+    <Grid>
 
+        <StackPanel>
         <TextBlock x:Uid="CurrentMapTitle"  TextWrapping="NoWrap" Text=""
                    FontSize="36" Margin="8,0,0,16"/>
 
@@ -59,7 +60,7 @@
             <maps:MapItemsControl ItemsSource="{Binding MapLocations}">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="/Assets/LocationPoint.png" Height="10" Width="10" HorizontalAlignment="Left" 
+                            <Image Source="/Assets/LocationPoint.png" Height="20" Width="20" HorizontalAlignment="Left" 
                                maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
                                caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($source)]"
                                FlyoutBase.AttachedFlyout="{StaticResource Details}"/>
@@ -67,7 +68,35 @@
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>
         </maps:MapControl>
+        </StackPanel>
 
-    </StackPanel>
+        <Grid Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BoolToVisConv}}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource PhoneChromeBrush}" />
+            <Border Grid.Column="4" Grid.RowSpan="2" Background="Black" Opacity="0.3" />
+
+            <UserControls:SideMenuFilter Grid.Column="1" Grid.Row="1" ItemsSourceCategories="{Binding ListOfCategories}" SelectedCategory="{Binding SelectedValue, Mode=TwoWay}" />
+       
+        </Grid>
+        
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="ToggleFilter" Icon="Filter" IsCompact="False" Label="Filtrowanie"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
 </Page>
 

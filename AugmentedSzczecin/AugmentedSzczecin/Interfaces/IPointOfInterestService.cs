@@ -1,4 +1,6 @@
-﻿namespace AugmentedSzczecin.Interfaces
+﻿using AugmentedSzczecin.Models;
+
+namespace AugmentedSzczecin.Interfaces
 {
     public interface IPointOfInterestService
     {
@@ -13,6 +15,6 @@
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <param name="radius"></param>
-        void LoadPoIs(double latitude, double longitude, int radius);
+        void LoadPoIs(double latitude, double longitude, int radius, CategoryType category);
     }
 }

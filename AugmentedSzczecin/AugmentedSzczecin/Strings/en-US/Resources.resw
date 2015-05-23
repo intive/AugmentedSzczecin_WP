@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BothConnectionDisabledMessage" xml:space="preserve">
+    <value>Internet and Location connection disabled.</value>
+  </data>
   <data name="CurrentMapTitle.Text" xml:space="preserve">
     <value>Current Location</value>
+  </data>
+  <data name="GeolocationDisabledMessage" xml:space="preserve">
+    <value>Geolocation disabled.</value>
+  </data>
+  <data name="InternetConnectionDisabledMessage" xml:space="preserve">
+    <value>Internet Connection disabled.</value>
+  </data>
+  <data name="RefreshConnection.Label" xml:space="preserve">
+    <value>Reconnect</value>
   </data>
   <data name="ResetPasswordButtonReset.Content" xml:space="preserve">
     <value>Reset password</value>

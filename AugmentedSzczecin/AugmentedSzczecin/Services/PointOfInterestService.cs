@@ -47,11 +47,11 @@ namespace AugmentedSzczecin.Services
             }
         }
 
-        public async void LoadPoIs(double latitude, double longitude, int radius)
+        public async void LoadPoIs(double latitude, double longitude, int radius, CategoryType category)
         {
             try
             {
-                PointOfInterestList = await _httpService.GetPointOfInterestList(latitude, longitude, radius);
+                PointOfInterestList = await _httpService.GetPointOfInterestList(latitude, longitude, radius, category);
                 _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
             }
             catch (Exception e)

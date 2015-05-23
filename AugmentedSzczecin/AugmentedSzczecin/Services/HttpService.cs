@@ -26,13 +26,21 @@ namespace AugmentedSzczecin.Services
             if (json == "{}")
             {
                 return new ObservableCollection<PointOfInterest>();
-            }
+        }
             return JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(json);
         }
 
-        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(double latitude, double longitude, int radius)
+        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(double latitude, double longitude, int radius, CategoryType category)
         {
-            HttpResponseMessage response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}", latitude, longitude, radius));
+            HttpResponseMessage response = null;
+            if (category == CategoryType.ALL)
+            {
+                response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}", latitude, longitude, radius));
+            }
+            else
+            {
+                response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}&cat={3}", latitude, longitude, radius, category));
+            }
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
             if (json == "{}")
