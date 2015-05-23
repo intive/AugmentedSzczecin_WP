@@ -13,12 +13,17 @@ using Windows.UI.Xaml.Controls.Primitives;
 using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Helpers;
 using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.AbstractClasses;
+using Caliburn.Micro;
+using AugmentedSzczecin.Events;
+using System.Collections.ObjectModel;
 using AugmentedSzczecin.Models;
+using Windows.UI.Xaml.Controls.Primitives;
 using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CurrentMapViewModel : Screen, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
+    public class CurrentMapViewModel : FilteredPOIViewBase, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
         #region Private & Public Fields
 
@@ -34,8 +39,8 @@ namespace AugmentedSzczecin.ViewModels
         #region Constructors
 
         public CurrentMapViewModel(IEventAggregator eventAggregator,
-                    ILocationService locationService, IPointOfInterestService pointOfInterestService,
-                    INavigationService navigationService)
+            ILocationService locationService, IPointOfInterestService pointOfInterestService,
+            INavigationService navigationService)
         {
             _eventAggregator = eventAggregator;
             _navigationService = navigationService;
@@ -50,7 +55,7 @@ namespace AugmentedSzczecin.ViewModels
         private ObservableCollection<PointOfInterest> _mapLocations;
         public ObservableCollection<PointOfInterest> MapLocations
         {
-            get
+            get 
             {
                 return _mapLocations;
             }
@@ -161,6 +166,16 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private string _radius = "1000";
+        public string Radius
+        {
+            get 
+            { 
+                return _radius; 
+            }
+        }
+        
+
         #endregion
 
         #region Override Methods
@@ -171,7 +186,7 @@ namespace AugmentedSzczecin.ViewModels
             base.OnActivate();
 
             CountZoomLevel();
-
+            
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             UpdateInternetConnection();
@@ -370,6 +385,16 @@ namespace AugmentedSzczecin.ViewModels
         private void PushpinTapped(object sender)
         {
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+        }
+
+        private void ToggleFilter()
+        {
+            IsFilterPanelVisible = !IsFilterPanelVisible;
+        }
+
+        protected override void RefreshPOIFilteredByCategory()
+        {
+            _pointOfInterestService.Refresh(CenterOfTheMap.Position.Latitude.ToString(), CenterOfTheMap.Position.Longitude.ToString(), Radius, SelectedValue);
         }
 
         #endregion
