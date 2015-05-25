@@ -8,10 +8,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1.6180339887*" />
+        </Grid.RowDefinitions>
+        
+        <Grid
+            Grid.Row="0"
+            x:Name="LayoutHeader">
+            
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            x:Name="LayoutBody"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" >
             <Button Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" HorizontalAlignment="Stretch" />
             <Button Content="Augmented View" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" HorizontalAlignment="Stretch" />
             <Button Content="Current Map" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" HorizontalAlignment="Stretch" />
@@ -19,6 +33,6 @@
             <Button Content="Sign Up" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]" HorizontalAlignment="Stretch"/>
             <Button Content="Sign In" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]" HorizontalAlignment="Stretch"/>
             <Button Content="Sign Out" caliburn:Message.Attach="[Event Tapped] = [Action SignOut]" HorizontalAlignment="Stretch"/>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Page>
