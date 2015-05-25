@@ -166,8 +166,8 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private string _radius = "1000";
-        public string Radius
+        private int _radius = 300;
+        public int Radius
         {
             get 
             { 
@@ -394,7 +394,7 @@ namespace AugmentedSzczecin.ViewModels
 
         protected override void RefreshPOIFilteredByCategory()
         {
-            _pointOfInterestService.Refresh(CenterOfTheMap.Position.Latitude.ToString(), CenterOfTheMap.Position.Longitude.ToString(), Radius, SelectedValue);
+            _pointOfInterestService.LoadPoIs(CenterOfTheMap.Position.Latitude, CenterOfTheMap.Position.Longitude, Radius, SelectedValue);
         }
 
         #endregion

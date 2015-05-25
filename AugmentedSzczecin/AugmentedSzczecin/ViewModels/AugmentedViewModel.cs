@@ -1,4 +1,5 @@
 ﻿using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Models;
 using Caliburn.Micro;
 using Windows.Devices.Geolocation;
 namespace AugmentedSzczecin.ViewModels
@@ -46,7 +47,7 @@ namespace AugmentedSzczecin.ViewModels
         public async void LoadPoIs()
         {
             Geopoint point = await _locationService.GetGeolocation();
-            _pointOfInterestService.LoadPoIs(point.Position.Latitude, point.Position.Longitude, Radius);
+            _pointOfInterestService.LoadPoIs(point.Position.Latitude, point.Position.Longitude, Radius, CategoryType.ALL);
         }
     }
 }
