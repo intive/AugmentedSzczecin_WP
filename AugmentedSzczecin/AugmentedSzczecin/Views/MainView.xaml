@@ -15,10 +15,17 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="1.6180339887*" />
         </Grid.RowDefinitions>
-        
+        <Image
+            Grid.Row="0"
+            Stretch="None"
+            Source="../Assets/SampleBackgrounds/sample_Header.jpg"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"/>
+
         <Grid
             Grid.Row="0"
             x:Name="LayoutHeader">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
