@@ -19,13 +19,40 @@
         <Grid
             Grid.Row="0"
             x:Name="LayoutHeader">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Rectangle
+                Margin="-35, 0, 0, 0"
+                RadiusX="35"
+                RadiusY="35"
+                Height="75"
+                Fill="White" />
+            <TextBlock
+                Margin="15, 0, 0, 30"
+                VerticalAlignment="Center"
+                Foreground="Black"
+                Text="AUGMENTED"
+                FontSize="18"
+                FontFamily="Segoe WP" />
+            <TextBlock
+                Margin="15, 15, 0, 0"
+                VerticalAlignment="Center"
+                Foreground="Black"
+                Text="SZCZECIN"
+                FontSize="32"
+                FontWeight="Bold"
+                FontFamily="Segoe WP" />
+            
             
         </Grid>
+        
         <Grid
+            Margin="15"
             Grid.Row="1"
-            x:Name="LayoutBody"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center" >
+            x:Name="LayoutBody">
             <Button Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" HorizontalAlignment="Stretch" />
             <Button Content="Augmented View" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" HorizontalAlignment="Stretch" />
             <Button Content="Current Map" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" HorizontalAlignment="Stretch" />
