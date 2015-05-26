@@ -34,7 +34,7 @@ namespace AugmentedSzczecin.Services
             }
         }
 
-        public async void Refresh()
+        public async void LoadPlaces()
         {
             try
             {
@@ -47,7 +47,7 @@ namespace AugmentedSzczecin.Services
             }
         }
 
-        public async void Refresh(string latitude, string longitude, string radius, CategoryType category)
+        public async void LoadPoIs(double latitude, double longitude, int radius, CategoryType category)
         {
             try
             {

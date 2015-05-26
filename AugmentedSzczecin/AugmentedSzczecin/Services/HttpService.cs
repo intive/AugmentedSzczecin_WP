@@ -1,6 +1,7 @@
 ﻿using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,11 +23,14 @@ namespace AugmentedSzczecin.Services
             HttpResponseMessage response = await _client.GetAsync("places");
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
-            ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(json);
-            return PointOfInterestList;
+            if (json == "{}")
+            {
+                return new ObservableCollection<PointOfInterest>();
+        }
+            return JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(json);
         }
 
-        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(string latitude, string longitude, string radius, CategoryType category)
+        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(double latitude, double longitude, int radius, CategoryType category)
         {
             HttpResponseMessage response = null;
             if (category == CategoryType.ALL)
@@ -39,8 +43,17 @@ namespace AugmentedSzczecin.Services
             }
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
-            ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(json);
-            return PointOfInterestList;
+            if (json == "{}")
+            {
+                return new ObservableCollection<PointOfInterest>();
+            }
+            ObservableCollection<PointOfInterest> pois = new ObservableCollection<PointOfInterest>();
+            IList<JToken> results = JObject.Parse(json)["places"].Children().ToList();
+            foreach (var result in results)
+            {
+                pois.Add(JsonConvert.DeserializeObject<PointOfInterest>(result.ToString()));
+            }
+            return pois;
         }
 
         public async Task<bool> CreateAccount(User user)
@@ -68,6 +81,11 @@ namespace AugmentedSzczecin.Services
 
         public async Task<bool> ResetPassword(User user)
         {
+            var response = await _client.GetAsync(string.Format("users/{0}/resetpassword", user.Email));
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -75,7 +93,7 @@ namespace AugmentedSzczecin.Services
         {
             var json = JsonConvert.SerializeObject(poi);
             var content = new StringContent(json, Encoding.Unicode, "application/json");
-            var response = await _client.PostAsync("places", content);
+            var response = await _client.PutAsync("places", content);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 return true;
