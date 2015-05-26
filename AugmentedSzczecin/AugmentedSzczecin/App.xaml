@@ -14,6 +14,7 @@
         <SolidColorBrush x:Key="BLStreamForegroundColorBrush" Color="#575757" />
         <caliburn:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:PoiToGeopointConverter x:Key="PoiToGeopointConverter" />
+        <converters:BooleanToSpecificBackgroundConverter x:Key="BooleanToSpecificBackgroundConverter" />
     </Application.Resources>
 
 </caliburn:CaliburnApplication>
