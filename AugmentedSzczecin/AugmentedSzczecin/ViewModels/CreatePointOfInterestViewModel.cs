@@ -3,15 +3,8 @@ using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
 using Windows.System;
-using Windows.UI;
-using Windows.UI.Popups;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using AugmentedSzczecin.Interfaces;
-using AugmentedSzczecin.Models;
-using AugmentedSzczecin.Views;
 using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
@@ -23,18 +16,6 @@ namespace AugmentedSzczecin.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IHttpService _httpService;
         private readonly ResourceLoader _loader = new ResourceLoader();
-
-        private TextBox _nameBox,
-            _descriptionBox,
-            _tagsBox,
-            _streetBox,
-            _zipCodeBox,
-            _cityBox,
-            _houseBox,
-            _placeBox;
-
-        private ComboBox _categoryBox, _subcategoryBox;
-
 
         #endregion
 
@@ -52,34 +33,6 @@ namespace AugmentedSzczecin.ViewModels
 
         private bool IsObligatoryFieldsValid { get; set; }
 
-        public bool IsNameValid { get; set; }
-        private bool IsNameEmptyValid { get; set; }
-
-        public bool IsDescriptionValid { get; set; }
-        private bool IsDescriptionEmptyValid { get; set; }
-
-        public bool IsTagsValid { get; set; }
-        private bool IsTagsEmptyValid { get; set; }
-        private bool IsTagsMatchValid { get; set; }
-
-        public bool IsStreetValid { get; set; }
-        private bool IsStreetEmptyValid { get; set; }
-        private bool IsStreetMatchValid { get; set; }
-
-        public bool IsZipCodeValid { get; set; }
-        private bool IsZipCodeEmptyValid { get; set; }
-        private bool IsZipCodeMatchValid { get; set; }
-
-        public bool IsCityValid { get; set; }
-        private bool IsCityEmptyValid { get; set; }
-        private bool IsCityMatchValid { get; set; }
-
-        public bool IsStreetNumberValid { get; set; }
-        private bool IsStreetNumberEmptyValid { get; set; }
-
-        private bool IsCategorySelected { get; set; }
-        private bool IsSubcategorySelected { get; set; }
-
         private string _name;
         public string Name
         {
@@ -91,9 +44,26 @@ namespace AugmentedSzczecin.ViewModels
             {
                 if (_name != value)
                 {
-                    _nameBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
                     _name = value;
+                    ValidateName();
                     NotifyOfPropertyChange(() => Name);
+                }
+            }
+        }
+        private bool IsNameEmptyValid { get; set; }
+        private bool _isNameValid = true;
+        public bool IsNameValid
+        {
+            get
+            {
+                return _isNameValid;
+            }
+            set
+            {
+                if (_isNameValid != value)
+                {
+                    _isNameValid = value;
+                    NotifyOfPropertyChange(() => IsNameValid);
                 }
             }
         }
@@ -110,13 +80,31 @@ namespace AugmentedSzczecin.ViewModels
                 if (_description != value)
                 {
                     _description = value;
+                    ValidateDescription();
                     NotifyOfPropertyChange(() => Description);
                 }
             }
         }
+        private bool IsDescriptionEmptyValid { get; set; }
+        private bool _isDescriptionValid = true;
+        public bool IsDescriptionValid
+        {
+            get
+            {
+                return _isDescriptionValid;
+            }
+            set
+            {
+                if (_isDescriptionValid != value)
+                {
+                    _isDescriptionValid = value;
+                    NotifyOfPropertyChange(() => IsDescriptionValid);
+                }
+            }
+        }
 
-        private string[] _tags;
-        public string[] Tags
+        private string _tags;
+        public string Tags
         {
             get
             {
@@ -127,7 +115,26 @@ namespace AugmentedSzczecin.ViewModels
                 if (_tags != value)
                 {
                     _tags = value;
+                    ValidateTags();
                     NotifyOfPropertyChange(() => Tags);
+                }
+            }
+        }
+        private bool IsTagsEmptyValid { get; set; }
+        private bool IsTagsMatchValid { get; set; }
+        private bool _isTagsValid = true;
+        public bool IsTagsValid
+        {
+            get
+            {
+                return _isTagsValid;
+            }
+            set
+            {
+                if (_isTagsValid != value)
+                {
+                    _isTagsValid = value;
+                    NotifyOfPropertyChange(() => IsTagsValid);
                 }
             }
         }
@@ -144,7 +151,26 @@ namespace AugmentedSzczecin.ViewModels
                 if (_street != value)
                 {
                     _street = value;
+                    ValidateStreet();
                     NotifyOfPropertyChange(() => Street);
+                }
+            }
+        }
+        private bool IsStreetEmptyValid { get; set; }
+        private bool IsStreetMatchValid { get; set; }
+        private bool _isStreetValid = true;
+        public bool IsStreetValid
+        {
+            get
+            {
+                return _isStreetValid;
+            }
+            set
+            {
+                if (_isStreetValid != value)
+                {
+                    _isStreetValid = value;
+                    NotifyOfPropertyChange(() => IsStreetValid);
                 }
             }
         }
@@ -161,7 +187,26 @@ namespace AugmentedSzczecin.ViewModels
                 if (_zipCode != value)
                 {
                     _zipCode = value;
+                    ValidateZipCode();
                     NotifyOfPropertyChange(() => ZipCode);
+                }
+            }
+        }
+        private bool IsZipCodeEmptyValid { get; set; }
+        private bool IsZipCodeMatchValid { get; set; }
+        private bool _isZipCodeValid = true;
+        public bool IsZipCodeValid
+        {
+            get
+            {
+                return _isZipCodeValid;
+            }
+            set
+            {
+                if (_isZipCodeValid != value)
+                {
+                    _isZipCodeValid = value;
+                    NotifyOfPropertyChange(() => IsZipCodeValid);
                 }
             }
         }
@@ -178,7 +223,26 @@ namespace AugmentedSzczecin.ViewModels
                 if (_city != value)
                 {
                     _city = value;
+                    ValidateCity();
                     NotifyOfPropertyChange(() => City);
+                }
+            }
+        }
+        private bool IsCityEmptyValid { get; set; }
+        private bool IsCityMatchValid { get; set; }
+        private bool _isCityValid = true;
+        public bool IsCityValid
+        {
+            get
+            {
+                return _isCityValid;
+            }
+            set
+            {
+                if (_isCityValid != value)
+                {
+                    _isCityValid = value;
+                    NotifyOfPropertyChange(() => IsCityValid);
                 }
             }
         }
@@ -195,7 +259,59 @@ namespace AugmentedSzczecin.ViewModels
                 if (_streetNumber != value)
                 {
                     _streetNumber = value;
+                    ValidateStreetNumber();
                     NotifyOfPropertyChange(() => StreetNumber);
+                }
+            }
+        }
+        private bool IsStreetNumberEmptyValid { get; set; }
+        private bool _isStreetNumberValid = true;
+        public bool IsStreetNumberValid
+        {
+            get
+            {
+                return _isStreetNumberValid;
+            }
+            set
+            {
+                if (_isStreetNumberValid != value)
+                {
+                    _isStreetNumberValid = value;
+                    NotifyOfPropertyChange(() => IsStreetNumberValid);
+                }
+            }
+        }
+
+        private bool _isCategorySelected = true;
+        public bool IsCategorySelected
+        {
+            get
+            {
+                return _isCategorySelected;
+            }
+            set
+            {
+                if (_isCategorySelected != value)
+                {
+                    _isCategorySelected = value;
+                    NotifyOfPropertyChange(() => IsCategorySelected);
+                }
+            }
+        }
+
+        private bool _isSubcategorySelected = true;
+        public bool IsSubcategorySelected
+        {
+            get
+            {
+                return _isSubcategorySelected;
+            }
+            set
+            {
+                if (_isSubcategorySelected != value)
+                {
+                    _isSubcategorySelected = value;
+                    NotifyOfPropertyChange(() => IsSubcategorySelected);
                 }
             }
         }
@@ -248,21 +364,8 @@ namespace AugmentedSzczecin.ViewModels
             get { return _selectedCategoryItem; }
             set
             {
-                _categoryBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
                 _selectedCategoryItem = value;
-                ValidateCategorySelected();
-                ValidateSubcategorySelected();
-                CheckValidation();
                 NotifyOfPropertyChange(() => SelectedCategoryItem);
-                if (_selectedCategoryItem == _loader.GetString("NewPoiCategoryFirst"))
-                {
-                    SubcategoryVisibility = Visibility.Visible;
-                }
-                else
-                {
-                    SubcategoryVisibility = Visibility.Collapsed;
-                    SelectedSubcategoryItem = null;
-                }
             }
         }
 
@@ -292,73 +395,21 @@ namespace AugmentedSzczecin.ViewModels
             get { return _selectedSubcategoryItem; }
             set
             {
-                _subcategoryBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
                 _selectedSubcategoryItem = value;
-                ValidateSubcategorySelected();
-                CheckValidation();
                 NotifyOfPropertyChange(() => SelectedSubcategoryItem);
             }
         }
 
-        public BindableCollection<string> FeeOptions
+        private bool _isExtraFieldChecked;
+        public bool IsExtraFieldChecked
         {
-            get
-            {
-                return new BindableCollection<string>(new[]
-                {
-                    _loader.GetString("PricePayable"),
-                    _loader.GetString("PriceFree"),
-                });
-            }
-        }
-
-        private string _selectedFeeOption;
-        public string SelectedFeeOption
-        {
-            get { return _selectedFeeOption; }
+            get { return _isExtraFieldChecked; }
             set
             {
-                _selectedFeeOption = value;
-                NotifyOfPropertyChange(() => SelectedFeeOption);
+                _isExtraFieldChecked = value;
+                NotifyOfPropertyChange(() => IsExtraFieldChecked);
             }
         }
-
-
-        public Geopoint Parameter { get; set; }
-
-
-
-        private Visibility _subcategoryVisibility = Visibility.Collapsed;
-        public Visibility SubcategoryVisibility
-        {
-            get { return _subcategoryVisibility; }
-            set
-            {
-                if (value != _subcategoryVisibility)
-                {
-                    _subcategoryVisibility = value;
-                    NotifyOfPropertyChange(() => SubcategoryVisibility);
-                }
-            }
-        }
-
-        private Visibility _extraFieldsVisibility = Visibility.Collapsed;
-        public Visibility ExtraFieldsVisibility
-        {
-            get { return _extraFieldsVisibility; }
-            set
-            {
-                if (value != _extraFieldsVisibility)
-                {
-                    _extraFieldsVisibility = value;
-                    NotifyOfPropertyChange(() => ExtraFieldsVisibility);
-                }
-            }
-        }
-
-
-
-
 
         private bool _validationCheck;
         public bool ValidationCheck
@@ -374,6 +425,9 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private string[] TagsArray;
+        public Geopoint Parameter { get; set; }
+
         #endregion
 
         #region Override Methods
@@ -382,22 +436,6 @@ namespace AugmentedSzczecin.ViewModels
         {
             Latitude = Parameter.Position.Latitude;
             Longitude = Parameter.Position.Longitude;
-        }
-
-        protected override void OnViewAttached(object view, object context)
-        {
-            _nameBox = ((CreatePointOfInterestView)view).Name;
-            _descriptionBox = ((CreatePointOfInterestView)view).Description;
-            _tagsBox = ((CreatePointOfInterestView)view).Tags;
-            _streetBox = ((CreatePointOfInterestView)view).Street;
-            _zipCodeBox = ((CreatePointOfInterestView)view).ZipCode;
-            _cityBox = ((CreatePointOfInterestView)view).City;
-            _houseBox = ((CreatePointOfInterestView)view).House;
-            _placeBox = ((CreatePointOfInterestView)view).Place;
-            _categoryBox = ((CreatePointOfInterestView)view).CategoryItems;
-            _subcategoryBox = ((CreatePointOfInterestView)view).SubcategoryItems;
-
-            base.OnViewAttached(view, context);
         }
 
         #endregion
@@ -411,24 +449,22 @@ namespace AugmentedSzczecin.ViewModels
 
         public void AddNewPointOfInterestClick()
         {
+            CheckValidation();
+
             if (ValidationCheck)
             {
 
-            }
-            else
-            {
-                WrongValidationMessageDialog();
             }
         }
 
         public void ExtraFieldsChecked()
         {
-            ExtraFieldsVisibility = Visibility.Visible;
+            IsExtraFieldChecked = true;
         }
 
         public void ExtraFieldsUnchecked()
         {
-            ExtraFieldsVisibility = Visibility.Collapsed;
+            IsExtraFieldChecked = false;
         }
 
         public void OnKeyDown(ActionExecutionContext context)
@@ -445,103 +481,108 @@ namespace AugmentedSzczecin.ViewModels
 
         private void CheckValidation()
         {
-            //// OBOWIAZKOWE
-
-            ////Adres
-            //// kateogrie
-            //IsCategorySelected
-            //isSubcategorySelected
-
-            //// DODATKOWE
-            //IsExtraFieldsSelected
-            //// adress WWW, 100
-            //IsWebsiteMatchValid
-
-            ////telefon 9 - tylko cyfry
-            //IsPhoneMatchValid
-
-            //// link wikipedia, 100
-            //IsWikipediaMatchValid
-
-            //// fan page, 100
-            //IsFanpageMatchValid
-
-            //    IsObligatoryFieldsValid =
-            //        IsExtraFieldsValid =
-
-            IsObligatoryFieldsValid = IsNameEmptyValid
-                && IsDescriptionEmptyValid
-                && IsTagsEmptyValid && IsTagsMatchValid
-                && IsStreetEmptyValid && IsStreetMatchValid
-                && IsZipCodeEmptyValid && IsZipCodeMatchValid
-                && IsCityEmptyValid && IsCityMatchValid
-                && IsHouseEmptyValid
-                && IsPlaceEmptyValid
-                && IsCategorySelected && IsSubcategorySelected;
-
-            //IsExtraFieldsValid = 
-
-            ValidationCheck = IsObligatoryFieldsValid;
+            CheckObligatoryFields();
+            ValidationCheck = IsNameValid
+                              && IsDescriptionValid
+                              && IsTagsValid
+                              && IsStreetValid
+                              && IsZipCodeValid
+                              && IsCityValid
+                              && IsStreetNumberValid
+                              && IsCategorySelected
+                              && IsSubcategorySelected;
         }
 
-        private void ValidateNameEmpty()
+        private void CheckObligatoryFields()
         {
-            IsNameEmptyValid = !String.IsNullOrEmpty(Name);
+            ValidateName();
+            ValidateDescription();
+            ValidateTags();
+            ValidateStreet();
+            ValidateZipCode();
+            ValidateCity();
+            ValidateStreetNumber();
+            ValidateCategorySelected();
+            ValidateSubcategorySelected();
         }
 
-        private void ValidateDescriptionEmpty()
+        private void ValidateName()
         {
-            IsDescriptionEmptyValid = !String.IsNullOrEmpty(Description);
+            IsNameValid = ValidateNameEmpty();
+        }
+        private bool ValidateNameEmpty()
+        {
+            return IsNameEmptyValid = !String.IsNullOrEmpty(Name);
         }
 
-        private void ValidateTagsEmpty()
+        private void ValidateDescription()
         {
-            IsTagsEmptyValid = !String.IsNullOrEmpty(Tags);
+            IsDescriptionValid = ValidateDescriptionEmpty();
+        }
+        private bool ValidateDescriptionEmpty()
+        {
+            return IsDescriptionEmptyValid = !String.IsNullOrEmpty(Description);
         }
 
-        private void ValidateTagsMatch()
+        private void ValidateTags()
         {
-            IsTagsMatchValid = Regex.IsMatch(Tags, @"^([a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ0-9]+( *, *[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ0-9]+)*)?$");
+            IsTagsValid = ValidateTagsEmpty() && ValidateTagsMatch();
+        }
+        private bool ValidateTagsEmpty()
+        {
+            return IsTagsEmptyValid = !String.IsNullOrEmpty(Tags);
+        }
+        private bool ValidateTagsMatch()
+        {
+            return IsTagsMatchValid = Regex.IsMatch(Tags, @"^([a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ0-9]+( *, *[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ0-9]+)*)?$");
         }
 
-        private void ValidateStreetEmpty()
+        private void ValidateStreet()
         {
-            IsStreetEmptyValid = !String.IsNullOrEmpty(Street);
+            IsStreetValid = ValidateStreetEmpty() && ValidateStreetMatch();
+        }
+        private bool ValidateStreetEmpty()
+        {
+            return IsStreetEmptyValid = !String.IsNullOrEmpty(Street);
+        }
+        private bool ValidateStreetMatch()
+        {
+            return IsStreetMatchValid = Regex.IsMatch(Street, @"^[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ .]+$");
         }
 
-        private void ValidateStreetMatch()
+        private void ValidateZipCode()
         {
-            IsStreetMatchValid = Regex.IsMatch(Street, @"^[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ .]+$");
+            IsZipCodeValid = ValidateZipCodeEmpty() && ValidateZipCodeMatch();
+        }
+        private bool ValidateZipCodeEmpty()
+        {
+            return IsZipCodeEmptyValid = !String.IsNullOrEmpty(ZipCode);
+        }
+        private bool ValidateZipCodeMatch()
+        {
+            return IsZipCodeMatchValid = Regex.IsMatch(ZipCode, @"[0-9]{2}-[0-9]{3}");
         }
 
-        private void ValidateZipCodeEmpty()
+        private void ValidateCity()
         {
-            IsZipCodeEmptyValid = !String.IsNullOrEmpty(ZipCode);
+            IsCityValid = ValidateCityEmpty() && ValidateCityMatch();
+        }
+        private bool ValidateCityEmpty()
+        {
+            return IsCityEmptyValid = !String.IsNullOrEmpty(City);
+        }
+        private bool ValidateCityMatch()
+        {
+            return IsCityMatchValid = Regex.IsMatch(City, @"^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ -]+$");
         }
 
-        private void ValidateZipCodeMatch()
+        private void ValidateStreetNumber()
         {
-            IsZipCodeMatchValid = Regex.IsMatch(ZipCode, @"[0-9]{2}-[0-9]{3}");
+            IsStreetNumberValid = ValidateStreetNumberEmpty();
         }
-
-        private void ValidateCityEmpty()
+        private bool ValidateStreetNumberEmpty()
         {
-            IsCityEmptyValid = !String.IsNullOrEmpty(City);
-        }
-
-        private void ValidateCityMatch()
-        {
-            IsCityMatchValid = Regex.IsMatch(City, @"^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ -]+$");
-        }
-
-        private void ValidateHouseEmpty()
-        {
-            IsHouseEmptyValid = !String.IsNullOrEmpty(StreetNumber);
-        }
-
-        private void ValidatePlaceEmpty()
-        {
-            IsPlaceEmptyValid = !String.IsNullOrEmpty(Place);
+            return IsStreetNumberEmptyValid = !String.IsNullOrEmpty(StreetNumber);
         }
 
         private void ValidateCategorySelected()
@@ -555,113 +596,11 @@ namespace AugmentedSzczecin.ViewModels
             {
                 IsSubcategorySelected = !String.IsNullOrEmpty(SelectedSubcategoryItem);
             }
-        }
-
-        private async void WrongValidationMessageDialog()
-        {
-            var loader = new ResourceLoader();
-            var message = "";
-
-            if (!IsNameEmptyValid
-                && !IsDescriptionEmptyValid
-                && !IsTagsEmptyValid && !IsTagsMatchValid
-                && !IsStreetEmptyValid && !IsStreetMatchValid
-                && !IsZipCodeEmptyValid && !IsZipCodeMatchValid
-                && !IsCityEmptyValid && !IsCityMatchValid
-                && !IsHouseEmptyValid
-                && !IsPlaceEmptyValid
-                && !IsCategorySelected && !IsSubcategorySelected)
-            {
-                message += loader.GetString("CreatePointOfInterestEmptyForm");
-            }
             else
             {
-                if (!IsNameEmptyValid)
-                {
-                    message += HighlightWrongTextBox(_nameBox, "CreatePointOfInterestNameEmpty");
-                }
-                if (!IsDescriptionEmptyValid)
-                {
-                    message += HighlightWrongTextBox(_descriptionBox, "CreatePointOfInterestDescriptionEmpty");
-                }
-                if (!IsTagsEmptyValid)
-                {
-                    message += HighlightWrongTextBox(_tagsBox, "CreatePointOfInterestTagsEmpty");
-                }
-                if (IsTagsEmptyValid && !IsTagsMatchValid)
-                {
-                    message += HighlightWrongTextBox(_tagsBox, "CreatePointOfInterestTagsMatch");
-                }
-                if (!IsStreetEmptyValid)
-                {
-                    message += HighlightWrongTextBox(_streetBox, "CreatePointOfInterestStreetEmpty");
-                }
-                if (IsStreetEmptyValid && !IsStreetMatchValid)
-                {
-                    message += HighlightWrongTextBox(_streetBox, "CreatePointOfInterestStreetMatch");
-                }
-                if (!IsZipCodeEmptyValid)
-                {
-                    message += HighlightWrongTextBox(_zipCodeBox, "CreatePointOfInterestZipCodeEmpty");
-                }
-                if (IsZipCodeEmptyValid && !IsZipCodeMatchValid)
-                {
-                    message += HighlightWrongTextBox(_zipCodeBox, "CreatePointOfInterestZipCodeMatch");
-                }
-                if (!IsCityEmptyValid)
-                {
-                    message += HighlightWrongTextBox(_cityBox, "CreatePointOfInterestCityEmpty");
-                }
-                if (IsCityEmptyValid && !IsCityMatchValid)
-                {
-                    message += HighlightWrongTextBox(_cityBox, "CreatePointOfInterestCityMatch");
-                }
-                if (!IsHouseEmptyValid)
-                {
-                    message += HighlightWrongTextBox(_houseBox, "CreatePointOfInterestHouseEmpty");
-                }
-                if (!IsPlaceEmptyValid)
-                {
-                    message += HighlightWrongTextBox(_placeBox, "CreatePointOfInterestPlaceEmpty");
-                }
-                if (!IsCategorySelected)
-                {
-                    message += HighlightWrongComboBox(_categoryBox, "CreatePointOfInterestCategoryNotSelected");
-                }
-                if (IsCategorySelected)
-                {
-                    if (SelectedCategoryItem == CategoryItems[0])
-                    {
-                        if (!IsSubcategorySelected)
-                        {
-                            message += HighlightWrongComboBox(_subcategoryBox, "CreatePointOfInterestSubcategoryNotSelected");
-                        }
-                    }
-                }
+                SelectedSubcategoryItem = null;
+                IsSubcategorySelected = true;
             }
-
-            var msg = new MessageDialog(message);
-            await msg.ShowAsync();
-        }
-
-        private string HighlightWrongComboBox(ComboBox comboBox, string stringResource)
-        {
-            var loader = new ResourceLoader();
-
-            var message = loader.GetString(stringResource) + "\n";
-            comboBox.Background = new SolidColorBrush(Colors.OrangeRed);
-
-            return message;
-        }
-
-        private string HighlightWrongTextBox(TextBox textBox, string stringResource)
-        {
-            var loader = new ResourceLoader();
-
-            var message = loader.GetString(stringResource) + "\n";
-            textBox.Background = new SolidColorBrush(Colors.OrangeRed);
-
-            return message;
         }
 
         #endregion
