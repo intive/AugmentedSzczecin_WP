@@ -60,7 +60,7 @@
             x:Name="LayoutBody">
             <ListView>
                 <ListViewItem
-                    Margin="0, 0, 0, 5"
+                    Margin="0, 0, 0, 10"
                     HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
@@ -68,7 +68,7 @@
                     Content="about"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
                 <ListViewItem
-                    Margin="0, 0, 0, 5"
+                    Margin="0, 0, 0, 10"
                     HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
@@ -76,7 +76,7 @@
                     Content="augmented view"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" />
                 <ListViewItem
-                    Margin="0, 0, 0, 5"
+                    Margin="0, 0, 0, 10"
                     HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
@@ -84,7 +84,7 @@
                     Content="current map"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" />
                 <ListViewItem
-                    Margin="0, 0, 0, 5"
+                    Margin="0, 0, 0, 10"
                     HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
@@ -92,7 +92,7 @@
                     Content="location list"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 <ListViewItem
-                    Margin="0, 0, 0, 5"
+                    Margin="0, 0, 0, 10"
                     HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
@@ -100,7 +100,7 @@
                     Content="sign up"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]" />
                 <ListViewItem
-                    Margin="0, 0, 0, 5"
+                    Margin="0, 0, 0, 10"
                     HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
