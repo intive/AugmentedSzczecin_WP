@@ -69,13 +69,136 @@ namespace AugmentedSzczecin.ViewModels
         public bool IsZipCodeValid { get; set; }
         private bool IsZipCodeEmptyValid { get; set; }
         private bool IsZipCodeMatchValid { get; set; }
+
+        public bool IsCityValid { get; set; }
         private bool IsCityEmptyValid { get; set; }
         private bool IsCityMatchValid { get; set; }
-        private bool IsHouseEmptyValid { get; set; }
-        private bool IsPlaceEmptyValid { get; set; }
+
+        public bool IsStreetNumberValid { get; set; }
+        private bool IsStreetNumberEmptyValid { get; set; }
+
         private bool IsCategorySelected { get; set; }
         private bool IsSubcategorySelected { get; set; }
 
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (_name != value)
+                {
+                    _nameBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
+                    _name = value;
+                    NotifyOfPropertyChange(() => Name);
+                }
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    NotifyOfPropertyChange(() => Description);
+                }
+            }
+        }
+
+        private string[] _tags;
+        public string[] Tags
+        {
+            get
+            {
+                return _tags;
+            }
+            set
+            {
+                if (_tags != value)
+                {
+                    _tags = value;
+                    NotifyOfPropertyChange(() => Tags);
+                }
+            }
+        }
+
+        private string _street;
+        public string Street
+        {
+            get
+            {
+                return _street;
+            }
+            set
+            {
+                if (_street != value)
+                {
+                    _street = value;
+                    NotifyOfPropertyChange(() => Street);
+                }
+            }
+        }
+
+        private string _zipCode;
+        public string ZipCode
+        {
+            get
+            {
+                return _zipCode;
+            }
+            set
+            {
+                if (_zipCode != value)
+                {
+                    _zipCode = value;
+                    NotifyOfPropertyChange(() => ZipCode);
+                }
+            }
+        }
+
+        private string _city;
+        public string City
+        {
+            get
+            {
+                return _city;
+            }
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    NotifyOfPropertyChange(() => City);
+                }
+            }
+        }
+
+        private string _streetNumber;
+        public string StreetNumber
+        {
+            get
+            {
+                return _streetNumber;
+            }
+            set
+            {
+                if (_streetNumber != value)
+                {
+                    _streetNumber = value;
+                    NotifyOfPropertyChange(() => StreetNumber);
+                }
+            }
+        }
 
         private double _latitude;
         public double Latitude
@@ -203,7 +326,7 @@ namespace AugmentedSzczecin.ViewModels
 
         public Geopoint Parameter { get; set; }
 
-        
+
 
         private Visibility _subcategoryVisibility = Visibility.Collapsed;
         public Visibility SubcategoryVisibility
@@ -233,171 +356,9 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-       
 
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (_name != value)
-                {
-                    _nameBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
-                    _name = value;
-                    ValidateNameEmpty();
-                    CheckValidation();
-                    NotifyOfPropertyChange(() => Name);
-                }
-            }
-        }
 
-        private string _description;
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                if (_description != value)
-                {
-                    _descriptionBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
-                    _description = value;
-                    ValidateDescriptionEmpty();
-                    CheckValidation();
-                    NotifyOfPropertyChange(() => Description);
-                }
-            }
-        }
 
-        private string _tags;
-        public string Tags
-        {
-            get
-            {
-                return _tags;
-            }
-            set
-            {
-                if (_tags != value)
-                {
-                    _tagsBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
-                    _tags = value;
-                    ValidateTagsEmpty();
-                    ValidateTagsMatch();
-                    CheckValidation();
-                    NotifyOfPropertyChange(() => Tags);
-                }
-            }
-        }
-
-        private string _street;
-        public string Street
-        {
-            get
-            {
-                return _street;
-            }
-            set
-            {
-                if (_street != value)
-                {
-                    _streetBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
-                    _street = value;
-                    ValidateStreetEmpty();
-                    ValidateStreetMatch();
-                    CheckValidation();
-                    NotifyOfPropertyChange(() => Street);
-                }
-            }
-        }
-
-        private string _zipCode;
-        public string ZipCode
-        {
-            get
-            {
-                return _zipCode;
-            }
-            set
-            {
-                if (_zipCode != value)
-                {
-                    _zipCodeBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
-                    _zipCode = value;
-                    ValidateZipCodeEmpty();
-                    ValidateZipCodeMatch();
-                    CheckValidation();
-                    NotifyOfPropertyChange(() => ZipCode);
-                }
-            }
-        }
-
-        private string _city;
-        public string City
-        {
-            get
-            {
-                return _city;
-            }
-            set
-            {
-                if (_city != value)
-                {
-                    _cityBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
-                    _city = value;
-                    ValidateCityEmpty();
-                    ValidateCityMatch();
-                    CheckValidation();
-                    NotifyOfPropertyChange(() => City);
-                }
-            }
-        }
-
-        private string _house;
-        public string House
-        {
-            get
-            {
-                return _house;
-            }
-            set
-            {
-                if (_house != value)
-                {
-                    _houseBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
-                    _house = value;
-                    ValidateHouseEmpty();
-                    CheckValidation();
-                    NotifyOfPropertyChange(() => House);
-                }
-            }
-        }
-
-        private string _place;
-        public string Place
-        {
-            get
-            {
-                return _place;
-            }
-            set
-            {
-                if (_place != value)
-                {
-                    _placeBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
-                    _place = value;
-                    ValidatePlaceEmpty();
-                    CheckValidation();
-                    NotifyOfPropertyChange(() => Place);
-                }
-            }
-        }
 
         private bool _validationCheck;
         public bool ValidationCheck
@@ -575,7 +536,7 @@ namespace AugmentedSzczecin.ViewModels
 
         private void ValidateHouseEmpty()
         {
-            IsHouseEmptyValid = !String.IsNullOrEmpty(House);
+            IsHouseEmptyValid = !String.IsNullOrEmpty(StreetNumber);
         }
 
         private void ValidatePlaceEmpty()
