@@ -34,7 +34,7 @@ namespace AugmentedSzczecin.Services
             }
         }
 
-        public async void Refresh()
+        public async void LoadPlaces()
         {
             try
             {
@@ -47,11 +47,11 @@ namespace AugmentedSzczecin.Services
             }
         }
 
-        public async void Refresh(string latitude, string longitude, string radius)
+        public async void LoadPoIs(double latitude, double longitude, int radius, CategoryType category)
         {
             try
             {
-                PointOfInterestList = await _httpService.GetPointOfInterestList(latitude, longitude, radius);
+                PointOfInterestList = await _httpService.GetPointOfInterestList(latitude, longitude, radius, category);
                 _eventAggregator.PublishOnUIThread(new PointOfInterestLoadedEvent() { PointOfInterestList = PointOfInterestList });
             }
             catch (Exception e)

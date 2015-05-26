@@ -13,6 +13,7 @@ using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.Media.Capture;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -28,12 +29,11 @@ namespace AugmentedSzczecin.Views
 {
     public sealed partial class AugmentedView : Page, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
-        private SimpleOrientationSensor _orientationSensor;
         private Compass _compass;
         private Geolocator _gps;
 
         private uint _movementThreshold = 100;
-        private double _defaultSearchRadius = 1;
+        private double _angleOfView = 45.0;
 
         private Geopoint _currentLocation = null;
         private double _currentHeading = 0;
@@ -43,7 +43,7 @@ namespace AugmentedSzczecin.Views
         public AugmentedView()
         {
             InitializeComponent();
-
+            
             _eventAgg = IoC.GetInstance(typeof(IEventAggregator), null);
             ((EventAggregator)_eventAgg).Subscribe(this);
         }
@@ -84,7 +84,10 @@ namespace AugmentedSzczecin.Views
 
                     foreach (var poi in _poiLocations)
                     {
-
+                        if (Math.Abs(poi.Location.Latitude) > 90 || Math.Abs(poi.Location.Longitude) > 180)
+                        {
+                            continue;
+                        }
                         var c = new Coordinate(poi.Location.Latitude, poi.Location.Longitude);
                         var poiHeading = SpatialTools.CalculateHeading(center, c);
                         var diff = _currentHeading - poiHeading;
@@ -98,26 +101,26 @@ namespace AugmentedSzczecin.Views
                             diff = _currentHeading + 360 - poiHeading;
                         }
 
-                        if (Math.Abs(diff) <= 22.5)
+                        if (Math.Abs(diff) <= (_angleOfView / 2))
                         {
-                            var distance = SpatialTools.HaversineDistance(center, c, DistanceUnits.KM);
+                            var distance = SpatialTools.HaversineDistance(center, c, DistanceUnits.Meters);
 
                             double left = 0;
 
                             if (diff > 0)
                             {
-                                left = ItemCanvas.ActualWidth / 2 * ((22.5 - diff) / 22.5);
+                                left = ItemCanvas.ActualWidth / 2 * (((_angleOfView / 2) - diff) / (_angleOfView / 2));
                             }
                             else
                             {
-                                left = ItemCanvas.ActualWidth / 2 * (1 + -diff / 22.5);
+                                left = ItemCanvas.ActualWidth / 2 * (1 + -diff / (_angleOfView / 2));
                             }
 
-                            double top = ItemCanvas.ActualHeight * (1 - distance / _defaultSearchRadius);
+                            double top = (ItemCanvas.ActualHeight - 50) * (1 - distance / RadiusSlider.Value) + 50;
 
                             var tb = new TextBlock()
                             {
-                                Text = poi.Name,
+                                Text = string.Format("{0}({1})", poi.Name, distance),
                                 FontSize = 24,
                                 TextAlignment = TextAlignment.Center,
                                 HorizontalAlignment = HorizontalAlignment.Center
@@ -135,15 +138,8 @@ namespace AugmentedSzczecin.Views
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
             await StartCamera();
-
-            _orientationSensor = SimpleOrientationSensor.GetDefault();
-            if (_orientationSensor != null)
-            {
-                _orientationSensor.OrientationChanged += SimpleOrientationSensorReadingChanged;
-                UpdateOrientation(_orientationSensor.GetCurrentOrientation());
-            }
 
             _compass = Compass.GetDefault();
             if (_compass != null)
@@ -169,47 +165,10 @@ namespace AugmentedSzczecin.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            _orientationSensor.OrientationChanged -= SimpleOrientationSensorReadingChanged;
             _compass.ReadingChanged -= CompassReadingChanged;
             _gps.PositionChanged -= GpsPositionChanged;
             StopCamera();
-        }
-
-        private void SimpleOrientationSensorReadingChanged(SimpleOrientationSensor sender, SimpleOrientationSensorOrientationChangedEventArgs args)
-        {
-            UpdateOrientation(args.Orientation);
-        }
-
-        private async void UpdateOrientation(SimpleOrientation orientation)
-        {
-            VideoRotation videoRotation = VideoRotation.None;
-
-            switch (orientation)
-            {
-                case SimpleOrientation.NotRotated:
-                    videoRotation = VideoRotation.Clockwise90Degrees;
-                    break;
-                case SimpleOrientation.Rotated90DegreesCounterclockwise:
-                    videoRotation = VideoRotation.None;
-                    break;
-                case SimpleOrientation.Rotated180DegreesCounterclockwise:
-                    videoRotation = VideoRotation.Clockwise270Degrees;
-                    break;
-                case SimpleOrientation.Rotated270DegreesCounterclockwise:
-                    videoRotation = VideoRotation.Clockwise180Degrees;
-                    break;
-                default:
-                    break;
-            }
-
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                if (PreviewScreen.Source != null)
-                {
-                    PreviewScreen.Source.SetPreviewRotation(videoRotation);
-                }
-            });
-
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.None;
         }
 
         private void CompassReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
@@ -223,7 +182,6 @@ namespace AugmentedSzczecin.Views
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 _currentHeading = reading.HeadingMagneticNorth;
-
                 UpdateARView();
             });
         }
@@ -238,18 +196,20 @@ namespace AugmentedSzczecin.Views
 
         private async void GpsChanged(BasicGeoposition position)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-
                 _currentLocation = new Geopoint(new BasicGeoposition() { Latitude = position.Latitude, Longitude = position.Longitude });
                 UpdateARView();
-
             });
         }
 
-        public void Handle(PointOfInterestLoadedEvent e)
+        public async void Handle(PointOfInterestLoadedEvent e)
         {
-            _poiLocations = e.PointOfInterestList;
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                _poiLocations = e.PointOfInterestList;
+                PoiCount.Text = _poiLocations.Count.ToString();
+            });
         }
 
         public void Handle(PointOfInterestLoadFailedEvent e)
