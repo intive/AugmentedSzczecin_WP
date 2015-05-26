@@ -28,7 +28,7 @@ namespace AugmentedSzczecin.ViewModels
             _descriptionBox,
             _tagsBox,
             _streetBox,
-            _postalCodeBox,
+            _zipCodeBox,
             _cityBox,
             _houseBox,
             _placeBox;
@@ -49,6 +49,61 @@ namespace AugmentedSzczecin.ViewModels
         #endregion
 
         #region Properties
+
+        private bool IsObligatoryFieldsValid { get; set; }
+
+        public bool IsNameValid { get; set; }
+        private bool IsNameEmptyValid { get; set; }
+
+        public bool IsDescriptionValid { get; set; }
+        private bool IsDescriptionEmptyValid { get; set; }
+
+        public bool IsTagsValid { get; set; }
+        private bool IsTagsEmptyValid { get; set; }
+        private bool IsTagsMatchValid { get; set; }
+
+        public bool IsStreetValid { get; set; }
+        private bool IsStreetEmptyValid { get; set; }
+        private bool IsStreetMatchValid { get; set; }
+
+        public bool IsZipCodeValid { get; set; }
+        private bool IsZipCodeEmptyValid { get; set; }
+        private bool IsZipCodeMatchValid { get; set; }
+        private bool IsCityEmptyValid { get; set; }
+        private bool IsCityMatchValid { get; set; }
+        private bool IsHouseEmptyValid { get; set; }
+        private bool IsPlaceEmptyValid { get; set; }
+        private bool IsCategorySelected { get; set; }
+        private bool IsSubcategorySelected { get; set; }
+
+
+        private double _latitude;
+        public double Latitude
+        {
+            get { return _latitude; }
+            set
+            {
+                if (_latitude != value)
+                {
+                    _latitude = value;
+                    NotifyOfPropertyChange(() => Latitude);
+                }
+            }
+        }
+
+        private double _longitude;
+        public double Longitude
+        {
+            get { return _longitude; }
+            set
+            {
+                if (_longitude != value)
+                {
+                    _longitude = value;
+                    NotifyOfPropertyChange(() => Longitude);
+                }
+            }
+        }
 
         public BindableCollection<string> CategoryItems
         {
@@ -148,33 +203,7 @@ namespace AugmentedSzczecin.ViewModels
 
         public Geopoint Parameter { get; set; }
 
-        private double _latitude;
-        public double Latitude
-        {
-            get { return _latitude; }
-            set
-            {
-                if (_latitude != value)
-                {
-                    _latitude = value;
-                    NotifyOfPropertyChange(() => Latitude);
-                }
-            }
-        }
-
-        private double _longitude;
-        public double Longitude
-        {
-            get { return _longitude; }
-            set
-            {
-                if (_longitude != value)
-                {
-                    _longitude = value;
-                    NotifyOfPropertyChange(() => Longitude);
-                }
-            }
-        }
+        
 
         private Visibility _subcategoryVisibility = Visibility.Collapsed;
         public Visibility SubcategoryVisibility
@@ -204,21 +233,7 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool IsObligatoryFieldsValid { get; set; }
-        private bool IsNameEmptyValid { get; set; }
-        private bool IsDescriptionEmptyValid { get; set; }
-        private bool IsTagsEmptyValid { get; set; }
-        private bool IsTagsMatchValid { get; set; }
-        private bool IsStreetEmptyValid { get; set; }
-        private bool IsStreetMatchValid { get; set; }
-        private bool IsPostalCodeEmptyValid { get; set; }
-        private bool IsPostalCodeMatchValid { get; set; }
-        private bool IsCityEmptyValid { get; set; }
-        private bool IsCityMatchValid { get; set; }
-        private bool IsHouseEmptyValid { get; set; }
-        private bool IsPlaceEmptyValid { get; set; }
-        private bool IsCategorySelected { get; set; }
-        private bool IsSubcategorySelected { get; set; }
+       
 
         private string _name;
         public string Name
@@ -302,23 +317,23 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private string _postalCode;
-        public string PostalCode
+        private string _zipCode;
+        public string ZipCode
         {
             get
             {
-                return _postalCode;
+                return _zipCode;
             }
             set
             {
-                if (_postalCode != value)
+                if (_zipCode != value)
                 {
-                    _postalCodeBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
-                    _postalCode = value;
-                    ValidatePostalCodeEmpty();
-                    ValidatePostalCodeMatch();
+                    _zipCodeBox.Background = Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
+                    _zipCode = value;
+                    ValidateZipCodeEmpty();
+                    ValidateZipCodeMatch();
                     CheckValidation();
-                    NotifyOfPropertyChange(() => PostalCode);
+                    NotifyOfPropertyChange(() => ZipCode);
                 }
             }
         }
@@ -414,7 +429,7 @@ namespace AugmentedSzczecin.ViewModels
             _descriptionBox = ((CreatePointOfInterestView)view).Description;
             _tagsBox = ((CreatePointOfInterestView)view).Tags;
             _streetBox = ((CreatePointOfInterestView)view).Street;
-            _postalCodeBox = ((CreatePointOfInterestView)view).PostalCode;
+            _zipCodeBox = ((CreatePointOfInterestView)view).ZipCode;
             _cityBox = ((CreatePointOfInterestView)view).City;
             _houseBox = ((CreatePointOfInterestView)view).House;
             _placeBox = ((CreatePointOfInterestView)view).Place;
@@ -497,7 +512,7 @@ namespace AugmentedSzczecin.ViewModels
                 && IsDescriptionEmptyValid
                 && IsTagsEmptyValid && IsTagsMatchValid
                 && IsStreetEmptyValid && IsStreetMatchValid
-                && IsPostalCodeEmptyValid && IsPostalCodeMatchValid
+                && IsZipCodeEmptyValid && IsZipCodeMatchValid
                 && IsCityEmptyValid && IsCityMatchValid
                 && IsHouseEmptyValid
                 && IsPlaceEmptyValid
@@ -538,14 +553,14 @@ namespace AugmentedSzczecin.ViewModels
             IsStreetMatchValid = Regex.IsMatch(Street, @"^[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ .]+$");
         }
 
-        private void ValidatePostalCodeEmpty()
+        private void ValidateZipCodeEmpty()
         {
-            IsPostalCodeEmptyValid = !String.IsNullOrEmpty(PostalCode);
+            IsZipCodeEmptyValid = !String.IsNullOrEmpty(ZipCode);
         }
 
-        private void ValidatePostalCodeMatch()
+        private void ValidateZipCodeMatch()
         {
-            IsPostalCodeMatchValid = Regex.IsMatch(PostalCode, @"[0-9]{2}-[0-9]{3}");
+            IsZipCodeMatchValid = Regex.IsMatch(ZipCode, @"[0-9]{2}-[0-9]{3}");
         }
 
         private void ValidateCityEmpty()
@@ -590,7 +605,7 @@ namespace AugmentedSzczecin.ViewModels
                 && !IsDescriptionEmptyValid
                 && !IsTagsEmptyValid && !IsTagsMatchValid
                 && !IsStreetEmptyValid && !IsStreetMatchValid
-                && !IsPostalCodeEmptyValid && !IsPostalCodeMatchValid
+                && !IsZipCodeEmptyValid && !IsZipCodeMatchValid
                 && !IsCityEmptyValid && !IsCityMatchValid
                 && !IsHouseEmptyValid
                 && !IsPlaceEmptyValid
@@ -624,13 +639,13 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     message += HighlightWrongTextBox(_streetBox, "CreatePointOfInterestStreetMatch");
                 }
-                if (!IsPostalCodeEmptyValid)
+                if (!IsZipCodeEmptyValid)
                 {
-                    message += HighlightWrongTextBox(_postalCodeBox, "CreatePointOfInterestPostalCodeEmpty");
+                    message += HighlightWrongTextBox(_zipCodeBox, "CreatePointOfInterestZipCodeEmpty");
                 }
-                if (IsPostalCodeEmptyValid && !IsPostalCodeMatchValid)
+                if (IsZipCodeEmptyValid && !IsZipCodeMatchValid)
                 {
-                    message += HighlightWrongTextBox(_postalCodeBox, "CreatePointOfInterestPostalCodeMatch");
+                    message += HighlightWrongTextBox(_zipCodeBox, "CreatePointOfInterestZipCodeMatch");
                 }
                 if (!IsCityEmptyValid)
                 {

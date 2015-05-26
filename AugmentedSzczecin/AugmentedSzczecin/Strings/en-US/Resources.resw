@@ -159,10 +159,10 @@
   <data name="CreatePointOfInterestPlaceEmpty" xml:space="preserve">
     <value>Fill Place field.</value>
   </data>
-  <data name="CreatePointOfInterestPostalCodeEmpty" xml:space="preserve">
+  <data name="CreatePointOfInterestZipCodeEmpty" xml:space="preserve">
     <value>Fill Postal Code field.</value>
   </data>
-  <data name="CreatePointOfInterestPostalCodeMatch" xml:space="preserve">
+  <data name="CreatePointOfInterestZipCodeMatch" xml:space="preserve">
     <value>Fill Postal Code properly.</value>
   </data>
   <data name="CreatePointOfInterestStreetEmpty" xml:space="preserve">
@@ -216,10 +216,10 @@
   <data name="NewPoiAddressPlaceBox.PlaceholderText" xml:space="preserve">
     <value>e.g. 3</value>
   </data>
-  <data name="NewPoiAddressPostalCode.Text" xml:space="preserve">
+  <data name="NewPoiAddressZipCode.Text" xml:space="preserve">
     <value>Postal code</value>
   </data>
-  <data name="NewPoiAddressPostalCodeBox.PlaceholderText" xml:space="preserve">
+  <data name="NewPoiAddressZipCodeBox.PlaceholderText" xml:space="preserve">
     <value>e.g. 71-696</value>
   </data>
   <data name="NewPoiAddressStreet.Text" xml:space="preserve">

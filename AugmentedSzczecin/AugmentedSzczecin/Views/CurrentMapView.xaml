@@ -29,7 +29,7 @@
                     <TextBlock Text="{Binding Location.Latitude}" />
                     <TextBlock Text="{Binding Location.Longitude}" />
                     <TextBlock Text="{Binding StreetName}" />
-                    <TextBlock Text="{Binding PostalCode}" />
+                    <TextBlock Text="{Binding ZipCode}" />
                     <TextBlock Text="{Binding Category}" />
                 </StackPanel>
             </Grid>
