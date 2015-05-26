@@ -70,7 +70,7 @@
         </maps:MapControl>
         </StackPanel>
 
-        <Grid Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BoolToVisConv}}" >
+        <Grid Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition Width="2*"/>
