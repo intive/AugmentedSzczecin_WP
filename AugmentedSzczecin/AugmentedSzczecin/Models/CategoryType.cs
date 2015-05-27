@@ -9,7 +9,7 @@ namespace AugmentedSzczecin.Models
     public enum CategoryType
     {
         PLACE,
-        POI,
+        COMMERCIAL,
         EVENT,
         PERSON,
         ALL

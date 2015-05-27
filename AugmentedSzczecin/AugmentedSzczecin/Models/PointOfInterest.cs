@@ -42,9 +42,9 @@ namespace AugmentedSzczecin.Models
         }
     }
 
-    public class PointOfInterest : PropertyChangedBase
+    public class PointOfInterest2 : PropertyChangedBase
     {
-        public PointOfInterest(string id)
+        public PointOfInterest2(string id)
         {
             Id = id;
         }
@@ -342,5 +342,74 @@ namespace AugmentedSzczecin.Models
                 }
             }
         }
+    }
+
+    public class PointOfInterest : PropertyChangedBase
+    {
+        public PointOfInterest(string id)
+        {
+            Id = id;
+        }
+
+        public string Id 
+        { 
+            get; 
+            private set; 
+        }
+
+        [JsonProperty(PropertyName = "Name")]
+        private string _name;
+        public string Name
+        {
+            get 
+            { 
+                return _name; 
+            }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    NotifyOfPropertyChange(() => Name);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "Location")]
+        private Location _location;
+        public Location Location
+        {
+            get
+            {
+                return _location;
+            }
+            set
+            {
+                if (_location != value)
+                {
+                    _location = value;
+                    NotifyOfPropertyChange(() => Location);
+                }
+            }
+        }
+        
+        [JsonProperty(PropertyName = "Category")]
+        private string _category;
+        public string Category
+        {
+            get 
+            { 
+                return _category; 
+            }
+            set
+            {
+                if (_category != value)
+                {
+                    _category = value;
+                    NotifyOfPropertyChange(() => Category);
+                }
+            }
+        }
+
     }
 }

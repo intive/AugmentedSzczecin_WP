@@ -48,7 +48,26 @@ namespace AugmentedSzczecin.Services
                 return new ObservableCollection<PointOfInterest>();
             }
             ObservableCollection<PointOfInterest> pois = new ObservableCollection<PointOfInterest>();
-            IList<JToken> results = JObject.Parse(json)["places"].Children().ToList();
+            IList<JToken> results = null;
+            switch(category)
+            {
+                case CategoryType.PLACE:
+                    results = JObject.Parse(json)["places"].Children().ToList();
+                    break;
+                case CategoryType.EVENT:
+                    results = JObject.Parse(json)["events"].Children().ToList();
+                    break;
+                case CategoryType.PERSON:
+                    results = JObject.Parse(json)["people"].Children().ToList();
+                    break;
+                case CategoryType.COMMERCIAL:
+                    results = JObject.Parse(json)["commercial"].Children().ToList();
+                    break;
+                case CategoryType.ALL:
+                    results = JObject.Parse(json).Children().ToList();
+                    break;
+            }
+            
             foreach (var result in results)
             {
                 pois.Add(JsonConvert.DeserializeObject<PointOfInterest>(result.ToString()));
