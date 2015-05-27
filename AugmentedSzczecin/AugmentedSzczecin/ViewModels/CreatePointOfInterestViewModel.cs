@@ -636,13 +636,15 @@ namespace AugmentedSzczecin.ViewModels
 
             if (ValidationCheck)
             {
-
+                var newPointOfInterest = CreatePointOfInterest();
+                _httpService.AddPointOfInterest(newPointOfInterest);
             }
             else
             {
                 WrongValidationMessageDialog();
             }
         }
+
 
         public void ExtraFieldsChecked()
         {
@@ -844,6 +846,60 @@ namespace AugmentedSzczecin.ViewModels
 
             var msg = new MessageDialog(message);
             await msg.ShowAsync();
+        }
+
+        private PointOfInterest CreatePointOfInterest()
+        {
+            var newPointOfInterest = NewPointOfInterest();
+            return newPointOfInterest;
+        }
+
+        private PointOfInterest NewPointOfInterest()
+        {
+            return new PointOfInterest
+            {
+                Name = Name,
+                Description = Description,
+                Location = new Location()
+                {
+                    Latitude = Latitude,
+                    Longitude = Longitude
+                },
+                Address = new Address()
+                {
+                    City = City,
+                    Street = Street,
+                    ZipCode = ZipCode,
+                    StreetNumber = StreetNumber
+                },
+                Tags = SplitTagsToTagsArray(),
+                Www = Www,
+                Phone = Phone,
+                Fanpage = Fanpage,
+                Opening = new[]
+                {
+                    new Opening()
+                    {
+                        Day = DayOfWeek.Monday.ToString().ToUpper(),
+                        Open = "8:30",
+                        Close = "16:30"
+                    },
+                    new Opening()
+                    {
+                        Day = DayOfWeek.Friday.ToString().ToUpper(),
+                        Open = "9:30",
+                        Close = "17:30"
+                    }
+                },
+                Subcategory = SelectedCategoryItem.ToUpper()
+            };
+        }
+
+        private string[] SplitTagsToTagsArray()
+        {
+            Tags = Tags.ToLower();
+            var tagsArray = Tags.Split(',');
+            return tagsArray;
         }
 
         #endregion
