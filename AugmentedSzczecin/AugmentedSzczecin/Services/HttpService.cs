@@ -70,8 +70,8 @@ namespace AugmentedSzczecin.Services
 
         public async Task<bool> SignIn(User user)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.Unicode.GetBytes(string.Format("{0}:{1}", user.Email, user.Password))));
-            var response = await _client.GetAsync("places");
+            SetAuthenticationHeader(user.Email, user.Password);
+            var response = await _client.GetAsync("users/whoami");
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 return true;
@@ -93,12 +93,22 @@ namespace AugmentedSzczecin.Services
         {
             var json = JsonConvert.SerializeObject(poi);
             var content = new StringContent(json, Encoding.Unicode, "application/json");
-            var response = await _client.PutAsync("places", content);
+            var response = await _client.PostAsync("places", content);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 return true;
             }
             return false;
+        }
+
+        public void SetAuthenticationHeader(string email, string password)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(string.Format("{0}:{1}", email, password))));
+        }
+
+        public void SignOut()
+        {
+            _client.DefaultRequestHeaders.Authorization = null;
         }
     }
 }
