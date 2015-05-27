@@ -205,7 +205,7 @@
     <value>e.g. Szczecin</value>
   </data>
   <data name="NewPoiAddressStreetNumber.Text" xml:space="preserve">
-    <value>Building number</value>
+    <value>Street number</value>
   </data>
   <data name="NewPoiAddressStreetNumberBox.PlaceholderText" xml:space="preserve">
     <value>e.g. 11</value>
@@ -235,16 +235,16 @@
     <value>Choose category...</value>
   </data>
   <data name="NewPoiCategoryFirst" xml:space="preserve">
-    <value>Public Place</value>
+    <value>Places</value>
   </data>
   <data name="NewPoiCategoryFourth" xml:space="preserve">
-    <value>Friend</value>
+    <value>People</value>
   </data>
   <data name="NewPoiCategorySecond" xml:space="preserve">
-    <value>Company &amp; Service</value>
+    <value>Commercial</value>
   </data>
   <data name="NewPoiCategoryThird" xml:space="preserve">
-    <value>Event</value>
+    <value>Events</value>
   </data>
   <data name="NewPoiDescription.Text" xml:space="preserve">
     <value>Description</value>
@@ -331,7 +331,7 @@
     <value>Website</value>
   </data>
   <data name="NewPoiWebsiteBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. www.blstream.com</value>
+    <value>e.g. blstream.com</value>
   </data>
   <data name="NewPoiWikipedia.Text" xml:space="preserve">
     <value>Wikipedia</value>
@@ -422,5 +422,8 @@
   </data>
   <data name="Wednesday.Content" xml:space="preserve">
     <value>Wednesday</value>
+  </data>
+  <data name="ValidationErrorGeneralMessage" xml:space="preserve">
+    <value>Please correct red-marked fields.</value>
   </data>
 </root>

@@ -3,8 +3,10 @@ using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
 using Windows.System;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Input;
 using AugmentedSzczecin.Interfaces;
+using AugmentedSzczecin.Models;
 using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
@@ -31,7 +33,22 @@ namespace AugmentedSzczecin.ViewModels
 
         #region Properties
 
-        private bool IsObligatoryFieldsValid { get; set; }
+        private bool _isObligatoryFieldsValid;
+        public bool IsObligatoryFieldsValid
+        {
+            get
+            {
+                return _isObligatoryFieldsValid;
+            }
+            set
+            {
+                if (_isObligatoryFieldsValid != value)
+                {
+                    _isObligatoryFieldsValid = value;
+                    NotifyOfPropertyChange(() => IsObligatoryFieldsValid);
+                }
+            }
+        }
 
         private string _name;
         public string Name
@@ -299,19 +316,216 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool _isSubcategorySelected = true;
-        public bool IsSubcategorySelected
+        private bool _isExtraFieldsValid;
+        public bool IsExtraFieldsValid
         {
             get
             {
-                return _isSubcategorySelected;
+                return _isExtraFieldsValid;
             }
             set
             {
-                if (_isSubcategorySelected != value)
+                if (_isExtraFieldsValid != value)
                 {
-                    _isSubcategorySelected = value;
-                    NotifyOfPropertyChange(() => IsSubcategorySelected);
+                    _isExtraFieldsValid = value;
+                    NotifyOfPropertyChange(() => IsExtraFieldsValid);
+                }
+            }
+        }
+
+        private string _www;
+        public string Www
+        {
+            get
+            {
+                return _www;
+            }
+            set
+            {
+                if (_www != value)
+                {
+                    _www = value;
+                    ValidateWww();
+                    NotifyOfPropertyChange(() => Www);
+                }
+            }
+        }
+        private bool IsWwwMatchValid { get; set; }
+        private bool _isWwwValid = true;
+        public bool IsWwwValid
+        {
+            get
+            {
+                return _isWwwValid;
+            }
+            set
+            {
+                if (_isWwwValid != value)
+                {
+                    _isWwwValid = value;
+                    NotifyOfPropertyChange(() => IsWwwValid);
+                }
+            }
+        }
+
+        private string _phone;
+        public string Phone
+        {
+            get
+            {
+                return _phone;
+            }
+            set
+            {
+                if (_phone != value)
+                {
+                    _phone = value;
+                    ValidatePhone();
+                    NotifyOfPropertyChange(() => Phone);
+                }
+            }
+        }
+        private bool IsPhoneMatchValid { get; set; }
+        private bool _isPhoneValid = true;
+        public bool IsPhoneValid
+        {
+            get
+            {
+                return _isPhoneValid;
+            }
+            set
+            {
+                if (_isPhoneValid != value)
+                {
+                    _isPhoneValid = value;
+                    NotifyOfPropertyChange(() => IsPhoneValid);
+                }
+            }
+        }
+
+        private string _fanpage;
+        public string Fanpage
+        {
+            get
+            {
+                return _fanpage;
+            }
+            set
+            {
+                if (_fanpage != value)
+                {
+                    _fanpage = value;
+                    ValidateFanpage();
+                    NotifyOfPropertyChange(() => Fanpage);
+                }
+            }
+        }
+        private bool IsFanpageMatchValid { get; set; }
+        private bool _isFanpageValid = true;
+        public bool IsFanpageValid
+        {
+            get
+            {
+                return _isFanpageValid;
+            }
+            set
+            {
+                if (_isFanpageValid != value)
+                {
+                    _isFanpageValid = value;
+                    NotifyOfPropertyChange(() => IsFanpageValid);
+                }
+            }
+        }
+
+        private bool _isMondayEnabled;
+        public bool IsMondayEnabled
+        {
+            get { return _isMondayEnabled; }
+            set
+            {
+                if (_isMondayEnabled != value)
+                {
+                    _isMondayEnabled = value;
+                    NotifyOfPropertyChange(() => IsMondayEnabled);
+                }
+            }
+        }
+        private bool _isTuesdayEnabled;
+        public bool IsTuesdayEnabled
+        {
+            get { return _isTuesdayEnabled; }
+            set
+            {
+                if (_isTuesdayEnabled != value)
+                {
+                    _isTuesdayEnabled = value;
+                    NotifyOfPropertyChange(() => IsTuesdayEnabled);
+                }
+            }
+        }
+        private bool _isWednesdayEnabled;
+        public bool IsWednesdayEnabled
+        {
+            get { return _isWednesdayEnabled; }
+            set
+            {
+                if (_isWednesdayEnabled != value)
+                {
+                    _isWednesdayEnabled = value;
+                    NotifyOfPropertyChange(() => IsWednesdayEnabled);
+                }
+            }
+        }
+        private bool _isThursdayEnabled;
+        public bool IsThursdayEnabled
+        {
+            get { return _isThursdayEnabled; }
+            set
+            {
+                if (_isThursdayEnabled != value)
+                {
+                    _isThursdayEnabled = value;
+                    NotifyOfPropertyChange(() => IsThursdayEnabled);
+                }
+            }
+        }
+        private bool _isFridayEnabled;
+        public bool IsFridayEnabled
+        {
+            get { return _isFridayEnabled; }
+            set
+            {
+                if (_isFridayEnabled != value)
+                {
+                    _isFridayEnabled = value;
+                    NotifyOfPropertyChange(() => IsFridayEnabled);
+                }
+            }
+        }
+        private bool _isSaturdayEnabled;
+        public bool IsSaturdayEnabled
+        {
+            get { return _isSaturdayEnabled; }
+            set
+            {
+                if (_isSaturdayEnabled != value)
+                {
+                    _isSaturdayEnabled = value;
+                    NotifyOfPropertyChange(() => IsSaturdayEnabled);
+                }
+            }
+        }
+        private bool _isSundayEnabled;
+        public bool IsSundayEnabled
+        {
+            get { return _isSundayEnabled; }
+            set
+            {
+                if (_isSundayEnabled != value)
+                {
+                    _isSundayEnabled = value;
+                    NotifyOfPropertyChange(() => IsSundayEnabled);
                 }
             }
         }
@@ -350,10 +564,10 @@ namespace AugmentedSzczecin.ViewModels
             {
                 return new BindableCollection<string>(new[]
                 {
-                    _loader.GetString("NewPoiCategoryFirst"),
-                    _loader.GetString("NewPoiCategorySecond"),
-                    _loader.GetString("NewPoiCategoryThird"),
-                    _loader.GetString("NewPoiCategoryFourth")
+                    CategoryType.PLACE.ToString(),
+                    CategoryType.COMMERCIAL.ToString(),
+                    CategoryType.EVENT.ToString(),
+                    CategoryType.PERSON.ToString()
                 });
             }
         }
@@ -366,37 +580,6 @@ namespace AugmentedSzczecin.ViewModels
             {
                 _selectedCategoryItem = value;
                 NotifyOfPropertyChange(() => SelectedCategoryItem);
-            }
-        }
-
-        public BindableCollection<string> SubcategoryItems
-        {
-            get
-            {
-                return new BindableCollection<string>(new[]
-                {
-                    _loader.GetString("NewPoiSubcategoryFirst"),
-                    _loader.GetString("NewPoiSubcategorySecond"),
-                    _loader.GetString("NewPoiSubcategoryThird"),
-                    _loader.GetString("NewPoiSubcategoryFourth"),
-                    _loader.GetString("NewPoiSubcategoryFifth"),
-                    _loader.GetString("NewPoiSubcategorySixth"),
-                    _loader.GetString("NewPoiSubcategorySeventh"),
-                    _loader.GetString("NewPoiSubcategoryEighth"),
-                    _loader.GetString("NewPoiSubcategoryNinth"),
-                    _loader.GetString("NewPoiSubcategoryTenth")
-                });
-            }
-        }
-
-        private string _selectedSubcategoryItem;
-        public string SelectedSubcategoryItem
-        {
-            get { return _selectedSubcategoryItem; }
-            set
-            {
-                _selectedSubcategoryItem = value;
-                NotifyOfPropertyChange(() => SelectedSubcategoryItem);
             }
         }
 
@@ -455,6 +638,10 @@ namespace AugmentedSzczecin.ViewModels
             {
 
             }
+            else
+            {
+                WrongValidationMessageDialog();
+            }
         }
 
         public void ExtraFieldsChecked()
@@ -482,15 +669,8 @@ namespace AugmentedSzczecin.ViewModels
         private void CheckValidation()
         {
             CheckObligatoryFields();
-            ValidationCheck = IsNameValid
-                              && IsDescriptionValid
-                              && IsTagsValid
-                              && IsStreetValid
-                              && IsZipCodeValid
-                              && IsCityValid
-                              && IsStreetNumberValid
-                              && IsCategorySelected
-                              && IsSubcategorySelected;
+            CheckExtraFields();
+            ValidationCheck = IsObligatoryFieldsValid && IsExtraFieldsValid;
         }
 
         private void CheckObligatoryFields()
@@ -503,7 +683,34 @@ namespace AugmentedSzczecin.ViewModels
             ValidateCity();
             ValidateStreetNumber();
             ValidateCategorySelected();
-            ValidateSubcategorySelected();
+
+            CheckObligatoryFieldsProperties();
+        }
+        private void CheckObligatoryFieldsProperties()
+        {
+            IsObligatoryFieldsValid = IsNameValid
+                                      && IsDescriptionValid
+                                      && IsTagsValid
+                                      && IsStreetValid
+                                      && IsZipCodeValid
+                                      && IsCityValid
+                                      && IsStreetNumberValid
+                                      && IsCategorySelected;
+        }
+
+        private void CheckExtraFields()
+        {
+            ValidateWww();
+            ValidatePhone();
+            ValidateFanpage();
+
+            CheckExtraFieldsProperties();
+        }
+        private void CheckExtraFieldsProperties()
+        {
+            IsExtraFieldsValid = IsWwwValid
+                                 && IsPhoneValid
+                                 && IsFanpageValid;
         }
 
         private void ValidateName()
@@ -590,17 +797,53 @@ namespace AugmentedSzczecin.ViewModels
             IsCategorySelected = !String.IsNullOrEmpty(SelectedCategoryItem);
         }
 
-        private void ValidateSubcategorySelected()
+
+        private void ValidateWww()
         {
-            if (SelectedCategoryItem == CategoryItems[0])
+            IsWwwValid = ValidateWwwMatch();
+        }
+        private bool ValidateWwwMatch()
+        {
+            if (!String.IsNullOrEmpty(Www))
             {
-                IsSubcategorySelected = !String.IsNullOrEmpty(SelectedSubcategoryItem);
+                return IsWwwMatchValid = Regex.IsMatch(Www, @"^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$");
             }
-            else
+            return true;
+        }
+
+        private void ValidatePhone()
+        {
+            IsPhoneValid = ValidatePhoneMatch();
+        }
+        private bool ValidatePhoneMatch()
+        {
+            if (!String.IsNullOrEmpty(Phone))
             {
-                SelectedSubcategoryItem = null;
-                IsSubcategorySelected = true;
+                return IsPhoneMatchValid = Regex.IsMatch(Phone, "[0-9]{9}");
             }
+            return true;
+        }
+
+        private void ValidateFanpage()
+        {
+            IsFanpageValid = ValidateFanpageMatch();
+        }
+        private bool ValidateFanpageMatch()
+        {
+            if (!String.IsNullOrEmpty(Fanpage))
+            {
+                return IsFanpageMatchValid = Regex.IsMatch(Www, @"^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$");
+            }
+            return true;
+        }
+
+        private async void WrongValidationMessageDialog()
+        {
+            var loader = new ResourceLoader();
+            var message = loader.GetString("ValidationErrorGeneralMessage");
+
+            var msg = new MessageDialog(message);
+            await msg.ShowAsync();
         }
 
         #endregion
