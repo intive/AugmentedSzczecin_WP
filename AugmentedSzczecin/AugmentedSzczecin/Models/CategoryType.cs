@@ -12,6 +12,7 @@ namespace AugmentedSzczecin.Models
         POI,
         EVENT,
         PERSON,
+        COMMERCIAL,
         ALL
     }
 }
