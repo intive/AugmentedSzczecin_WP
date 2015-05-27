@@ -14,6 +14,10 @@ namespace AugmentedSzczecin.Interfaces
 
         Task<bool> SignIn(User user);
 
+        void SignOut();
+
+        void SetAuthenticationHeader(string email, string password);
+
         Task<bool> ResetPassword(User user);
 
         Task<bool> AddPointOfInterest(PointOfInterest poi);

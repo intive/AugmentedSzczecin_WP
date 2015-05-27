@@ -6,17 +6,17 @@ namespace AugmentedSzczecin.Services
 {
     public class UserDataStorageService : IUserDataStorageService
     {
-        public void AddUserData(string resource, string email, string token)
+        public void AddUserData(string resource, string email, string password)
         {
             var vault = new PasswordVault();
-            vault.Add(new PasswordCredential(resource, email, token));
+            vault.Add(new PasswordCredential(resource, email, password));
         }
 
         public bool IsUserSignedIn()
         {
             var vault = new PasswordVault();
-            var UserList = vault.RetrieveAll();
-            if (UserList.Count != 0)
+            var credentials = vault.RetrieveAll();
+            if (credentials.Count != 0)
             {
                 return true;
             }
@@ -26,11 +26,11 @@ namespace AugmentedSzczecin.Services
         public void SignOut()
         {
             var vault = new PasswordVault();
-            IReadOnlyList<PasswordCredential> userDatalist = vault.RetrieveAll();
+            var credentials = vault.RetrieveAll();
 
-            if (userDatalist.Count != 0)
+            if (credentials.Count != 0)
             {
-                for (int i = userDatalist.Count - 1; i >= 0; i--)
+                for (int i = 0; i < credentials.Count; i++)
                 {
                     vault.Remove((vault.RetrieveAll())[i]);
                 }
@@ -40,22 +40,16 @@ namespace AugmentedSzczecin.Services
         public string GetUserEmail()
         {
             var vault = new PasswordVault();
-            IReadOnlyList<PasswordCredential> userDatalist = vault.RetrieveAll();
-
-            string email = userDatalist[0].UserName;
-
-            return email;
+            var credentials = vault.RetrieveAll();
+            return credentials[0].UserName;
         }
 
-        public string GetUserToken()
+        public string GetUserPassword()
         {
             var vault = new PasswordVault();
-            IReadOnlyList<PasswordCredential> userDatalist = vault.RetrieveAll();
-
-            userDatalist[1].RetrievePassword();
-            string token = userDatalist[1].Password;
-
-            return token;
+            var credentials = vault.RetrieveAll();
+            credentials[0].RetrievePassword();
+            return credentials[0].Password;
         }
     }
 }

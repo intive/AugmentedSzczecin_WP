@@ -12,7 +12,7 @@
 
         string GetUserEmail();
 
-        string GetUserToken();
+        string GetUserPassword();
 
         void ResetPassword(string email);
     }

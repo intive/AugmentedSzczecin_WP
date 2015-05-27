@@ -17,6 +17,11 @@ namespace AugmentedSzczecin.Services
             _eventAggregator = eventAggregator;
             _httpService = httpService;
             _userDataStorageService = userDataStorageService;
+
+            if (_userDataStorageService.IsUserSignedIn())
+            {
+                _httpService.SetAuthenticationHeader(_userDataStorageService.GetUserEmail(), _userDataStorageService.GetUserPassword());
+            }
         }
 
         public async void Register(string email, string password)
@@ -54,28 +59,23 @@ namespace AugmentedSzczecin.Services
     
         public bool IsUserSignedIn()
         {
-            bool isUserSignedIn = _userDataStorageService.IsUserSignedIn();
-            
-            return isUserSignedIn;
+            return _userDataStorageService.IsUserSignedIn();
         }
 
         public void SignOut()
         {
             _userDataStorageService.SignOut();
+            _httpService.SignOut();
         }
     
         public string GetUserEmail()
         {
-            string email = _userDataStorageService.GetUserEmail();
-
-            return email;
+            return _userDataStorageService.GetUserEmail();
         }
 
-        public string GetUserToken()
+        public string GetUserPassword()
         {
-            string token = _userDataStorageService.GetUserToken();
-
-            return token;
+            return _userDataStorageService.GetUserPassword();
         }
 
         public async void ResetPassword(string email)
