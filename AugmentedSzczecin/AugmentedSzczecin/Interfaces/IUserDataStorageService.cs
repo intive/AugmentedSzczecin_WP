@@ -10,6 +10,6 @@
 
         string GetUserEmail();
 
-        string GetUserToken();
+        string GetUserPassword();
     }
 }
