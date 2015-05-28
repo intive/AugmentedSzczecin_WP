@@ -56,27 +56,19 @@ namespace AugmentedSzczecin.Services
             return pois;
         }
 
-        public async Task<bool> CreateAccount(User user)
+        public async Task<int> CreateAccount(User user)
         {
             var json = JsonConvert.SerializeObject(user);
             var content = new StringContent(json, Encoding.Unicode, "application/json");
             var response = await _client.PostAsync("users", content);
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                return true;
-            }
-            return false;
+            return (int)response.StatusCode;
         }
 
-        public async Task<bool> SignIn(User user)
+        public async Task<int> SignIn(User user)
         {
             SetAuthenticationHeader(user.Email, user.Password);
             var response = await _client.GetAsync("users/whoami");
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                return true;
-            }
-            return false;
+            return (int)response.StatusCode;
         }
 
         public async Task<bool> ResetPassword(User user)
