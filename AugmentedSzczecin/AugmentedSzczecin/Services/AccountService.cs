@@ -34,13 +34,13 @@ namespace AugmentedSzczecin.Services
                 case 204:
                     _userDataStorageService.AddUserData("ASPassword", email, password);
                     _httpService.SetAuthenticationHeader(email, password);
-                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!" });
+                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Rejestracja zakończona pomyślnie!" });
                     break;
                 case 422:
                     _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Ten email jest już używany." });
                     break;
                 default:
-                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Backend error" });
+                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Błąd serwera." });
                     break;
             }
         }
@@ -55,13 +55,13 @@ namespace AugmentedSzczecin.Services
                 case 200:
                     _userDataStorageService.AddUserData("ASPassword", email, password);
                     _httpService.SetAuthenticationHeader(email, password);
-                    _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "SignIn Successful!" });
+                    _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Logowanie zakończone pomyślnie!" });
                     break;
                 case 401:
                     _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Niepoprawne dane." });
                     break;
                 default:
-                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Backend error" });
+                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Błąd serwera." });
                     break;
             }
         }
