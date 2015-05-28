@@ -56,27 +56,19 @@ namespace AugmentedSzczecin.Services
             return pois;
         }
 
-        public async Task<bool> CreateAccount(User user)
+        public async Task<int> CreateAccount(User user)
         {
             var json = JsonConvert.SerializeObject(user);
             var content = new StringContent(json, Encoding.Unicode, "application/json");
             var response = await _client.PostAsync("users", content);
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                return true;
-            }
-            return false;
+            return (int)response.StatusCode;
         }
 
-        public async Task<bool> SignIn(User user)
+        public async Task<int> SignIn(User user)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.Unicode.GetBytes(string.Format("{0}:{1}", user.Email, user.Password))));
-            var response = await _client.GetAsync("places");
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                return true;
-            }
-            return false;
+            SetAuthenticationHeader(user.Email, user.Password);
+            var response = await _client.GetAsync("users/whoami");
+            return (int)response.StatusCode;
         }
 
         public async Task<bool> ResetPassword(User user)
@@ -93,12 +85,22 @@ namespace AugmentedSzczecin.Services
         {
             var json = JsonConvert.SerializeObject(poi);
             var content = new StringContent(json, Encoding.Unicode, "application/json");
-            var response = await _client.PutAsync("places", content);
+            var response = await _client.PostAsync("places", content);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 return true;
             }
             return false;
+        }
+
+        public void SetAuthenticationHeader(string email, string password)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(string.Format("{0}:{1}", email, password))));
+        }
+
+        public void SignOut()
+        {
+            _client.DefaultRequestHeaders.Authorization = null;
         }
     }
 }
