@@ -55,10 +55,13 @@ namespace AugmentedSzczecin.Services
                 case 200:
                     _userDataStorageService.AddUserData("ASPassword", email, password);
                     _httpService.SetAuthenticationHeader(email, password);
-                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "SignIn Successful!" });
+                    _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "SignIn Successful!" });
+                    break;
+                case 401:
+                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Niepoprawne dane." });
                     break;
                 default:
-                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Backend error" });
+                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Backend error" });
                     break;
             }
         }
