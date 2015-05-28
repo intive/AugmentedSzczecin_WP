@@ -16,17 +16,17 @@ namespace AugmentedSzczecin.ViewModels
         #region Private & Public Fields
 
         private readonly INavigationService _navigationService;
-        private readonly IHttpService _httpService;
+        private readonly IPointOfInterestService _pointOfInterestService;
         private readonly ResourceLoader _loader = new ResourceLoader();
 
         #endregion
 
         #region Constructors
 
-        public CreatePointOfInterestViewModel(INavigationService navigationService, IHttpService httpService)
+        public CreatePointOfInterestViewModel(INavigationService navigationService, IPointOfInterestService pointOfInterestService)
         {
             _navigationService = navigationService;
-            _httpService = httpService;
+            _pointOfInterestService = pointOfInterestService;
         }
 
         #endregion
@@ -637,7 +637,7 @@ namespace AugmentedSzczecin.ViewModels
             if (ValidationCheck)
             {
                 var newPointOfInterest = CreatePointOfInterest();
-                _httpService.AddPointOfInterest(newPointOfInterest);
+                _pointOfInterestService.AddPointOfInterest(newPointOfInterest);
             }
             else
             {

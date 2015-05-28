@@ -14,11 +14,13 @@ namespace AugmentedSzczecin.Services
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IHttpService _httpService;
+        private readonly IAccountService _accountService;
 
-        public PointOfInterestService(IEventAggregator eventAggregator, IHttpService httpService)
+        public PointOfInterestService(IEventAggregator eventAggregator, IHttpService httpService, IAccountService accountService)
         {
             _eventAggregator = eventAggregator;
             _httpService = httpService;
+            _accountService = accountService;
         }
 
         private ObservableCollection<PointOfInterest> _pointOfInterestList = new ObservableCollection<PointOfInterest>();
@@ -57,6 +59,17 @@ namespace AugmentedSzczecin.Services
             catch (Exception e)
             {
                 _eventAggregator.PublishOnUIThread(new PointOfInterestLoadFailedEvent() { PointOfInterestLoadException = e });
+            }
+        }
+
+        public async void AddPointOfInterest(PointOfInterest poi)
+        {
+            try
+            {
+                await _httpService.AddPointOfInterest(poi, _accountService.GetUserEmail(), _accountService.GetUserPassword());
+            }
+            catch (Exception e)
+            {
             }
         }
     }

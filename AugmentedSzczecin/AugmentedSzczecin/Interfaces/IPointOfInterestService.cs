@@ -16,5 +16,7 @@ namespace AugmentedSzczecin.Interfaces
         /// <param name="longitude"></param>
         /// <param name="radius"></param>
         void LoadPoIs(double latitude, double longitude, int radius, CategoryType category);
+
+        void AddPointOfInterest(PointOfInterest poi);
     }
 }

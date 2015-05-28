@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
 using Windows.Media.Capture;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace AugmentedSzczecin
