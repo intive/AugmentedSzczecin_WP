@@ -1,5 +1,6 @@
 ﻿using AugmentedSzczecin.Models;
 using System.Collections.ObjectModel;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace AugmentedSzczecin.Interfaces
@@ -10,9 +11,9 @@ namespace AugmentedSzczecin.Interfaces
 
         Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(double latitude, double longitude, int radius, CategoryType category);
 
-        Task<bool> CreateAccount(User user);
+        Task<int> CreateAccount(User user);
 
-        Task<bool> SignIn(User user);
+        Task<int> SignIn(User user);
 
         void SignOut();
 

@@ -27,33 +27,42 @@ namespace AugmentedSzczecin.Services
         public async void Register(string email, string password)
         {
             var newUser = new User() { Email = email, Password = password };
+            var status = await _httpService.CreateAccount(newUser);
 
-            bool status = await _httpService.CreateAccount(newUser);
-
-            if(status)
+            switch (status)
             {
-                _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Registration Successful!" });
-            }
-            else
-            {
-                _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Backend error" });
+                case 204:
+                    _userDataStorageService.AddUserData("ASPassword", email, password);
+                    _httpService.SetAuthenticationHeader(email, password);
+                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Rejestracja zakończona pomyślnie!" });
+                    break;
+                case 422:
+                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Ten email jest już używany." });
+                    break;
+                default:
+                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Błąd serwera." });
+                    break;
             }
         }
 
         public async void SignIn(string email, string password)
         {
             var newUser = new User() { Email = email, Password = password };
-
             var status = await _httpService.SignIn(newUser);
 
-            if (status)
+            switch (status)
             {
-                _userDataStorageService.AddUserData("ASPassword", email, password);
-                _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Signed In successfully!" });
-            }
-            else
-            {
-                _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Backend error" });
+                case 200:
+                    _userDataStorageService.AddUserData("ASPassword", email, password);
+                    _httpService.SetAuthenticationHeader(email, password);
+                    _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Logowanie zakończone pomyślnie!" });
+                    break;
+                case 401:
+                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Niepoprawne dane." });
+                    break;
+                default:
+                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Błąd serwera." });
+                    break;
             }
         }
     

@@ -16,14 +16,14 @@ namespace AugmentedSzczecin.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IAccountService _accountService;
-        private readonly INavigationService _navigationservice;
+        private readonly INavigationService _navigationService;
         private Windows.UI.Xaml.Controls.PasswordBox _passwordBox;
 
-        public SignInViewModel(IEventAggregator eventAggregator, IAccountService accountService, INavigationService navigationservice)
+        public SignInViewModel(IEventAggregator eventAggregator, IAccountService accountService, INavigationService navigationService)
         {
             _eventAggregator = eventAggregator;
             _accountService = accountService;
-            _navigationservice = navigationservice;
+            _navigationService = navigationService;
         }
 
         private bool _isProgressRingVisible;
@@ -202,6 +202,7 @@ namespace AugmentedSzczecin.ViewModels
             IsProgressRingActive = false;
             var msg = new MessageDialog(e.SuccessMessage);
             msg.ShowAsync();
+            _navigationService.GoBack();  
         }
 
         public void Handle(SignInFailedEvent e)
@@ -223,7 +224,7 @@ namespace AugmentedSzczecin.ViewModels
 
         public void ResetPasword()
         {
-            _navigationservice.NavigateToViewModel<ResetPasswordViewModel>();
+            _navigationService.NavigateToViewModel<ResetPasswordViewModel>();
         }
 
         private void ValidatePasswordEmpty()
