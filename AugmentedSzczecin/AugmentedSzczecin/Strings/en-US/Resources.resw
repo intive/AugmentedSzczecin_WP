@@ -145,10 +145,10 @@
     <value>Twoje hasło</value>
   </data>
   <data name="SignInButtonResetPassword.Content" xml:space="preserve">
-    <value>Reset pass</value>
+    <value>Zresetuj hasło</value>
   </data>
   <data name="SignInButtonSignIn.Content" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Zaloguj się</value>
   </data>
   <data name="Email.Text" xml:space="preserve">
     <value>E-mail</value>
@@ -157,11 +157,11 @@
     <value>Hasło</value>
   </data>
   <data name="SignInProgressRing.Text" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Logowanie</value>
   </data>
   <data name="SignOutConfirmationText" xml:space="preserve">
     <value>Are you sure you want to sign out?</value>
-  </data>  
+  </data>
   <data name="SignUpButtonSignUp.Content" xml:space="preserve">
     <value>Gotowe</value>
   </data>
@@ -185,5 +185,8 @@
   </data>
   <data name="SignUpProgressRing.Text" xml:space="preserve">
     <value>Rejestruję</value>
+  </data>
+  <data name="SignInMainText.Text" xml:space="preserve">
+    <value>Zaloguj się</value>
   </data>
 </root>
