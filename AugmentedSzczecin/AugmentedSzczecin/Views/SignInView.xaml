@@ -19,7 +19,7 @@
             <ScrollViewer IsEnabled="{Binding AreControlsEnabled}">
                 <StackPanel>
 
-                    <TextBlock FontSize="15" x:Uid="SignEmail"/>
+                    <TextBlock FontSize="15" x:Uid="SignInEmail"/>
                     <TextBox InputScope="5" x:Name="Email" VerticalAlignment="Stretch" 
                              caliburn:Message.Attach="[Event KeyDown] = [Action EmailTextBoxChangeFocusToPasswordTextBox($executionContext)]" />
 
