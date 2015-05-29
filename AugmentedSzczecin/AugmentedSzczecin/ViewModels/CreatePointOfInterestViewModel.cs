@@ -858,8 +858,8 @@ namespace AugmentedSzczecin.ViewModels
         {
             return new PointOfInterest
             {
-                Name = Name,
-                Description = Description,
+                Name = "Loch Ness monster",
+                Description = "Arrrrgghhhhhh!",
                 Location = new Location()
                 {
                     Latitude = Latitude,
@@ -867,15 +867,20 @@ namespace AugmentedSzczecin.ViewModels
                 },
                 Address = new Address()
                 {
-                    City = City,
-                    Street = Street,
-                    ZipCode = ZipCode,
-                    StreetNumber = StreetNumber
+                    City = "Szczecin",
+                    Street = "Lake Street",
+                    ZipCode = "12-345",
+                    StreetNumber = "1"
                 },
                 Tags = SplitTagsToTagsArray(),
-                Www = Www,
-                Phone = Phone,
-                Fanpage = Fanpage,
+                Www = "http://www.microsoft.com",
+                Phone = "123321123",
+                Fanpage = "http://fb.com/WIZUT.NET",
+                Media = new[]
+                {
+                    "http://img4.wikia.nocookie.net/__cb20120122105531/callofduty/images/7/73/Trollface.png",
+                    "http://img4.wikia.nocookie.net/__cb20120122105531/callofduty/images/7/73/Trollface.png"
+                },
                 Opening = new[]
                 {
                     new Opening()
@@ -884,21 +889,16 @@ namespace AugmentedSzczecin.ViewModels
                         Open = "8:30",
                         Close = "16:30"
                     },
-                    new Opening()
-                    {
-                        Day = DayOfWeek.Friday.ToString().ToUpper(),
-                        Open = "9:30",
-                        Close = "17:30"
-                    }
                 },
-                Subcategory = SelectedCategoryItem.ToUpper()
+                Subcategory = "COMMERCIAL"
             };
         }
 
         private string[] SplitTagsToTagsArray()
         {
             Tags = Tags.ToLower();
-            var tagsArray = Tags.Split(',');
+            var delimiters = new[] {',', ' '};
+            var tagsArray = Tags.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
             return tagsArray;
         }
 

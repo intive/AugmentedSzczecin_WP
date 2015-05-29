@@ -321,6 +321,24 @@ namespace AugmentedSzczecin.Models
             }
         }
 
+        [JsonProperty(PropertyName = "media")]
+        private string[] _media;
+        public string[] Media
+        {
+            get
+            {
+                return _media;
+            }
+            set
+            {
+                if (_media != value)
+                {
+                    _media = value;
+                    NotifyOfPropertyChange(() => Media);
+                }
+            }
+        }
+
         [JsonProperty(PropertyName = "opening")]
         private Opening[] _opening;
         public Opening[] Opening
@@ -339,27 +357,7 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-
-
-        //[JsonProperty(PropertyName = "Wikipedia")]
-        //private string _wikipedia;
-        //public string Wikipedia
-        //{
-        //    get
-        //    {
-        //        return _wikipedia;
-        //    }
-        //    set
-        //    {
-        //        if (_wikipedia != value)
-        //        {
-        //            _wikipedia = value;
-        //            NotifyOfPropertyChange(() => Wikipedia);
-        //        }
-        //    }
-        //}
-
-        //[JsonProperty(PropertyName = "Category")]
+        //[JsonProperty(PropertyName = "category")]
         //private string _category;
         //public string Category
         //{

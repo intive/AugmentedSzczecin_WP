@@ -93,7 +93,7 @@ namespace AugmentedSzczecin.Services
         {
             SetAuthenticationHeader(email, password);
             var json = JsonConvert.SerializeObject(poi);
-            var content = new StringContent(json, Encoding.Unicode, "application/json");
+            var content = new StringContent(json, Encoding.GetEncoding("iso-8859-1"), "application/json"); // "iso-8859-1" GetEncoding( "utf-8" )
             var response = await _client.PostAsync("places", content);
             if (response.StatusCode == HttpStatusCode.OK)
             {
