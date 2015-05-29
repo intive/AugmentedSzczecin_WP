@@ -138,6 +138,9 @@
   <data name="ResetPasswordProgressRing.Text" xml:space="preserve">
     <value>Sending request</value>
   </data>
+  <data name="SignEmail.PlaceholderText" xml:space="preserve">
+    <value>Podaj swój email</value>
+  </data>
   <data name="SignEmail.Text" xml:space="preserve">
     <value>E-mail</value>
   </data>
@@ -153,11 +156,11 @@
   <data name="SignOutConfirmationText" xml:space="preserve">
     <value>Are you sure you want to sign out?</value>
   </data>
-  <data name="SignPassword.Text" xml:space="preserve">
-    <value>Password</value>
+  <data name="SignPassword.PlaceholderText" xml:space="preserve">
+    <value>Twoje hasło</value>
   </data>
   <data name="SignUpButtonSignUp.Content" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Gotowe</value>
   </data>
   <data name="SignUpEmailEmpty" xml:space="preserve">
     <value>E-mail not specified.</value>
@@ -168,6 +171,9 @@
   <data name="SignUpEmptyForm" xml:space="preserve">
     <value>E-mail and password not specified.</value>
   </data>
+  <data name="SignUpMainText.Text" xml:space="preserve">
+    <value>Załóż nowe konto</value>
+  </data>
   <data name="SignUpPasswordEmpty" xml:space="preserve">
     <value>Password not specified.</value>
   </data>
@@ -175,6 +181,6 @@
     <value>Password too short.</value>
   </data>
   <data name="SignUpProgressRing.Text" xml:space="preserve">
-    <value>Register</value>
+    <value>Rejestruję</value>
   </data>
 </root>
