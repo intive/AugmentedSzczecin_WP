@@ -12,6 +12,14 @@
         </Style>
         <SolidColorBrush x:Key="BLStreamBackgroundColorBrush" Color="#f9461c" />
         <SolidColorBrush x:Key="BLStreamForegroundColorBrush" Color="#575757" />
+        <SolidColorBrush x:Key="ASBlue" Color="#348FD9" />
+        <SolidColorBrush x:Key="ASNavy" Color="#2B75B3" />
+        <SolidColorBrush x:Key="ASAzure" Color="#CCE6FF" />
+        <SolidColorBrush x:Key="ASRed" Color="#F25a5a" />
+        <SolidColorBrush x:Key="ASBlack" Color="#212121" />
+        <SolidColorBrush x:Key="ASDarkGray" Color="#727272" />
+        <SolidColorBrush x:Key="ASLightGray" Color="#B6B6B6" />
+        <SolidColorBrush x:Key="ASWhite" Color="#FFFFFF" />
         <caliburn:BooleanToVisibilityConverter x:Key="BoolToVisConv" />
         <converters:PoiToGeopointConverter x:Key="PoiToGeopointConverter" />
     </Application.Resources>

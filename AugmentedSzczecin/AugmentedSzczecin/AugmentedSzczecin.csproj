@@ -223,6 +223,7 @@
     <Content Include="Assets\LocationPoint.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\MyLocationPoint.png" />
+    <Content Include="Assets\SampleBackgrounds\sample_Header.jpg" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />

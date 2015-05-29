@@ -16,12 +16,14 @@ namespace AugmentedSzczecin.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IAccountService _accountService;
+        private readonly INavigationService _navigationService;
         private PasswordBox _passwordBox;
 
-        public SignUpViewModel(IEventAggregator eventAggregator, IAccountService accountService)
+        public SignUpViewModel(IEventAggregator eventAggregator, IAccountService accountService, INavigationService navigationService)
         {
             _eventAggregator = eventAggregator;
             _accountService = accountService;
+            _navigationService = navigationService;
         }
 
         private bool _isProgressRingVisible;
@@ -246,6 +248,7 @@ namespace AugmentedSzczecin.ViewModels
             IsProgressRingActive = false;
             var msg = new MessageDialog(e.SuccessMessage);
             msg.ShowAsync();
+            _navigationService.GoBack();            
         }
 
         public void EmailTextBoxChangeFocusToPasswordTextBox(ActionExecutionContext context)
