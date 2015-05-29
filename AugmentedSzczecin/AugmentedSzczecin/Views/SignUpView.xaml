@@ -8,7 +8,7 @@
     xmlns:caliburn="using:Caliburn.Micro"
     mc:Ignorable="d"
     Foreground="{StaticResource ASBlue}"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{StaticResource ASWhite}">
     <Page.Resources>
         <x:Double x:Key="TextControlThemeMinWidth">51</x:Double>
         <x:Double x:Key="TextControlThemeMinHeight">34</x:Double>
@@ -573,7 +573,7 @@
         							</VisualState>
         						</VisualStateGroup>
         					</VisualStateManager.VisualStateGroups>
-        					<Border x:Name="BackgroundOverlay" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Opacity="0" Grid.RowSpan="3"/>
+        					<Border x:Name="BackgroundOverlay" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Opacity="0" Grid.RowSpan="3" Background="{StaticResource ASWhite}"/>
         					<Grid x:Name="Ring" Background="Transparent" FlowDirection="LeftToRight" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Height="{StaticResource ProgressRingThemeSize}" MaxWidth="{Binding TemplateSettings.MaxSideLength, RelativeSource={RelativeSource Mode=TemplatedParent}}" MaxHeight="{Binding TemplateSettings.MaxSideLength, RelativeSource={RelativeSource Mode=TemplatedParent}}" Grid.Row="1" RenderTransformOrigin=".5,.5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="{StaticResource ProgressRingThemeSize}">
         						<Canvas RenderTransformOrigin=".5,.5">
         							<Canvas.RenderTransform>
