@@ -55,7 +55,7 @@ namespace AugmentedSzczecin.ViewModels
         private ObservableCollection<PointOfInterest> _mapLocations;
         public ObservableCollection<PointOfInterest> MapLocations
         {
-            get 
+            get
             {
                 return _mapLocations;
             }
@@ -138,6 +138,21 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private Geopoint _myLocation;
+        public Geopoint MyLocation
+        {
+            get { return _myLocation; }
+            set
+            {
+                if (_myLocation != value)
+                {
+                    _myLocation = value;
+                    MyLocationPointVisibility = Visibility.Visible;
+                    NotifyOfPropertyChange(() => MyLocation);
+                }
+            }
+        }
+
         private Visibility _myLocationPointVisibility = Visibility.Collapsed;
         public Visibility MyLocationPointVisibility
         {
@@ -169,12 +184,13 @@ namespace AugmentedSzczecin.ViewModels
         private int _radius = 300;
         public int Radius
         {
-            get 
-            { 
-                return _radius; 
+            get
+            {
+                return _radius;
             }
         }
-        
+
+        public Geopoint Parameter { get; set; }
 
         #endregion
 
@@ -186,7 +202,7 @@ namespace AugmentedSzczecin.ViewModels
             base.OnActivate();
 
             CountZoomLevel();
-            
+
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             UpdateInternetConnection();
@@ -375,6 +391,21 @@ namespace AugmentedSzczecin.ViewModels
         private async void SetGeolocation()
         {
             CenterOfTheMap = await _locationService.GetGeolocation();
+            if (Parameter != null)
+            {
+                CenterOfTheMap = Parameter;
+            }
+
+            if (Parameter != null)
+            {
+                CenterOfTheMap = await _locationService.GetGeolocation(Parameter);
+                MyLocation = await _locationService.GetGeolocation();
+            }
+            else
+            {
+                MyLocation = CenterOfTheMap = await _locationService.GetGeolocation();
+            }
+
         }
 
         private void CountZoomLevel()
