@@ -208,16 +208,16 @@
                         x:Name="IsMondayEnabled"
                         x:Uid="Monday" />
                     <TimePicker
-                        IsEnabled="{Binding IsMondayEnabled}"
+                        MinuteIncrement="15"
                         x:Name="MondayOpenFrom"
-                        Time="8:00"
+                        IsEnabled="{Binding IsMondayEnabled}"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="0" Grid.Column="1" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsMondayEnabled}"
                         x:Name="MondayOpenTo"
-                        Time="16:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="0" Grid.Column="2"  />
@@ -228,17 +228,17 @@
                         x:Name="IsTuesdayEnabled"
                         x:Uid="Tuesday" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsTuesdayEnabled}"
                         x:Name="TuesdayOpenFrom"
-                        Time="8:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="1"
                         Grid.Column="1" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsTuesdayEnabled}"
                         x:Name="TuesdayOpenTo"
-                        Time="16:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="1"
@@ -250,17 +250,17 @@
                         x:Name="IsWednesdayEnabled"
                         x:Uid="Wednesday" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsWednesdayEnabled}"
                         x:Name="WednesdayOpenFrom"
-                        Time="8:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="2"
                         Grid.Column="1" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsWednesdayEnabled}"
                         x:Name="WednesdayOpenTo"
-                        Time="16:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="2"
@@ -272,17 +272,17 @@
                         x:Name="IsThursdayEnabled"
                         x:Uid="Thursday" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsThursdayEnabled}"
                         x:Name="ThursdayOpenFrom"
-                        Time="8:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="3"
                         Grid.Column="1" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsThursdayEnabled}"
                         x:Name="ThursdayOpenTo"
-                        Time="16:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="3"
@@ -294,17 +294,17 @@
                         x:Name="IsFridayEnabled"
                         x:Uid="Friday" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsFridayEnabled}"
                         x:Name="FridayOpenFrom"
-                        Time="8:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="4"
                         Grid.Column="1" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsFridayEnabled}"
                         x:Name="FridayOpenTo"
-                        Time="16:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="4"
@@ -316,17 +316,17 @@
                         x:Name="IsSaturdayEnabled"
                         x:Uid="Saturday" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsSaturdayEnabled}"
                         x:Name="SaturdayOpenFrom"
-                        Time="8:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="5"
                         Grid.Column="1" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsSaturdayEnabled}"
                         x:Name="SaturdayOpenTo"
-                        Time="16:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="5"
@@ -338,17 +338,17 @@
                         x:Name="IsSundayEnabled"
                         x:Uid="Sunday" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsSundayEnabled}"
                         x:Name="SundayOpenFrom"
-                        Time="8:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="6"
                         Grid.Column="1" />
                     <TimePicker
+                        MinuteIncrement="15"
                         IsEnabled="{Binding IsSundayEnabled}"
                         x:Name="SundayOpenTo"
-                        Time="16:00"
                         ClockIdentifier="24HourClock"
                         HorizontalAlignment="Center"
                         Grid.Row="6"
