@@ -391,10 +391,6 @@ namespace AugmentedSzczecin.ViewModels
         private async void SetGeolocation()
         {
             CenterOfTheMap = await _locationService.GetGeolocation();
-            if (Parameter != null)
-            {
-                CenterOfTheMap = Parameter;
-            }
 
             if (Parameter != null)
             {
