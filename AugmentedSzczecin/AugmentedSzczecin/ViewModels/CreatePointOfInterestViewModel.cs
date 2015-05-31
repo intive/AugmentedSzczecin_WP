@@ -1,20 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
+using Windows.Phone.UI.Input;
 using Windows.System;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Models;
 using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
 {
-    public class CreatePointOfInterestViewModel : Screen
+    public class CreatePointOfInterestViewModel : Screen, IHandle<CreatePointOfInterestSuccessEvent>, IHandle<CreatePointOfInterestFailedEvent>
     {
         #region Private & Public Fields
 
+        private readonly IEventAggregator _eventAggregator;
         private readonly INavigationService _navigationService;
         private readonly IPointOfInterestService _pointOfInterestService;
         private readonly ResourceLoader _loader = new ResourceLoader();
@@ -23,8 +31,9 @@ namespace AugmentedSzczecin.ViewModels
 
         #region Constructors
 
-        public CreatePointOfInterestViewModel(INavigationService navigationService, IPointOfInterestService pointOfInterestService)
+        public CreatePointOfInterestViewModel(IEventAggregator eventAggregator, INavigationService navigationService, IPointOfInterestService pointOfInterestService)
         {
+            _eventAggregator = eventAggregator;
             _navigationService = navigationService;
             _pointOfInterestService = pointOfInterestService;
         }
@@ -344,7 +353,7 @@ namespace AugmentedSzczecin.ViewModels
             {
                 if (_www != value)
                 {
-                    _www = value;
+                    _www = String.IsNullOrEmpty(value) ? null : value;
                     ValidateWww();
                     NotifyOfPropertyChange(() => Www);
                 }
@@ -379,7 +388,7 @@ namespace AugmentedSzczecin.ViewModels
             {
                 if (_phone != value)
                 {
-                    _phone = value;
+                    _phone = String.IsNullOrEmpty(value) ? null : value;
                     ValidatePhone();
                     NotifyOfPropertyChange(() => Phone);
                 }
@@ -414,7 +423,7 @@ namespace AugmentedSzczecin.ViewModels
             {
                 if (_fanpage != value)
                 {
-                    _fanpage = value;
+                    _fanpage = String.IsNullOrEmpty(value) ? null : value;
                     ValidateFanpage();
                     NotifyOfPropertyChange(() => Fanpage);
                 }
@@ -451,6 +460,33 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
+        private TimeSpan _mondayOpenFrom;
+        public TimeSpan MondayOpenFrom
+        {
+            get { return _mondayOpenFrom; }
+            set
+            {
+                if (_mondayOpenFrom != value)
+                {
+                    _mondayOpenFrom = value;
+                    NotifyOfPropertyChange(() => MondayOpenFrom);
+                }
+            }
+        }
+        private TimeSpan _mondayOpenTo;
+        public TimeSpan MondayOpenTo
+        {
+            get { return _mondayOpenTo; }
+            set
+            {
+                if (_mondayOpenTo != value)
+                {
+                    _mondayOpenTo = value;
+                    NotifyOfPropertyChange(() => MondayOpenTo);
+                }
+            }
+        }
+
         private bool _isTuesdayEnabled;
         public bool IsTuesdayEnabled
         {
@@ -464,6 +500,33 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
+        private TimeSpan _tuesdayOpenFrom;
+        public TimeSpan TuesdayOpenFrom
+        {
+            get { return _tuesdayOpenFrom; }
+            set
+            {
+                if (_tuesdayOpenFrom != value)
+                {
+                    _tuesdayOpenFrom = value;
+                    NotifyOfPropertyChange(() => TuesdayOpenFrom);
+                }
+            }
+        }
+        private TimeSpan _tuesdayOpenTo;
+        public TimeSpan TuesdayOpenTo
+        {
+            get { return _tuesdayOpenTo; }
+            set
+            {
+                if (_tuesdayOpenTo != value)
+                {
+                    _tuesdayOpenTo = value;
+                    NotifyOfPropertyChange(() => TuesdayOpenTo);
+                }
+            }
+        }
+
         private bool _isWednesdayEnabled;
         public bool IsWednesdayEnabled
         {
@@ -477,6 +540,33 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
+        private TimeSpan _wednesdayOpenFrom;
+        public TimeSpan WednesdayOpenFrom
+        {
+            get { return _wednesdayOpenFrom; }
+            set
+            {
+                if (_wednesdayOpenFrom != value)
+                {
+                    _wednesdayOpenFrom = value;
+                    NotifyOfPropertyChange(() => WednesdayOpenFrom);
+                }
+            }
+        }
+        private TimeSpan _wednesdayOpenTo;
+        public TimeSpan WednesdayOpenTo
+        {
+            get { return _wednesdayOpenTo; }
+            set
+            {
+                if (_wednesdayOpenTo != value)
+                {
+                    _wednesdayOpenTo = value;
+                    NotifyOfPropertyChange(() => WednesdayOpenTo);
+                }
+            }
+        }
+
         private bool _isThursdayEnabled;
         public bool IsThursdayEnabled
         {
@@ -490,6 +580,33 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
+        private TimeSpan _thursdayOpenFrom;
+        public TimeSpan ThursdayOpenFrom
+        {
+            get { return _thursdayOpenFrom; }
+            set
+            {
+                if (_thursdayOpenFrom != value)
+                {
+                    _thursdayOpenFrom = value;
+                    NotifyOfPropertyChange(() => ThursdayOpenFrom);
+                }
+            }
+        }
+        private TimeSpan _thursdayOpenTo;
+        public TimeSpan ThursdayOpenTo
+        {
+            get { return _thursdayOpenTo; }
+            set
+            {
+                if (_thursdayOpenTo != value)
+                {
+                    _thursdayOpenTo = value;
+                    NotifyOfPropertyChange(() => ThursdayOpenTo);
+                }
+            }
+        }
+
         private bool _isFridayEnabled;
         public bool IsFridayEnabled
         {
@@ -503,6 +620,33 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
+        private TimeSpan _fridayOpenFrom;
+        public TimeSpan FridayOpenFrom
+        {
+            get { return _fridayOpenFrom; }
+            set
+            {
+                if (_fridayOpenFrom != value)
+                {
+                    _fridayOpenFrom = value;
+                    NotifyOfPropertyChange(() => FridayOpenFrom);
+                }
+            }
+        }
+        private TimeSpan _fridayOpenTo;
+        public TimeSpan FridayOpenTo
+        {
+            get { return _fridayOpenTo; }
+            set
+            {
+                if (_fridayOpenTo != value)
+                {
+                    _fridayOpenTo = value;
+                    NotifyOfPropertyChange(() => FridayOpenTo);
+                }
+            }
+        }
+
         private bool _isSaturdayEnabled;
         public bool IsSaturdayEnabled
         {
@@ -516,6 +660,33 @@ namespace AugmentedSzczecin.ViewModels
                 }
             }
         }
+        private TimeSpan _saturdayOpenFrom;
+        public TimeSpan SaturdayOpenFrom
+        {
+            get { return _saturdayOpenFrom; }
+            set
+            {
+                if (_saturdayOpenFrom != value)
+                {
+                    _saturdayOpenFrom = value;
+                    NotifyOfPropertyChange(() => SaturdayOpenFrom);
+                }
+            }
+        }
+        private TimeSpan _saturdayOpenTo;
+        public TimeSpan SaturdayOpenTo
+        {
+            get { return _saturdayOpenTo; }
+            set
+            {
+                if (_saturdayOpenTo != value)
+                {
+                    _saturdayOpenTo = value;
+                    NotifyOfPropertyChange(() => SaturdayOpenTo);
+                }
+            }
+        }
+
         private bool _isSundayEnabled;
         public bool IsSundayEnabled
         {
@@ -526,6 +697,32 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _isSundayEnabled = value;
                     NotifyOfPropertyChange(() => IsSundayEnabled);
+                }
+            }
+        }
+        private TimeSpan _sundayOpenFrom;
+        public TimeSpan SundayOpenFrom
+        {
+            get { return _sundayOpenFrom; }
+            set
+            {
+                if (_sundayOpenFrom != value)
+                {
+                    _sundayOpenFrom = value;
+                    NotifyOfPropertyChange(() => SundayOpenFrom);
+                }
+            }
+        }
+        private TimeSpan _sundayOpenTo;
+        public TimeSpan SundayOpenTo
+        {
+            get { return _sundayOpenTo; }
+            set
+            {
+                if (_sundayOpenTo != value)
+                {
+                    _sundayOpenTo = value;
+                    NotifyOfPropertyChange(() => SundayOpenTo);
                 }
             }
         }
@@ -608,7 +805,6 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private string[] TagsArray;
         public Geopoint Parameter { get; set; }
 
         #endregion
@@ -617,8 +813,17 @@ namespace AugmentedSzczecin.ViewModels
 
         protected override void OnActivate()
         {
+            _eventAggregator.Subscribe(this);
+            base.OnActivate();
+
             Latitude = Parameter.Position.Latitude;
             Longitude = Parameter.Position.Longitude;
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            _eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
         }
 
         #endregion
@@ -645,12 +850,10 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-
         public void ExtraFieldsChecked()
         {
             IsExtraFieldChecked = true;
         }
-
         public void ExtraFieldsUnchecked()
         {
             IsExtraFieldChecked = false;
@@ -662,6 +865,17 @@ namespace AugmentedSzczecin.ViewModels
             {
                 FocusManager.TryMoveFocus(FocusNavigationDirection.Next);
             }
+        }
+
+        public async void Handle(CreatePointOfInterestSuccessEvent e)
+        {
+            await ShowCreatedPointOfInterestSuccessMessage(e);
+        }
+
+        public async void Handle(CreatePointOfInterestFailedEvent e)
+        {
+            var message = new MessageDialog(e.FailureMessage);
+            await message.ShowAsync();
         }
 
         #endregion
@@ -799,7 +1013,6 @@ namespace AugmentedSzczecin.ViewModels
             IsCategorySelected = !String.IsNullOrEmpty(SelectedCategoryItem);
         }
 
-
         private void ValidateWww()
         {
             IsWwwValid = ValidateWwwMatch();
@@ -850,16 +1063,15 @@ namespace AugmentedSzczecin.ViewModels
 
         private PointOfInterest CreatePointOfInterest()
         {
-            var newPointOfInterest = NewPointOfInterest();
-            return newPointOfInterest;
+            return NewPointOfInterest();
         }
 
         private PointOfInterest NewPointOfInterest()
         {
-            return new PointOfInterest
+            var pointOfInterest = new PointOfInterest
             {
-                Name = "Loch Ness monster",
-                Description = "Arrrrgghhhhhh!",
+                Name = Name,
+                Description = Description,
                 Location = new Location()
                 {
                     Latitude = Latitude,
@@ -867,39 +1079,166 @@ namespace AugmentedSzczecin.ViewModels
                 },
                 Address = new Address()
                 {
-                    City = "Szczecin",
-                    Street = "Lake Street",
-                    ZipCode = "12-345",
-                    StreetNumber = "1"
+                    City = City,
+                    Street = Street,
+                    ZipCode = ZipCode,
+                    StreetNumber = StreetNumber
                 },
-                Tags = SplitTagsToTagsArray(),
-                Www = "http://www.microsoft.com",
-                Phone = "123321123",
-                Fanpage = "http://fb.com/WIZUT.NET",
-                Media = new[]
-                {
-                    "http://img4.wikia.nocookie.net/__cb20120122105531/callofduty/images/7/73/Trollface.png",
-                    "http://img4.wikia.nocookie.net/__cb20120122105531/callofduty/images/7/73/Trollface.png"
-                },
-                Opening = new[]
-                {
-                    new Opening()
-                    {
-                        Day = DayOfWeek.Monday.ToString().ToUpper(),
-                        Open = "8:30",
-                        Close = "16:30"
-                    },
-                },
-                Subcategory = "COMMERCIAL"
+                Tags = SplitTagsToTagsArray()
             };
+
+            if (IsExtraFieldChecked)
+            {
+                pointOfInterest.Www = Www;
+                pointOfInterest.Phone = Phone;
+                pointOfInterest.Fanpage = Fanpage;
+                pointOfInterest.Opening = GetOpeningDaysAndHours();
+            }
+            pointOfInterest.Category = SelectedCategoryItem;
+
+            return pointOfInterest;
+        }
+
+        private Opening[] GetOpeningDaysAndHours()
+        {
+            int size = GetOpeningDaysAndHoursArraySize();
+            var openingDaysAndHours = new Opening[size];
+
+            int index = 0;
+            if (IsMondayEnabled)
+            {
+                openingDaysAndHours[index++] = new Opening()
+                {
+                    Day = DayOfWeek.Monday.ToString().ToUpper(),
+                    Open = GetHour(MondayOpenFrom.Hours, MondayOpenFrom.Minutes),
+                    Close = GetHour(MondayOpenTo.Hours, MondayOpenTo.Minutes)
+                };
+            }
+            if (IsTuesdayEnabled)
+            {
+                openingDaysAndHours[index++] = new Opening()
+                {
+                    Day = DayOfWeek.Tuesday.ToString().ToUpper(),
+                    Open = GetHour(TuesdayOpenFrom.Hours, TuesdayOpenFrom.Minutes),
+                    Close = GetHour(TuesdayOpenTo.Hours, TuesdayOpenTo.Minutes)
+                };
+            }
+            if (IsWednesdayEnabled)
+            {
+                openingDaysAndHours[index++] = new Opening()
+                {
+                    Day = DayOfWeek.Wednesday.ToString().ToUpper(),
+                    Open = GetHour(WednesdayOpenFrom.Hours, WednesdayOpenFrom.Minutes),
+                    Close = GetHour(WednesdayOpenTo.Hours, WednesdayOpenTo.Minutes)
+                };
+            }
+            if (IsThursdayEnabled)
+            {
+                openingDaysAndHours[index++] = new Opening()
+                {
+                    Day = DayOfWeek.Thursday.ToString().ToUpper(),
+                    Open = GetHour(ThursdayOpenFrom.Hours, ThursdayOpenFrom.Minutes),
+                    Close = GetHour(ThursdayOpenTo.Hours, ThursdayOpenTo.Minutes)
+                };
+            }
+            if (IsFridayEnabled)
+            {
+                openingDaysAndHours[index++] = new Opening()
+                {
+                    Day = DayOfWeek.Friday.ToString().ToUpper(),
+                    Open = GetHour(FridayOpenFrom.Hours, FridayOpenFrom.Minutes),
+                    Close = GetHour(FridayOpenTo.Hours, FridayOpenTo.Minutes)
+                };
+            }
+            if (IsSaturdayEnabled)
+            {
+                openingDaysAndHours[index++] = new Opening()
+                {
+                    Day = DayOfWeek.Saturday.ToString().ToUpper(),
+                    Open = GetHour(SaturdayOpenFrom.Hours, SaturdayOpenFrom.Minutes),
+                    Close = GetHour(SaturdayOpenTo.Hours, SaturdayOpenTo.Minutes)
+                };
+            }
+            if (IsSundayEnabled)
+            {
+                openingDaysAndHours[index] = new Opening()
+                {
+                    Day = DayOfWeek.Sunday.ToString().ToUpper(),
+                    Open = GetHour(SundayOpenFrom.Hours, SundayOpenFrom.Minutes),
+                    Close = GetHour(SundayOpenTo.Hours, SundayOpenTo.Minutes)
+                };
+            }
+
+            return openingDaysAndHours;
+        }
+
+        private int GetOpeningDaysAndHoursArraySize()
+        {
+            var size = IsMondayEnabled ? 1 : 0;
+            size += IsTuesdayEnabled ? 1 : 0;
+            size += IsWednesdayEnabled ? 1 : 0;
+            size += IsThursdayEnabled ? 1 : 0;
+            size += IsFridayEnabled ? 1 : 0;
+            size += IsSaturdayEnabled ? 1 : 0;
+            size += IsSundayEnabled ? 1 : 0;
+            return size;
+        }
+
+        private string GetHour(int hours, int minutes)
+        {
+            var hour = new StringBuilder();
+
+            hour.Append(hours.ToString());
+            hour.Append(":");
+            hour.Append(minutes == 0 ? "00" : minutes.ToString());
+
+            return hour.ToString();
         }
 
         private string[] SplitTagsToTagsArray()
         {
             Tags = Tags.ToLower();
-            var delimiters = new[] {',', ' '};
+            var delimiters = new[] { ',', ' ' };
             var tagsArray = Tags.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
             return tagsArray;
+        }
+
+        private async Task ShowCreatedPointOfInterestSuccessMessage(CreatePointOfInterestSuccessEvent e)
+        {
+            var message = new MessageDialog(e.SuccessMessage);
+            message.Commands.Add(new UICommand("Menu", BackButtonInvokedHandler));
+            message.Commands.Add(new UICommand("Show", BackButtonInvokedHandler));
+            message.DefaultCommandIndex = 0;
+            message.CancelCommandIndex = 1;
+
+            await message.ShowAsync();
+        }
+
+        private void BackButtonInvokedHandler(IUICommand command)
+        {
+            switch (command.Label)
+            {
+                case "Menu":
+                    HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+                    _navigationService.NavigateToViewModel<MainViewModel>();
+                    break;
+                case "Show":
+                    HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+                    _navigationService.NavigateToViewModel<CurrentMapViewModel>(Parameter);
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame != null && rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
+                e.Handled = true;
+            }
         }
 
         #endregion
