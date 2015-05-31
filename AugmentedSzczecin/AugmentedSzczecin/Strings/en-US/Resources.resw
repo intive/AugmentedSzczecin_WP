@@ -426,4 +426,10 @@
   <data name="ValidationErrorGeneralMessage" xml:space="preserve">
     <value>Please correct red-marked fields.</value>
   </data>
+  <data name="CreatePointOfInterestFailureMessage" xml:space="preserve">
+    <value>Something goes wrong. Try again!</value>
+  </data>
+  <data name="CreatePointOfInterestSuccessMessage" xml:space="preserve">
+    <value>Point added!</value>
+  </data>
 </root>
