@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Models;
@@ -64,12 +65,16 @@ namespace AugmentedSzczecin.Services
 
         public async void AddPointOfInterest(PointOfInterest poi)
         {
-            try
+            var loader = new ResourceLoader();
+            var isPointOfInterestAdded = await _httpService.AddPointOfInterest(poi, _accountService.GetUserEmail(), _accountService.GetUserPassword());
+
+            if (isPointOfInterestAdded)
             {
-                await _httpService.AddPointOfInterest(poi, _accountService.GetUserEmail(), _accountService.GetUserPassword());
+                _eventAggregator.PublishOnUIThread(new CreatePointOfInterestSuccessEvent() { SuccessMessage = loader.GetString("CreatePointOfInterestSuccessMessage") });
             }
-            catch (Exception e)
+            else
             {
+                _eventAggregator.PublishOnUIThread(new CreatePointOfInterestFailedEvent() { FailureMessage = loader.GetString("CreatePointOfInterestFailureMessage") });
             }
         }
     }
