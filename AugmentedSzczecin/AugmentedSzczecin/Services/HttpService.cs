@@ -92,8 +92,8 @@ namespace AugmentedSzczecin.Services
         public async Task<bool> AddPointOfInterest(PointOfInterest poi, string email, string password)
         {
             SetAuthenticationHeader(email, password);
-            var json = JsonConvert.SerializeObject(poi);
-            var content = new StringContent(json, Encoding.GetEncoding("iso-8859-1"), "application/json"); // "iso-8859-1" GetEncoding( "utf-8" )
+            var json = JsonConvert.SerializeObject(poi, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, });
+            var content = new StringContent(json, Encoding.GetEncoding("iso-8859-1"), "application/json");
             var response = await _client.PostAsync("places", content);
             if (response.StatusCode == HttpStatusCode.OK)
             {
