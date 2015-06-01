@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
 using Windows.Media.Capture;
 using Windows.UI.Xaml;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 
 namespace AugmentedSzczecin
@@ -44,6 +45,14 @@ namespace AugmentedSzczecin
             _container.Singleton<IHttpService, HttpService>();
             _container.Singleton<IUserDataStorageService, UserDataStorageService>();
             IoC.GetInstance = GetInstance;
+
+            HideStatusBar();
+        }
+
+        private static void HideStatusBar()
+        {
+            var statusBar = StatusBar.GetForCurrentView();
+            statusBar.HideAsync();
         }
 
         protected override void PrepareViewFirst(Frame rootFrame)

@@ -9,16 +9,112 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <Button Content="About" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" HorizontalAlignment="Stretch" />
-            <Button Content="Augmented View" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" HorizontalAlignment="Stretch" />
-            <Button Content="Current Map" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" HorizontalAlignment="Stretch" />
-            <Button Content="Add POI" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAddPointOfInterest]" HorizontalAlignment="Stretch" />
-            <Button Content="Location List" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" HorizontalAlignment="Stretch"/>
-            <Button Content="Sign Up" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]" HorizontalAlignment="Stretch"/>
-            <Button Content="Sign In" caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]" HorizontalAlignment="Stretch"/>
-            <Button Content="Sign Out" caliburn:Message.Attach="[Event Tapped] = [Action SignOut]" HorizontalAlignment="Stretch"/>
+
+    <Grid x:Name="LayoutRoot"
+          Background="White" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1.6180339887*" />
+        </Grid.RowDefinitions>
+        <Image
+            Grid.Row="0"
+            Stretch="None"
+            Source="../Assets/SampleBackgrounds/sample_Header.jpg"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"/>
+
+        <Grid
+            Grid.Row="0"
+            x:Name="LayoutHeader">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle
+                VerticalAlignment="Bottom"
+                Margin="-35, 0, 0, 30"
+                RadiusX="35"
+                RadiusY="35"
+                Height="75"
+                Fill="White" />
+            <TextBlock
+                Margin="15, 0, 0, 70"
+                VerticalAlignment="Bottom"
+                Foreground="Black"
+                Text="AUGMENTED"
+                FontSize="18"
+                FontFamily="Segoe WP" />
+            <TextBlock
+                Margin="15, 15, 0, 37.5"
+                VerticalAlignment="Bottom"
+                Foreground="Black"
+                Text="SZCZECIN"
+                FontSize="32"
+                FontWeight="Bold"
+                FontFamily="Segoe WP" />
+        </Grid>
+
+        <StackPanel
+            Margin="15, 25"
+            Grid.Row="1"
+            x:Name="LayoutBody">
+            <ListView>
+                <ListViewItem
+                    Margin="0, 0, 0, 10"
+                    HorizontalAlignment="Left"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                    Content="about"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
+                <ListViewItem
+                    Margin="0, 0, 0, 10"
+                    HorizontalAlignment="Left"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                    Content="augmented view"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" />
+                <ListViewItem
+                    Margin="0, 0, 0, 10"
+                    HorizontalAlignment="Left"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                    Content="current map"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" />
+                <ListViewItem
+                    Margin="0, 0, 0, 10"
+                    HorizontalAlignment="Left"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                    Content="location list"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
+                <ListViewItem
+                    Margin="0, 0, 0, 10"
+                    HorizontalAlignment="Left"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                    Content="sign up"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]" />
+                <ListViewItem
+                    Margin="0, 0, 0, 10"
+                    HorizontalAlignment="Left"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                    Content="sign in"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]" />
+                <ListViewItem
+                    HorizontalAlignment="Left"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                    Content="sign out"
+                    caliburn:Message.Attach="[Event Tapped] = [Action SignOut]" />
+            </ListView>
         </StackPanel>
     </Grid>
 </Page>

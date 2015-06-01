@@ -9,9 +9,9 @@ namespace AugmentedSzczecin.Models
         private string _name;
         public string Name
         {
-            get
-            {
-                return _name;
+            get 
+            { 
+                return _name; 
             }
             set
             {
@@ -27,9 +27,9 @@ namespace AugmentedSzczecin.Models
         private string _description;
         public string Description
         {
-            get
-            {
-                return _description;
+            get 
+            { 
+                return _description; 
             }
             set
             {
@@ -45,8 +45,8 @@ namespace AugmentedSzczecin.Models
         private Location _location;
         public Location Location
         {
-            get
-            {
+            get 
+            { 
                 return _location;
             }
             set
@@ -63,8 +63,8 @@ namespace AugmentedSzczecin.Models
         private Address _address;
         public Address Address
         {
-            get
-            {
+            get 
+            { 
                 return _address;
             }
             set
@@ -81,8 +81,8 @@ namespace AugmentedSzczecin.Models
         private string[] _tags;
         public string[] Tags
         {
-            get
-            {
+            get 
+            { 
                 return _tags;
             }
             set
@@ -99,8 +99,8 @@ namespace AugmentedSzczecin.Models
         private string _www;
         public string Www
         {
-            get
-            {
+            get 
+            { 
                 return _www;
             }
             set
@@ -117,9 +117,9 @@ namespace AugmentedSzczecin.Models
         private string _phone;
         public string Phone
         {
-            get
-            {
-                return _phone;
+            get 
+            { 
+                return _phone; 
             }
             set
             {
@@ -135,9 +135,9 @@ namespace AugmentedSzczecin.Models
         private string _fanpage;
         public string Fanpage
         {
-            get
-            {
-                return _fanpage;
+            get 
+            { 
+                return _fanpage; 
             }
             set
             {
@@ -153,8 +153,8 @@ namespace AugmentedSzczecin.Models
         private Opening[] _opening;
         public Opening[] Opening
         {
-            get
-            {
+            get 
+            { 
                 return _opening;
             }
             set
@@ -171,9 +171,9 @@ namespace AugmentedSzczecin.Models
         private string _category;
         public string Category
         {
-            get
-            {
-                return _category;
+            get 
+            { 
+                return _category; 
             }
             set
             {
@@ -189,8 +189,8 @@ namespace AugmentedSzczecin.Models
         private string _subcategory;
         public string Subcategory
         {
-            get
-            {
+            get 
+            { 
                 return _subcategory;
             }
             set
