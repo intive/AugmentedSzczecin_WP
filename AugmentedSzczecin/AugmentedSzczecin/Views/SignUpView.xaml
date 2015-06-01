@@ -690,14 +690,14 @@
             <ProgressRing 
                 x:Name="SignUpProgressRing" 
                 IsActive="{Binding IsProgressRingActive}"
-                Visibility="{Binding IsProgressRingVisible, Converter={StaticResource BoolToVisConv}}" 
+                Visibility="{Binding IsProgressRingVisible, Converter={StaticResource BooleanToVisibilityConverter}}" 
                 Height="10" 
                 Width="200" 
                 HorizontalAlignment="Center" Style="{StaticResource ProgressRingStyleSign}"/>
             <TextBlock 
                 x:Uid="SignUpProgressRing" 
                 FontSize="15" 
-                Visibility="{Binding IsProgressRingVisible, Converter={StaticResource BoolToVisConv}}" 
+                Visibility="{Binding IsProgressRingVisible, Converter={StaticResource BooleanToVisibilityConverter}}" 
                 HorizontalAlignment="Center" 
                 Foreground="{StaticResource ASRed}"
                 Margin="0,10,0,0" />
