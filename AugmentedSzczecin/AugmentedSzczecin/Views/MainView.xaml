@@ -54,7 +54,7 @@
                 FontFamily="Segoe WP" />
         </Grid>
 
-        <StackPanel
+        <Grid
             Margin="15, 25"
             Grid.Row="1"
             x:Name="LayoutBody">
@@ -89,6 +89,14 @@
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
+                    Content="add poi"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAddPointOfInterest]" />
+                <ListViewItem
+                    Margin="0, 0, 0, 10"
+                    HorizontalAlignment="Left"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
                     Content="location list"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 <ListViewItem
@@ -115,6 +123,6 @@
                     Content="sign out"
                     caliburn:Message.Attach="[Event Tapped] = [Action SignOut]" />
             </ListView>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Page>

@@ -1095,6 +1095,7 @@ namespace AugmentedSzczecin.ViewModels
                 pointOfInterest.Opening = GetOpeningDaysAndHours();
             }
             pointOfInterest.Category = SelectedCategoryItem;
+            pointOfInterest.Subcategory = "PARK";
 
             return pointOfInterest;
         }
