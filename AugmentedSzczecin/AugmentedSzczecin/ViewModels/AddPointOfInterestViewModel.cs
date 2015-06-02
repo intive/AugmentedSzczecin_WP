@@ -12,13 +12,13 @@ using Windows.UI.Xaml.Controls.Maps;
 using AugmentedSzczecin.Helpers;
 using AugmentedSzczecin.Interfaces;
 using Caliburn.Micro;
+using Microsoft.VisualBasic;
+using Constants = AugmentedSzczecin.Models.Constants;
 
 namespace AugmentedSzczecin.ViewModels
 {
     public class AddPointOfInterestViewModel : Screen
     {
-        private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
-
         private readonly IEventAggregator _eventAggregator;
         private readonly INavigationService _navigationService;
         private readonly ILocationService _locationService;
@@ -46,7 +46,7 @@ namespace AugmentedSzczecin.ViewModels
 
         public string BingKey
         {
-            get { return _bingKey; }
+            get { return Constants.BingKey; }
         }
 
         private readonly bool _landmarksVisible = true;
