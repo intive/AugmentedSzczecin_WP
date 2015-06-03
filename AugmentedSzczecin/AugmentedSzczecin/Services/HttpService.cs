@@ -43,35 +43,43 @@ namespace AugmentedSzczecin.Services
             }
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
+            json = "{\"places\":[{\"name\":\"osmy Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5580,\"latitude\":53.4299},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"PLACE\"}, {\"name\":\"piaty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5590,\"latitude\":53.4390},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"PLACE\"}], \"events\":[{\"name\":\"drugi Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5588,\"latitude\":53.4299},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"EVENT\"}, {\"name\":\"czwarty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5590,\"latitude\":53.4390},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"EVENT\"}], \"commercial\":[{\"name\":\"dziewiaty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5570,\"latitude\":53.4300},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"COMMERCIAL\"}, {\"name\":\"jedenasty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5510,\"latitude\":53.4400},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"COMMERCIAL\"}]}";
+
             if (json == "{}")
             {
                 return new ObservableCollection<PointOfInterest>();
             }
-            ObservableCollection<PointOfInterest> pois = new ObservableCollection<PointOfInterest>();
+
             IList<JToken> results = null;
             switch(category)
             {
                 case CategoryType.PLACE:
-                    results = JObject.Parse(json)["places"].Children().ToList();
+                    results = PoiQueryResponse.ParsePoiPlacesQuery(json);
                     break;
                 case CategoryType.EVENT:
-                    results = JObject.Parse(json)["events"].Children().ToList();
+                    results = PoiQueryResponse.ParsePoiEventsQuery(json);
                     break;
                 case CategoryType.PERSON:
-                    results = JObject.Parse(json)["people"].Children().ToList();
+                    results = PoiQueryResponse.ParsePoiPeopleQuery(json);
                     break;
                 case CategoryType.COMMERCIAL:
-                    results = JObject.Parse(json)["commercial"].Children().ToList();
+                    results = PoiQueryResponse.ParsePoiCommercialQuery(json);
                     break;
                 case CategoryType.ALL:
-                    results = JObject.Parse(json).Children().ToList();
+                    results = PoiQueryResponse.ParsePoiAllQuery(json);
                     break;
             }
+
+            ObservableCollection<PointOfInterest> pois = new ObservableCollection<PointOfInterest>();
             
-            foreach (var result in results)
+            if(results != null)
             {
-                pois.Add(JsonConvert.DeserializeObject<PointOfInterest>(result.ToString()));
+                foreach (var result in results)
+                {
+                    pois.Add(JsonConvert.DeserializeObject<PointOfInterest>(result.ToString()));
+                }
             }
+            
             return pois;
         }
 
