@@ -161,7 +161,7 @@
   </data>
   <data name="SignOutConfirmationText" xml:space="preserve">
     <value>Are you sure you want to sign out?</value>
-  </data>  
+  </data>
   <data name="SignUpButtonSignUp.Content" xml:space="preserve">
     <value>Gotowe</value>
   </data>
@@ -191,5 +191,14 @@
   </data>
   <data name="ResetPasswordMainText.Text" xml:space="preserve">
     <value>Zresetuj hasło</value>
+  </data>
+  <data name="AboutText.Text" xml:space="preserve">
+    <value>Aplikacja została stworzona 
+w ramach projektu
+BlStream Patronage 2015.
+</value>
+  </data>
+  <data name="AboutVersion" xml:space="preserve">
+    <value>Wersja: </value>
   </data>
 </root>
