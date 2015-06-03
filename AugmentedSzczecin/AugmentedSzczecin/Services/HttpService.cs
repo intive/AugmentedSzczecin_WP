@@ -43,7 +43,10 @@ namespace AugmentedSzczecin.Services
             }
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
+
+            /****** DO TESTÓW ******/
             json = "{\"places\":[{\"name\":\"osmy Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5580,\"latitude\":53.4299},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"PLACE\"}, {\"name\":\"piaty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5590,\"latitude\":53.4390},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"PLACE\"}], \"events\":[{\"name\":\"drugi Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5588,\"latitude\":53.4299},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"EVENT\"}, {\"name\":\"czwarty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5590,\"latitude\":53.4390},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"EVENT\"}], \"commercial\":[{\"name\":\"dziewiaty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5570,\"latitude\":53.4300},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"COMMERCIAL\"}, {\"name\":\"jedenasty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5510,\"latitude\":53.4400},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"COMMERCIAL\"}]}";
+            /***********************/
 
             if (json == "{}")
             {
