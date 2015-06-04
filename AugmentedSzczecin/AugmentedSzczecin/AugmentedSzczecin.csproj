@@ -105,6 +105,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Opening.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
+    <Compile Include="Models\PoiQueryResponse.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
