@@ -64,7 +64,7 @@ namespace AugmentedSzczecin.Models
 
             IList<JToken> temporaryResults = null;
 
-            for (int i = 0; i < listOfFunctions.Capacity; i++)
+            for (int i = 0; i < listOfFunctions.Count; i++)
             {
                 temporaryResults = listOfFunctions[i](json);
                 if (temporaryResults != null)
