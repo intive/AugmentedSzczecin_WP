@@ -37,17 +37,15 @@
     </Page.Resources>
 
     <Grid>
-
-        <StackPanel>
-        <TextBlock x:Uid="CurrentMapTitle"  
-                   TextWrapping="NoWrap" Text=""
-                   FontSize="36" 
-                   Margin="8,0,0,16"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.08*" />
+        </Grid.RowDefinitions>
+        
         <maps:MapControl
+            Grid.Row="0"
             MapServiceToken="{Binding BingKey}"
             x:Name="BingMap"
-            Height="560"
             Center="{Binding CenterOfTheMap}"
             ZoomLevel="{Binding ZoomLevel}"
             LandmarksVisible="{Binding LandmarksVisible}"            
@@ -61,22 +59,8 @@
                 maps:MapControl.Location="{Binding CenterOfTheMap}" 
                 Visibility="{Binding MyLocationPointVisibility}"/>
 
-            <TextBlock 
-                x:Name="ScaleText" 
-                Text="{Binding ScaleText}" 
-                FontSize="14" 
-                Foreground="Black" 
-                Margin="24,530,0,2" 
-                Opacity="0.6" />
-            <Rectangle 
-                Name="RecScale" 
-                Fill="Black" 
-                Width="100" 
-                Height="4" 
-                Margin="24,548,0,0" 
-                Opacity="0.6" />
-
-            <maps:MapItemsControl ItemsSource="{Binding MapLocations}">
+            <maps:MapItemsControl 
+                ItemsSource="{Binding MapLocations}">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
                             <UserControls:MapPin 
@@ -90,9 +74,33 @@
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>
         </maps:MapControl>
-        </StackPanel>
 
+        <Rectangle 
+                Grid.Row="1"
+                Name="RecScale"
+                Stretch="Fill">
+        	<Rectangle.Fill>
+        		<LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                    <GradientStop Color="#B6B6B6"/>
+                    <GradientStop Color="White" Offset="0.5"/>
+                    <GradientStop Color="#B6B6B6" Offset="1"/>
+                </LinearGradientBrush>
+        	</Rectangle.Fill>
+        </Rectangle>
+        <TextBlock 
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                x:Name="ScaleText" 
+                Text="{Binding ScaleText}" 
+                Foreground="{StaticResource ASBlack}"
+                FontSize="20" 
+                Opacity="0.6" />
+
+        <!--
         <Grid Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BoolToVisConv}}" >
+        -->
+        <Grid Visibility="Collapsed" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition Width="2*"/>

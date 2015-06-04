@@ -17,6 +17,6 @@
         <Viewbox Margin="0, 6, 0, 0" VerticalAlignment="Top" MaxHeight="20">
             <SymbolIcon Symbol="{Binding PinSign, ElementName=MapPinRoot}" />
         </Viewbox>
-        <Rectangle Margin="0, 52, 0, 0" VerticalAlignment="Top" Height="6" Width="25" RadiusX="80" RadiusY="80" Fill="{Binding PinColorBase, ElementName=MapPinRoot}"></Rectangle>
+        <Rectangle Margin="0, 52, 0, 0" VerticalAlignment="Top" Height="4" Width="15" RadiusX="80" RadiusY="80" Fill="{Binding PinColorBase, ElementName=MapPinRoot}"></Rectangle>
     </Grid>
 </UserControl>
