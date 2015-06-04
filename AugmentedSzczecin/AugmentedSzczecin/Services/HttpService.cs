@@ -67,7 +67,7 @@ namespace AugmentedSzczecin.Services
         public async Task<int> SignIn(User user)
         {
             SetAuthenticationHeader(user.Email, user.Password);
-            var response = await _client.GetAsync("users/whoami");
+            var response = await _client.GetAsync(String.Format("users/whoami?v={0}",DateTime.Now.Ticks));
             return (int)response.StatusCode;
         }
 
