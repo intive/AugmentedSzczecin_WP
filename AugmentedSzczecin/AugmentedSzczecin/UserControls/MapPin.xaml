@@ -12,11 +12,11 @@
     Width="45">
 
     <Grid RenderTransformOrigin="0.5,1" HorizontalAlignment="Center" VerticalAlignment="Top">
-        <Border VerticalAlignment="Top" Background="{Binding PinColor, ElementName=MapPinRoot}"  CornerRadius="35" Width="35" Height="35" />
-        <Path Data="M50,0L100,50 50,180 0,50z" Fill="{Binding PinColor, ElementName=MapPinRoot}" Stretch="Fill" Margin="0, 18, 0, 0" Width="28" Height="35" VerticalAlignment="Top"/>
+        <Border VerticalAlignment="Top" Background="{Binding PinColor, ElementName=MapPinRoot}"  CornerRadius="30" Width="30" Height="30" />
+        <Path Data="M50,0L100,50 50,180 0,50z" Fill="{Binding PinColor, ElementName=MapPinRoot}" Stretch="Fill" Margin="0, 16, 0, 0" Width="25" Height="30" VerticalAlignment="Top"/>
         <Viewbox Margin="0, 5, 0, 0" VerticalAlignment="Top" MaxHeight="25">
             <SymbolIcon Symbol="{Binding PinSign, ElementName=MapPinRoot}" />
         </Viewbox>
-        <Rectangle Margin="0, 60, 0, 0" VerticalAlignment="Top" Height="6" Width="25" RadiusX="80" RadiusY="80" Fill="{Binding PinColorBase, ElementName=MapPinRoot}"></Rectangle>
+        <Rectangle Margin="0, 52, 0, 0" VerticalAlignment="Top" Height="6" Width="25" RadiusX="80" RadiusY="80" Fill="{Binding PinColorBase, ElementName=MapPinRoot}"></Rectangle>
     </Grid>
 </UserControl>
