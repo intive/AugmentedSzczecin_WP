@@ -18,7 +18,7 @@ namespace AugmentedSzczecin.Models
                                                         new Subcategory() {Text = "Kościół", EnumSubcategory = SubcategoryType.CHURCH},
                                                     };
 
-        public static List<Subcategory> GetSubategoryList()
+        public static List<Subcategory> GetSubcategoryList()
         {
             return _subcategoryList;
         }

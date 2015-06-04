@@ -26,7 +26,6 @@ namespace AugmentedSzczecin.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly INavigationService _navigationService;
         private readonly IPointOfInterestService _pointOfInterestService;
-        private readonly ResourceLoader _loader = new ResourceLoader();
 
         #endregion
 
@@ -322,6 +321,34 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _isCategorySelected = value;
                     NotifyOfPropertyChange(() => IsCategorySelected);
+                }
+            }
+        }
+
+        private bool _isSubcategorySelected = true;
+        public bool IsSubcategorySelected
+        {
+            get { return _isSubcategorySelected; }
+            set
+            {
+                if (_isSubcategorySelected != value)
+                {
+                    _isSubcategorySelected = value;
+                    NotifyOfPropertyChange(() => IsSubcategorySelected);
+                }
+            }
+        }
+
+        private bool _isFirstCategorySelected;
+        public bool IsFirstCategorySelected
+        {
+            get { return _isFirstCategorySelected; }
+            set
+            {
+                if (_isFirstCategorySelected != value)
+                {
+                    _isFirstCategorySelected = value;
+                    NotifyOfPropertyChange(() => IsFirstCategorySelected);
                 }
             }
         }
@@ -770,7 +797,7 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private Category _selectedCategoryItem = null;
+        private Category _selectedCategoryItem;
         public Category SelectedCategoryItem
         {
             get { return _selectedCategoryItem; }
@@ -779,7 +806,36 @@ namespace AugmentedSzczecin.ViewModels
                 if (_selectedCategoryItem != value)
                 {
                     _selectedCategoryItem = value;
+                    ValidateCategorySelected();
                     NotifyOfPropertyChange(() => SelectedCategoryItem);
+                }
+            }
+        }
+
+        private List<Subcategory> _subcategoryItems;
+        public List<Subcategory> SubcategoryItems
+        {
+            get { return _subcategoryItems; }
+            set
+            {
+                if (_subcategoryItems != value)
+                {
+                    _subcategoryItems = value;
+                    NotifyOfPropertyChange(() => SubcategoryItems);
+                }
+            }
+        }
+
+        private Subcategory _selectedSubcategoryItem;
+        public Subcategory SelectedSubcategoryItem
+        {
+            get { return _selectedSubcategoryItem; }
+            set
+            {
+                if (_selectedSubcategoryItem != value)
+                {
+                    _selectedSubcategoryItem = value;
+                    NotifyOfPropertyChange(() => SelectedSubcategoryItem);
                 }
             }
         }
@@ -939,7 +995,8 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidateNameEmpty()
         {
-            return IsNameEmptyValid = !String.IsNullOrEmpty(Name);
+            IsNameEmptyValid = !String.IsNullOrEmpty(Name);
+            return IsNameEmptyValid;
         }
 
         private void ValidateDescription()
@@ -948,7 +1005,8 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidateDescriptionEmpty()
         {
-            return IsDescriptionEmptyValid = !String.IsNullOrEmpty(Description);
+            IsDescriptionEmptyValid = !String.IsNullOrEmpty(Description);
+            return IsDescriptionEmptyValid;
         }
 
         private void ValidateTags()
@@ -957,11 +1015,13 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidateTagsEmpty()
         {
-            return IsTagsEmptyValid = !String.IsNullOrEmpty(Tags);
+            IsTagsEmptyValid = !String.IsNullOrEmpty(Tags);
+            return IsTagsEmptyValid;
         }
         private bool ValidateTagsMatch()
         {
-            return IsTagsMatchValid = Regex.IsMatch(Tags, @"^([a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ0-9]+( *, *[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ0-9]+)*)?$");
+            IsTagsMatchValid = Regex.IsMatch(Tags, @"^([a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ0-9]+( *, *[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ0-9]+)*)?$");
+            return IsTagsMatchValid;
         }
 
         private void ValidateStreet()
@@ -970,11 +1030,13 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidateStreetEmpty()
         {
-            return IsStreetEmptyValid = !String.IsNullOrEmpty(Street);
+            IsStreetEmptyValid = !String.IsNullOrEmpty(Street);
+            return IsStreetEmptyValid;
         }
         private bool ValidateStreetMatch()
         {
-            return IsStreetMatchValid = Regex.IsMatch(Street, @"^[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ .]+$");
+            IsStreetMatchValid = Regex.IsMatch(Street, @"^[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+[0-9A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ .]+$");
+            return IsStreetMatchValid;
         }
 
         private void ValidateZipCode()
@@ -983,11 +1045,13 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidateZipCodeEmpty()
         {
-            return IsZipCodeEmptyValid = !String.IsNullOrEmpty(ZipCode);
+            IsZipCodeEmptyValid = !String.IsNullOrEmpty(ZipCode);
+            return IsZipCodeEmptyValid;
         }
         private bool ValidateZipCodeMatch()
         {
-            return IsZipCodeMatchValid = Regex.IsMatch(ZipCode, @"[0-9]{2}-[0-9]{3}");
+            IsZipCodeMatchValid = Regex.IsMatch(ZipCode, @"[0-9]{2}-[0-9]{3}");
+            return IsZipCodeMatchValid;
         }
 
         private void ValidateCity()
@@ -996,11 +1060,13 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidateCityEmpty()
         {
-            return IsCityEmptyValid = !String.IsNullOrEmpty(City);
+            IsCityEmptyValid = !String.IsNullOrEmpty(City);
+            return IsCityEmptyValid;
         }
         private bool ValidateCityMatch()
         {
-            return IsCityMatchValid = Regex.IsMatch(City, @"^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ -]+$");
+            IsCityMatchValid = Regex.IsMatch(City, @"^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ -]+$");
+            return IsCityMatchValid;
         }
 
         private void ValidateStreetNumber()
@@ -1009,12 +1075,30 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidateStreetNumberEmpty()
         {
-            return IsStreetNumberEmptyValid = !String.IsNullOrEmpty(StreetNumber);
+            IsStreetNumberEmptyValid = !String.IsNullOrEmpty(StreetNumber);
+            return IsStreetNumberEmptyValid;
         }
 
         private void ValidateCategorySelected()
         {
-            IsCategorySelected = SelectedCategoryItem != null;
+            if (SelectedCategoryItem == CategoryItems[0])
+            {
+                IsFirstCategorySelected = true;
+                SubcategoryItems = SubcategoryList.GetSubcategoryList();
+                ValidateSubcategorySelected();
+                IsCategorySelected = IsSubcategorySelected;
+            }
+            else
+            {
+                IsFirstCategorySelected = false;
+                SelectedSubcategoryItem = null;
+                IsCategorySelected = SelectedCategoryItem != null;
+            }
+        }
+
+        private void ValidateSubcategorySelected()
+        {
+            IsSubcategorySelected = SelectedSubcategoryItem != null;
         }
 
         private void ValidateWww()
@@ -1023,11 +1107,9 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidateWwwMatch()
         {
-            if (!String.IsNullOrEmpty(Www))
-            {
-                return IsWwwMatchValid = Regex.IsMatch(Www, @"^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$");
-            }
-            return true;
+            if (String.IsNullOrEmpty(Www)) return true;
+            IsWwwMatchValid = Regex.IsMatch(Www, @"^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$");
+            return IsWwwMatchValid;
         }
 
         private void ValidatePhone()
@@ -1036,11 +1118,9 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidatePhoneMatch()
         {
-            if (!String.IsNullOrEmpty(Phone))
-            {
-                return IsPhoneMatchValid = Regex.IsMatch(Phone, "[0-9]{9}");
-            }
-            return true;
+            if (String.IsNullOrEmpty(Phone)) return true;
+            IsPhoneMatchValid = Regex.IsMatch(Phone, "[0-9]{9}");
+            return IsPhoneMatchValid;
         }
 
         private void ValidateFanpage()
@@ -1049,11 +1129,9 @@ namespace AugmentedSzczecin.ViewModels
         }
         private bool ValidateFanpageMatch()
         {
-            if (!String.IsNullOrEmpty(Fanpage))
-            {
-                return IsFanpageMatchValid = Regex.IsMatch(Www, @"^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$");
-            }
-            return true;
+            if (String.IsNullOrEmpty(Fanpage)) return true;
+            IsFanpageMatchValid = Regex.IsMatch(Www, @"^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$");
+            return IsFanpageMatchValid;
         }
 
         private async void WrongValidationMessageDialog()
@@ -1106,10 +1184,10 @@ namespace AugmentedSzczecin.ViewModels
 
         private Opening[] GetOpeningDaysAndHours()
         {
-            int size = GetOpeningDaysAndHoursArraySize();
+            var size = GetOpeningDaysAndHoursArraySize();
             var openingDaysAndHours = new Opening[size];
 
-            int index = 0;
+            var index = 0;
             if (IsMondayEnabled)
             {
                 openingDaysAndHours[index++] = new Opening()
@@ -1238,12 +1316,10 @@ namespace AugmentedSzczecin.ViewModels
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null && rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-                e.Handled = true;
-            }
+            var rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null || !rootFrame.CanGoBack) return;
+            rootFrame.GoBack();
+            e.Handled = true;
         }
 
         #endregion

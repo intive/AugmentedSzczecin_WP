@@ -123,6 +123,15 @@
                 Background="{Binding IsCategorySelected, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
                 x:Uid="NewPoiCategoryBox" />
 
+            <!-- Subkategoria -->
+            <TextBlock FontSize="15" x:Uid="NewPoiSubcategory" />
+            <ComboBox
+                ItemsSource="{Binding SubcategoryItems}"
+                SelectedItem="{Binding SelectedSubcategoryItem, Mode=TwoWay}"
+                Visibility="{Binding IsFirstCategorySelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Background="{Binding IsSubcategorySelected, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                x:Uid="NewPoiSubcategoryBox" />
+
             <CheckBox
                 caliburn:Message.Attach="[Event Checked] = [Action ExtraFieldsChecked]; [Event Unchecked] = [Action ExtraFieldsUnchecked]"
                 x:Uid="ExtraFieldsCheckBox" />
