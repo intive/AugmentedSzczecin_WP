@@ -3,10 +3,9 @@
     public enum CategoryType
     {
         PLACE,
-        POI,
+        COMMERCIAL,
         EVENT,
         PERSON,
-        COMMERCIAL,
         ALL
     }
 }
