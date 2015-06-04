@@ -16,13 +16,39 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="1.6180339887*" />
         </Grid.RowDefinitions>
-        <Image
-            Grid.Row="0"
-            Stretch="None"
-            Source="../Assets/SampleBackgrounds/sample_Header.jpg"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"/>
 
+        <FlipView ToolTipService.ToolTip="TooltipExample">
+            <FlipViewItem>
+                <Image
+                    Stretch="Fill"
+                    Source="../Assets/SampleBackgrounds/szczecin_01.png" />
+            </FlipViewItem>
+            <FlipViewItem>
+                <Image
+                    Stretch="Fill"
+                    Source="../Assets/SampleBackgrounds/szczecin_02.png" />
+            </FlipViewItem>
+            <FlipViewItem>
+                <Image
+                    Stretch="Fill"
+                    Source="../Assets/SampleBackgrounds/szczecin_03.png" />
+            </FlipViewItem>
+            <FlipViewItem>
+                <Image
+                    Stretch="Fill"
+                    Source="../Assets/SampleBackgrounds/szczecin_04.png" />
+            </FlipViewItem>
+            <FlipViewItem>
+                <Image
+                    Stretch="Fill"
+                    Source="../Assets/SampleBackgrounds/szczecin_05.png" />
+            </FlipViewItem>
+            <FlipViewItem>
+                <Image
+                    Stretch="Fill"
+                    Source="../Assets/SampleBackgrounds/szczecin_06.png" />
+            </FlipViewItem>
+        </FlipView>
         <Grid
             Grid.Row="0"
             x:Name="LayoutHeader">
