@@ -82,6 +82,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CategoryToPinSignConverter.cs" />
     <Compile Include="Converters\PoiToGeopointConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Events\PointOfInterestLoadedEvent.cs" />

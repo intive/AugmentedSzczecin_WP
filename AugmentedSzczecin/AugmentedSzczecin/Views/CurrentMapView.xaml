@@ -39,8 +39,10 @@
     <Grid>
 
         <StackPanel>
-        <TextBlock x:Uid="CurrentMapTitle"  TextWrapping="NoWrap" Text=""
-                   FontSize="36" Margin="8,0,0,16"/>
+        <TextBlock x:Uid="CurrentMapTitle"  
+                   TextWrapping="NoWrap" Text=""
+                   FontSize="36" 
+                   Margin="8,0,0,16"/>
 
         <maps:MapControl
             MapServiceToken="{Binding BingKey}"
@@ -52,17 +54,34 @@
             caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]"
             Margin="0,0,0,0">
 
-            <UserControls:MapPin PinColor="{StaticResource ASRed}" PinSign="Target" PinColorBase="{StaticResource ASBlue}" maps:MapControl.Location="{Binding CenterOfTheMap}" Visibility="{Binding MyLocationPointVisibility}"/>
+            <UserControls:MapPin 
+                PinColor="{StaticResource ASRed}" 
+                PinSign="Target" 
+                PinColorBase="{StaticResource ASBlue}" 
+                maps:MapControl.Location="{Binding CenterOfTheMap}" 
+                Visibility="{Binding MyLocationPointVisibility}"/>
 
-            <TextBlock x:Name="ScaleText" Text="{Binding ScaleText}" FontSize="14" Foreground="Black" Margin="24,530,0,2" Opacity="0.6" />
-            <Rectangle Name="RecScale" Fill="Black" Width="100" Height="4" Margin="24,548,0,0" Opacity="0.6" />
+            <TextBlock 
+                x:Name="ScaleText" 
+                Text="{Binding ScaleText}" 
+                FontSize="14" 
+                Foreground="Black" 
+                Margin="24,530,0,2" 
+                Opacity="0.6" />
+            <Rectangle 
+                Name="RecScale" 
+                Fill="Black" 
+                Width="100" 
+                Height="4" 
+                Margin="24,548,0,0" 
+                Opacity="0.6" />
 
             <maps:MapItemsControl ItemsSource="{Binding MapLocations}">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
                             <UserControls:MapPin 
                                 PinColor="{StaticResource ASBlue}" 
-                                PinSign="Target" 
+                                PinSign="{Binding Category, Converter={StaticResource CategoryToPinSignConverter}}" 
                                 PinColorBase="{StaticResource ASRed}" 
                                 maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
                                 caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($source)]"
