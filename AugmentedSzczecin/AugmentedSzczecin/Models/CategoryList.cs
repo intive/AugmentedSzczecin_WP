@@ -7,6 +7,7 @@ namespace AugmentedSzczecin.Models
         private static readonly List<Category> _categoryList = new List<Category>()
                                                     {
                                                         new Category() {Text = "Miejsca publiczne", EnumCategory = CategoryType.PLACE},
+                                                        new Category() {Text = "Miejsca publiczne", EnumCategory = CategoryType.POI},
                                                         new Category() {Text = "Wydarzenia", EnumCategory = CategoryType.EVENT},
                                                         new Category() {Text = "Znajomi", EnumCategory = CategoryType.PERSON},
                                                         new Category() {Text = "Wszystkie", EnumCategory = CategoryType.ALL},
