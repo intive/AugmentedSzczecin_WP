@@ -17,8 +17,8 @@
             <RowDefinition Height="1.6180339887*" />
         </Grid.RowDefinitions>
 
-        <FlipView ToolTipService.ToolTip="TooltipExample">
-            <FlipViewItem>
+        <FlipView SelectedIndex="{Binding SelectedBackground, Mode=TwoWay}" ItemsSource="{Binding BackgroundList}">
+            <!--<FlipViewItem>
                 <Image
                     Stretch="Fill"
                     Source="../Assets/SampleBackgrounds/szczecin_01.png" />
@@ -47,7 +47,7 @@
                 <Image
                     Stretch="Fill"
                     Source="../Assets/SampleBackgrounds/szczecin_06.png" />
-            </FlipViewItem>
+            </FlipViewItem>-->
         </FlipView>
         <Grid
             Grid.Row="0"
