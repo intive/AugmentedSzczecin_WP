@@ -628,10 +628,19 @@
             <ColumnDefinition Width="0.18*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="0.50*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
+        <Image
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Center"
+            Margin="-230,-70,-230,70"
+            Stretch="Uniform"
+            Source="../Assets/PanoramaSzczecin.png" />
         <ScrollViewer 
             Grid.Column="1" 
             Grid.Row="1"

@@ -109,6 +109,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Opening.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
+    <Compile Include="Models\PoiQueryResponse.cs" />
     <Compile Include="Models\Subcategory.cs" />
     <Compile Include="Models\SubcategoryList.cs" />
     <Compile Include="Models\SubcategoryType.cs" />
