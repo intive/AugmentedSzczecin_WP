@@ -113,6 +113,9 @@
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\PointOfInterestService.cs" />
     <Compile Include="Services\UserDataStorageService.cs" />
+    <Compile Include="UserControls\MapPin.xaml.cs">
+      <DependentUpon>MapPin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SideMenuFilter.xaml.cs">
       <DependentUpon>SideMenuFilter.xaml</DependentUpon>
     </Compile>
@@ -185,6 +188,10 @@
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="UserControls\MapPin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\SideMenuFilter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
