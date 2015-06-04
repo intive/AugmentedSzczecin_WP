@@ -103,6 +103,7 @@
     <Compile Include="Interfaces\IUserDataStorageService.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryList.cs" />
     <Compile Include="Models\CategoryType.cs" />
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\Location.cs" />
