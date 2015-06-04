@@ -7,7 +7,6 @@ namespace AugmentedSzczecin.AbstractClasses
     public abstract class FilteredPOIViewBase : Screen
     {
         private List<Category> _listOfCategories = CategoryList.GetCategoryList();
-
         public List<Category> ListOfCategories
         {
             get

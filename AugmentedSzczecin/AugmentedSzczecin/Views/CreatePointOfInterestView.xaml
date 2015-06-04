@@ -118,10 +118,10 @@
             <!-- Kategoria -->
             <TextBlock FontSize="15" x:Uid="NewPoiCategory" />
             <ComboBox
+                ItemsSource="{Binding CategoryItems}"
+                SelectedItem="{Binding SelectedCategoryItem, Mode=TwoWay}"
                 Background="{Binding IsCategorySelected, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
-                x:FieldModifier="Public"
-                x:Uid="NewPoiCategoryBox"
-                x:Name="CategoryItems" />
+                x:Uid="NewPoiCategoryBox" />
 
             <CheckBox
                 caliburn:Message.Attach="[Event Checked] = [Action ExtraFieldsChecked]; [Event Unchecked] = [Action ExtraFieldsUnchecked]"

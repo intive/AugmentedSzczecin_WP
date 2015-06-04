@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -755,28 +756,31 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        public BindableCollection<string> CategoryItems
+        private List<Category> _categoryItems = CategoryList.GetCategoryList();
+        public List<Category> CategoryItems
         {
-            get
+            get { return _categoryItems; }
+            set
             {
-                return new BindableCollection<string>(new[]
+                if (_categoryItems != value)
                 {
-                    CategoryType.PLACE.ToString(),
-                    CategoryType.COMMERCIAL.ToString(),
-                    CategoryType.EVENT.ToString(),
-                    CategoryType.PERSON.ToString()
-                });
+                    _categoryItems = value;
+                    NotifyOfPropertyChange(() => CategoryItems);
+                }
             }
         }
 
-        private string _selectedCategoryItem;
-        public string SelectedCategoryItem
+        private Category _selectedCategoryItem = null;
+        public Category SelectedCategoryItem
         {
             get { return _selectedCategoryItem; }
             set
             {
-                _selectedCategoryItem = value;
-                NotifyOfPropertyChange(() => SelectedCategoryItem);
+                if (_selectedCategoryItem != value)
+                {
+                    _selectedCategoryItem = value;
+                    NotifyOfPropertyChange(() => SelectedCategoryItem);
+                }
             }
         }
 
@@ -1010,7 +1014,7 @@ namespace AugmentedSzczecin.ViewModels
 
         private void ValidateCategorySelected()
         {
-            IsCategorySelected = !String.IsNullOrEmpty(SelectedCategoryItem);
+            IsCategorySelected = SelectedCategoryItem != null;
         }
 
         private void ValidateWww()
@@ -1094,7 +1098,7 @@ namespace AugmentedSzczecin.ViewModels
                 pointOfInterest.Fanpage = Fanpage;
                 pointOfInterest.Opening = GetOpeningDaysAndHours();
             }
-            pointOfInterest.Category = SelectedCategoryItem;
+            pointOfInterest.Category = SelectedCategoryItem.EnumCategory.ToString();
             pointOfInterest.Subcategory = "PARK";
 
             return pointOfInterest;
