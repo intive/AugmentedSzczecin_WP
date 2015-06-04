@@ -16,39 +16,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="1.6180339887*" />
         </Grid.RowDefinitions>
+        
 
-        <FlipView SelectedIndex="{Binding SelectedBackground, Mode=TwoWay}" ItemsSource="{Binding BackgroundList}">
-            <!--<FlipViewItem>
-                <Image
-                    Stretch="Fill"
-                    Source="../Assets/SampleBackgrounds/szczecin_01.png" />
-            </FlipViewItem>
-            <FlipViewItem>
-                <Image
-                    Stretch="Fill"
-                    Source="../Assets/SampleBackgrounds/szczecin_02.png" />
-            </FlipViewItem>
-            <FlipViewItem>
-                <Image
-                    Stretch="Fill"
-                    Source="../Assets/SampleBackgrounds/szczecin_03.png" />
-            </FlipViewItem>
-            <FlipViewItem>
-                <Image
-                    Stretch="Fill"
-                    Source="../Assets/SampleBackgrounds/szczecin_04.png" />
-            </FlipViewItem>
-            <FlipViewItem>
-                <Image
-                    Stretch="Fill"
-                    Source="../Assets/SampleBackgrounds/szczecin_05.png" />
-            </FlipViewItem>
-            <FlipViewItem>
-                <Image
-                    Stretch="Fill"
-                    Source="../Assets/SampleBackgrounds/szczecin_06.png" />
-            </FlipViewItem>-->
-        </FlipView>
+        <FlipView SelectedIndex="{Binding SelectedBackground, Mode=TwoWay}" ItemsSource="{Binding BackgroundList}" />
         <Grid
             Grid.Row="0"
             x:Name="LayoutHeader">
@@ -57,27 +27,43 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Rectangle
-                VerticalAlignment="Bottom"
-                Margin="-35, 0, 0, 30"
+                VerticalAlignment="Top"
+                Margin="-35, 30, 0, 0"
                 RadiusX="35"
                 RadiusY="35"
                 Height="75"
                 Fill="White" />
             <TextBlock
-                Margin="15, 0, 0, 70"
-                VerticalAlignment="Bottom"
+                Margin="15, 40, 0, 0"
+                VerticalAlignment="Top"
                 Foreground="Black"
                 Text="AUGMENTED"
                 FontSize="18"
                 FontFamily="Segoe WP" />
             <TextBlock
-                Margin="15, 15, 0, 37.5"
-                VerticalAlignment="Bottom"
+                Margin="15, 55, 0, 0"
+                VerticalAlignment="Top"
                 Foreground="Black"
                 Text="SZCZECIN"
                 FontSize="32"
                 FontWeight="Bold"
                 FontFamily="Segoe WP" />
+            <Border
+                Margin="0, 30, 15, 0"
+                Background="White"
+                CornerRadius="50"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Grid.Column="1">
+                <Canvas
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Width="76"
+                Height="76">
+                    <Path Width="38" Height="41.1667" Canvas.Left="19" Canvas.Top="17.4167" Stretch="Fill" Fill="#FF000000" Data="F1 M 36.4167,36.4167L 36.4167,17.4167L 41.1667,17.4167L 41.1667,36.4167L 36.4167,36.4167 Z M 57,39.5833C 57,50.0767 48.4934,58.5833 38,58.5833C 27.5066,58.5833 19,50.0767 19,39.5833C 19,30.7301 25.0552,23.2911 33.25,21.1819L 33.25,27.8374C 28.6079,29.7165 25.3333,34.2675 25.3333,39.5833C 25.3333,46.5789 31.0044,52.25 38,52.25C 44.9956,52.25 50.6667,46.5789 50.6667,39.5833C 50.6667,34.8949 48.1194,30.8014 44.3333,28.6113L 44.3333,21.6645C 51.7129,24.2728 57,31.3106 57,39.5833 Z "/>
+                </Canvas>
+            </Border>
+            
         </Grid>
 
         <StackPanel
