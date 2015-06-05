@@ -71,7 +71,8 @@ namespace AugmentedSzczecin.ViewModels
                     {
                         Stretch = Stretch.Fill,
                         ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/SampleBackgrounds/szczecin_01.png"))
-                    }
+                    },
+                    Opacity = 0.75
                 },
                 new FlipViewItem()
                 {
@@ -79,7 +80,8 @@ namespace AugmentedSzczecin.ViewModels
                     {
                         Stretch = Stretch.Fill,
                         ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/SampleBackgrounds/szczecin_02.png"))
-                    }
+                    },
+                    Opacity = 0.75
                 },
                 new FlipViewItem()
                 {
@@ -87,7 +89,8 @@ namespace AugmentedSzczecin.ViewModels
                     {
                         Stretch = Stretch.Fill,
                         ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/SampleBackgrounds/szczecin_03.png"))
-                    }
+                    },
+                    Opacity = 0.75
                 },
                 new FlipViewItem()
                 {
@@ -95,7 +98,8 @@ namespace AugmentedSzczecin.ViewModels
                     {
                         Stretch = Stretch.Fill,
                         ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/SampleBackgrounds/szczecin_04.png"))
-                    }
+                    },
+                    Opacity = 0.75
                 },
                 new FlipViewItem()
                 {
@@ -103,7 +107,8 @@ namespace AugmentedSzczecin.ViewModels
                     {
                         Stretch = Stretch.Fill,
                         ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/SampleBackgrounds/szczecin_05.png"))
-                    }
+                    },
+                    Opacity = 0.75
                 },
                 new FlipViewItem()
                 {
@@ -111,7 +116,8 @@ namespace AugmentedSzczecin.ViewModels
                     {
                         Stretch = Stretch.Fill,
                         ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/SampleBackgrounds/szczecin_06.png"))
-                    }
+                    },
+                    Opacity = 0.75
                 }
             };
         }
