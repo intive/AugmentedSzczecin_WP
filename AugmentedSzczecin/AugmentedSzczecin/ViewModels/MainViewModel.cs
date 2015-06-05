@@ -36,27 +36,24 @@ namespace AugmentedSzczecin.ViewModels
             _navigationService.NavigateToViewModel<SignUpViewModel>();
         }
 
-        public bool CanNavigateToSignIn
-        {
-            get
-            {
-                NotifyOfPropertyChange(() => CanSignOut);
-                bool isUserSignedIn = !_accountService.IsUserSignedIn();
-                return isUserSignedIn;
-            }
-        }
-
         public void NavigateToSignIn()
         {
             _navigationService.NavigateToViewModel<SignInViewModel>();
         }
 
-        public bool CanSignOut
+        public bool IsGuest
         {
             get
             {
-                bool isUserSignedIn = _accountService.IsUserSignedIn();
-                return isUserSignedIn;
+                return !_accountService.IsUserSignedIn();
+            }
+        }
+
+        public bool IsUser
+        {
+            get
+            {
+                return _accountService.IsUserSignedIn();
             }
         }
 
@@ -74,7 +71,8 @@ namespace AugmentedSzczecin.ViewModels
         private void SignOutConfirmed(IUICommand command)
         {
             _accountService.SignOut();
-            NotifyOfPropertyChange(() => CanNavigateToSignIn);
+            NotifyOfPropertyChange(() => IsUser);
+            NotifyOfPropertyChange(() => IsGuest);
         }
 
         public void NavigateToAugmentedView()
