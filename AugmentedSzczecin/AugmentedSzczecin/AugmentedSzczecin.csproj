@@ -83,8 +83,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CategoryToPinSignConverter.cs" />
+    <Compile Include="Converters\DayEnglishToDayPolishConverter.cs" />
+    <Compile Include="Converters\OpeningToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringToCategoryConverter.cs" />
     <Compile Include="Converters\PoiToGeopointConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Converters\TagsToVisibilityConverter.cs" />
     <Compile Include="Events\PointOfInterestLoadedEvent.cs" />
     <Compile Include="Events\PointOfInterestLoadFailedEvent.cs" />
     <Compile Include="Events\RegisterFailedEvent.cs" />

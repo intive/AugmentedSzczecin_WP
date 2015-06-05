@@ -7,10 +7,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    RenderTransformOrigin="0.5,1" 
-    Height="70"
+    RenderTransformOrigin="0.5,1"
+    Height="56"
     Width="45">
-
+    <UserControl.RenderTransform>
+        <TranslateTransform X="-23.5" Y="-56"></TranslateTransform>
+    </UserControl.RenderTransform>
     <Grid RenderTransformOrigin="0.5,1" HorizontalAlignment="Center" VerticalAlignment="Top">
         <Border VerticalAlignment="Top" Background="{Binding PinColor, ElementName=MapPinRoot}"  CornerRadius="30" Width="30" Height="30" />
         <Path Data="M50,0L100,50 50,180 0,50z" Fill="{Binding PinColor, ElementName=MapPinRoot}" Stretch="Fill" Margin="0, 16, 0, 0" Width="25" Height="30" VerticalAlignment="Top"/>

@@ -174,8 +174,51 @@ namespace AugmentedSzczecin.ViewModels
                 return _radius; 
             }
         }
-        
 
+        private bool _isInformationPanelVisible = false;
+        public bool IsInformationPanelVisible
+        {
+            get 
+            { 
+                return _isInformationPanelVisible; 
+            }
+            set 
+            { 
+                _isInformationPanelVisible = value;
+                NotifyOfPropertyChange(() => IsInformationPanelVisible);
+            }
+        }
+
+        private bool _isInformationPanelPreviouslyVisible = false;
+        public bool IsInformationPanelPreviouslyVisible
+        {
+            get
+            {
+                return _isInformationPanelPreviouslyVisible;
+            }
+            set
+            {
+                _isInformationPanelPreviouslyVisible = value;
+                NotifyOfPropertyChange(() => _isInformationPanelPreviouslyVisible);
+            }
+        }
+
+        private PointOfInterest _pointToShowInformation;
+
+        public PointOfInterest PointToShowInformation
+        {
+            get 
+            { 
+                return _pointToShowInformation; 
+            }
+            set 
+            { 
+                _pointToShowInformation = value;
+                NotifyOfPropertyChange(() => PointToShowInformation);
+            }
+        }
+        
+        
         #endregion
 
         #region Override Methods
@@ -382,9 +425,15 @@ namespace AugmentedSzczecin.ViewModels
             ZoomLevel = ResolutionHelper.CountZoomLevel();
         }
 
+        public void CloseInformationPanel()
+        {
+            IsInformationPanelVisible = false;
+        }
+
         private void PushpinTapped(object sender)
         {
-            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            IsInformationPanelVisible = true;
+            PointToShowInformation = (PointOfInterest)sender;
         }
 
         private void ToggleFilter()
