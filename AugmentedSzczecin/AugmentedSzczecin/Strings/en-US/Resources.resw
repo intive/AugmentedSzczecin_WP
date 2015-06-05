@@ -133,31 +133,37 @@
     <value>Reconnect</value>
   </data>
   <data name="ResetPasswordButtonReset.Content" xml:space="preserve">
-    <value>Reset password</value>
+    <value>Gotowe</value>
   </data>
   <data name="ResetPasswordProgressRing.Text" xml:space="preserve">
-    <value>Sending request</value>
+    <value>Wysyłanie prośby</value>
   </data>
-  <data name="SignEmail.Text" xml:space="preserve">
-    <value>E-mail</value>
+  <data name="SignEmail.PlaceholderText" xml:space="preserve">
+    <value>Podaj swój email</value>
+  </data>
+  <data name="SignPassword.PlaceholderText" xml:space="preserve">
+    <value>Twoje hasło</value>
   </data>
   <data name="SignInButtonResetPassword.Content" xml:space="preserve">
-    <value>Reset pass</value>
+    <value>Zresetuj hasło</value>
   </data>
   <data name="SignInButtonSignIn.Content" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Zaloguj się</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>Hasło</value>
   </data>
   <data name="SignInProgressRing.Text" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Logowanie</value>
   </data>
   <data name="SignOutConfirmationText" xml:space="preserve">
     <value>Are you sure you want to sign out?</value>
-  </data>
-  <data name="SignPassword.Text" xml:space="preserve">
-    <value>Password</value>
-  </data>
+  </data>  
   <data name="SignUpButtonSignUp.Content" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Gotowe</value>
   </data>
   <data name="SignUpEmailEmpty" xml:space="preserve">
     <value>E-mail not specified.</value>
@@ -168,6 +174,9 @@
   <data name="SignUpEmptyForm" xml:space="preserve">
     <value>E-mail and password not specified.</value>
   </data>
+  <data name="SignUpMainText.Text" xml:space="preserve">
+    <value>Załóż nowe konto</value>
+  </data>
   <data name="SignUpPasswordEmpty" xml:space="preserve">
     <value>Password not specified.</value>
   </data>
@@ -175,6 +184,42 @@
     <value>Password too short.</value>
   </data>
   <data name="SignUpProgressRing.Text" xml:space="preserve">
-    <value>Register</value>
+    <value>Rejestruję</value>
+  </data>
+  <data name="SignInMainText.Text" xml:space="preserve">
+    <value>Zaloguj się</value>
+  </data>
+  <data name="ResetPasswordMainText.Text" xml:space="preserve">
+    <value>Zresetuj hasło</value>
+  </data>
+  <data name="MainViewAbout.Content" xml:space="preserve">
+    <value>O aplikacji</value>
+  </data>
+  <data name="MainViewAR.Content" xml:space="preserve">
+    <value>Widok AR</value>
+  </data>
+  <data name="MainViewList.Content" xml:space="preserve">
+    <value>Lista punktów</value>
+  </data>
+  <data name="MainViewMap.Content" xml:space="preserve">
+    <value>Widok 2D</value>
+  </data>
+  <data name="MainViewSignIn.Content" xml:space="preserve">
+    <value>Zaloguj</value>
+  </data>
+  <data name="MainViewSignOut.Content" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
+  <data name="MainViewSignUp.Content" xml:space="preserve">
+    <value>Załóż konto</value>
+  </data>
+  <data name="AboutText.Text" xml:space="preserve">
+    <value>Aplikacja została stworzona 
+w ramach projektu
+BlStream Patronage 2015.
+</value>
+  </data>
+  <data name="AboutVersion" xml:space="preserve">
+    <value>Wersja: </value>
   </data>
 </root>

@@ -70,20 +70,54 @@
             x:Name="LayoutBody">
             <ListView>
                 <ListViewItem
-                    Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
+                                HorizontalAlignment="Right"
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="about"
-                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
+                                x:Uid="MainViewSignUp"
+                                caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]" />
+                <ListViewItem
+                                HorizontalAlignment="Right"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                                x:Uid="MainViewSignIn"                  
+                                caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]" />
+                        </ListView>
+                    </Border>
+                    <Border 
+                        Visibility="{Binding IsUser, Converter={StaticResource BoolToVisConv}}" 
+                        Margin="0,10,0,0" 
+                        Padding="15, 5, 10, 5" 
+                        Background="White" 
+                        CornerRadius="25, 0, 0, 25" 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top">
+                        <ListView HorizontalAlignment="Right">
+                <ListViewItem
+                                HorizontalAlignment="Right"
+                    Foreground="Black"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                                x:Uid="MainViewSignOut"
+                                caliburn:Message.Attach="[Event Tapped] = [Action SignOut]" />
+                        </ListView>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <StackPanel
+            Margin="15, 25"
+            Grid.Row="1"
+            x:Name="LayoutBody">
+            <ListView>
                 <ListViewItem
                     Margin="0, 0, 0, 10"
                     HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="augmented view"
+                    x:Uid="MainViewAR"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" />
                 <ListViewItem
                     Margin="0, 0, 0, 10"
@@ -91,7 +125,7 @@
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="current map"
+                    x:Uid="MainViewMap"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" />
                 <ListViewItem
                     Margin="0, 0, 0, 10"
@@ -99,7 +133,8 @@
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="location list"
+                    x:Uid="MainViewList"
+                    Visibility="{Binding IsUser, Converter={StaticResource BoolToVisConv}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 <ListViewItem
                     Margin="0, 0, 0, 10"
@@ -107,23 +142,8 @@
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="sign up"
-                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]" />
-                <ListViewItem
-                    Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
-                    Foreground="Black"
-                    FontSize="28"
-                    FontFamily="Segoe WP"
-                    Content="sign in"
-                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]" />
-                <ListViewItem
-                    HorizontalAlignment="Left"
-                    Foreground="Black"
-                    FontSize="28"
-                    FontFamily="Segoe WP"
-                    Content="sign out"
-                    caliburn:Message.Attach="[Event Tapped] = [Action SignOut]" />
+                    x:Uid="MainViewAbout"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
             </ListView>
         </StackPanel>
     </Grid>

@@ -1,6 +1,7 @@
 ﻿using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,11 +23,14 @@ namespace AugmentedSzczecin.Services
             HttpResponseMessage response = await _client.GetAsync("places");
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
-            ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(json);
-            return PointOfInterestList;
+            if (json == "{}")
+            {
+                return new ObservableCollection<PointOfInterest>();
+        }
+            return JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(json);
         }
 
-        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(string latitude, string longitude, string radius, CategoryType category)
+        public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(double latitude, double longitude, int radius, CategoryType category)
         {
             HttpResponseMessage response = null;
             if (category == CategoryType.ALL)
@@ -39,35 +43,71 @@ namespace AugmentedSzczecin.Services
             }
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
-            ObservableCollection<PointOfInterest> PointOfInterestList = JsonConvert.DeserializeObject<ObservableCollection<PointOfInterest>>(json);
-            return PointOfInterestList;
+
+            /****** DO TESTÓW ******/
+            //json = "{\"places\":[{\"name\":\"osmy Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5580,\"latitude\":53.4299},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"PLACE\"}, {\"name\":\"piaty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5590,\"latitude\":53.4390},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"PLACE\"}], \"events\":[{\"name\":\"drugi Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5588,\"latitude\":53.4299},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"EVENT\"}, {\"name\":\"czwarty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5590,\"latitude\":53.4390},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"EVENT\"}], \"commercial\":[{\"name\":\"dziewiaty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5570,\"latitude\":53.4300},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"COMMERCIAL\"}, {\"name\":\"jedenasty Budynek pierwszego na ziemiach polskich kolegium salwatoriaĹskiego oraz grota Matki BoĹźej z Lourdes\",\"location\":{\"longitude\":14.5510,\"latitude\":53.4400},\"address\":{\"street\":\"GĹowackiego 3 w dzielnicy Salwator\"},\"subcategory\":\"MONUMENT\",\"category\":\"COMMERCIAL\"}]}";
+            /***********************/
+
+            if (json == "{}")
+            {
+                return new ObservableCollection<PointOfInterest>();
+            }
+
+            IList<JToken> results = null;
+            switch(category)
+            {
+                case CategoryType.PLACE:
+                    results = PoiQueryResponse.ParsePoiPlacesQuery(json);
+                    break;
+                case CategoryType.EVENT:
+                    results = PoiQueryResponse.ParsePoiEventsQuery(json);
+                    break;
+                case CategoryType.PERSON:
+                    results = PoiQueryResponse.ParsePoiPeopleQuery(json);
+                    break;
+                case CategoryType.COMMERCIAL:
+                    results = PoiQueryResponse.ParsePoiCommercialQuery(json);
+                    break;
+                case CategoryType.ALL:
+                    results = PoiQueryResponse.ParsePoiAllQuery(json);
+                    break;
+            }
+
+            ObservableCollection<PointOfInterest> pois = new ObservableCollection<PointOfInterest>();
+            
+            if(results != null)
+            {
+                foreach (var result in results)
+                {
+                    pois.Add(JsonConvert.DeserializeObject<PointOfInterest>(result.ToString()));
+                }
+            }
+            
+            return pois;
         }
 
-        public async Task<bool> CreateAccount(User user)
+        public async Task<int> CreateAccount(User user)
         {
             var json = JsonConvert.SerializeObject(user);
             var content = new StringContent(json, Encoding.Unicode, "application/json");
             var response = await _client.PostAsync("users", content);
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                return true;
-            }
-            return false;
+            return (int)response.StatusCode;
         }
 
-        public async Task<bool> SignIn(User user)
+        public async Task<int> SignIn(User user)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.Unicode.GetBytes(string.Format("{0}:{1}", user.Email, user.Password))));
-            var response = await _client.GetAsync("places");
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                return true;
-            }
-            return false;
+            SetAuthenticationHeader(user.Email, user.Password);
+            var response = await _client.GetAsync(String.Format("users/whoami?v={0}",DateTime.Now.Ticks));
+            return (int)response.StatusCode;
         }
 
         public async Task<bool> ResetPassword(User user)
         {
+            var response = await _client.GetAsync(string.Format("users/{0}/resetpassword", user.Email));
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -81,6 +121,16 @@ namespace AugmentedSzczecin.Services
                 return true;
             }
             return false;
+        }
+
+        public void SetAuthenticationHeader(string email, string password)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(string.Format("{0}:{1}", email, password))));
+        }
+
+        public void SignOut()
+        {
+            _client.DefaultRequestHeaders.Authorization = null;
         }
     }
 }

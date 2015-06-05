@@ -3,65 +3,15 @@ using Newtonsoft.Json;
 
 namespace AugmentedSzczecin.Models
 {
-    public class Location : PropertyChangedBase
-    {
-        [JsonProperty(PropertyName = "Latitude")]
-        private double _latitude;
-        public double Latitude
-        {
-            get
-            {
-                return _latitude;
-            }
-            set
-            {
-                if (_latitude != value)
-                {
-                    _latitude = value;
-                    NotifyOfPropertyChange(() => Latitude);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Longitude")]
-        private double _longitude;
-        public double Longitude
-        {
-            get
-            {
-                return _longitude;
-            }
-            set
-            {
-                if (_longitude != value)
-                {
-                    _longitude = value;
-                    NotifyOfPropertyChange(() => Longitude);
-                }
-            }
-        }
-    }
-
     public class PointOfInterest : PropertyChangedBase
     {
-        public PointOfInterest(string id)
-        {
-            Id = id;
-        }
-
-        public string Id 
-        { 
-            get; 
-            private set; 
-        }
-
-        [JsonProperty(PropertyName = "Name")]
+        [JsonProperty(PropertyName = "name")]
         private string _name;
         public string Name
         {
-            get 
-            { 
-                return _name; 
+            get
+            {
+                return _name;
             }
             set
             {
@@ -73,7 +23,25 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-        [JsonProperty(PropertyName = "Location")]
+        [JsonProperty(PropertyName = "description")]
+        private string _description;
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    NotifyOfPropertyChange(() => Description);
+                }
+            }
+        }
+
+        [JsonProperty(PropertyName = "location")]
         private Location _location;
         public Location Location
         {
@@ -91,31 +59,31 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-        [JsonProperty(PropertyName = "Description")]
-        private string _description;
-        public string Description
+        [JsonProperty(PropertyName = "address")]
+        private Address _address;
+        public Address Address
         {
-            get 
-            { 
-                return _description; 
+            get
+            {
+                return _address;
             }
             set
             {
-                if (_description != value)
+                if (_address != value)
                 {
-                    _description = value;
-                    NotifyOfPropertyChange(() => Description);
+                    _address = value;
+                    NotifyOfPropertyChange(() => Address);
                 }
             }
         }
 
-        [JsonProperty(PropertyName = "Tags")]
-        private string _tags;
-        public string Tags
+        [JsonProperty(PropertyName = "tags")]
+        private string[] _tags;
+        public string[] Tags
         {
-            get 
-            { 
-                return _tags; 
+            get
+            {
+                return _tags;
             }
             set
             {
@@ -127,85 +95,31 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-        [JsonProperty(PropertyName = "StreetName")]
-        private string _streetName;
-        public string StreetName
+        [JsonProperty(PropertyName = "www")]
+        private string _www;
+        public string Www
         {
-            get 
-            { 
-                return _streetName; 
+            get
+            {
+                return _www;
             }
             set
             {
-                if (_streetName != value)
+                if (_www != value)
                 {
-                    _streetName = value;
-                    NotifyOfPropertyChange(() => StreetName);
+                    _www = value;
+                    NotifyOfPropertyChange(() => Www);
                 }
             }
         }
 
-        [JsonProperty(PropertyName = "PostalCode")]
-        private string _postalCode;
-        public string PostalCode
-        {
-            get 
-            { 
-                return _postalCode; 
-            }
-            set
-            {
-                if (_postalCode != value)
-                {
-                    _postalCode = value;
-                    NotifyOfPropertyChange(() => PostalCode);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Country")]
-        private string _country;
-        public string Country
-        {
-            get 
-            { 
-                return _country; 
-            }
-            set
-            {
-                if (_country != value)
-                {
-                    _country = value;
-                    NotifyOfPropertyChange(() => Country);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Website")]
-        private string _website;
-        public string Website
-        {
-            get 
-            { 
-                return _website; 
-            }
-            set
-            {
-                if (_website != value)
-                {
-                    _website = value;
-                    NotifyOfPropertyChange(() => Website);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Phone")]
+        [JsonProperty(PropertyName = "phone")]
         private string _phone;
         public string Phone
         {
-            get 
-            { 
-                return _phone; 
+            get
+            {
+                return _phone;
             }
             set
             {
@@ -217,13 +131,13 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-        [JsonProperty(PropertyName = "Fanpage")]
+        [JsonProperty(PropertyName = "fanpage")]
         private string _fanpage;
         public string Fanpage
         {
-            get 
-            { 
-                return _fanpage; 
+            get
+            {
+                return _fanpage;
             }
             set
             {
@@ -235,67 +149,49 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-        [JsonProperty(PropertyName = "Wikipedia")]
-        private string _wikipedia;
-        public string Wikipedia
+        [JsonProperty(PropertyName = "media")]
+        private string[] _media;
+        public string[] Media
         {
-            get 
-            { 
-                return _wikipedia; 
+            get
+            {
+                return _media;
             }
             set
             {
-                if (_wikipedia != value)
+                if (_media != value)
                 {
-                    _wikipedia = value;
-                    NotifyOfPropertyChange(() => Wikipedia);
+                    _media = value;
+                    NotifyOfPropertyChange(() => Media);
                 }
             }
         }
 
-        [JsonProperty(PropertyName = "OpeningDays")]
-        private string _openingDays;
-        public string OpeningDays
+        [JsonProperty(PropertyName = "opening")]
+        private Opening[] _opening;
+        public Opening[] Opening
         {
-            get 
-            { 
-                return _openingDays; 
+            get
+            {
+                return _opening;
             }
             set
             {
-                if (_openingDays != value)
+                if (_opening != value)
                 {
-                    _openingDays = value;
-                    NotifyOfPropertyChange(() => OpeningDays);
+                    _opening = value;
+                    NotifyOfPropertyChange(() => Opening);
                 }
             }
         }
 
-        [JsonProperty(PropertyName = "OpeningHours")]
-        private string _openingHours;
-        public string OpeningHours
-        {
-            get 
-            { 
-                return _openingHours; 
-            }
-            set
-            {
-                if (_openingHours != value)
-                {
-                    _openingHours = value;
-                    NotifyOfPropertyChange(() => OpeningHours);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Category")]
+        [JsonProperty(PropertyName = "category")]
         private string _category;
         public string Category
         {
-            get 
-            { 
-                return _category; 
+            get
+            {
+                return _category;
             }
             set
             {
@@ -307,38 +203,20 @@ namespace AugmentedSzczecin.Models
             }
         }
 
-        [JsonProperty(PropertyName = "Price")]
-        private string _price;
-        public string Price
+        [JsonProperty(PropertyName = "subcategory")]
+        private string _subcategory;
+        public string Subcategory
         {
-            get 
-            { 
-                return _price; 
+            get
+            {
+                return _subcategory;
             }
             set
             {
-                if (_price != value)
+                if (_subcategory != value)
                 {
-                    _price = value;
-                    NotifyOfPropertyChange(() => Price);
-                }
-            }
-        }
-
-        [JsonProperty(PropertyName = "Owner")]
-        private string _owner;
-        public string Owner
-        {
-            get 
-            { 
-                return _owner; 
-            }
-            set
-            {
-                if (_owner != value)
-                {
-                    _owner = value;
-                    NotifyOfPropertyChange(() => Owner);
+                    _subcategory = value;
+                    NotifyOfPropertyChange(() => Subcategory);
                 }
             }
         }
