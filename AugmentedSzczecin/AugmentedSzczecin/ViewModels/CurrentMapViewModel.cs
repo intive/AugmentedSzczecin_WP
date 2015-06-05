@@ -229,11 +229,6 @@ namespace AugmentedSzczecin.ViewModels
             ScaleText = scaleDistance.ToString() + " m";
         }
 
-        public void RefreshPointOfInterestService()
-        {
-            _pointOfInterestService.LoadPlaces();
-        }
-
         public void UpdateInternetConnection()
         {
             ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
@@ -282,7 +277,7 @@ namespace AugmentedSzczecin.ViewModels
 
         #region Private Methods
 
-        private void CheckConnectionsAvailability()
+        private async void CheckConnectionsAvailability()
         {
             if (!InternetConnection && !GeolocationEnabled)
             {
@@ -298,9 +293,8 @@ namespace AugmentedSzczecin.ViewModels
             }
             if (!InternetConnection || !GeolocationEnabled) return;
 
-            SetGeolocation();
-            _mapLocations = new ObservableCollection<PointOfInterest>();
-            RefreshPointOfInterestService();
+            CenterOfTheMap = await _locationService.GetGeolocation();
+            RefreshPOIFilteredByCategory();
         }
 
         private void UpdateGeolocationEnabled()
