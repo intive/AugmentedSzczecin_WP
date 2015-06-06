@@ -133,37 +133,37 @@
     <value>Reconnect</value>
   </data>
   <data name="ResetPasswordButtonReset.Content" xml:space="preserve">
-    <value>Gotowe</value>
+    <value>Ready</value>
   </data>
   <data name="ResetPasswordProgressRing.Text" xml:space="preserve">
-    <value>Wysyłanie prośby</value>
+    <value>Requesting</value>
   </data>
   <data name="SignEmail.PlaceholderText" xml:space="preserve">
-    <value>Podaj swój email</value>
+    <value>Enter your email</value>
   </data>
   <data name="SignPassword.PlaceholderText" xml:space="preserve">
-    <value>Twoje hasło</value>
+    <value>Enter your password</value>
   </data>
   <data name="SignInButtonResetPassword.Content" xml:space="preserve">
-    <value>Zresetuj hasło</value>
+    <value>Reset password</value>
   </data>
   <data name="SignInButtonSignIn.Content" xml:space="preserve">
-    <value>Zaloguj się</value>
+    <value>Sign in</value>
   </data>
   <data name="Email.Text" xml:space="preserve">
     <value>E-mail</value>
   </data>
   <data name="Password.Text" xml:space="preserve">
-    <value>Hasło</value>
+    <value>Password</value>
   </data>
   <data name="SignInProgressRing.Text" xml:space="preserve">
-    <value>Logowanie</value>
+    <value>Logging</value>
   </data>
   <data name="SignOutConfirmationText" xml:space="preserve">
     <value>Are you sure you want to sign out?</value>
   </data>
   <data name="SignUpButtonSignUp.Content" xml:space="preserve">
-    <value>Gotowe</value>
+    <value>Ready</value>
   </data>
   <data name="SignUpEmailEmpty" xml:space="preserve">
     <value>E-mail not specified.</value>
@@ -175,7 +175,7 @@
     <value>E-mail and password not specified.</value>
   </data>
   <data name="SignUpMainText.Text" xml:space="preserve">
-    <value>Załóż nowe konto</value>
+    <value>Create new account</value>
   </data>
   <data name="SignUpPasswordEmpty" xml:space="preserve">
     <value>Password not specified.</value>
@@ -184,42 +184,80 @@
     <value>Password too short.</value>
   </data>
   <data name="SignUpProgressRing.Text" xml:space="preserve">
-    <value>Rejestruję</value>
+    <value>Registering</value>
   </data>
   <data name="SignInMainText.Text" xml:space="preserve">
-    <value>Zaloguj się</value>
+    <value>Sign in</value>
   </data>
   <data name="ResetPasswordMainText.Text" xml:space="preserve">
-    <value>Zresetuj hasło</value>
+    <value>Reset password</value>
   </data>
   <data name="MainViewAbout.Content" xml:space="preserve">
-    <value>o aplikacji</value>
+    <value>about application</value>
   </data>
   <data name="MainViewAR.Content" xml:space="preserve">
-    <value>widok AR</value>
+    <value>augmented view</value>
   </data>
   <data name="MainViewList.Content" xml:space="preserve">
-    <value>lista punktów</value>
+    <value>location list</value>
   </data>
   <data name="MainViewMap.Content" xml:space="preserve">
-    <value>widok 2D</value>
+    <value>map</value>
   </data>
   <data name="MainViewSignIn.Content" xml:space="preserve">
-    <value>Zaloguj</value>
+    <value>Sign In</value>
   </data>
   <data name="MainViewSignOut.Content" xml:space="preserve">
-    <value>Wyloguj</value>
+    <value>Sign Out</value>
   </data>
   <data name="MainViewSignUp.Content" xml:space="preserve">
-    <value>Załóż konto</value>
+    <value>Sign Up</value>
   </data>
   <data name="AboutText.Text" xml:space="preserve">
-    <value>Aplikacja została stworzona 
-w ramach projektu
-BlStream Patronage 2015.
-</value>
+    <value>Application was made
+within the project
+BLStream Patronage in 2015.</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
-    <value>Wersja: </value>
+    <value>Version:</value>
+  </data>
+  <data name="Augmented.Text" xml:space="preserve">
+    <value>AUGMENTED</value>
+  </data>
+  <data name="Back.Content" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Cancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="RegisterEmailFailMessage" xml:space="preserve">
+    <value>This email is already used!</value>
+  </data>
+  <data name="RegisterSuccessMessage" xml:space="preserve">
+    <value>Successfully registered!</value>
+  </data>
+  <data name="ResetPasswordSuccessMessage" xml:space="preserve">
+    <value>New password sent on the email address!</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>Server error!</value>
+  </data>
+  <data name="Settings.Content" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SignInDataFailMessage" xml:space="preserve">
+    <value>Invalid data!</value>
+  </data>
+  <data name="SignInSuccessMessage" xml:space="preserve">
+    <value>Signed in!</value>
+  </data>
+  <data name="SignOut.Content" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="Szczecin.Text" xml:space="preserve">
+    <value>SZCZECIN</value>
+  </data>
+  <data name="ToggleFilter.Label" xml:space="preserve">
+    <value>Filter</value>
   </data>
 </root>

@@ -41,7 +41,7 @@ namespace AugmentedSzczecin.ViewModels
         protected override void OnDeactivate(bool close)
         {
             base.OnDeactivate(close);
-            _eventAggregator.Unsubscribe(this);    
+            _eventAggregator.Unsubscribe(this);
         }
 
         public async void LoadPoIs()

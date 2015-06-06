@@ -55,7 +55,7 @@ namespace AugmentedSzczecin.ViewModels
         private ObservableCollection<PointOfInterest> _mapLocations;
         public ObservableCollection<PointOfInterest> MapLocations
         {
-            get 
+            get
             {
                 return _mapLocations;
             }
@@ -169,12 +169,12 @@ namespace AugmentedSzczecin.ViewModels
         private int _radius = 300;
         public int Radius
         {
-            get 
-            { 
-                return _radius; 
+            get
+            {
+                return _radius;
             }
         }
-        
+
 
         #endregion
 
@@ -186,7 +186,7 @@ namespace AugmentedSzczecin.ViewModels
             base.OnActivate();
 
             CountZoomLevel();
-            
+
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             UpdateInternetConnection();
@@ -326,9 +326,10 @@ namespace AugmentedSzczecin.ViewModels
 
         private void ShowConnectionDisabledMessage(string connectionDisabledMessage, object id)
         {
+            var loader = new ResourceLoader();
             var message = new MessageDialog(connectionDisabledMessage);
-            message.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
-            message.Commands.Add(new UICommand("Settings", BackButtonInvokedHandler, id));
+            message.Commands.Add(new UICommand(loader.GetString("Back"), BackButtonInvokedHandler));
+            message.Commands.Add(new UICommand(loader.GetString("Settings"), BackButtonInvokedHandler, id));
             message.DefaultCommandIndex = 0;
             message.CancelCommandIndex = 1;
 
