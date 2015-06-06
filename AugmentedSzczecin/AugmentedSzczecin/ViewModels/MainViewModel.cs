@@ -194,10 +194,5 @@ namespace AugmentedSzczecin.ViewModels
         {
             _navigationService.NavigateToViewModel<AugmentedViewModel>();
         }
-
-        public void DisplayedItemChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }
