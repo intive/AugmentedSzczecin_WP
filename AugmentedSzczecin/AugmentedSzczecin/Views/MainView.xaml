@@ -11,18 +11,14 @@
 
 
     <Grid x:Name="LayoutRoot"
-          Background="White" >
+          Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="1.6180339887*" />
         </Grid.RowDefinitions>
-        <Image
-            Grid.Row="0"
-            Stretch="None"
-            Source="../Assets/SampleBackgrounds/sample_Header.jpg"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"/>
 
+
+        <FlipView Margin="-3" SelectedIndex="{Binding SelectedBackground, Mode=TwoWay}" ItemsSource="{Binding BackgroundList}" />
         <Grid
             Grid.Row="0"
             x:Name="LayoutHeader">
@@ -31,33 +27,84 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Rectangle
-                VerticalAlignment="Bottom"
-                Margin="-35, 0, 0, 30"
+                VerticalAlignment="Top"
+                Margin="-35, 30, 0, 0"
                 RadiusX="35"
                 RadiusY="35"
                 Height="75"
                 Fill="White" />
             <TextBlock
-                Margin="15, 0, 0, 70"
-                VerticalAlignment="Bottom"
-                Foreground="Black"
+                Margin="17.5, 37.5, 0, 0"
+                VerticalAlignment="Top"
+                Foreground="{StaticResource ASNavy}"
                 Text="AUGMENTED"
-                FontSize="18"
+                FontSize="25.5"
+                FontWeight="Normal"
                 FontFamily="Segoe WP" />
             <TextBlock
-                Margin="15, 15, 0, 37.5"
-                VerticalAlignment="Bottom"
-                Foreground="Black"
+                Margin="17.5, 57.5, 0, 0"
+                VerticalAlignment="Top"
+                Foreground="{StaticResource ASRed}"
                 Text="SZCZECIN"
                 FontSize="32"
                 FontWeight="Bold"
                 FontFamily="Segoe WP" />
-        </Grid>
 
+            <StackPanel Grid.Column="1">
+                <Border
+                    Visibility="{Binding IsGuest, Converter={StaticResource BoolToVisConv}}"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]"
+                    Margin="0, 40, 0, 0"
+                    CornerRadius="50"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Background="White">
+                    <Border.RenderTransform>
+                        <ScaleTransform ScaleX="0.75" ScaleY="0.75" />
+                    </Border.RenderTransform>
+                    <Canvas
+                    Width="76.0106"
+                    Height="76.0106">
+                        <Path Width="31.6711" Height="38.0053" Canvas.Left="22.17" Canvas.Top="19.0027" Stretch="Fill" Fill="{StaticResource ASRed}" Data="F1 M 22.17,36.4216L 25.3369,36.4216L 25.3369,31.6711C 25.3369,24.6745 31.0087,19.0027 38.0053,19.0027C 45.0019,19.0027 50.6737,24.6745 50.6737,31.6711L 50.6737,36.4216L 53.841,36.4216L 53.8411,57.008L 22.17,57.008L 22.17,36.4216 Z M 45.9231,31.6711C 45.9231,27.2982 42.3782,23.7533 38.0053,23.7533C 33.6324,23.7533 30.0875,27.2982 30.0875,31.6711L 30.0875,36.4216L 45.923,36.4216L 45.9231,31.6711 Z "/>
+                    </Canvas>
+                </Border>
+                <Border
+                    Visibility="{Binding IsGuest, Converter={StaticResource BoolToVisConv}}"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]"
+                    CornerRadius="50"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Background="{StaticResource ASBlue}">
+                    <Border.RenderTransform>
+                        <ScaleTransform ScaleX="0.75" ScaleY="0.75" />
+                    </Border.RenderTransform>
+                    <Canvas
+                    Width="76" Height="76">
+                        <Path Width="38" Height="39.5833" Canvas.Left="19" Canvas.Top="19" Stretch="Fill" Fill="White" Data="F1 M 26.9167,38L 31.6667,38L 31.6667,45.9167L 39.5833,45.9167L 39.5833,50.6667L 31.6667,50.6667L 31.6667,58.5833L 26.9167,58.5833L 26.9167,50.6667L 19,50.6667L 19,45.9167L 26.9167,45.9167L 26.9167,38 Z M 38,19C 43.5417,19 45.9167,22.1667 45.1174,28.8134C 45.8315,29.2229 46.3125,29.9928 46.3125,30.875C 46.3125,31.9545 45.5923,32.8658 44.6061,33.1546C 44.1941,34.623 43.5543,35.9229 42.75,36.9628L 42.75,41.9583C 45.3889,42.4861 47.5,42.75 50.6667,44.3333C 53.8333,45.9167 54.8889,47.3681 57,49.4792L 57,57L 33.25,57L 33.25,52.25L 41.1667,52.25L 41.1666,44.3333L 33.25,44.3333L 33.25,36.9628L 33.25,36.4167L 32.8586,36.4167C 32.237,35.4811 31.7366,34.3762 31.3939,33.1546C 30.4077,32.8658 29.6875,31.9545 29.6875,30.875C 29.6875,29.9928 30.1685,29.2229 30.8826,28.8134C 30.0833,22.1667 32.4583,19 38,19 Z M 19,57L 19,52.25L 25.3333,52.25L 25.3333,57L 19,57 Z "/>
+                    </Canvas>
+                </Border>
+                <Border
+                    Visibility="{Binding IsUser, Converter={StaticResource BoolToVisConv}}"
+                    caliburn:Message.Attach="[Event Tapped] = [Action SignOut]"
+                    Margin="0, 40, 0, 0"
+                    CornerRadius="50"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Background="{StaticResource ASRed}">
+                    <Border.RenderTransform>
+                        <ScaleTransform ScaleX="0.75" ScaleY="0.75" />
+                    </Border.RenderTransform>
+                    <Canvas
+                            Width="76" Height="76">
+                        <Path Width="38" Height="41.1667" Canvas.Left="19" Canvas.Top="17.4167" Stretch="Fill" Fill="White" Data="F1 M 36.4167,36.4167L 36.4167,17.4167L 41.1667,17.4167L 41.1667,36.4167L 36.4167,36.4167 Z M 57,39.5833C 57,50.0767 48.4934,58.5833 38,58.5833C 27.5066,58.5833 19,50.0767 19,39.5833C 19,30.7301 25.0552,23.2911 33.25,21.1819L 33.25,27.8374C 28.6079,29.7165 25.3333,34.2675 25.3333,39.5833C 25.3333,46.5789 31.0044,52.25 38,52.25C 44.9956,52.25 50.6667,46.5789 50.6667,39.5833C 50.6667,34.8949 48.1194,30.8014 44.3333,28.6113L 44.3333,21.6645C 51.7129,24.2728 57,31.3106 57,39.5833 Z "/>
+                    </Canvas>
+                </Border>
+            </StackPanel>
+
+        </Grid>
         <StackPanel
             Margin="15, 25"
-            Grid.Row="1"
-            x:Name="LayoutBody">
+            Grid.Row="1">
             <ListView>
                 <ListViewItem
                     Margin="0, 0, 0, 10"
@@ -65,15 +112,7 @@
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="about"
-                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
-                <ListViewItem
-                    Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
-                    Foreground="Black"
-                    FontSize="28"
-                    FontFamily="Segoe WP"
-                    Content="augmented view"
+                    x:Uid="MainViewAR"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" />
                 <ListViewItem
                     Margin="0, 0, 0, 10"
@@ -81,7 +120,7 @@
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="current map"
+                    x:Uid="MainViewMap"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" />
                 <ListViewItem
                     Margin="0, 0, 0, 10"
@@ -89,7 +128,8 @@
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="location list"
+                    x:Uid="MainViewList"
+                    Visibility="{Binding IsUser, Converter={StaticResource BoolToVisConv}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 <ListViewItem
                     Margin="0, 0, 0, 10"
@@ -97,23 +137,8 @@
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="sign up"
-                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]" />
-                <ListViewItem
-                    Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
-                    Foreground="Black"
-                    FontSize="28"
-                    FontFamily="Segoe WP"
-                    Content="sign in"
-                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]" />
-                <ListViewItem
-                    HorizontalAlignment="Left"
-                    Foreground="Black"
-                    FontSize="28"
-                    FontFamily="Segoe WP"
-                    Content="sign out"
-                    caliburn:Message.Attach="[Event Tapped] = [Action SignOut]" />
+                    x:Uid="MainViewAbout"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
             </ListView>
         </StackPanel>
     </Grid>

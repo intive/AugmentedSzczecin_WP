@@ -242,7 +242,12 @@
     <Content Include="Assets\Logo\LogoTekst.png" />
     <Content Include="Assets\Logo\LogoZnak.png" />
     <Content Include="Assets\MyLocationPoint.png" />
-    <Content Include="Assets\SampleBackgrounds\sample_Header.jpg" />
+    <Content Include="Assets\SampleBackgrounds\szczecin_01.png" />
+    <Content Include="Assets\SampleBackgrounds\szczecin_02.png" />
+    <Content Include="Assets\SampleBackgrounds\szczecin_03.png" />
+    <Content Include="Assets\SampleBackgrounds\szczecin_04.png" />
+    <Content Include="Assets\SampleBackgrounds\szczecin_05.png" />
+    <Content Include="Assets\SampleBackgrounds\szczecin_06.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
