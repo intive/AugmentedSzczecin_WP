@@ -103,12 +103,13 @@
 
         </Grid>
         <StackPanel
-            Margin="15, 25"
+            VerticalAlignment="Center"
+            Margin="0"
             Grid.Row="1">
-            <ListView>
+            <ListView
+                HorizontalAlignment="Center">
                 <ListViewItem
                     Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
@@ -116,7 +117,6 @@
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" />
                 <ListViewItem
                     Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
@@ -124,7 +124,6 @@
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" />
                 <ListViewItem
                     Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
@@ -133,7 +132,6 @@
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 <ListViewItem
                     Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
                     Foreground="Black"
                     FontSize="28"
                     FontFamily="Segoe WP"
