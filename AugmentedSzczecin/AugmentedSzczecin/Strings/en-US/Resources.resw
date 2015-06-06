@@ -459,4 +459,19 @@ BlStream Patronage 2015.
   <data name="AboutVersion" xml:space="preserve">
     <value>Wersja: </value>
   </data>
+  <data name="MainViewAbout.Content" xml:space="preserve">
+    <value>about application</value>
+  </data>
+  <data name="MainViewAdd.Content" xml:space="preserve">
+    <value>add point</value>
+  </data>
+  <data name="MainViewAR.Content" xml:space="preserve">
+    <value>augmented</value>
+  </data>
+  <data name="MainViewList.Content" xml:space="preserve">
+    <value>location list</value>
+  </data>
+  <data name="MainViewMap.Content" xml:space="preserve">
+    <value>map</value>
+  </data>
 </root>

@@ -429,7 +429,7 @@ namespace AugmentedSzczecin.ViewModels
 
             if (Parameter != null)
             {
-                CenterOfTheMap = await _locationService.GetGeolocation(Parameter);
+                CenterOfTheMap = Parameter;
                 MyLocation = await _locationService.GetGeolocation();
             }
             else

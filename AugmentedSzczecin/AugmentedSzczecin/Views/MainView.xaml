@@ -102,7 +102,7 @@
             </StackPanel>
 
         </Grid>
-        <Grid
+        <StackPanel
             VerticalAlignment="Center"
             Margin="0"
             Grid.Row="1">
@@ -114,7 +114,6 @@
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewAR"
-                    Content="augmented view"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" />
                 <ListViewItem
                     HorizontalAlignment="Center"
@@ -123,7 +122,6 @@
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewMap"
-                    Content="map"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" />
                 <ListViewItem
                     HorizontalAlignment="Center"
@@ -131,7 +129,7 @@
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="add point"
+                    x:Uid="MainViewAdd"
                     Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAddPointOfInterest]" />
                 <ListViewItem
@@ -140,7 +138,7 @@
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
-                    Content="location list"
+                    x:Uid="MainViewList"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 <ListViewItem
                     HorizontalAlignment="Center"
@@ -148,9 +146,8 @@
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewAbout"
-                    Content="about"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
             </ListView>
-        </Grid>
+        </StackPanel>
     </Grid>
 </Page>
