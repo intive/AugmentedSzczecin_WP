@@ -53,7 +53,7 @@ namespace AugmentedSzczecin.ViewModels
         private ObservableCollection<PointOfInterest> _mapLocations;
         public ObservableCollection<PointOfInterest> MapLocations
         {
-            get
+            get 
             {
                 return _mapLocations;
             }
@@ -182,14 +182,57 @@ namespace AugmentedSzczecin.ViewModels
         private int _radius = 300;
         public int Radius
         {
-            get
-            {
-                return _radius;
+            get 
+            { 
+                return _radius; 
+            }
+        }
+        
+        private bool _isInformationPanelVisible = false;
+        public bool IsInformationPanelVisible
+        {
+            get 
+            { 
+                return _isInformationPanelVisible; 
+            }
+            set 
+            { 
+                _isInformationPanelVisible = value;
+                NotifyOfPropertyChange(() => IsInformationPanelVisible);
             }
         }
 
+        private bool _isInformationPanelPreviouslyVisible = false;
+        public bool IsInformationPanelPreviouslyVisible
+        {
+            get
+            {
+                return _isInformationPanelPreviouslyVisible;
+            }
+            set
+            {
+                _isInformationPanelPreviouslyVisible = value;
+                NotifyOfPropertyChange(() => _isInformationPanelPreviouslyVisible);
+            }
+        }
+
+        private PointOfInterest _pointToShowInformation;
         public Geopoint Parameter { get; set; }
 
+        public PointOfInterest PointToShowInformation
+        {
+            get 
+            { 
+                return _pointToShowInformation; 
+            }
+            set 
+            { 
+                _pointToShowInformation = value;
+                NotifyOfPropertyChange(() => PointToShowInformation);
+            }
+        }
+        
+        
         #endregion
 
         #region Override Methods
@@ -200,7 +243,7 @@ namespace AugmentedSzczecin.ViewModels
             base.OnActivate();
 
             CountZoomLevel();
-
+            
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             UpdateInternetConnection();
@@ -241,11 +284,6 @@ namespace AugmentedSzczecin.ViewModels
             double scaleDistance = Math.Round(100 * metersPerPixel / 10) * 10;
 
             ScaleText = scaleDistance.ToString() + " m";
-        }
-
-        public void RefreshPointOfInterestService()
-        {
-            _pointOfInterestService.LoadPlaces();
         }
 
         public void UpdateInternetConnection()
@@ -296,7 +334,7 @@ namespace AugmentedSzczecin.ViewModels
 
         #region Private Methods
 
-        private void CheckConnectionsAvailability()
+        private async void CheckConnectionsAvailability()
         {
             if (!InternetConnection && !GeolocationEnabled)
             {
@@ -312,9 +350,8 @@ namespace AugmentedSzczecin.ViewModels
             }
             if (!InternetConnection || !GeolocationEnabled) return;
 
-            SetGeolocation();
-            _mapLocations = new ObservableCollection<PointOfInterest>();
-            RefreshPointOfInterestService();
+            CenterOfTheMap = await _locationService.GetGeolocation();
+            RefreshPOIFilteredByCategory();
         }
 
         private void UpdateGeolocationEnabled()
@@ -407,9 +444,15 @@ namespace AugmentedSzczecin.ViewModels
             ZoomLevel = ResolutionHelper.CountZoomLevel();
         }
 
+        public void CloseInformationPanel()
+        {
+            IsInformationPanelVisible = false;
+        }
+
         private void PushpinTapped(object sender)
         {
-            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            IsInformationPanelVisible = true;
+            PointToShowInformation = (PointOfInterest)sender;
         }
 
         private void ToggleFilter()

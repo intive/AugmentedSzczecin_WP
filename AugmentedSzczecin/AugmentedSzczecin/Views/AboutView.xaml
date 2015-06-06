@@ -21,32 +21,53 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="1.2*"/>
         </Grid.RowDefinitions>
-        <Image
-            Grid.Row="1"
-            Grid.Column="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Source="../Assets/Logo/LogoZnak.png" />
-        <Image
-            Grid.Row="1"
-            Grid.Column="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            Source="../Assets/Logo/LogoTekst.png" />
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.6180339887*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Rectangle RadiusX="10" RadiusY="10" Fill="{StaticResource ASBlue}" />
+            <Rectangle Height="80" Fill="White" />
+            <Rectangle Width="120" Fill="White" />
+            <Rectangle Height="120"   Width="160" Fill="White" />
+            <Canvas Margin="57.5,30,0,0" Width="128.653" Height="182.32">
+                <Canvas.RenderTransform>
+                    <ScaleTransform ScaleX="0.55" ScaleY="0.55" />
+                </Canvas.RenderTransform>
+                <Path Width="128.762" Height="182.109" Canvas.Left="-0.00267776" Canvas.Top="-0.0779178" Stretch="Fill" Fill="#FFF25A5A" Data="F1 M 51.5333,0.92453C 64.52,-0.90213 78.3867,-0.648773 90.4,5.23123C 109.067,13.0712 123.08,30.5246 127.133,50.3112C 131.493,67.5912 126.387,85.5112 120.093,101.645C 107.533,131.831 87.1467,157.938 65.4,182.031L 63.4,182.031C 47.3467,164.285 31.88,145.738 20.1067,124.818C 9.38667,106.965 1.52,86.9512 0,66.0446C -0.106667,53.8446 2.97333,41.4579 9.25333,30.9379C 18.1733,15.4179 34.16,4.64456 51.5333,0.92453 Z M 58.16,42.5379C 48.6533,45.1245 41.16,54.6446 42.0933,64.6845C 42.36,76.2179 52.64,86.6845 64.4133,85.8979C 77.1867,86.7912 87.9067,74.4445 86.7067,62.0179C 86.3067,48.4312 70.92,38.2046 58.16,42.5379 Z "/>
+            </Canvas>
+            <StackPanel Grid.Row="1">
+                <TextBlock
+                Margin="0,20,0,-15"
+                HorizontalAlignment="Center"
+                Foreground="{StaticResource ASNavy}"
+                Text="AUGMENTED"
+                FontSize="33"
+                FontWeight="Normal"
+                FontFamily="Segoe WP" />
+                <TextBlock
+                HorizontalAlignment="Center"
+                Foreground="{StaticResource ASRed}"
+                Text="SZCZECIN"
+                FontSize="42"
+                FontWeight="Bold"
+                FontFamily="Segoe WP" />
+            </StackPanel>
+        </Grid>
         <StackPanel
             Grid.Row="2"
             Grid.Column="1"
             Grid.ColumnSpan="3"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center">
-        <TextBlock 
+            <TextBlock 
             x:Uid="AboutText"
             FontSize="20"
             TextWrapping="WrapWholeWords"
             Text="About Augmented Szczecin:" 
             TextAlignment="Center" 
             />
-        <TextBlock 
+            <TextBlock 
             FontSize="20"
             TextWrapping="WrapWholeWords"
             Text="{Binding InformationAboutVersion}" 
