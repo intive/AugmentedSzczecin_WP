@@ -161,7 +161,7 @@
   </data>
   <data name="SignOutConfirmationText" xml:space="preserve">
     <value>Are you sure you want to sign out?</value>
-  </data>  
+  </data>
   <data name="SignUpButtonSignUp.Content" xml:space="preserve">
     <value>Gotowe</value>
   </data>
@@ -193,16 +193,16 @@
     <value>Zresetuj hasło</value>
   </data>
   <data name="MainViewAbout.Content" xml:space="preserve">
-    <value>O aplikacji</value>
+    <value>o aplikacji</value>
   </data>
   <data name="MainViewAR.Content" xml:space="preserve">
-    <value>Widok AR</value>
+    <value>widok AR</value>
   </data>
   <data name="MainViewList.Content" xml:space="preserve">
-    <value>Lista punktów</value>
+    <value>lista punktów</value>
   </data>
   <data name="MainViewMap.Content" xml:space="preserve">
-    <value>Widok 2D</value>
+    <value>widok 2D</value>
   </data>
   <data name="MainViewSignIn.Content" xml:space="preserve">
     <value>Zaloguj</value>
