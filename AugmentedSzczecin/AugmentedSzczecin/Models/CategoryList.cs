@@ -17,5 +17,13 @@ namespace AugmentedSzczecin.Models
         {
             return _categoryList;
         }
+
+        internal static List<Category> GetAddPoiCategoryList()
+        {
+            var tempList = new List<Category>(_categoryList);
+            tempList.RemoveAt(_categoryList.Count - 1);
+
+            return tempList;
+        }
     }
 }

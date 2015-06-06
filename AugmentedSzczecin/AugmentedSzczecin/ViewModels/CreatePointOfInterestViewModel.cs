@@ -783,7 +783,7 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private List<Category> _categoryItems = CategoryList.GetCategoryList();
+        private List<Category> _categoryItems = CategoryList.GetAddPoiCategoryList();
         public List<Category> CategoryItems
         {
             get { return _categoryItems; }

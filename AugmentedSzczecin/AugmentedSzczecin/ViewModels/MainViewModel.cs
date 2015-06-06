@@ -66,7 +66,7 @@ namespace AugmentedSzczecin.ViewModels
             get
             {
                 bool isUserSignedIn = _accountService.IsUserSignedIn();
-                return isUserSignedIn;
+                return true; //isUserSignedIn;
             }
         }
 
