@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
 using Windows.Media.Capture;
+using Windows.UI.Xaml;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 
@@ -36,6 +37,8 @@ namespace AugmentedSzczecin
             _container.PerRequest<SignUpViewModel>();
             _container.PerRequest<SignInViewModel>();
             _container.PerRequest<ResetPasswordViewModel>();
+            _container.PerRequest<AddPointOfInterestViewModel>();
+            _container.PerRequest<CreatePointOfInterestViewModel>();
             _container.Singleton<IPointOfInterestService, PointOfInterestService>();
             _container.Singleton<ILocationService, LocationService>();
             _container.Singleton<IAccountService, AccountService>();

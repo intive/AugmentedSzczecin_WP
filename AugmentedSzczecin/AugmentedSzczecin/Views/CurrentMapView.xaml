@@ -23,7 +23,7 @@
             x:Name="BingMap"
             Center="{Binding CenterOfTheMap}"
             ZoomLevel="{Binding ZoomLevel}"
-            LandmarksVisible="{Binding LandmarksVisible}" 
+            LandmarksVisible="{Binding LandmarksVisible}"            
             caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]"
             Margin="0,0,0,0">
 
@@ -42,7 +42,7 @@
                                 PinColor="{StaticResource ASBlue}" 
                                 PinSign="{Binding Category, Converter={StaticResource CategoryToPinSignConverter}}" 
                                 PinColorBase="{StaticResource ASRed}" 
-                                maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
+                               maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
                                 caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($dataContext)]"
                                 />
                     </DataTemplate>
@@ -75,7 +75,7 @@
         <Grid 
             Grid.Row="0" 
             Grid.RowSpan="3" 
-            Visibility="{Binding IsInformationPanelVisible, Converter={StaticResource BoolToVisConv}}" >
+            Visibility="{Binding IsInformationPanelVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition Width="2*"/>
@@ -123,7 +123,7 @@
                     TextWrapping="Wrap"
                     Foreground="{StaticResource ASWhite}"
                     Text="{Binding PointToShowInformation.Name}" />
-            </StackPanel>
+        </StackPanel>
             <Border
                 Grid.Column="0"
                 Grid.Row="2"
@@ -263,7 +263,7 @@
         </Grid>
 
 
-        <Grid Grid.RowSpan="3" Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BoolToVisConv}}" >
+        <Grid Grid.RowSpan="3" Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition Width="2*"/>

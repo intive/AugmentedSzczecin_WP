@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
 
-        <FlipView Margin="-3" SelectedIndex="{Binding SelectedBackground, Mode=TwoWay}" ItemsSource="{Binding BackgroundList}" />
+        <FlipView SelectedIndex="{Binding SelectedBackground, Mode=TwoWay}" ItemsSource="{Binding BackgroundList}" />
         <Grid
             Grid.Row="0"
             x:Name="LayoutHeader">
@@ -52,7 +52,7 @@
 
             <StackPanel Grid.Column="1">
                 <Border
-                    Visibility="{Binding IsGuest, Converter={StaticResource BoolToVisConv}}"
+                    Visibility="{Binding IsGuest, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]"
                     Margin="0, 40, 0, 0"
                     CornerRadius="50"
@@ -69,7 +69,7 @@
                     </Canvas>
                 </Border>
                 <Border
-                    Visibility="{Binding IsGuest, Converter={StaticResource BoolToVisConv}}"
+                    Visibility="{Binding IsGuest, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]"
                     CornerRadius="50"
                     HorizontalAlignment="Right"
@@ -84,7 +84,7 @@
                     </Canvas>
                 </Border>
                 <Border
-                    Visibility="{Binding IsUser, Converter={StaticResource BoolToVisConv}}"
+                    Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action SignOut]"
                     Margin="0, 40, 0, 0"
                     CornerRadius="50"
@@ -103,38 +103,46 @@
 
         </Grid>
         <StackPanel
-            Margin="15, 25"
+            VerticalAlignment="Center"
+            Margin="0"
             Grid.Row="1">
-            <ListView>
+            <ListView HorizontalAlignment="Center">
                 <ListViewItem
+                    HorizontalAlignment="Center"
                     Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
-                    Foreground="Black"
+                    Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewAR"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" />
                 <ListViewItem
+                    HorizontalAlignment="Center"
                     Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
-                    Foreground="Black"
+                    Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewMap"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" />
                 <ListViewItem
+                    HorizontalAlignment="Center"
                     Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
-                    Foreground="Black"
+                    Foreground="{StaticResource ASNavy}"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
+                    x:Uid="MainViewAdd"
+                    Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAddPointOfInterest]" />
+                <ListViewItem
+                    Margin="0, 0, 0, 10"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewList"
-                    Visibility="{Binding IsUser, Converter={StaticResource BoolToVisConv}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 <ListViewItem
-                    Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Left"
-                    Foreground="Black"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewAbout"

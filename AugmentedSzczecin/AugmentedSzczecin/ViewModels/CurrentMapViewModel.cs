@@ -21,19 +21,12 @@ namespace AugmentedSzczecin.ViewModels
 {
     public class CurrentMapViewModel : FilteredPOIViewBase, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
-        #region Private & Public Fields
-
-        private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
-
-
-        #endregion
-
         #region Constructors
 
         public CurrentMapViewModel( IEventAggregator eventAggregator, 
                                     ILocationService locationService, 
                                     IPointOfInterestService pointOfInterestService, 
-                                    INavigationService navigationService) 
+                                    INavigationService navigationService)
                                     : base(eventAggregator, locationService, pointOfInterestService, navigationService) { }
 
         #endregion
@@ -57,11 +50,9 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        
-
         public string BingKey
         {
-            get { return _bingKey; }
+            get { return Constants.BingKey; }
         }
 
         private double _zoomLevel;
@@ -100,6 +91,21 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private Geopoint _myLocation;
+        public Geopoint MyLocation
+        {
+            get { return _myLocation; }
+            set
+            {
+                if (_myLocation != value)
+                {
+                    _myLocation = value;
+                    MyLocationPointVisibility = Visibility.Visible;
+                    NotifyOfPropertyChange(() => MyLocation);
+                }
+            }
+        }
+
         private Visibility _myLocationPointVisibility = Visibility.Collapsed;
         public Visibility MyLocationPointVisibility
         {
@@ -128,20 +134,58 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        
+        private bool _isInformationPanelVisible = false;
+        public bool IsInformationPanelVisible
+        {
+            get 
+            { 
+                return _isInformationPanelVisible; 
+            }
+            set 
+            { 
+                _isInformationPanelVisible = value;
+                NotifyOfPropertyChange(() => IsInformationPanelVisible);
+            }
+        }
 
+        private bool _isInformationPanelPreviouslyVisible = false;
+        public bool IsInformationPanelPreviouslyVisible
+        {
+            get
+            {
+                return _isInformationPanelPreviouslyVisible;
+            }
+            set
+            {
+                _isInformationPanelPreviouslyVisible = value;
+                NotifyOfPropertyChange(() => _isInformationPanelPreviouslyVisible);
+            }
+        }
 
-        
-        
+        public Geopoint Parameter { get; set; }
+
+        private PointOfInterest _pointToShowInformation;
+        public PointOfInterest PointToShowInformation
+        {
+            get 
+            { 
+                return _pointToShowInformation; 
+            }
+            set 
+            { 
+                _pointToShowInformation = value;
+                NotifyOfPropertyChange(() => PointToShowInformation);
+            }
+        }        
         
         #endregion
 
         #region Override Methods
 
-        protected override async void OnActivate()
+        protected override void OnActivate()
         {
             base.OnActivate();
-            CenterOfTheMap = await _locationService.GetGeolocation();
+            SetGeolocation();
             CountZoomLevel();
             _eventAggregator.Subscribe(this);           
         }
@@ -181,7 +225,7 @@ namespace AugmentedSzczecin.ViewModels
             ScaleText = scaleDistance.ToString() + " m";
         }
 
-        
+
 
         public void Handle(PointOfInterestLoadedEvent e)
         {
@@ -198,13 +242,35 @@ namespace AugmentedSzczecin.ViewModels
 
         #region Private Methods
 
+        private async void SetGeolocation()
+        {
+            if (Parameter != null)
+            {
+                CenterOfTheMap = Parameter;
+                MyLocation = await _locationService.GetGeolocation();
+            }
+            else
+            {
+                MyLocation = CenterOfTheMap = await _locationService.GetGeolocation();
+            }
+        }
+
         private void CountZoomLevel()
         {
             ZoomLevel = ResolutionHelper.CountZoomLevel();
         }
 
-        
-
         #endregion
+
+        public void CloseInformationPanel()
+        {
+            IsInformationPanelVisible = false;
+        }
+
+        public void PushpinTapped(object sender)
+        {
+            IsInformationPanelVisible = true;
+            PointToShowInformation = (PointOfInterest)sender;
+        }
     }
 }

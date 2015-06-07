@@ -32,15 +32,8 @@ namespace AugmentedSzczecin.AbstractClasses
             _pointOfInterestService = pointOfInterestService;
         }
 
-        private List<Category> _listOfCategories = new List<Category>()
-                                                    {
-                                                        new Category() {Text = "Miejsca publiczne", EnumCategory = CategoryType.PLACE},
-                                                        new Category() {Text = "Firmy i usługi", EnumCategory = CategoryType.COMMERCIAL},
-                                                        new Category() {Text = "Wydarzenia", EnumCategory = CategoryType.EVENT},
-                                                        new Category() {Text = "Znajomi", EnumCategory = CategoryType.PERSON},
-                                                        new Category() {Text = "Wszystkie", EnumCategory = CategoryType.ALL},
-                                                    };
 
+        private List<Category> _listOfCategories = CategoryList.GetCategoryList();
         public List<Category> ListOfCategories
         {
             get
@@ -139,34 +132,6 @@ namespace AugmentedSzczecin.AbstractClasses
                 _radius = value;
                 NotifyOfPropertyChange(() => Radius);
                 RefreshPOIFilteredByCategory();
-            }
-        }
-
-        private bool _isInformationPanelVisible = false;
-        public bool IsInformationPanelVisible
-        {
-            get
-            {
-                return _isInformationPanelVisible;
-            }
-            set
-            {
-                _isInformationPanelVisible = value;
-                NotifyOfPropertyChange(() => IsInformationPanelVisible);
-            }
-        }
-
-        private PointOfInterest _pointToShowInformation;
-        public PointOfInterest PointToShowInformation
-        {
-            get
-            {
-                return _pointToShowInformation;
-            }
-            set
-            {
-                _pointToShowInformation = value;
-                NotifyOfPropertyChange(() => PointToShowInformation);
             }
         }
 
@@ -304,17 +269,6 @@ namespace AugmentedSzczecin.AbstractClasses
                 rootFrame.GoBack();
                 e.Handled = true;
             }
-        }
-
-        public void CloseInformationPanel()
-        {
-            IsInformationPanelVisible = false;
-        }
-
-        public void PushpinTapped(object sender)
-        {
-            IsInformationPanelVisible = true;
-            PointToShowInformation = (PointOfInterest)sender;
         }
 
         public void ToggleFilter()

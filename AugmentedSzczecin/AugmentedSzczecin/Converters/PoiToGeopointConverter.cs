@@ -1,8 +1,7 @@
-﻿using AugmentedSzczecin.Models;
-using System;
+﻿using System;
 using Windows.Devices.Geolocation;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
+using AugmentedSzczecin.Models;
 
 namespace AugmentedSzczecin.Converters
 {

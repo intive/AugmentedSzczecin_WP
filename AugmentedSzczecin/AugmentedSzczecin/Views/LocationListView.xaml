@@ -90,7 +90,7 @@
                                     <TextBlock
 							TextWrapping="Wrap"
 							FontSize="16"
-							Text="{Binding PostalCode}" />
+							Text="{Binding ZipCode}" />
                                     <TextBlock
 							TextWrapping="Wrap"
 							FontSize="16"
