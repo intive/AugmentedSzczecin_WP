@@ -1,0 +1,20 @@
+﻿<UserControl
+    x:Name="ArPinRoot"
+    x:Class="AugmentedSzczecin.UserControls.ArPin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AugmentedSzczecin.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <Grid Width="100" Height="135">
+        <Ellipse Width="100" Height="100" Fill="#FF348FD9" VerticalAlignment="Top"/>
+        
+        <Viewbox MaxHeight="100" MaxWidth="100" VerticalAlignment="Top">
+            <SymbolIcon Symbol="{Binding PinSign, ElementName=ArPinRoot}"/>
+        </Viewbox>
+        <Ellipse Width="50" Height="50" Fill="#FFF25A5A" VerticalAlignment="Bottom" Margin="0"/>
+        <TextBlock Text="{Binding PinDist, ElementName=ArPinRoot}" FontSize="16" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+    </Grid>
+</UserControl>
