@@ -20,7 +20,8 @@
         <SolidColorBrush x:Key="ASDarkGray" Color="#727272" />
         <SolidColorBrush x:Key="ASLightGray" Color="#B6B6B6" />
         <SolidColorBrush x:Key="ASWhite" Color="#FFFFFF" />
-        <caliburn:BooleanToVisibilityConverter x:Key="BoolToVisConv" />
+        <caliburn:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:BooleanToSpecificBackgroundConverter x:Key="BooleanToSpecificBackgroundConverter" />
         <converters:PoiToGeopointConverter x:Key="PoiToGeopointConverter" />
         <converters:CategoryToPinSignConverter x:Key="CategoryToPinSignConverter" />
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />

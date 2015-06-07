@@ -52,7 +52,7 @@
 
             <StackPanel Grid.Column="1">
                 <Border
-                    Visibility="{Binding IsGuest, Converter={StaticResource BoolToVisConv}}"
+                    Visibility="{Binding IsGuest, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignIn]"
                     Margin="0, 40, 0, 0"
                     CornerRadius="50"
@@ -69,7 +69,7 @@
                     </Canvas>
                 </Border>
                 <Border
-                    Visibility="{Binding IsGuest, Converter={StaticResource BoolToVisConv}}"
+                    Visibility="{Binding IsGuest, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToSignUp]"
                     CornerRadius="50"
                     HorizontalAlignment="Right"
@@ -84,7 +84,7 @@
                     </Canvas>
                 </Border>
                 <Border
-                    Visibility="{Binding IsUser, Converter={StaticResource BoolToVisConv}}"
+                    Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action SignOut]"
                     Margin="0, 40, 0, 0"
                     CornerRadius="50"
@@ -129,8 +129,16 @@
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
+                    x:Uid="MainViewAdd"
+                    Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAddPointOfInterest]" />
+                <ListViewItem
+                    Margin="0, 0, 0, 10"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource ASNavy}"
+                    FontSize="28"
+                    FontFamily="Segoe WP"
                     x:Uid="MainViewList"
-                    Visibility="{Binding IsUser, Converter={StaticResource BoolToVisConv}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 <ListViewItem
                     HorizontalAlignment="Center"

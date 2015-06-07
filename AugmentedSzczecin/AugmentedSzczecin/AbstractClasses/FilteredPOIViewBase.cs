@@ -6,15 +6,7 @@ namespace AugmentedSzczecin.AbstractClasses
 {
     public abstract class FilteredPOIViewBase : Screen
     {
-        private List<Category> _listOfCategories = new List<Category>()
-                                                    {
-                                                        new Category() {Text = "Miejsca publiczne", EnumCategory = CategoryType.PLACE},
-                                                        new Category() {Text = "Firmy i usługi", EnumCategory = CategoryType.COMMERCIAL},
-                                                        new Category() {Text = "Wydarzenia", EnumCategory = CategoryType.EVENT},
-                                                        new Category() {Text = "Znajomi", EnumCategory = CategoryType.PERSON},
-                                                        new Category() {Text = "Wszystkie", EnumCategory = CategoryType.ALL},
-                                                    };
-
+        private List<Category> _listOfCategories = CategoryList.GetCategoryList();
         public List<Category> ListOfCategories
         {
             get

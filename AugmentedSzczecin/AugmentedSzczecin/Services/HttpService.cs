@@ -111,10 +111,11 @@ namespace AugmentedSzczecin.Services
             return false;
         }
 
-        public async Task<bool> AddPointOfInterest(PointOfInterest poi)
+        public async Task<bool> AddPointOfInterest(PointOfInterest poi, string email, string password)
         {
-            var json = JsonConvert.SerializeObject(poi);
-            var content = new StringContent(json, Encoding.Unicode, "application/json");
+            SetAuthenticationHeader(email, password);
+            var json = JsonConvert.SerializeObject(poi, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, });
+            var content = new StringContent(json, Encoding.GetEncoding("iso-8859-1"), "application/json");
             var response = await _client.PostAsync("places", content);
             if (response.StatusCode == HttpStatusCode.OK)
             {

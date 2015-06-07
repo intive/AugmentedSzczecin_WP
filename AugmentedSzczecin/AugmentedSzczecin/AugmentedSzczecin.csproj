@@ -86,7 +86,10 @@
     <Compile Include="Converters\DayEnglishToDayPolishConverter.cs" />
     <Compile Include="Converters\OpeningToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToCategoryConverter.cs" />
+    <Compile Include="Converters\BooleanToSpecificBackgroundConverter.cs" />
     <Compile Include="Converters\PoiToGeopointConverter.cs" />
+    <Compile Include="Events\CreatePointOfInterestFailedEvent.cs" />
+    <Compile Include="Events\CreatePointOfInterestSuccessEvent.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\TagsToVisibilityConverter.cs" />
@@ -107,11 +110,16 @@
     <Compile Include="Interfaces\IUserDataStorageService.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryList.cs" />
     <Compile Include="Models\CategoryType.cs" />
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Opening.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
     <Compile Include="Models\PoiQueryResponse.cs" />
+    <Compile Include="Models\Subcategory.cs" />
+    <Compile Include="Models\SubcategoryList.cs" />
+    <Compile Include="Models\SubcategoryType.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,7 +135,9 @@
       <DependentUpon>SideMenuFilter.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\AddPointOfInterestViewModel.cs" />
     <Compile Include="ViewModels\AugmentedViewModel.cs" />
+    <Compile Include="ViewModels\CreatePointOfInterestViewModel.cs" />
     <Compile Include="ViewModels\CurrentMapViewModel.cs" />
     <Compile Include="ViewModels\LocationListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -137,8 +147,14 @@
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddPointOfInterestView.xaml.cs">
+      <DependentUpon>AddPointOfInterestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AugmentedView.xaml.cs">
       <DependentUpon>AugmentedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreatePointOfInterestView.xaml.cs">
+      <DependentUpon>CreatePointOfInterestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CurrentMapView.xaml.cs">
       <DependentUpon>CurrentMapView.xaml</DependentUpon>
@@ -207,7 +223,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddPointOfInterestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AugmentedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreatePointOfInterestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
