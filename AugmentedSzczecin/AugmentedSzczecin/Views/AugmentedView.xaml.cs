@@ -164,11 +164,11 @@ namespace AugmentedSzczecin.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            base.OnNavigatedFrom(e);
             _compass.ReadingChanged -= CompassReadingChanged;
             _gps.PositionChanged -= GpsPositionChanged;
             StopCamera();
-            DisplayInformation.AutoRotationPreferences = DisplayOrientations.None;
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+            base.OnNavigatedFrom(e);
         }
 
         private void CompassReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
