@@ -235,7 +235,7 @@ namespace AugmentedSzczecin.AbstractClasses
             message.Commands.Add(new UICommand("Back", BackButtonInvokedHandler));
             message.Commands.Add(new UICommand("Settings", BackButtonInvokedHandler, id));
             message.DefaultCommandIndex = 0;
-            message.CancelCommandIndex = 1;
+            message.CancelCommandIndex = 0;
 
             message.ShowAsync();
         }
