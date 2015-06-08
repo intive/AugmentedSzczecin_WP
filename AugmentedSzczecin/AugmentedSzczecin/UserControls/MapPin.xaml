@@ -17,7 +17,7 @@
         <Border VerticalAlignment="Top" Background="{Binding PinColor, ElementName=MapPinRoot}"  CornerRadius="30" Width="30" Height="30" />
         <Path Data="M50,0L100,50 50,180 0,50z" Fill="{Binding PinColor, ElementName=MapPinRoot}" Stretch="Fill" Margin="0, 16, 0, 0" Width="25" Height="30" VerticalAlignment="Top"/>
         <Viewbox Margin="0, 6, 0, 0" VerticalAlignment="Top" MaxHeight="20">
-            <SymbolIcon Symbol="{Binding PinSign, ElementName=MapPinRoot}" />
+            <SymbolIcon Symbol="{Binding PinSign, ElementName=MapPinRoot}" Foreground="White" />
         </Viewbox>
         <Rectangle Margin="0, 52, 0, 0" VerticalAlignment="Top" Height="4" Width="15" RadiusX="80" RadiusY="80" Fill="{Binding PinColorBase, ElementName=MapPinRoot}"></Rectangle>
     </Grid>

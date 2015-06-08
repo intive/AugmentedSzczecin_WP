@@ -1,5 +1,7 @@
-﻿using AugmentedSzczecin.Events;
+﻿using AugmentedSzczecin.Converters;
+using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Models;
+using AugmentedSzczecin.UserControls;
 using Caliburn.Micro;
 using Microsoft.Maps.SpatialToolbox;
 using System;
@@ -118,17 +120,13 @@ namespace AugmentedSzczecin.Views
 
                             double top = (ItemCanvas.ActualHeight - 50) * (1 - distance / RadiusSlider.Value) + 50;
 
-                            var tb = new TextBlock()
-                            {
-                                Text = string.Format("{0}({1})", poi.Name, distance),
-                                FontSize = 24,
-                                TextAlignment = TextAlignment.Center,
-                                HorizontalAlignment = HorizontalAlignment.Center
-                            };
+                            var converter = new CategoryToPinSignConverter();
+                            var symbol = (Symbol) converter.Convert(poi.Category, null, null, null);
+                            var pin = new ArPin() { PinSign = symbol, PinDist = ((int)distance).ToString() };
 
-                            Canvas.SetLeft(tb, left);
-                            Canvas.SetTop(tb, top);
-                            ItemCanvas.Children.Add(tb);
+                            Canvas.SetLeft(pin, left - 32);
+                            Canvas.SetTop(pin, top - 45);
+                            ItemCanvas.Children.Add(pin);
                         }
                     }
                 }
