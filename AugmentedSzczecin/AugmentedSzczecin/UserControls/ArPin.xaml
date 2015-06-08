@@ -8,13 +8,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     
-    <Grid Width="100" Height="135">
-        <Ellipse Width="100" Height="100" Fill="#FF348FD9" VerticalAlignment="Top"/>
-        
-        <Viewbox MaxHeight="100" MaxWidth="100" VerticalAlignment="Top">
-            <SymbolIcon Symbol="{Binding PinSign, ElementName=ArPinRoot}"/>
+    <Grid Width="64" Height="90">
+        <Ellipse 
+            Width="64" 
+            Height="64" 
+            Fill="#FF348FD9" 
+            VerticalAlignment="Top"/>        
+        <Viewbox 
+            MaxHeight="64" 
+            MaxWidth="64" 
+            VerticalAlignment="Top">
+            <SymbolIcon 
+                Symbol="{Binding PinSign, ElementName=ArPinRoot}" 
+                Foreground="White"/>
         </Viewbox>
-        <Ellipse Width="50" Height="50" Fill="#FFF25A5A" VerticalAlignment="Bottom" Margin="0"/>
-        <TextBlock Text="{Binding PinDist, ElementName=ArPinRoot}" FontSize="16" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+        <Ellipse 
+            Width="32" 
+            Height="32" 
+            Fill="#FFF25A5A" 
+            VerticalAlignment="Bottom" 
+            Margin="0"/>
+        <TextBlock 
+            Text="{Binding PinDist, ElementName=ArPinRoot}" 
+            FontSize="10" 
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Center" 
+            Margin="0,0,0,10" 
+            Foreground="White"/>
     </Grid>
 </UserControl>

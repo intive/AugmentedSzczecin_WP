@@ -198,14 +198,14 @@
             VerticalAlignment="Center" 
             Margin="0" Foreground="Black"/>
         </Grid>
-		<Grid Width="100" Height="150" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0">
-        <Polygon Points="0,0 100,0 100,100  50,150 0,100" Fill="#FF348FD9" />
-        <TextBlock 
-            x:Name="PoiCount" 
-            VerticalAlignment="Center" 
-            HorizontalAlignment="Center" 
-            FontSize="42.667" Margin="0,0,0,51"/>
-			</Grid>       
+		<Grid Width="50" Height="75" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0">
+            <Polygon Points="0,0 50,0 50,50  25,75 0,50" Fill="#FF348FD9" />
+            <TextBlock 
+                x:Name="PoiCount" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Center" 
+                FontSize="24" Margin="0,15,0,0"/>
+		</Grid>       
         <Grid Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>

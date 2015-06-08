@@ -104,28 +104,23 @@
         </Grid>
         <StackPanel
             VerticalAlignment="Center"
+            HorizontalAlignment="Center"
             Margin="0"
             Grid.Row="1">
-            <ListView HorizontalAlignment="Center">
+            <ListView HorizontalAlignment="Left">
                 <ListViewItem
-                    HorizontalAlignment="Center"
-                    Margin="0, 0, 0, 10"
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewAR"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" />
                 <ListViewItem
-                    HorizontalAlignment="Center"
-                    Margin="0, 0, 0, 10"
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewMap"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" />
                 <ListViewItem
-                    HorizontalAlignment="Center"
-                    Margin="0, 0, 0, 10"
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
@@ -133,15 +128,13 @@
                     Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAddPointOfInterest]" />
                 <ListViewItem
-                    Margin="0, 0, 0, 10"
-                    HorizontalAlignment="Center"
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewList"
+                    Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 <ListViewItem
-                    HorizontalAlignment="Center"
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
                     FontFamily="Segoe WP"

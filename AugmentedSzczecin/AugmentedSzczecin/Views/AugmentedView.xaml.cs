@@ -124,8 +124,8 @@ namespace AugmentedSzczecin.Views
                             var symbol = (Symbol) converter.Convert(poi.Category, null, null, null);
                             var pin = new ArPin() { PinSign = symbol, PinDist = ((int)distance).ToString() };
 
-                            Canvas.SetLeft(pin, left);
-                            Canvas.SetTop(pin, top);
+                            Canvas.SetLeft(pin, left - 32);
+                            Canvas.SetTop(pin, top - 45);
                             ItemCanvas.Children.Add(pin);
                         }
                     }
