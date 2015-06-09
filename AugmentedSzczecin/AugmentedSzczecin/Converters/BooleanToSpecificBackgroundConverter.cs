@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Devices.Geolocation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
@@ -19,10 +14,10 @@ namespace AugmentedSzczecin.Converters
 
             if (!isValid)
             {
-                return new SolidColorBrush(Colors.OrangeRed);
+                return Application.Current.Resources["ASRed"] as SolidColorBrush;
             }
 
-            return Application.Current.Resources["TextBoxPlaceholderTextThemeBrush"] as SolidColorBrush;
+            return new SolidColorBrush(Colors.White);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -42,6 +42,12 @@ namespace AugmentedSzczecin.UserControls
                                           typeof(MapPin),
                                           new PropertyMetadata(""));
 
+        public static readonly DependencyProperty PinSignColorProperty = DependencyProperty.Register(
+                                          "PinSignColor",
+                                          typeof(Brush),
+                                          typeof(MapPin),
+                                          new PropertyMetadata(""));
+
         public Brush PinColor
         {
             get
@@ -75,6 +81,18 @@ namespace AugmentedSzczecin.UserControls
             set
             {
                 SetValue(PinSignProperty, value);
+            }
+        }
+
+        public Brush PinSignColor
+        {
+            get
+            {
+                return GetValue(PinSignColorProperty) as Brush;
+            }
+            set
+            {
+                SetValue(PinSignColorProperty, value);
             }
         }
     }
