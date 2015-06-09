@@ -1,0 +1,731 @@
+﻿<Page
+    x:Class="AugmentedSzczecin.Views.CreatePointOfInterestView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:caliburn="using:Caliburn.Micro"
+    mc:Ignorable="d"
+    Background="White">
+
+    <Page.Resources>
+
+        <Style TargetType="TextBlock" x:Key="InputHeader">
+            <Setter Property="Margin" Value="15, 30, 10, 0" />
+            <Setter Property="Foreground" Value="{StaticResource ASBlue}" />
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="FontWeight" Value="SemiLight" />
+        </Style>
+        <Style TargetType="Border" x:Key="InputBorder">
+            <Setter Property="Margin" Value="10, 0" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="BorderBrush" Value="{StaticResource ASBlue}" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="InputTextBox">
+            <Setter Property="Foreground" Value="{StaticResource ASNavy}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="0, 7"/>
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+
+        <Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
+        <FontWeight x:Key="PhoneButtonFontWeight">Semibold</FontWeight>
+        <x:Double x:Key="TextStyleLargeFontSize">18.14</x:Double>
+        <Thickness x:Key="PhoneButtonContentPadding">9.5,0,9.5,3.5</Thickness>
+        <x:Double x:Key="PhoneButtonMinHeight">57.5</x:Double>
+        <x:Double x:Key="PhoneButtonMinWidth">109</x:Double>
+        <Thickness x:Key="PhoneTouchTargetOverhang">0,9.5</Thickness>
+        <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="Transparent"/>
+        <Style x:Key="ButtonStyleCancel" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource PhoneForegroundBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource PhoneBorderThickness}"/>
+            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontWeight" Value="{ThemeResource PhoneButtonFontWeight}"/>
+            <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}"/>
+            <Setter Property="Padding" Value="{ThemeResource PhoneButtonContentPadding}"/>
+            <Setter Property="MinHeight" Value="{ThemeResource PhoneButtonMinHeight}"/>
+            <Setter Property="MinWidth" Value="{ThemeResource PhoneButtonMinWidth}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="Grid" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="Pressed" To="PointerOver">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="PointerOver" To="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="Pressed" To="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentPresenter.Foreground)" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ASWhite}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="Grid"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ASRed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentPresenter.Foreground)" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ASWhite}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Null}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentPresenter.Foreground)" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ASWhite}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyleAdd" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource PhoneForegroundBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource PhoneBorderThickness}"/>
+            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontWeight" Value="{ThemeResource PhoneButtonFontWeight}"/>
+            <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}"/>
+            <Setter Property="Padding" Value="{ThemeResource PhoneButtonContentPadding}"/>
+            <Setter Property="MinHeight" Value="{ThemeResource PhoneButtonMinHeight}"/>
+            <Setter Property="MinWidth" Value="{ThemeResource PhoneButtonMinWidth}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="Grid" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="Pressed" To="PointerOver">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="PointerOver" To="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="Pressed" To="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentPresenter.Foreground)" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ASWhite}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="Grid"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentPresenter.Foreground)" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ASWhite}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentPresenter.Foreground)" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ASWhite}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border" BorderThickness="{TemplateBinding BorderThickness}" Margin="{ThemeResource PhoneTouchTargetOverhang}" Background="#348FD9">
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock
+                Foreground="{StaticResource ASNavy}"
+                HorizontalAlignment="Center"
+                x:Uid="CreatePointOfInterestTitle"
+                TextWrapping="NoWrap"
+                FontSize="36"
+                Margin="8,10,0,0" />
+
+            <!-- Nazwa -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiName" />
+            <Border Background="{Binding IsNameValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                 Style="{StaticResource InputBorder}">
+                <TextBox
+                Style="{StaticResource InputTextBox}"
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                TabIndex="0"
+                x:Uid="NewPoiNameBox"
+                x:Name="Name"
+                MaxLength="50" />
+            </Border>
+
+
+            <!-- Latitude -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiLatitude" />
+            <Border Style="{StaticResource InputBorder}">
+                <TextBox
+                Style="{StaticResource InputTextBox}"
+                IsEnabled="False"
+                x:Name="Latitude" />
+            </Border>
+
+            <!-- Longitude -->
+            <TextBlock
+                Margin="15,0,0,0"
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiLongitude" />
+            <Border Style="{StaticResource InputBorder}">
+                <TextBox
+                Style="{StaticResource InputTextBox}"
+                IsEnabled="False"
+                x:Name="Longitude" />
+            </Border>
+
+            <!-- Opis -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiDescription" />
+            <Border Background="{Binding IsDescriptionValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                 Height="150" Style="{StaticResource InputBorder}">
+                <TextBox
+                Style="{StaticResource InputTextBox}"
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                TabIndex="1"
+                x:Uid="NewPoiDescriptionBox"
+                Height="132.5"
+                MaxLength="500"
+                x:Name="Description"
+                TextWrapping="Wrap"
+                TextAlignment="Left" />
+            </Border>
+
+            <!-- Tagi -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiTags" />
+            <Border Background="{Binding IsTagsValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                Style="{StaticResource InputBorder}">
+                <TextBox
+                Style="{StaticResource InputTextBox}"
+                caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                TabIndex="2"
+                x:Uid="NewPoiTagsBox"
+                MaxLength="30"
+                x:Name="Tags" />
+            </Border>
+
+            <!-- Adres -->
+            <TextBlock
+                FontWeight="Normal"
+                Margin="0, 30, 0, -30"
+                HorizontalAlignment="Center"
+                Foreground="{StaticResource ASNavy}"
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiAddress" />
+
+            <!-- Adres Ulica -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiAddressStreet" />
+            <Border Background="{Binding IsStreetValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                Style="{StaticResource InputBorder}">
+                <TextBox
+                    Style="{StaticResource InputTextBox}"
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    TabIndex="3"
+                    MaxLength="60"
+                    x:Uid="NewPoiAddressStreetBox"
+                    x:Name="Street"/>
+            </Border>
+
+            <!-- Adres Kod Pocztowy -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiAddressZipCode" />
+            <Border Background="{Binding IsZipCodeValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                Style="{StaticResource InputBorder}">
+                <TextBox
+                    Style="{StaticResource InputTextBox}"
+                    InputScope="32"
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    TabIndex="4"
+                    MaxLength="6"
+                    x:Uid="NewPoiAddressZipCodeBox"
+                    x:Name="ZipCode"/>
+            </Border>
+
+            <!-- Adres Miasto -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiAddressCity" />
+            <Border Background="{Binding IsCityValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                Style="{StaticResource InputBorder}">
+                <TextBox
+                    Style="{StaticResource InputTextBox}"
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    TabIndex="5"
+                    MaxLength="30"
+                    x:Uid="NewPoiAddressCityBox"
+                    x:Name="City" />
+            </Border>
+
+            <!-- Adres Numer Ulicy -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiAddressStreetNumber" />
+            <Border Background="{Binding IsStreetNumberValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                Style="{StaticResource InputBorder}">
+                <TextBox
+                    Style="{StaticResource InputTextBox}"
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    TabIndex="6"
+                    MaxLength="10"
+                    x:Uid="NewPoiAddressStreetNumberBox"
+                    x:Name="StreetNumber" />
+            </Border>
+
+            <!-- Kategoria -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                x:Uid="NewPoiCategory" />
+            <ComboBox
+                Margin="10, -10, 10, -20"
+                Background="{Binding IsCategorySelected, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                BorderThickness="2"
+                BorderBrush="{StaticResource ASBlue}"
+                ItemsSource="{Binding CategoryItems}"
+                SelectedItem="{Binding SelectedCategoryItem, Mode=TwoWay}"
+                x:Uid="NewPoiCategoryBox" />
+
+            <!-- Subkategoria -->
+            <TextBlock
+                Style="{StaticResource InputHeader}"
+                Visibility="{Binding IsFirstCategorySelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                x:Uid="NewPoiSubcategory" />
+            <ComboBox
+                Margin="10, -10, 10, 0"
+                ItemsSource="{Binding SubcategoryItems}"
+                BorderThickness="2"
+                BorderBrush="{StaticResource ASBlue}"
+                SelectedItem="{Binding SelectedSubcategoryItem, Mode=TwoWay}"
+                Visibility="{Binding IsFirstCategorySelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Background="{Binding IsSubcategorySelected, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                x:Uid="NewPoiSubcategoryBox" />
+
+            <CheckBox
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Center"
+                BorderThickness="3"
+                BorderBrush="{StaticResource ASBlue}"
+                Foreground="{StaticResource ASNavy}"
+                Margin="0,20,0,0"
+                caliburn:Message.Attach="[Event Checked] = [Action ExtraFieldsChecked]; [Event Unchecked] = [Action ExtraFieldsUnchecked]"
+                x:Uid="ExtraFieldsCheckBox" />
+
+
+            <StackPanel Visibility="{Binding IsExtraFieldChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                <TextBlock
+                    x:Uid="CreatePointOfInterestExtraTitle"
+                    FontWeight="Normal"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource ASNavy}"
+                    Style="{StaticResource InputHeader}" />
+
+                <!-- Adres WWW -->
+                <TextBlock
+                    Style="{StaticResource InputHeader}"
+                    x:Uid="NewPoiWebsite" />
+                <Border Background="{Binding IsWwwValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                    Style="{StaticResource InputBorder}">
+                    <TextBox
+                    Style="{StaticResource InputTextBox}"
+                    InputScope="1"
+                    caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                    TabIndex="7"
+                    x:Uid="NewPoiWebsiteBox"
+                    x:Name="Www"
+                    MaxLength="100" />
+                </Border>
+
+                <!-- Telefon -->
+                <TextBlock
+                    Style="{StaticResource InputHeader}"
+                    x:Uid="NewPoiPhone" />
+                <Border Background="{Binding IsPhoneValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                    Style="{StaticResource InputBorder}">
+                    <TextBox
+                        InputScope="32"
+                        Style="{StaticResource InputTextBox}"
+                        caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                        TabIndex="8"
+                        x:Uid="NewPoiPhoneBox"
+                        x:Name="Phone"
+                        MaxLength="9" />
+                </Border>
+
+                <!-- Fanpage -->
+                <TextBlock
+                    Style="{StaticResource InputHeader}"
+                    x:Uid="NewPoiFanpage" />
+                <Border Background="{Binding IsFanpageValid, Converter={StaticResource BooleanToSpecificBackgroundConverter}}"
+                    Style="{StaticResource InputBorder}">
+                    <TextBox
+                        InputScope="1"
+                        caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
+                        TabIndex="9"
+                        x:Uid="NewPoiFanpageBox"
+                        Style="{StaticResource InputTextBox}"
+                        x:Name="Fanpage"
+                        MaxLength="100" />
+                </Border>
+
+                <!-- Dni otwarcia -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource InputHeader}"
+                        x:Uid="NewPoiOpeningDays" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource InputHeader}"
+                        Grid.Column="1"
+                        x:Uid="OpeningHoursFrom" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource InputHeader}"
+                        Grid.Column="2"
+                        x:Uid="OpeningHoursTo" />
+                </Grid>
+                <Grid Background="{StaticResource ASNavy}" Margin="0, 0, 0, 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <CheckBox
+                        BorderThickness="3"
+                        BorderBrush="White"
+                        Foreground="White"
+                        Margin="0, 10"
+                        Grid.Row="0"
+                        x:Name="IsMondayEnabled"
+                        x:Uid="Monday" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        x:Name="MondayOpenFrom"
+                        IsEnabled="{Binding IsMondayEnabled}"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="0" Grid.Column="1" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsMondayEnabled}"
+                        x:Name="MondayOpenTo"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="0" Grid.Column="2"  />
+
+                    <CheckBox
+                        BorderThickness="3"
+                        BorderBrush="White"
+                        Foreground="White"
+                        Margin="0, 10"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        x:Name="IsTuesdayEnabled"
+                        x:Uid="Tuesday" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsTuesdayEnabled}"
+                        x:Name="TuesdayOpenFrom"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="1"
+                        Grid.Column="1" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsTuesdayEnabled}"
+                        x:Name="TuesdayOpenTo"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="1"
+                        Grid.Column="2" />
+
+                    <CheckBox
+                        BorderThickness="3"
+                        BorderBrush="White"
+                        Foreground="White"
+                        Margin="0, 10"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        x:Name="IsWednesdayEnabled"
+                        x:Uid="Wednesday" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsWednesdayEnabled}"
+                        x:Name="WednesdayOpenFrom"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="2"
+                        Grid.Column="1" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsWednesdayEnabled}"
+                        x:Name="WednesdayOpenTo"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="2"
+                        Grid.Column="2" />
+
+                    <CheckBox
+                        BorderThickness="3"
+                        BorderBrush="White"
+                        Foreground="White"
+                        Margin="0, 10"
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        x:Name="IsThursdayEnabled"
+                        x:Uid="Thursday" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsThursdayEnabled}"
+                        x:Name="ThursdayOpenFrom"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="3"
+                        Grid.Column="1" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsThursdayEnabled}"
+                        x:Name="ThursdayOpenTo"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="3"
+                        Grid.Column="2" />
+
+                    <CheckBox
+                        BorderThickness="3"
+                        BorderBrush="White"
+                        Foreground="White"
+                        Margin="0, 10"
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        x:Name="IsFridayEnabled"
+                        x:Uid="Friday" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsFridayEnabled}"
+                        x:Name="FridayOpenFrom"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="4"
+                        Grid.Column="1" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsFridayEnabled}"
+                        x:Name="FridayOpenTo"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="4"
+                        Grid.Column="2" />
+
+                    <CheckBox
+                        BorderThickness="3"
+                        BorderBrush="White"
+                        Foreground="White"
+                        Margin="0, 10"
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        x:Name="IsSaturdayEnabled"
+                        x:Uid="Saturday" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsSaturdayEnabled}"
+                        x:Name="SaturdayOpenFrom"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="5"
+                        Grid.Column="1" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsSaturdayEnabled}"
+                        x:Name="SaturdayOpenTo"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="5"
+                        Grid.Column="2" />
+
+                    <CheckBox
+                        BorderThickness="3"
+                        BorderBrush="White"
+                        Foreground="White"
+                        Margin="0, 10"
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        x:Name="IsSundayEnabled"
+                        x:Uid="Sunday" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsSundayEnabled}"
+                        x:Name="SundayOpenFrom"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="6"
+                        Grid.Column="1" />
+                    <TimePicker
+                        Foreground="White"
+                        Margin="0, 10"
+                        MinuteIncrement="15"
+                        IsEnabled="{Binding IsSundayEnabled}"
+                        x:Name="SundayOpenTo"
+                        ClockIdentifier="24HourClock"
+                        HorizontalAlignment="Center"
+                        Grid.Row="6"
+                        Grid.Column="2" />
+                </Grid>
+
+            </StackPanel>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border
+                    Grid.Column="0"
+                    Margin="10,20,10,20"
+                    CornerRadius="10" 
+                    Height="40"
+                    BorderThickness="2" 
+                    BorderBrush="{StaticResource ASRed}" Background="{StaticResource ASRed}">
+                    <Button
+                        BorderBrush="{x:Null}"
+                        Style="{StaticResource ButtonStyleCancel}" 
+                        Background="{StaticResource ASRed}"
+                        caliburn:Message.Attach="[Event Click] = [Action CancelNewPointOfInterestClick]"
+                        x:Uid="CancelAddingPointOfInterest"
+                        HorizontalAlignment="Center" />
+                </Border>
+
+                <Border
+                    Grid.Column="1"
+                    Margin="10,20,10,20"
+                    CornerRadius="10" 
+                    Height="40"
+                    BorderThickness="2" 
+                    BorderBrush="{StaticResource ASBlue}" Background="{StaticResource ASBlue}">
+                    <Button
+                        BorderBrush="{x:Null}" 
+                        Style="{StaticResource ButtonStyleAdd}" 
+                        Background="{StaticResource ASBlue}"
+                        caliburn:Message.Attach="[Event Click] = [Action AddNewPointOfInterestClick]"
+                        x:Uid="AddNewPointOfInterest"
+                        HorizontalAlignment="Center" />
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
+

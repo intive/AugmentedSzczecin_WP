@@ -15,38 +15,19 @@ using AugmentedSzczecin.Helpers;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.AbstractClasses;
 using Caliburn.Micro;
-using AugmentedSzczecin.Events;
-using System.Collections.ObjectModel;
 using AugmentedSzczecin.Models;
-using Windows.UI.Xaml.Controls.Primitives;
-using Caliburn.Micro;
 
 namespace AugmentedSzczecin.ViewModels
 {
     public class CurrentMapViewModel : FilteredPOIViewBase, IHandle<PointOfInterestLoadedEvent>, IHandle<PointOfInterestLoadFailedEvent>
     {
-        #region Private & Public Fields
-
-        private readonly string _bingKey = "AsaWb7fdBJmcC1YW6uC1UPb57wfLh9cmeX6Zq_r9s0k49tFScWa3o3Z0Sk7ZUo3I";
-
-        private readonly IEventAggregator _eventAggregator;
-        private readonly INavigationService _navigationService;
-        private readonly ILocationService _locationService;
-        private readonly IPointOfInterestService _pointOfInterestService;
-
-        #endregion
-
         #region Constructors
 
-        public CurrentMapViewModel(IEventAggregator eventAggregator,
-            ILocationService locationService, IPointOfInterestService pointOfInterestService,
+        public CurrentMapViewModel( IEventAggregator eventAggregator, 
+                                    ILocationService locationService, 
+                                    IPointOfInterestService pointOfInterestService, 
             INavigationService navigationService)
-        {
-            _eventAggregator = eventAggregator;
-            _navigationService = navigationService;
-            _locationService = locationService;
-            _pointOfInterestService = pointOfInterestService;
-        }
+                                    : base(eventAggregator, locationService, pointOfInterestService, navigationService) { }
 
         #endregion
 
@@ -55,7 +36,7 @@ namespace AugmentedSzczecin.ViewModels
         private ObservableCollection<PointOfInterest> _mapLocations;
         public ObservableCollection<PointOfInterest> MapLocations
         {
-            get
+            get 
             {
                 return _mapLocations;
             }
@@ -69,37 +50,9 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private bool _internetConnection;
-        public bool InternetConnection
-        {
-            get { return _internetConnection; }
-            set
-            {
-                if (value != _internetConnection)
-                {
-                    _internetConnection = value;
-                    NotifyOfPropertyChange(() => InternetConnection);
-                }
-            }
-        }
-
-        private bool _geolocationEnabled;
-        public bool GeolocationEnabled
-        {
-            get { return _geolocationEnabled; }
-            set
-            {
-                if (value != _geolocationEnabled)
-                {
-                    _geolocationEnabled = value;
-                    NotifyOfPropertyChange(() => GeolocationEnabled);
-                }
-            }
-        }
-
         public string BingKey
         {
-            get { return _bingKey; }
+            get { return Constants.BingKey; }
         }
 
         private double _zoomLevel;
@@ -138,6 +91,21 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
+        private Geopoint _myLocation;
+        public Geopoint MyLocation
+        {
+            get { return _myLocation; }
+            set
+            {
+                if (_myLocation != value)
+                {
+                    _myLocation = value;
+                    MyLocationPointVisibility = Visibility.Visible;
+                    NotifyOfPropertyChange(() => MyLocation);
+                }
+            }
+        }
+
         private Visibility _myLocationPointVisibility = Visibility.Collapsed;
         public Visibility MyLocationPointVisibility
         {
@@ -166,32 +134,60 @@ namespace AugmentedSzczecin.ViewModels
             }
         }
 
-        private int _radius = 300;
-        public int Radius
+        private bool _isInformationPanelVisible = false;
+        public bool IsInformationPanelVisible
         {
-            get
-            {
-                return _radius;
+            get 
+            { 
+                return _isInformationPanelVisible; 
+            }
+            set 
+            { 
+                _isInformationPanelVisible = value;
+                NotifyOfPropertyChange(() => IsInformationPanelVisible);
             }
         }
 
+        private bool _isInformationPanelPreviouslyVisible = false;
+        public bool IsInformationPanelPreviouslyVisible
+        {
+            get 
+            { 
+                return _isInformationPanelPreviouslyVisible;
+            }
+            set
+            {
+                _isInformationPanelPreviouslyVisible = value;
+                NotifyOfPropertyChange(() => _isInformationPanelPreviouslyVisible);
+            }
+        }
+        
+        public Geopoint Parameter { get; set; }
 
+        private PointOfInterest _pointToShowInformation;
+        public PointOfInterest PointToShowInformation
+        {
+            get 
+            { 
+                return _pointToShowInformation; 
+            }
+            set 
+            { 
+                _pointToShowInformation = value;
+                NotifyOfPropertyChange(() => PointToShowInformation);
+            }
+        }        
+        
         #endregion
 
         #region Override Methods
 
         protected override void OnActivate()
         {
-            _eventAggregator.Subscribe(this);
             base.OnActivate();
-
+            SetGeolocation();
             CountZoomLevel();
-
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
-            UpdateInternetConnection();
-            UpdateGeolocationEnabled();
-            CheckConnectionsAvailability();
+            _eventAggregator.Subscribe(this);           
         }
 
         protected override void OnDeactivate(bool close)
@@ -229,38 +225,7 @@ namespace AugmentedSzczecin.ViewModels
             ScaleText = scaleDistance.ToString() + " m";
         }
 
-        public void UpdateInternetConnection()
-        {
-            ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
 
-            if (internetConnectionProfile == null)
-            {
-                InternetConnection = false;
-                return;
-            }
-
-            InternetConnection = true;
-        }
-
-        public void RefreshConnectionClick()
-        {
-            UpdateInternetConnection();
-            UpdateGeolocationEnabled();
-            CheckConnectionsAvailability();
-        }
-
-        public void InternetConnectionDisabledMessage()
-        {
-            var loader = new ResourceLoader();
-            var internetConnectionDisabledMessage = loader.GetString("InternetConnectionDisabledMessage");
-            ShowConnectionDisabledMessage(internetConnectionDisabledMessage, "1");
-        }
-
-        public void NavigateToMain()
-        {
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-            _navigationService.GoBack();
-        }
 
         public void Handle(PointOfInterestLoadedEvent e)
         {
@@ -277,121 +242,35 @@ namespace AugmentedSzczecin.ViewModels
 
         #region Private Methods
 
-        private async void CheckConnectionsAvailability()
-        {
-            if (!InternetConnection && !GeolocationEnabled)
-            {
-                BothConnectionDisabledMessage();
-            }
-            if (!InternetConnection && GeolocationEnabled)
-            {
-                InternetConnectionDisabledMessage();
-            }
-            if (InternetConnection && !GeolocationEnabled)
-            {
-                GeolocationDisabledMessage();
-            }
-            if (!InternetConnection || !GeolocationEnabled) return;
-
-            CenterOfTheMap = await _locationService.GetGeolocation();
-            RefreshPOIFilteredByCategory();
-        }
-
-        private void UpdateGeolocationEnabled()
-        {
-            var isGeolocationEnabled = _locationService.IsGeolocationEnabled();
-
-            if (!isGeolocationEnabled)
-            {
-                GeolocationEnabled = false;
-                return;
-            }
-
-            GeolocationEnabled = true;
-        }
-
-        private void BothConnectionDisabledMessage()
-        {
-            var loader = new ResourceLoader();
-            var bothConnectionDisabledMessage = loader.GetString("BothConnectionDisabledMessage");
-            ShowConnectionDisabledMessage(bothConnectionDisabledMessage, "2");
-        }
-
-        private void GeolocationDisabledMessage()
-        {
-            var loader = new ResourceLoader();
-            var geolocationDisabledMessage = loader.GetString("GeolocationDisabledMessage");
-            ShowConnectionDisabledMessage(geolocationDisabledMessage, "0");
-        }
-
-        private void ShowConnectionDisabledMessage(string connectionDisabledMessage, object id)
-        {
-            var loader = new ResourceLoader();
-            var message = new MessageDialog(connectionDisabledMessage);
-            message.Commands.Add(new UICommand(loader.GetString("Back"), BackButtonInvokedHandler));
-            message.Commands.Add(new UICommand(loader.GetString("Settings"), BackButtonInvokedHandler, id));
-            message.DefaultCommandIndex = 0;
-            message.CancelCommandIndex = 1;
-
-            message.ShowAsync();
-        }
-
-        private void BackButtonInvokedHandler(IUICommand command)
-        {
-            switch (command.Label)
-            {
-                case "Back":
-                    HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-                    NavigateToMain();
-                    break;
-                case "Settings":
-                    if (ReferenceEquals(command.Id, "2"))
-                        Launcher.LaunchUriAsync(new Uri("ms-settings-wifi://"));
-                    if (ReferenceEquals(command.Id, "1"))
-                        Launcher.LaunchUriAsync(new Uri("ms-settings-wifi://"));
-                    if (ReferenceEquals(command.Id, "0"))
-                        Launcher.LaunchUriAsync(new Uri("ms-settings-location://"));
-                    break;
-                default:
-                    return;
-            }
-        }
-
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null && rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-                e.Handled = true;
-            }
-        }
-
         private async void SetGeolocation()
         {
-            CenterOfTheMap = await _locationService.GetGeolocation();
-        }
+            if (Parameter != null)
+            {
+                CenterOfTheMap = Parameter;
+                MyLocation = await _locationService.GetGeolocation();
+            }
+            else
+            {
+                MyLocation = CenterOfTheMap = await _locationService.GetGeolocation();
+            }
+            }
 
         private void CountZoomLevel()
         {
             ZoomLevel = ResolutionHelper.CountZoomLevel();
         }
 
-        private void PushpinTapped(object sender)
-        {
-            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-        }
-
-        private void ToggleFilter()
-        {
-            IsFilterPanelVisible = !IsFilterPanelVisible;
-        }
-
-        protected override void RefreshPOIFilteredByCategory()
-        {
-            _pointOfInterestService.LoadPoIs(CenterOfTheMap.Position.Latitude, CenterOfTheMap.Position.Longitude, Radius, SelectedValue);
-        }
-
         #endregion
+
+        public void CloseInformationPanel()
+        {
+            IsInformationPanelVisible = false;
+        }
+
+        public void PushpinTapped(object sender)
+        {
+            IsInformationPanelVisible = true;
+            PointToShowInformation = (PointOfInterest)sender;
+        }
     }
 }

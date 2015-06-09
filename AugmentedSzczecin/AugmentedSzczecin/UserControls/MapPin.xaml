@@ -1,0 +1,24 @@
+﻿<UserControl
+    x:Name="MapPinRoot"
+    x:Class="AugmentedSzczecin.UserControls.MapPin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AugmentedSzczecin.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RenderTransformOrigin="0.5,1"
+    Height="56"
+    Width="45">
+    <UserControl.RenderTransform>
+        <TranslateTransform X="-23.5" Y="-56"></TranslateTransform>
+    </UserControl.RenderTransform>
+    <Grid RenderTransformOrigin="0.5,1" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <Border VerticalAlignment="Top" Background="{Binding PinColor, ElementName=MapPinRoot}"  CornerRadius="30" Width="30" Height="30" />
+        <Path Data="M50,0L100,50 50,180 0,50z" Fill="{Binding PinColor, ElementName=MapPinRoot}" Stretch="Fill" Margin="0, 16, 0, 0" Width="25" Height="30" VerticalAlignment="Top"/>
+        <Viewbox Margin="0, 6, 0, 0" VerticalAlignment="Top" MaxHeight="20">
+            <SymbolIcon Symbol="{Binding PinSign, ElementName=MapPinRoot}" Foreground="{Binding PinSignColor, ElementName=MapPinRoot}" />
+        </Viewbox>
+        <Rectangle Margin="0, 52, 0, 0" VerticalAlignment="Top" Height="4" Width="15" RadiusX="80" RadiusY="80" Fill="{Binding PinColorBase, ElementName=MapPinRoot}"></Rectangle>
+    </Grid>
+</UserControl>

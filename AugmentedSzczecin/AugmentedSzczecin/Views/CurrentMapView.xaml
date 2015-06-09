@@ -9,68 +9,263 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
-        <Flyout x:Key="Details" Placement="Bottom">
-            <Grid Margin="20, 20, 20, 20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="Name: " />
-                    <TextBlock Text="Latitude: " />
-                    <TextBlock Text="Longitude: " />
-                    <TextBlock Text="Street name: " />
-                    <TextBlock Text="Postal code: " />
-                    <TextBlock Text="Category: " />
-                </StackPanel>
-                <StackPanel Grid.Column="1">
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text="{Binding Location.Latitude}" />
-                    <TextBlock Text="{Binding Location.Longitude}" />
-                    <TextBlock Text="{Binding StreetName}" />
-                    <TextBlock Text="{Binding PostalCode}" />
-                    <TextBlock Text="{Binding Category}" />
-                </StackPanel>
-            </Grid>
-        </Flyout>
-    </Page.Resources>
-
     <Grid>
-
-        <StackPanel>
-        <TextBlock x:Uid="CurrentMapTitle"  TextWrapping="NoWrap" Text=""
-                   FontSize="36" Margin="8,0,0,16"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.08*" />
+        </Grid.RowDefinitions>
 
         <maps:MapControl
+            Grid.Row="0"
+            Grid.RowSpan="3"
             MapServiceToken="{Binding BingKey}"
             x:Name="BingMap"
-            Height="560"
             Center="{Binding CenterOfTheMap}"
             ZoomLevel="{Binding ZoomLevel}"
             LandmarksVisible="{Binding LandmarksVisible}"            
             caliburn:Message.Attach="[Event ZoomLevelChanged] = [Action ChangeScaleBar($source)]"
             Margin="0,0,0,0">
 
-            <Image Name="ImgMyLocation" Source="/Assets/MyLocationPoint.png" maps:MapControl.Location="{Binding CenterOfTheMap}" Height="10" Width="10" Visibility="{Binding MyLocationPointVisibility}"/>
+            <UserControls:MapPin 
+                PinColor="{StaticResource ASRed}" 
+                PinSign="Target" 
+                PinColorBase="{StaticResource ASBlue}" 
+                PinSignColor="{StaticResource ASWhite}"
+                maps:MapControl.Location="{Binding CenterOfTheMap}" 
+                Visibility="{Binding MyLocationPointVisibility}"/>
 
-            <TextBlock x:Name="ScaleText" Text="{Binding ScaleText}" FontSize="14" Foreground="Black" Margin="24,530,0,2" Opacity="0.6" />
-            <Rectangle Name="RecScale" Fill="Black" Width="100" Height="4" Margin="24,548,0,0" Opacity="0.6" />
-
-            <maps:MapItemsControl ItemsSource="{Binding MapLocations}">
+            <maps:MapItemsControl 
+                ItemsSource="{Binding MapLocations}">
                 <maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
-                            <Image Source="/Assets/LocationPoint.png" Height="20" Width="20" HorizontalAlignment="Left" 
+                        <UserControls:MapPin 
+                                PinColor="{StaticResource ASBlue}" 
+                                PinSign="{Binding Category, Converter={StaticResource CategoryToPinSignConverter}}" 
+                                PinColorBase="{StaticResource ASRed}" 
+                                PinSignColor="{StaticResource ASWhite}"
                                maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
-                               caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($source)]"
-                               FlyoutBase.AttachedFlyout="{StaticResource Details}"/>
+                                caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($dataContext)]"
+                                />
                     </DataTemplate>
                 </maps:MapItemsControl.ItemTemplate>
             </maps:MapItemsControl>
         </maps:MapControl>
-        </StackPanel>
 
-        <Grid Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BoolToVisConv}}" >
+        <Rectangle 
+                Grid.Row="2"
+                Name="RecScale"
+                Stretch="Fill">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                    <GradientStop Color="#B6B6B6"/>
+                    <GradientStop Color="White" Offset="0.5"/>
+                    <GradientStop Color="#B6B6B6" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <TextBlock 
+                Grid.Row="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                x:Name="ScaleText" 
+                Text="{Binding ScaleText}" 
+                Foreground="{StaticResource ASBlack}"
+                FontSize="20" 
+                Opacity="0.6" />
+
+        <Grid 
+            Grid.Row="0" 
+            Grid.RowSpan="3" 
+            Visibility="{Binding IsInformationPanelVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2.5*" />
+                <RowDefinition Height="0.8*" />
+                <RowDefinition Height="2.5*" />
+            </Grid.RowDefinitions>
+            <Border
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Grid.Row="0"
+                caliburn:Message.Attach="[Event Tapped] = [Action CloseInformationPanel]" >
+            	<Border.Background>
+            		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            			<GradientStop Color="#CC424242" Offset="1"/>
+            			<GradientStop Color="Transparent" Offset="0.772"/>
+            		</LinearGradientBrush>
+            	</Border.Background>
+            </Border>
+            <Border
+                Grid.Column="0"
+                Grid.Row="1"
+                Background="{StaticResource ASBlue}"/>
+            <Border
+                Grid.Column="2"
+                Grid.Row="1"
+                Background="{StaticResource ASBlue}"/>
+            <StackPanel 
+                Grid.Column="1" 
+                Grid.Row="1" 
+                Background="{StaticResource ASBlue}">
+                <TextBlock 
+                    Margin="0,15,0,0" 
+                    VerticalAlignment="Center"
+                    Foreground="{StaticResource ASWhite}"
+                    FontSize="15"
+                    Text="{Binding PointToShowInformation.Category, Converter={StaticResource StringToCategoryConverter}}" />
+                <TextBlock  
+                    VerticalAlignment="Center"
+                    Margin="0, 10, 0, 10"
+                    FontSize="25"
+                    TextWrapping="Wrap"
+                    Foreground="{StaticResource ASWhite}"
+                    Text="{Binding PointToShowInformation.Name}" />
+        </StackPanel>
+            <Border
+                Grid.Column="0"
+                Grid.Row="2"
+                Grid.RowSpan="2"
+                Background="{StaticResource ASWhite}"/>
+            <Border
+                Grid.Column="2"
+                Grid.Row="2"
+                Grid.RowSpan="2"
+                Background="{StaticResource ASWhite}"/>
+            <ScrollViewer
+                Grid.Column="1" 
+                Grid.Row="2" 
+                Padding="0, 20, 0, 20"
+                Background="{StaticResource ASWhite}">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0, 0, 0, 0"
+                        FontSize="15" 
+                        TextAlignment="Justify"
+                        Visibility="{Binding PointToShowInformation.Description, Converter={StaticResource StringToVisibilityConverter}}"
+                        Foreground="{StaticResource ASBlack}"
+                        TextWrapping="WrapWholeWords"
+                        Text="{Binding PointToShowInformation.Description}" />
+                    <TextBlock
+                        Margin="0, 10, 0, 0"
+                        FontSize="15" 
+                        TextAlignment="Justify"
+                        Visibility="{Binding PointToShowInformation.Address.Street, Converter={StaticResource StringToVisibilityConverter}}"
+                        Foreground="{StaticResource ASBlack}"
+                        TextWrapping="WrapWholeWords">
+                        <Run Text="{Binding PointToShowInformation.Address.Street}"/>
+					    <Run Text=" " />
+						<Run Text="{Binding PointToShowInformation.Address.StreetNumber}" />
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0, 2, 0, 0"
+                        FontSize="15" 
+                        TextAlignment="Justify"
+                        Visibility="{Binding PointToShowInformation.Address.ZipCode, Converter={StaticResource StringToVisibilityConverter}}"
+                        Foreground="{StaticResource ASBlack}"
+                        TextWrapping="WrapWholeWords">
+                        <Run Text="{Binding PointToShowInformation.Address.ZipCode}"/>
+					    <Run Text=" " />
+						<Run Text="{Binding PointToShowInformation.Address.City}" />
+                    </TextBlock>
+                    <ListView 
+                        Margin="0, 10, 0, 0"
+                        Visibility="{Binding PointToShowInformation.Opening, Converter={StaticResource OpeningToVisibilityConverter}}"
+                        ItemsSource="{Binding PointToShowInformation.Opening}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid 
+                                    Orientation="Vertical" 
+                                    HorizontalChildrenAlignment="left"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,0,0,-20"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="0,0,0,-10"
+                                    FontSize="15" 
+                                    TextAlignment="Justify"
+                                    Foreground="{StaticResource ASBlack}"
+                                    TextWrapping="WrapWholeWords">
+                                    <Run Text="{Binding Day, Converter={StaticResource DayEnglishToDayPolishConverter}}"/>
+					                <Run Text=": " />
+						            <Run Text="{Binding Open}" />
+                                    <Run Text=" - " />
+                                    <Run Text="{Binding Close}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock
+                        Margin="0, 10, 0, 0"
+                        FontSize="15" 
+                        TextAlignment="Justify"
+                        Visibility="{Binding PointToShowInformation.Phone, Converter={StaticResource StringToVisibilityConverter}}"
+                        Foreground="{StaticResource ASBlack}"
+                        TextWrapping="WrapWholeWords">
+                        <Run Text="tel: " />
+                        <Run Text="{Binding PointToShowInformation.Phone}"/>
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0, 10, 0, 0"
+                        FontSize="15" 
+                        TextAlignment="Justify"
+                        Visibility="{Binding PointToShowInformation.Www, Converter={StaticResource StringToVisibilityConverter}}"
+                        Foreground="{StaticResource ASBlack}"
+                        TextWrapping="WrapWholeWords">
+                        <Run Text="www: " />
+                        <Run Text="{Binding PointToShowInformation.Www}"/>
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0, 0, 0, 0"
+                        FontSize="15" 
+                        TextAlignment="Justify"
+                        Visibility="{Binding PointToShowInformation.Fanpage, Converter={StaticResource StringToVisibilityConverter}}"
+                        Foreground="{StaticResource ASBlack}"
+                        TextWrapping="WrapWholeWords">
+                        <Run Text="fanpage: " />
+                        <Run Text="{Binding PointToShowInformation.Fanpage}"/>
+                    </TextBlock>
+                    <ListView 
+                        Margin="0, 10, 0, 0"
+                        Visibility="{Binding PointToShowInformation.Tags, Converter={StaticResource TagsToVisibilityConverter}}"
+                        ItemsSource="{Binding PointToShowInformation.Tags}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel 
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Left"  
+                                    VerticalAlignment="Top"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    FontSize="15" 
+                                    TextAlignment="Justify"
+                                    Foreground="{StaticResource ASBlack}"
+                                    TextWrapping="WrapWholeWords" 
+                                    Text="{Binding }"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+
+        <Grid Grid.RowSpan="3" Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition Width="2*"/>
@@ -81,19 +276,39 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="5*" />
             </Grid.RowDefinitions>
-            <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource PhoneChromeBrush}" />
-            <Border Grid.Column="3" Grid.RowSpan="2" Background="Black" Opacity="0.3" />
-
-            <UserControls:SideMenuFilter Grid.Column="1" Grid.Row="1" ItemsSourceCategories="{Binding ListOfCategories}" SelectedCategory="{Binding SelectedValue, Mode=TwoWay}" />
-       
+            <Border 
+                Grid.Column="0" 
+                Grid.ColumnSpan="3" 
+                Grid.RowSpan="2" 
+                Background="{StaticResource PhoneChromeBrush}" />
+            <Border 
+                Grid.Column="4" 
+                Grid.RowSpan="2">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,0.5" StartPoint="1,0.5">
+                        <GradientStop Color="#CC424242" Offset="1"/>
+                        <GradientStop Color="Transparent" Offset="0.772"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <UserControls:SideMenuFilter
+                Grid.Column="1" 
+                Grid.Row="1" 
+                ItemsSourceCategories="{Binding ListOfCategories}" 
+                SelectedCategory="{Binding SelectedValue, Mode=TwoWay}" />
         </Grid>
-        
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar IsSticky="True" x:Name="appBar">
+        <CommandBar 
+            IsSticky="True" 
+            x:Name="appBar">
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="ToggleFilter" Icon="Filter" IsCompact="False" x:Uid="ToggleFilter" Label="Filtrowanie"/>
+                <AppBarButton 
+                    x:Name="ToggleFilter" 
+                    Icon="Filter" 
+                    IsCompact="False" 
+                    Label="Filtrowanie"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

@@ -21,6 +21,6 @@ namespace AugmentedSzczecin.Interfaces
 
         Task<bool> ResetPassword(User user);
 
-        Task<bool> AddPointOfInterest(PointOfInterest poi);
+        Task<bool> AddPointOfInterest(PointOfInterest poi, string email, string password);
     }
 }
