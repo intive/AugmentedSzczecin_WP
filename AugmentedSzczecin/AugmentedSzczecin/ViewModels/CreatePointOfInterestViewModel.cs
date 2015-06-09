@@ -1130,7 +1130,7 @@ namespace AugmentedSzczecin.ViewModels
         private bool ValidateFanpageMatch()
         {
             if (String.IsNullOrEmpty(Fanpage)) return true;
-            IsFanpageMatchValid = Regex.IsMatch(Www, @"^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$");
+            IsFanpageMatchValid = Regex.IsMatch(Fanpage, @"^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$");
             return IsFanpageMatchValid;
         }
 
