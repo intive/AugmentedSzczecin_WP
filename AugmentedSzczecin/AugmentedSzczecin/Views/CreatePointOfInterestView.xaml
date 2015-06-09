@@ -208,7 +208,6 @@
                  Style="{StaticResource InputBorder}">
                 <TextBox
                 Style="{StaticResource InputTextBox}"
-                PlaceholderText="Testowa Nazwa"
                 caliburn:Message.Attach="[Event KeyDown] = [Action OnKeyDown($executionContext)]"
                 TabIndex="0"
                 x:Uid="NewPoiNameBox"
