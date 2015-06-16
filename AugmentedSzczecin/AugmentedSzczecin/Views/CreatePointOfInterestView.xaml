@@ -222,9 +222,10 @@
                 x:Uid="NewPoiLatitude" />
             <Border Style="{StaticResource InputBorder}">
                 <TextBox
-                Style="{StaticResource InputTextBox}"
-                IsEnabled="False"
-                x:Name="Latitude" />
+                    Style="{StaticResource InputTextBox}"
+                    Foreground="Gray"
+                    IsReadOnly="True"
+                    x:Name="Latitude" />
             </Border>
 
             <!-- Longitude -->
@@ -234,9 +235,10 @@
                 x:Uid="NewPoiLongitude" />
             <Border Style="{StaticResource InputBorder}">
                 <TextBox
-                Style="{StaticResource InputTextBox}"
-                IsEnabled="False"
-                x:Name="Longitude" />
+                    Style="{StaticResource InputTextBox}"
+                    Foreground="Gray"
+                    IsReadOnly="True"
+                    x:Name="Longitude" />
             </Border>
 
             <!-- Opis -->
