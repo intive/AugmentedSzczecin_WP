@@ -52,6 +52,8 @@
                 FontSize="42"
                 FontWeight="Bold"
                 FontFamily="Segoe WP" />
+                
+                
             </StackPanel>
         </Grid>
         <StackPanel

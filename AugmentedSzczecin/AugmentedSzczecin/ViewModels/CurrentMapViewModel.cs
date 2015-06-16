@@ -26,7 +26,7 @@ namespace AugmentedSzczecin.ViewModels
         public CurrentMapViewModel( IEventAggregator eventAggregator, 
                                     ILocationService locationService, 
                                     IPointOfInterestService pointOfInterestService, 
-                                    INavigationService navigationService)
+            INavigationService navigationService)
                                     : base(eventAggregator, locationService, pointOfInterestService, navigationService) { }
 
         #endregion
@@ -151,8 +151,8 @@ namespace AugmentedSzczecin.ViewModels
         private bool _isInformationPanelPreviouslyVisible = false;
         public bool IsInformationPanelPreviouslyVisible
         {
-            get
-            {
+            get 
+            { 
                 return _isInformationPanelPreviouslyVisible;
             }
             set
@@ -161,7 +161,7 @@ namespace AugmentedSzczecin.ViewModels
                 NotifyOfPropertyChange(() => _isInformationPanelPreviouslyVisible);
             }
         }
-
+        
         public Geopoint Parameter { get; set; }
 
         private PointOfInterest _pointToShowInformation;
@@ -253,7 +253,7 @@ namespace AugmentedSzczecin.ViewModels
             {
                 MyLocation = CenterOfTheMap = await _locationService.GetGeolocation();
             }
-        }
+            }
 
         private void CountZoomLevel()
         {

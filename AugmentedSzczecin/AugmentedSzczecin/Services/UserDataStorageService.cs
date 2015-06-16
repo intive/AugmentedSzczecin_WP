@@ -36,7 +36,7 @@ namespace AugmentedSzczecin.Services
                 }
             }
         }
-    
+
         public string GetUserEmail()
         {
             var vault = new PasswordVault();

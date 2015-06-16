@@ -38,6 +38,7 @@
                 VerticalAlignment="Top"
                 Foreground="{StaticResource ASNavy}"
                 Text="AUGMENTED"
+                x:Uid="Augmented"
                 FontSize="25.5"
                 FontWeight="Normal"
                 FontFamily="Segoe WP" />
@@ -46,6 +47,7 @@
                 VerticalAlignment="Top"
                 Foreground="{StaticResource ASRed}"
                 Text="SZCZECIN"
+                x:Uid="Szczecin"
                 FontSize="32"
                 FontWeight="Bold"
                 FontFamily="Segoe WP" />

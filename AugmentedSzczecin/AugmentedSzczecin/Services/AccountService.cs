@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.ApplicationModel.Resources;
 using AugmentedSzczecin.Events;
 using AugmentedSzczecin.Interfaces;
 using AugmentedSzczecin.Models;
@@ -26,6 +27,7 @@ namespace AugmentedSzczecin.Services
 
         public async void Register(string email, string password)
         {
+            var loader = new ResourceLoader();
             var newUser = new User() { Email = email, Password = password };
             var status = await _httpService.CreateAccount(newUser);
 
@@ -34,19 +36,20 @@ namespace AugmentedSzczecin.Services
                 case 204:
                     _userDataStorageService.AddUserData("ASPassword", email, password);
                     _httpService.SetAuthenticationHeader(email, password);
-                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = "Rejestracja zakończona pomyślnie!" });
+                    _eventAggregator.PublishOnUIThread(new RegisterSuccessEvent() { SuccessMessage = loader.GetString("RegisterSuccessMessage") });
                     break;
                 case 422:
-                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Ten email jest już używany." });
+                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = loader.GetString("RegisterEmailFailMessage") });
                     break;
                 default:
-                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = "Błąd serwera." });
+                    _eventAggregator.PublishOnUIThread(new RegisterFailedEvent() { FailMessage = loader.GetString("ServerError") });
                     break;
             }
         }
 
         public async void SignIn(string email, string password)
         {
+            var loader = new ResourceLoader();
             var newUser = new User() { Email = email, Password = password };
             var status = await _httpService.SignIn(newUser);
 
@@ -55,17 +58,17 @@ namespace AugmentedSzczecin.Services
                 case 200:
                     _userDataStorageService.AddUserData("ASPassword", email, password);
                     _httpService.SetAuthenticationHeader(email, password);
-                    _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = "Logowanie zakończone pomyślnie!" });
+                    _eventAggregator.PublishOnUIThread(new SignInSuccessEvent() { SuccessMessage = loader.GetString("SignInSuccessMessage") });
                     break;
                 case 401:
-                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Niepoprawne dane." });
+                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = loader.GetString("SignInDataFailMessage") });
                     break;
                 default:
-                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = "Błąd serwera." });
+                    _eventAggregator.PublishOnUIThread(new SignInFailedEvent() { FailMessage = loader.GetString("ServerError") });
                     break;
             }
         }
-    
+
         public bool IsUserSignedIn()
         {
             return _userDataStorageService.IsUserSignedIn();
@@ -76,7 +79,7 @@ namespace AugmentedSzczecin.Services
             _userDataStorageService.SignOut();
             _httpService.SignOut();
         }
-    
+
         public string GetUserEmail()
         {
             return _userDataStorageService.GetUserEmail();
@@ -89,17 +92,18 @@ namespace AugmentedSzczecin.Services
 
         public async void ResetPassword(string email)
         {
+            var loader = new ResourceLoader();
             var newUser = new User() { Email = email, Password = "" };
 
             var status = await _httpService.ResetPassword(newUser);
 
             if (status)
             {
-                _eventAggregator.PublishOnUIThread(new ResetPasswordSuccessEvent() { SuccessMessage = "New password sent on the email address!" });
+                _eventAggregator.PublishOnUIThread(new ResetPasswordSuccessEvent() { SuccessMessage = loader.GetString("ResetPasswordSuccessMessage") });
             }
             else
             {
-                _eventAggregator.PublishOnUIThread(new ResetPasswordFailedEvent() { FailMessage = "Backend error" });
+                _eventAggregator.PublishOnUIThread(new ResetPasswordFailedEvent() { FailMessage = loader.GetString("ServerError") });
             }
         }
     }
