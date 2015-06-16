@@ -1092,6 +1092,7 @@ namespace AugmentedSzczecin.ViewModels
             {
                 IsFirstCategorySelected = false;
                 SelectedSubcategoryItem = null;
+                IsSubcategorySelected = false;
                 IsCategorySelected = SelectedCategoryItem != null;
             }
         }
@@ -1177,7 +1178,10 @@ namespace AugmentedSzczecin.ViewModels
                 pointOfInterest.Opening = GetOpeningDaysAndHours();
             }
             pointOfInterest.Category = SelectedCategoryItem.EnumCategory.ToString();
-            pointOfInterest.Subcategory = "PARK";
+            if (IsSubcategorySelected)
+            {
+                pointOfInterest.Subcategory = SelectedSubcategoryItem.EnumSubcategory.ToString();
+            }
 
             return pointOfInterest;
         }
