@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
@@ -57,10 +58,17 @@ namespace AugmentedSzczecin.Views
         private async Task StartCamera()
         {
             var mediaCapture = new MediaCapture();
-            (App.Current as App)._mediaCapture = mediaCapture;
-            await mediaCapture.InitializeAsync();
-            PreviewScreen.Source = mediaCapture;
-            await mediaCapture.StartPreviewAsync();
+            (App.Current as App)._mediaCapture = mediaCapture;;
+            var cameraId = await FindRearFacingCamera();
+            if (!string.IsNullOrEmpty(cameraId))
+            {
+                var settings = new MediaCaptureInitializationSettings();
+                settings.VideoDeviceId = cameraId;
+                settings.StreamingCaptureMode = StreamingCaptureMode.Video;
+                await mediaCapture.InitializeAsync(settings);
+                PreviewScreen.Source = mediaCapture;
+                await mediaCapture.StartPreviewAsync();
+            }
         }
 
         private async void StopCamera()
@@ -73,6 +81,33 @@ namespace AugmentedSzczecin.Views
             }
         }
 
+        private async Task<string> FindRearFacingCamera()
+        {
+            var devices = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
+
+            var device = (from d in devices
+                          where d.EnclosureLocation != null &&
+                                d.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Back
+                          select d).FirstOrDefault();
+
+            if (device == null)
+            {
+                device = (from d in devices
+                          where d.Name.ToLower().Contains("back") ||
+                                d.Id.ToLower().Contains("back") ||
+                                d.Name.ToLower().Contains("rear") ||
+                                d.Id.ToLower().Contains("rear")
+                          select d).FirstOrDefault();
+            }
+
+            if (device != null)
+            {
+                return device.Id;
+            }
+
+            return null;
+        }
+
         private void UpdateARView()
         {
             if (_currentLocation != null)
@@ -81,7 +116,7 @@ namespace AugmentedSzczecin.Views
 
                 if (_poiLocations != null && _poiLocations.Count > 0)
                 {
-                    var center = new Coordinate(_currentLocation.Position.Latitude,
+                    var currentCoord = new Coordinate(_currentLocation.Position.Latitude,
                         _currentLocation.Position.Longitude);
 
                     foreach (var poi in _poiLocations)
@@ -90,8 +125,8 @@ namespace AugmentedSzczecin.Views
                         {
                             continue;
                         }
-                        var c = new Coordinate(poi.Location.Latitude, poi.Location.Longitude);
-                        var poiHeading = SpatialTools.CalculateHeading(center, c);
+                        var poiCoord = new Coordinate(poi.Location.Latitude, poi.Location.Longitude);
+                        var poiHeading = SpatialTools.CalculateHeading(currentCoord, poiCoord);
                         var diff = _currentHeading - poiHeading;
 
                         if (diff > 180)
@@ -105,7 +140,7 @@ namespace AugmentedSzczecin.Views
 
                         if (Math.Abs(diff) <= (_angleOfView / 2))
                         {
-                            var distance = SpatialTools.HaversineDistance(center, c, DistanceUnits.Meters);
+                            var distance = SpatialTools.HaversineDistance(currentCoord, poiCoord, DistanceUnits.Meters);
 
                             double left = 0;
 
@@ -118,7 +153,7 @@ namespace AugmentedSzczecin.Views
                                 left = ItemCanvas.ActualWidth / 2 * (1 + -diff / (_angleOfView / 2));
                             }
 
-                            double top = (ItemCanvas.ActualHeight - 50) * (1 - distance / RadiusSlider.Value) + 50;
+                            double top = (ItemCanvas.ActualHeight - 90) * (1 - distance / RadiusSlider.Value) + 45;
 
                             var converter = new CategoryToPinSignConverter();
                             var symbol = (Symbol) converter.Convert(poi.Category, null, null, null);
@@ -179,8 +214,17 @@ namespace AugmentedSzczecin.Views
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                _currentHeading = reading.HeadingMagneticNorth;
-                UpdateARView();
+                if (reading.HeadingAccuracy != MagnetometerAccuracy.High)
+                {
+                    CompassCalibration.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                }
+                else
+                {
+                    CompassCalibration.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    _currentHeading = reading.HeadingMagneticNorth + 90;
+                    UpdateARView();
+                }
+                
             });
         }
 

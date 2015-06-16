@@ -2,10 +2,10 @@
 {
     public enum CategoryType
     {
+        ALL,
         PLACE,
         COMMERCIAL,
         EVENT,
         PERSON,
-        ALL
     }
 }

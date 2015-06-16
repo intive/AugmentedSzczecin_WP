@@ -129,6 +129,7 @@
                     x:Uid="MainViewAdd"
                     Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAddPointOfInterest]" />
+                <!--
                 <ListViewItem
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
@@ -136,6 +137,7 @@
                     x:Uid="MainViewList"
                     Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
+                -->
                 <ListViewItem
                     Foreground="{StaticResource ASNavy}"
                     FontSize="28"
