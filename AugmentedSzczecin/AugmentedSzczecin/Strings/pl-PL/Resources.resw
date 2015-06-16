@@ -118,145 +118,145 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BothConnectionDisabledMessage" xml:space="preserve">
-    <value>Internet and Location connection disabled.</value>
+    <value>Dostęp do Internetu oraz lokalizacja wyłączone</value>
   </data>
   <data name="AddNewPointOfInterest.Content" xml:space="preserve">
-    <value>Add</value>
+    <value>Dodaj</value>
   </data>
   <data name="AddPointOfInterestTitle.Text" xml:space="preserve">
-    <value>Tap to add POI on the map</value>
+    <value>Dodaj nowy punkt na mapie</value>
   </data>
   <data name="CancelAddingPointOfInterest.Content" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Anuluj</value>
   </data>
   <data name="ConfirmNewPointOfInterest.Label" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Zatwierdź</value>
   </data>
   <data name="CreatePointOfInterestCategoryNotSelected" xml:space="preserve">
-    <value>Choose Category.</value>
+    <value>Wybierz kategorię</value>
   </data>
   <data name="CreatePointOfInterestCityEmpty" xml:space="preserve">
-    <value>Fill City field.</value>
+    <value>Wypełnij pole Miasto.</value>
   </data>
   <data name="CreatePointOfInterestCityMatch" xml:space="preserve">
-    <value>Fill City field properly.</value>
+    <value>Wypełnij pole Miasto poprawnie.</value>
   </data>
   <data name="CreatePointOfInterestDescriptionEmpty" xml:space="preserve">
-    <value>Fill Description field.</value>
+    <value>Wypełnij pole Opis</value>
   </data>
   <data name="CreatePointOfInterestEmptyForm" xml:space="preserve">
-    <value>Fill the fields.</value>
+    <value>Wypełnij pola.</value>
   </data>
   <data name="CreatePointOfInterestExtraTitle.Text" xml:space="preserve">
-    <value>Extra Fields</value>
+    <value>Pola dodatkowe</value>
   </data>
   <data name="CreatePointOfInterestStreetNumberEmpty" xml:space="preserve">
-    <value>Fill StreetNumber field.</value>
+    <value>Wypełnij pole Numer ulicy.</value>
   </data>
   <data name="CreatePointOfInterestNameEmpty" xml:space="preserve">
-    <value>Fill Name field.</value>
+    <value>Wypełnij pole Nazwa.</value>
   </data>
   <data name="CreatePointOfInterestPlaceEmpty" xml:space="preserve">
-    <value>Fill Place field.</value>
+    <value>Wypełnij pole Miejsce.</value>
   </data>
   <data name="CreatePointOfInterestZipCodeEmpty" xml:space="preserve">
-    <value>Fill Postal Code field.</value>
+    <value>Wypełnij pole Kod Pocztowy.</value>
   </data>
   <data name="CreatePointOfInterestZipCodeMatch" xml:space="preserve">
-    <value>Fill Postal Code properly.</value>
+    <value>Wypełnij pole kod Pocztowy Poprawnie.</value>
   </data>
   <data name="CreatePointOfInterestStreetEmpty" xml:space="preserve">
-    <value>Fill Street field.</value>
+    <value>Wypełnij pole Ulica.</value>
   </data>
   <data name="CreatePointOfInterestStreetMatch" xml:space="preserve">
-    <value>Fill Street field properly.</value>
+    <value>Wypełnij pole Ulica poprawnie.</value>
   </data>
   <data name="CreatePointOfInterestSubcategoryNotSelected" xml:space="preserve">
-    <value>Choose Subcategory.</value>
+    <value>Wybierz podkategorię</value>
   </data>
   <data name="CreatePointOfInterestTagsEmpty" xml:space="preserve">
-    <value>Fill Tags field.</value>
+    <value>Wypełnij pole Tagi.</value>
   </data>
   <data name="CreatePointOfInterestTagsMatch" xml:space="preserve">
-    <value>Fill Tags field properly.</value>
+    <value>Wypełnij pole Tagi poprawnie.</value>
   </data>
   <data name="CreatePointOfInterestTitle.Text" xml:space="preserve">
-    <value>Creating POI</value>
+    <value>Tworzenie POI</value>
   </data>
   <data name="CurrentMapTitle.Text" xml:space="preserve">
-    <value>Current Location</value>
+    <value>Obecna lokalizacja.</value>
   </data>
   <data name="ExtraFieldsCheckBox.Content" xml:space="preserve">
-    <value>Extra Fields</value>
+    <value>Pola dodatkowe</value>
   </data>
   <data name="Friday.Content" xml:space="preserve">
-    <value>Friday</value>
+    <value>Piątek</value>
   </data>
   <data name="Monday.Content" xml:space="preserve">
-    <value>Monday</value>
+    <value>Poniedziałek</value>
   </data>
   <data name="NewPoiAddress.Text" xml:space="preserve">
-    <value>Address</value>
+    <value>Adres</value>
   </data>
   <data name="NewPoiAddressCity.Text" xml:space="preserve">
-    <value>City</value>
+    <value>Miasto</value>
   </data>
   <data name="NewPoiAddressCityBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. Szczecin</value>
+    <value>np. Szczecin</value>
   </data>
   <data name="NewPoiAddressStreetNumber.Text" xml:space="preserve">
-    <value>Street number</value>
+    <value>Numer ulicy</value>
   </data>
   <data name="NewPoiAddressStreetNumberBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. 11</value>
+    <value>np. 11</value>
   </data>
   <data name="NewPoiAddressPlace.Text" xml:space="preserve">
-    <value>Door number</value>
+    <value>Numer domu</value>
   </data>
   <data name="NewPoiAddressPlaceBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. 3</value>
+    <value>np.. 3</value>
   </data>
   <data name="NewPoiAddressZipCode.Text" xml:space="preserve">
-    <value>Postal code</value>
+    <value>Kod pocztowy</value>
   </data>
   <data name="NewPoiAddressZipCodeBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. 71-696</value>
+    <value>np. 71-696</value>
   </data>
   <data name="NewPoiAddressStreet.Text" xml:space="preserve">
-    <value>Street</value>
+    <value>Ulica</value>
   </data>
   <data name="NewPoiAddressStreetBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. Kormoranów</value>
+    <value>np. Kormoranów</value>
   </data>
   <data name="NewPoiCategory.Text" xml:space="preserve">
-    <value>Category</value>
+    <value>Kategoria</value>
   </data>
   <data name="NewPoiCategoryBox.PlaceholderText" xml:space="preserve">
-    <value>Choose category...</value>
+    <value>Wybierz kateogorię...</value>
   </data>
   <data name="NewPoiCategoryFirst" xml:space="preserve">
-    <value>Places</value>
+    <value>Miejsca</value>
   </data>
   <data name="NewPoiCategoryFourth" xml:space="preserve">
-    <value>People</value>
+    <value>Ludzie</value>
   </data>
   <data name="NewPoiCategorySecond" xml:space="preserve">
     <value>Commercial</value>
   </data>
   <data name="NewPoiCategoryThird" xml:space="preserve">
-    <value>Events</value>
+    <value>Wydarzenia</value>
   </data>
   <data name="NewPoiDescription.Text" xml:space="preserve">
-    <value>Description</value>
+    <value>Opis</value>
   </data>
   <data name="NewPoiDescriptionBox.PlaceholderText" xml:space="preserve">
-    <value>Add some description...</value>
+    <value>Dodaj opis...</value>
   </data>
   <data name="NewPoiFanpage.Text" xml:space="preserve">
     <value>Fanpage</value>
   </data>
   <data name="NewPoiFanpageBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. fb.com/BLStreamPatronage</value>
+    <value>np. fb.com/BLStreamPatronage</value>
   </data>
   <data name="NewPoiLatitude.Text" xml:space="preserve">
     <value>Latitude</value>
@@ -265,251 +265,250 @@
     <value>Longitude</value>
   </data>
   <data name="NewPoiName.Text" xml:space="preserve">
-    <value>Name</value>
+    <value>Nazwa</value>
   </data>
   <data name="NewPoiNameBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. My new POI</value>
+    <value>np. My new POI</value>
   </data>
   <data name="NewPoiOpeningDays.Text" xml:space="preserve">
-    <value>Opening Days</value>
+    <value>Dni otwarte</value>
   </data>
   <data name="NewPoiPhone.Text" xml:space="preserve">
-    <value>Phone</value>
+    <value>Telefon</value>
   </data>
   <data name="NewPoiPhoneBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. 123456789</value>
+    <value>np. 123456789</value>
   </data>
   <data name="NewPoiPrice.Text" xml:space="preserve">
-    <value>Price</value>
+    <value>Cena</value>
   </data>
   <data name="NewPoiPriceBox.PlaceholderText" xml:space="preserve">
-    <value>Payable/Free</value>
+    <value>Płatne/Bezpłatne</value>
   </data>
   <data name="NewPoiSubcategory.Text" xml:space="preserve">
-    <value>Subcategory</value>
+    <value>Podkategoria</value>
   </data>
   <data name="NewPoiSubcategoryBox.PlaceholderText" xml:space="preserve">
-    <value>Choose subcategory...</value>
+    <value>Wybierz podkategorię...</value>
   </data>
   <data name="NewPoiSubcategoryEighth" xml:space="preserve">
-    <value>Railway Station</value>
+    <value>Dworzec kolejowy</value>
   </data>
   <data name="NewPoiSubcategoryFifth" xml:space="preserve">
-    <value>Museum</value>
+    <value>Muzeum</value>
   </data>
   <data name="NewPoiSubcategoryFirst" xml:space="preserve">
-    <value>School</value>
+    <value>Szkoła</value>
   </data>
   <data name="NewPoiSubcategoryFourth" xml:space="preserve">
-    <value>Monument</value>
+    <value>Pomnik</value>
   </data>
   <data name="NewPoiSubcategoryNinth" xml:space="preserve">
-    <value>Post Office</value>
+    <value>Urząd pocztowy</value>
   </data>
   <data name="NewPoiSubcategorySecond" xml:space="preserve">
-    <value>Hospital</value>
+    <value>Szpital</value>
   </data>
   <data name="NewPoiSubcategorySeventh" xml:space="preserve">
-    <value>Bus Station</value>
+    <value>Dworzec autobusowy</value>
   </data>
   <data name="NewPoiSubcategorySixth" xml:space="preserve">
-    <value>Office</value>
+    <value>Urząd</value>
   </data>
   <data name="NewPoiSubcategoryTenth" xml:space="preserve">
-    <value>Church</value>
+    <value>Kościół</value>
   </data>
   <data name="NewPoiSubcategoryThird" xml:space="preserve">
     <value>Park</value>
   </data>
   <data name="NewPoiTags.Text" xml:space="preserve">
-    <value>Tags</value>
+    <value>Tagi</value>
   </data>
   <data name="NewPoiTagsBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. best, epic, rare, ...</value>
+    <value>np. best, epic, rare, ...</value>
   </data>
   <data name="NewPoiWebsite.Text" xml:space="preserve">
-    <value>Website</value>
+    <value>Strona WWW</value>
   </data>
   <data name="NewPoiWebsiteBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. blstream.com</value>
+    <value>np. blstream.com</value>
   </data>
   <data name="NewPoiWikipedia.Text" xml:space="preserve">
     <value>Wikipedia</value>
   </data>
   <data name="NewPoiWikipediaBox.PlaceholderText" xml:space="preserve">
-    <value>e.g. wikipedia.org/wiki/Microsoft</value>
+    <value>np. wikipedia.org/wiki/Microsoft</value>
   </data>
   <data name="OpeningHoursCheckBox.Content" xml:space="preserve">
-    <value>Opening Hours</value>
+    <value>Godziny otwarcia</value>
   </data>
   <data name="OpeningHoursFrom.Text" xml:space="preserve">
-    <value>From</value>
+    <value>Od</value>
   </data>
   <data name="OpeningHoursTo.Text" xml:space="preserve">
-    <value>To</value>
+    <value>Do</value>
   </data>
   <data name="PriceFree" xml:space="preserve">
-    <value>Free</value>
+    <value>Bezpłatne</value>
   </data>
   <data name="PricePayable" xml:space="preserve">
-    <value>Payable</value>
+    <value>Płate</value>
   </data>
   <data name="GeolocationDisabledMessage" xml:space="preserve">
-    <value>Geolocation disabled.</value>
+    <value>Lokalizacja wyłączona.</value>
   </data>
   <data name="InternetConnectionDisabledMessage" xml:space="preserve">
-    <value>Internet Connection disabled.</value>
+    <value>Dostęp do Internetu wyłączonu.</value>
   </data>
   <data name="RefreshConnection.Label" xml:space="preserve">
-    <value>Reconnect</value>
+    <value>Odśwież</value>
   </data>
   <data name="ResetPasswordButtonReset.Content" xml:space="preserve">
-    <value>Ready</value>
+    <value>Gotowe</value>
   </data>
   <data name="ResetPasswordProgressRing.Text" xml:space="preserve">
-    <value>Requesting</value>
+    <value>Wysyłam żądanie.</value>
   </data>
   <data name="Saturday.Content" xml:space="preserve">
-    <value>Saturday</value>
+    <value>Sobota</value>
   </data>
   <data name="SignEmail.Text" xml:space="preserve">
     <value>E-mail</value>
   </data>
   <data name="SignEmail.PlaceholderText" xml:space="preserve">
-    <value>Enter your email</value>
+    <value>Wpisz email</value>
   </data>
   <data name="SignPassword.PlaceholderText" xml:space="preserve">
-    <value>Enter your password</value>
+    <value>Wpisz hasło</value>
   </data>
   <data name="SignInButtonResetPassword.Content" xml:space="preserve">
-    <value>Reset password</value>
+    <value>Zresetuj hasło</value>
   </data>
   <data name="SignInButtonSignIn.Content" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Zaloguj</value>
   </data>
   <data name="Email.Text" xml:space="preserve">
     <value>E-mail</value>
   </data>
   <data name="Password.Text" xml:space="preserve">
-    <value>Password</value>
+    <value>Hasło</value>
   </data>
   <data name="SignInProgressRing.Text" xml:space="preserve">
-    <value>Logging</value>
+    <value>Trwa logowanie</value>
   </data>
   <data name="SignOutConfirmationText" xml:space="preserve">
-    <value>Are you sure you want to sign out?</value>
+    <value>Czy wylogować?</value>
   </data>
   <data name="SignUpButtonSignUp.Content" xml:space="preserve">
-    <value>Ready</value>
+    <value>Gotowe</value>
   </data>
   <data name="SignUpEmailEmpty" xml:space="preserve">
-    <value>E-mail not specified.</value>
+    <value>Email niekoreślony</value>
   </data>
   <data name="SignUpEmailMatch" xml:space="preserve">
-    <value>Invalid E-mail.</value>
+    <value>Email niepoprawny</value>
   </data>
   <data name="SignUpEmptyForm" xml:space="preserve">
-    <value>E-mail and password not specified.</value>
+    <value>Email i hasło nieokreślone</value>
   </data>
   <data name="SignUpMainText.Text" xml:space="preserve">
-    <value>Create new account</value>
+    <value>Stwórzy nowe konto</value>
   </data>
   <data name="SignUpPasswordEmpty" xml:space="preserve">
-    <value>Password not specified.</value>
+    <value>Hasło nieokreślone</value>
   </data>
   <data name="SignUpPasswordLength" xml:space="preserve">
-    <value>Password too short.</value>
+    <value>Hasło zbyt krótkie</value>
   </data>
   <data name="SignUpProgressRing.Text" xml:space="preserve">
-    <value>Registering</value>
+    <value>Resjestruje</value>
   </data>
   <data name="SignInMainText.Text" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Zaloguj</value>
   </data>
   <data name="ResetPasswordMainText.Text" xml:space="preserve">
-    <value>Reset password</value>
+    <value>Zresetuj hasło</value>
   </data>
   <data name="Sunday.Content" xml:space="preserve">
-    <value>Sunday</value>
+    <value>Niedziela</value>
   </data>
   <data name="Thursday.Content" xml:space="preserve">
-    <value>Thursday</value>
+    <value>Czwartek</value>
   </data>
   <data name="Tuesday.Content" xml:space="preserve">
-    <value>Tuesday</value>
+    <value>Wtorek</value>
   </data>
   <data name="Wednesday.Content" xml:space="preserve">
-    <value>Wednesday</value>
+    <value>Środa</value>
   </data>
   <data name="ValidationErrorGeneralMessage" xml:space="preserve">
-    <value>Please correct red-marked fields.</value>
+    <value>Popraw czerwone pola.</value>
   </data>
   <data name="CreatePointOfInterestFailureMessage" xml:space="preserve">
-    <value>Something goes wrong. Try again!</value>
+    <value>Coś poszło nie tak. Spróbuj ponownie!</value>
   </data>
   <data name="CreatePointOfInterestSuccessMessage" xml:space="preserve">
-    <value>Point added!</value>
+    <value>Punkt dodano!</value>
   </data>
   <data name="AboutText.Text" xml:space="preserve">
-    <value>Application was made
-within the project
+    <value>Aplikacja wykonana w ramach
 BLStream Patronage in 2015.</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
-    <value>Version:</value>
+    <value>Wersja: </value>
   </data>
   <data name="Augmented.Text" xml:space="preserve">
     <value>AUGMENTED</value>
   </data>
   <data name="Back.Content" xml:space="preserve">
-    <value>Back</value>
+    <value>Wstecz</value>
   </data>
   <data name="Cancel.Content" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Anuluj</value>
   </data>
   <data name="RegisterEmailFailMessage" xml:space="preserve">
-    <value>This email is already used!</value>
+    <value>Ten adres email jest zajęty</value>
   </data>
   <data name="RegisterSuccessMessage" xml:space="preserve">
-    <value>Successfully registered!</value>
+    <value>Pomyślnie zarejestrowano!</value>
   </data>
   <data name="ResetPasswordSuccessMessage" xml:space="preserve">
-    <value>New password sent on the email address!</value>
+    <value>Nowe hasło wysłano na adres email!</value>
   </data>
   <data name="ServerError" xml:space="preserve">
-    <value>Server error!</value>
+    <value>Błąd serwera!</value>
   </data>
   <data name="Settings.Content" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ustawienia</value>
   </data>
   <data name="SignInDataFailMessage" xml:space="preserve">
-    <value>Invalid data!</value>
+    <value>Niepoprawne dane!</value>
   </data>
   <data name="SignInSuccessMessage" xml:space="preserve">
-    <value>Signed in!</value>
+    <value>Zalogowano!</value>
   </data>
   <data name="SignOut.Content" xml:space="preserve">
-    <value>Sign Out</value>
+    <value>Wyloguj</value>
   </data>
   <data name="Szczecin.Text" xml:space="preserve">
     <value>SZCZECIN</value>
   </data>
   <data name="ToggleFilter.Label" xml:space="preserve">
-    <value>Filter</value>
+    <value>Piątek</value>
   </data>
   <data name="MainViewAbout.Content" xml:space="preserve">
-    <value>about application</value>
+    <value>o aplikacji</value>
   </data>
   <data name="MainViewAdd.Content" xml:space="preserve">
-    <value>add point</value>
+    <value>dodaj punkt</value>
   </data>
   <data name="MainViewAR.Content" xml:space="preserve">
     <value>augmented</value>
   </data>
   <data name="MainViewList.Content" xml:space="preserve">
-    <value>location list</value>
+    <value>lista lokacji</value>
   </data>
   <data name="MainViewMap.Content" xml:space="preserve">
-    <value>map</value>
+    <value>mapa</value>
   </data>
 </root>

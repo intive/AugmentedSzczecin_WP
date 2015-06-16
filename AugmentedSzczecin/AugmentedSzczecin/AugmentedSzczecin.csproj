@@ -211,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <PRIResource Include="Strings\pl-PL\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>

@@ -57,7 +57,7 @@ namespace AugmentedSzczecin.ViewModels
                 {
                     _backgroundList = value;
                     NotifyOfPropertyChange(() => BackgroundList);
-        }
+                }
             }
         }
 
@@ -177,8 +177,8 @@ namespace AugmentedSzczecin.ViewModels
             var loader = new ResourceLoader();
             var msg = new MessageDialog(loader.GetString("SignOutConfirmationText"));
 
-            msg.Commands.Add(new UICommand("Sign out", SignOutConfirmed));
-            msg.Commands.Add(new UICommand("Cancel"));
+            msg.Commands.Add(new UICommand(loader.GetString("SignOut"), SignOutConfirmed));
+            msg.Commands.Add(new UICommand(loader.GetString(("Cancel"))));
 
             msg.ShowAsync();
         }

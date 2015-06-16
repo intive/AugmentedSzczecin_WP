@@ -44,7 +44,7 @@
                                 PinSign="{Binding Category, Converter={StaticResource CategoryToPinSignConverter}}" 
                                 PinColorBase="{StaticResource ASRed}" 
                                 PinSignColor="{StaticResource ASWhite}"
-                                maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
+                               maps:MapControl.Location="{Binding Converter={StaticResource PoiToGeopointConverter}}"
                                 caliburn:Message.Attach="[Event Tapped] = [Action PushpinTapped($dataContext)]"
                                 />
                     </DataTemplate>

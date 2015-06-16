@@ -6,7 +6,7 @@ using Windows.Devices.Geolocation;
 namespace AugmentedSzczecin.ViewModels
 {
     public class AugmentedViewModel : FilteredPOIViewBase
-    {        
+    {
         public AugmentedViewModel( IEventAggregator eventAggregator, 
                                     ILocationService locationService, 
                                     IPointOfInterestService pointOfInterestService, 
@@ -20,7 +20,7 @@ namespace AugmentedSzczecin.ViewModels
         }
 
         protected override void OnDeactivate(bool close)
-        {            
+        {
             _eventAggregator.Unsubscribe(this);
             base.OnDeactivate(close);
         }

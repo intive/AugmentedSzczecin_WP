@@ -46,7 +46,7 @@ namespace AugmentedSzczecin.Views
         public AugmentedView()
         {
             InitializeComponent();
-            
+
             _eventAgg = IoC.GetInstance(typeof(IEventAggregator), null);
             ((EventAggregator)_eventAgg).Subscribe(this);
         }

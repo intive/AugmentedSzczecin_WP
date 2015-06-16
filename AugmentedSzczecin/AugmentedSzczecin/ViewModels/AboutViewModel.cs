@@ -9,7 +9,7 @@ namespace AugmentedSzczecin.ViewModels
         {
             SetInformationAboutVersion();
         }
-        
+
         public string InformationAboutVersion
         {
             get;
