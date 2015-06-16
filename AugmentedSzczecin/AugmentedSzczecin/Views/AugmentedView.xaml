@@ -221,7 +221,9 @@
                 x:Name="PoiCount" 
                 VerticalAlignment="Top" 
                 HorizontalAlignment="Center" 
-                FontSize="24" Margin="0,15,0,0"/>
+                FontSize="24" 
+                Margin="0,15,0,0"
+                Foreground="White"/>
         </Grid>
         <Grid Visibility="{Binding IsFilterPanelVisible, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <Grid.ColumnDefinitions>
@@ -273,7 +275,7 @@
             Visibility="Collapsed">
             <StackPanel VerticalAlignment="Center">
                 <Image Source="/Assets/CalibrateCompass.png" Height="200" Width="auto"/>
-                <TextBlock Width="500" TextWrapping="Wrap" TextAlignment="Center" Margin="50" FontSize="20">
+                <TextBlock Width="500" TextWrapping="Wrap" TextAlignment="Center" Margin="50" FontSize="20" Foreground="White">
                     Kompas wymaga kalibracji. Ustaw urządzenie przed sobą i poruszaj nim tak jak na obrazku.
                 </TextBlock>
             </StackPanel>
