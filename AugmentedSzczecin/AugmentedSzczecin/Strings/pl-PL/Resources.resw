@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BothConnectionDisabledMessage" xml:space="preserve">
+    <value>Dostęp do Internetu oraz lokalizacja wyłączone</value>
+  </data>
+  <data name="AddNewPointOfInterest.Content" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
+  <data name="AddPointOfInterestTitle.Text" xml:space="preserve">
+    <value>Dodaj nowy punkt na mapie</value>
+  </data>
+  <data name="CancelAddingPointOfInterest.Content" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="ConfirmNewPointOfInterest.Label" xml:space="preserve">
+    <value>Zatwierdź</value>
+  </data>
+  <data name="CreatePointOfInterestCategoryNotSelected" xml:space="preserve">
+    <value>Wybierz kategorię</value>
+  </data>
+  <data name="CreatePointOfInterestCityEmpty" xml:space="preserve">
+    <value>Wypełnij pole Miasto.</value>
+  </data>
+  <data name="CreatePointOfInterestCityMatch" xml:space="preserve">
+    <value>Wypełnij pole Miasto poprawnie.</value>
+  </data>
+  <data name="CreatePointOfInterestDescriptionEmpty" xml:space="preserve">
+    <value>Wypełnij pole Opis</value>
+  </data>
+  <data name="CreatePointOfInterestEmptyForm" xml:space="preserve">
+    <value>Wypełnij pola.</value>
+  </data>
+  <data name="CreatePointOfInterestExtraTitle.Text" xml:space="preserve">
+    <value>Pola dodatkowe</value>
+  </data>
+  <data name="CreatePointOfInterestStreetNumberEmpty" xml:space="preserve">
+    <value>Wypełnij pole Numer ulicy.</value>
+  </data>
+  <data name="CreatePointOfInterestNameEmpty" xml:space="preserve">
+    <value>Wypełnij pole Nazwa.</value>
+  </data>
+  <data name="CreatePointOfInterestPlaceEmpty" xml:space="preserve">
+    <value>Wypełnij pole Miejsce.</value>
+  </data>
+  <data name="CreatePointOfInterestZipCodeEmpty" xml:space="preserve">
+    <value>Wypełnij pole Kod Pocztowy.</value>
+  </data>
+  <data name="CreatePointOfInterestZipCodeMatch" xml:space="preserve">
+    <value>Wypełnij pole kod Pocztowy Poprawnie.</value>
+  </data>
+  <data name="CreatePointOfInterestStreetEmpty" xml:space="preserve">
+    <value>Wypełnij pole Ulica.</value>
+  </data>
+  <data name="CreatePointOfInterestStreetMatch" xml:space="preserve">
+    <value>Wypełnij pole Ulica poprawnie.</value>
+  </data>
+  <data name="CreatePointOfInterestSubcategoryNotSelected" xml:space="preserve">
+    <value>Wybierz podkategorię</value>
+  </data>
+  <data name="CreatePointOfInterestTagsEmpty" xml:space="preserve">
+    <value>Wypełnij pole Tagi.</value>
+  </data>
+  <data name="CreatePointOfInterestTagsMatch" xml:space="preserve">
+    <value>Wypełnij pole Tagi poprawnie.</value>
+  </data>
+  <data name="CreatePointOfInterestTitle.Text" xml:space="preserve">
+    <value>Tworzenie POI</value>
+  </data>
+  <data name="CurrentMapTitle.Text" xml:space="preserve">
+    <value>Obecna lokalizacja.</value>
+  </data>
+  <data name="ExtraFieldsCheckBox.Content" xml:space="preserve">
+    <value>Pola dodatkowe</value>
+  </data>
+  <data name="Friday.Content" xml:space="preserve">
+    <value>Piątek</value>
+  </data>
+  <data name="Monday.Content" xml:space="preserve">
+    <value>Poniedziałek</value>
+  </data>
+  <data name="NewPoiAddress.Text" xml:space="preserve">
+    <value>Adres</value>
+  </data>
+  <data name="NewPoiAddressCity.Text" xml:space="preserve">
+    <value>Miasto</value>
+  </data>
+  <data name="NewPoiAddressCityBox.PlaceholderText" xml:space="preserve">
+    <value>np. Szczecin</value>
+  </data>
+  <data name="NewPoiAddressStreetNumber.Text" xml:space="preserve">
+    <value>Numer ulicy</value>
+  </data>
+  <data name="NewPoiAddressStreetNumberBox.PlaceholderText" xml:space="preserve">
+    <value>np. 11</value>
+  </data>
+  <data name="NewPoiAddressPlace.Text" xml:space="preserve">
+    <value>Numer domu</value>
+  </data>
+  <data name="NewPoiAddressPlaceBox.PlaceholderText" xml:space="preserve">
+    <value>np.. 3</value>
+  </data>
+  <data name="NewPoiAddressZipCode.Text" xml:space="preserve">
+    <value>Kod pocztowy</value>
+  </data>
+  <data name="NewPoiAddressZipCodeBox.PlaceholderText" xml:space="preserve">
+    <value>np. 71-696</value>
+  </data>
+  <data name="NewPoiAddressStreet.Text" xml:space="preserve">
+    <value>Ulica</value>
+  </data>
+  <data name="NewPoiAddressStreetBox.PlaceholderText" xml:space="preserve">
+    <value>np. Kormoranów</value>
+  </data>
+  <data name="NewPoiCategory.Text" xml:space="preserve">
+    <value>Kategoria</value>
+  </data>
+  <data name="NewPoiCategoryBox.PlaceholderText" xml:space="preserve">
+    <value>Wybierz kateogorię...</value>
+  </data>
+  <data name="NewPoiCategoryFirst" xml:space="preserve">
+    <value>Miejsca</value>
+  </data>
+  <data name="NewPoiCategoryFourth" xml:space="preserve">
+    <value>Ludzie</value>
+  </data>
+  <data name="NewPoiCategorySecond" xml:space="preserve">
+    <value>Commercial</value>
+  </data>
+  <data name="NewPoiCategoryThird" xml:space="preserve">
+    <value>Wydarzenia</value>
+  </data>
+  <data name="NewPoiDescription.Text" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="NewPoiDescriptionBox.PlaceholderText" xml:space="preserve">
+    <value>Dodaj opis...</value>
+  </data>
+  <data name="NewPoiFanpage.Text" xml:space="preserve">
+    <value>Fanpage</value>
+  </data>
+  <data name="NewPoiFanpageBox.PlaceholderText" xml:space="preserve">
+    <value>np. fb.com/BLStreamPatronage</value>
+  </data>
+  <data name="NewPoiLatitude.Text" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="NewPoiLongitude.Text" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="NewPoiName.Text" xml:space="preserve">
+    <value>Nazwa</value>
+  </data>
+  <data name="NewPoiNameBox.PlaceholderText" xml:space="preserve">
+    <value>np. My new POI</value>
+  </data>
+  <data name="NewPoiOpeningDays.Text" xml:space="preserve">
+    <value>Dni otwarte</value>
+  </data>
+  <data name="NewPoiPhone.Text" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="NewPoiPhoneBox.PlaceholderText" xml:space="preserve">
+    <value>np. 123456789</value>
+  </data>
+  <data name="NewPoiPrice.Text" xml:space="preserve">
+    <value>Cena</value>
+  </data>
+  <data name="NewPoiPriceBox.PlaceholderText" xml:space="preserve">
+    <value>Płatne/Bezpłatne</value>
+  </data>
+  <data name="NewPoiSubcategory.Text" xml:space="preserve">
+    <value>Podkategoria</value>
+  </data>
+  <data name="NewPoiSubcategoryBox.PlaceholderText" xml:space="preserve">
+    <value>Wybierz podkategorię...</value>
+  </data>
+  <data name="NewPoiSubcategoryEighth" xml:space="preserve">
+    <value>Dworzec kolejowy</value>
+  </data>
+  <data name="NewPoiSubcategoryFifth" xml:space="preserve">
+    <value>Muzeum</value>
+  </data>
+  <data name="NewPoiSubcategoryFirst" xml:space="preserve">
+    <value>Szkoła</value>
+  </data>
+  <data name="NewPoiSubcategoryFourth" xml:space="preserve">
+    <value>Pomnik</value>
+  </data>
+  <data name="NewPoiSubcategoryNinth" xml:space="preserve">
+    <value>Urząd pocztowy</value>
+  </data>
+  <data name="NewPoiSubcategorySecond" xml:space="preserve">
+    <value>Szpital</value>
+  </data>
+  <data name="NewPoiSubcategorySeventh" xml:space="preserve">
+    <value>Dworzec autobusowy</value>
+  </data>
+  <data name="NewPoiSubcategorySixth" xml:space="preserve">
+    <value>Urząd</value>
+  </data>
+  <data name="NewPoiSubcategoryTenth" xml:space="preserve">
+    <value>Kościół</value>
+  </data>
+  <data name="NewPoiSubcategoryThird" xml:space="preserve">
+    <value>Park</value>
+  </data>
+  <data name="NewPoiTags.Text" xml:space="preserve">
+    <value>Tagi</value>
+  </data>
+  <data name="NewPoiTagsBox.PlaceholderText" xml:space="preserve">
+    <value>np. best, epic, rare, ...</value>
+  </data>
+  <data name="NewPoiWebsite.Text" xml:space="preserve">
+    <value>Strona WWW</value>
+  </data>
+  <data name="NewPoiWebsiteBox.PlaceholderText" xml:space="preserve">
+    <value>np. blstream.com</value>
+  </data>
+  <data name="NewPoiWikipedia.Text" xml:space="preserve">
+    <value>Wikipedia</value>
+  </data>
+  <data name="NewPoiWikipediaBox.PlaceholderText" xml:space="preserve">
+    <value>np. wikipedia.org/wiki/Microsoft</value>
+  </data>
+  <data name="OpeningHoursCheckBox.Content" xml:space="preserve">
+    <value>Godziny otwarcia</value>
+  </data>
+  <data name="OpeningHoursFrom.Text" xml:space="preserve">
+    <value>Od</value>
+  </data>
+  <data name="OpeningHoursTo.Text" xml:space="preserve">
+    <value>Do</value>
+  </data>
+  <data name="PriceFree" xml:space="preserve">
+    <value>Bezpłatne</value>
+  </data>
+  <data name="PricePayable" xml:space="preserve">
+    <value>Płate</value>
+  </data>
+  <data name="GeolocationDisabledMessage" xml:space="preserve">
+    <value>Lokalizacja wyłączona.</value>
+  </data>
+  <data name="InternetConnectionDisabledMessage" xml:space="preserve">
+    <value>Dostęp do Internetu wyłączonu.</value>
+  </data>
+  <data name="RefreshConnection.Label" xml:space="preserve">
+    <value>Odśwież</value>
+  </data>
+  <data name="ResetPasswordButtonReset.Content" xml:space="preserve">
+    <value>Gotowe</value>
+  </data>
+  <data name="ResetPasswordProgressRing.Text" xml:space="preserve">
+    <value>Wysyłam żądanie.</value>
+  </data>
+  <data name="Saturday.Content" xml:space="preserve">
+    <value>Sobota</value>
+  </data>
+  <data name="SignEmail.Text" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="SignEmail.PlaceholderText" xml:space="preserve">
+    <value>Wpisz email</value>
+  </data>
+  <data name="SignPassword.PlaceholderText" xml:space="preserve">
+    <value>Wpisz hasło</value>
+  </data>
+  <data name="SignInButtonResetPassword.Content" xml:space="preserve">
+    <value>Zresetuj hasło</value>
+  </data>
+  <data name="SignInButtonSignIn.Content" xml:space="preserve">
+    <value>Zaloguj</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
+  <data name="SignInProgressRing.Text" xml:space="preserve">
+    <value>Trwa logowanie</value>
+  </data>
+  <data name="SignOutConfirmationText" xml:space="preserve">
+    <value>Czy wylogować?</value>
+  </data>
+  <data name="SignUpButtonSignUp.Content" xml:space="preserve">
+    <value>Gotowe</value>
+  </data>
+  <data name="SignUpEmailEmpty" xml:space="preserve">
+    <value>Email niekoreślony</value>
+  </data>
+  <data name="SignUpEmailMatch" xml:space="preserve">
+    <value>Email niepoprawny</value>
+  </data>
+  <data name="SignUpEmptyForm" xml:space="preserve">
+    <value>Email i hasło nieokreślone</value>
+  </data>
+  <data name="SignUpMainText.Text" xml:space="preserve">
+    <value>Stwórzy nowe konto</value>
+  </data>
+  <data name="SignUpPasswordEmpty" xml:space="preserve">
+    <value>Hasło nieokreślone</value>
+  </data>
+  <data name="SignUpPasswordLength" xml:space="preserve">
+    <value>Hasło zbyt krótkie</value>
+  </data>
+  <data name="SignUpProgressRing.Text" xml:space="preserve">
+    <value>Resjestruje</value>
+  </data>
+  <data name="SignInMainText.Text" xml:space="preserve">
+    <value>Zaloguj</value>
+  </data>
+  <data name="ResetPasswordMainText.Text" xml:space="preserve">
+    <value>Zresetuj hasło</value>
+  </data>
+  <data name="Sunday.Content" xml:space="preserve">
+    <value>Niedziela</value>
+  </data>
+  <data name="Thursday.Content" xml:space="preserve">
+    <value>Czwartek</value>
+  </data>
+  <data name="Tuesday.Content" xml:space="preserve">
+    <value>Wtorek</value>
+  </data>
+  <data name="Wednesday.Content" xml:space="preserve">
+    <value>Środa</value>
+  </data>
+  <data name="ValidationErrorGeneralMessage" xml:space="preserve">
+    <value>Popraw czerwone pola.</value>
+  </data>
+  <data name="CreatePointOfInterestFailureMessage" xml:space="preserve">
+    <value>Coś poszło nie tak. Spróbuj ponownie!</value>
+  </data>
+  <data name="CreatePointOfInterestSuccessMessage" xml:space="preserve">
+    <value>Punkt dodano!</value>
+  </data>
+  <data name="AboutText.Text" xml:space="preserve">
+    <value>Aplikacja wykonana w ramach
+BLStream Patronage in 2015.</value>
+  </data>
+  <data name="AboutVersion" xml:space="preserve">
+    <value>Wersja: </value>
+  </data>
+  <data name="Augmented.Text" xml:space="preserve">
+    <value>AUGMENTED</value>
+  </data>
+  <data name="Back.Content" xml:space="preserve">
+    <value>Wstecz</value>
+  </data>
+  <data name="Cancel.Content" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="RegisterEmailFailMessage" xml:space="preserve">
+    <value>Ten adres email jest zajęty</value>
+  </data>
+  <data name="RegisterSuccessMessage" xml:space="preserve">
+    <value>Pomyślnie zarejestrowano!</value>
+  </data>
+  <data name="ResetPasswordSuccessMessage" xml:space="preserve">
+    <value>Nowe hasło wysłano na adres email!</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>Błąd serwera!</value>
+  </data>
+  <data name="Settings.Content" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="SignInDataFailMessage" xml:space="preserve">
+    <value>Niepoprawne dane!</value>
+  </data>
+  <data name="SignInSuccessMessage" xml:space="preserve">
+    <value>Zalogowano!</value>
+  </data>
+  <data name="SignOut.Content" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
+  <data name="Szczecin.Text" xml:space="preserve">
+    <value>SZCZECIN</value>
+  </data>
+  <data name="ToggleFilter.Label" xml:space="preserve">
+    <value>Piątek</value>
+  </data>
+  <data name="MainViewAbout.Content" xml:space="preserve">
+    <value>o aplikacji</value>
+  </data>
+  <data name="MainViewAdd.Content" xml:space="preserve">
+    <value>dodaj punkt</value>
+  </data>
+  <data name="MainViewAR.Content" xml:space="preserve">
+    <value>augmented</value>
+  </data>
+  <data name="MainViewList.Content" xml:space="preserve">
+    <value>lista lokacji</value>
+  </data>
+  <data name="MainViewMap.Content" xml:space="preserve">
+    <value>mapa</value>
+  </data>
+</root>
