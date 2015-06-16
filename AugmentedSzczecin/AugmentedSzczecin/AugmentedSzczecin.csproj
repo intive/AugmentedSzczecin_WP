@@ -268,6 +268,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\CalibrateCompass.png" />
     <Content Include="Assets\LocationPoint.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\Logo\LogoTekst.png" />
@@ -285,6 +286,7 @@
     <Content Include="Assets\StoreLogo.scale-240.png" />
     <Content Include="Assets\PanoramaSzczecin.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
+    <Content Include="StoreManifest.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Maps.SpatialToolbox.Core\Microsoft.Maps.SpatialToolbox.Core.csproj">
