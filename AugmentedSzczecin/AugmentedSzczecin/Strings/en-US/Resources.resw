@@ -488,9 +488,6 @@ BLStream Patronage in 2015.</value>
   <data name="SignInSuccessMessage" xml:space="preserve">
     <value>Signed in!</value>
   </data>
-  <data name="SignOut.Content" xml:space="preserve">
-    <value>Sign Out</value>
-  </data>
   <data name="Szczecin.Text" xml:space="preserve">
     <value>SZCZECIN</value>
   </data>
@@ -511,5 +508,8 @@ BLStream Patronage in 2015.</value>
   </data>
   <data name="MainViewMap.Content" xml:space="preserve">
     <value>map</value>
+  </data>
+  <data name="SignOutConfirmed" xml:space="preserve">
+    <value>Sign Out</value>
   </data>
 </root>

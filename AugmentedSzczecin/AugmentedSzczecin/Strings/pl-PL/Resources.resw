@@ -511,4 +511,7 @@ BLStream Patronage in 2015.</value>
   <data name="MainViewMap.Content" xml:space="preserve">
     <value>mapa</value>
   </data>
+  <data name="SignOutConfirmed" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
 </root>
