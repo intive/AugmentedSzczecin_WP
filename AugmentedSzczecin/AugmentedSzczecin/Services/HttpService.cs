@@ -33,15 +33,15 @@ namespace AugmentedSzczecin.Services
         public async Task<ObservableCollection<PointOfInterest>> GetPointOfInterestList(double latitude, double longitude, int radius, CategoryType category)
         {
             HttpResponseMessage response = null;
-            //if (category == CategoryType.ALL)
-            //{
-            //    response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}", latitude, longitude, radius));
-            //}
-            //else
-            //{
-            //    response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}&cat={3}", latitude, longitude, radius, category));
-            //}
-            //response.EnsureSuccessStatusCode();
+            if (category == CategoryType.ALL)
+            {
+                response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}", latitude, longitude, radius));
+            }
+            else
+            {
+                response = await _client.GetAsync(string.Format("q?lt={0}&lg={1}&radius={2}&cat={3}", latitude, longitude, radius, category));
+            }
+            response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
 
             /****** DO TESTÓW ******/
