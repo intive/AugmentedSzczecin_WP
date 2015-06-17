@@ -259,16 +259,16 @@
     <value>np. fb.com/BLStreamPatronage</value>
   </data>
   <data name="NewPoiLatitude.Text" xml:space="preserve">
-    <value>Latitude</value>
+    <value>Szerokość geograficzna</value>
   </data>
   <data name="NewPoiLongitude.Text" xml:space="preserve">
-    <value>Longitude</value>
+    <value>Długość geograficzna</value>
   </data>
   <data name="NewPoiName.Text" xml:space="preserve">
     <value>Nazwa</value>
   </data>
   <data name="NewPoiNameBox.PlaceholderText" xml:space="preserve">
-    <value>np. My new POI</value>
+    <value>np. Jakaś nazwa</value>
   </data>
   <data name="NewPoiOpeningDays.Text" xml:space="preserve">
     <value>Dni otwarte</value>
@@ -421,7 +421,7 @@
     <value>Hasło zbyt krótkie</value>
   </data>
   <data name="SignUpProgressRing.Text" xml:space="preserve">
-    <value>Resjestruje</value>
+    <value>Resjestruję</value>
   </data>
   <data name="SignInMainText.Text" xml:space="preserve">
     <value>Zaloguj</value>
