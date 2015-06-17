@@ -412,7 +412,7 @@
     <value>Email i hasło nieokreślone</value>
   </data>
   <data name="SignUpMainText.Text" xml:space="preserve">
-    <value>Stwórzy nowe konto</value>
+    <value>Stwórz nowe konto</value>
   </data>
   <data name="SignUpPasswordEmpty" xml:space="preserve">
     <value>Hasło nieokreślone</value>
@@ -503,13 +503,13 @@ BLStream Patronage in 2015.</value>
     <value>dodaj punkt</value>
   </data>
   <data name="MainViewAR.Content" xml:space="preserve">
-    <value>augmented</value>
+    <value>widok AR</value>
   </data>
   <data name="MainViewList.Content" xml:space="preserve">
     <value>lista lokacji</value>
   </data>
   <data name="MainViewMap.Content" xml:space="preserve">
-    <value>mapa</value>
+    <value>widok 2D</value>
   </data>
   <data name="SignOutConfirmed" xml:space="preserve">
     <value>Wyloguj</value>

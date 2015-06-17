@@ -105,26 +105,34 @@
 
         </Grid>
         <StackPanel
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Margin="17.5 37.5"
             Grid.Row="1">
             <ListView HorizontalAlignment="Left">
                 <ListViewItem
+                    Margin="0, 0, 0, 17.5"
                     Foreground="{StaticResource ASNavy}"
-                    FontSize="28"
+                    FontSize="38"
+                    FontWeight="Light"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewAR"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAugmentedView]" />
                 <ListViewItem
+                    Margin="0, 0, 0, 17.5"
+                    Content="widok 2D"
                     Foreground="{StaticResource ASNavy}"
-                    FontSize="28"
+                    FontSize="38"
+                    FontWeight="Light"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewMap"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToCurrentMap]" />
                 <ListViewItem
+                    Margin="0, 0, 0, 17.5"
+                    Content="dodaj punkt"
                     Foreground="{StaticResource ASNavy}"
-                    FontSize="28"
+                    FontSize="38"
+                    FontWeight="Light"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewAdd"
                     Visibility="{Binding IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -139,8 +147,10 @@
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToLocationList]" />
                 -->
                 <ListViewItem
+                    Content="o aplikacji"
                     Foreground="{StaticResource ASNavy}"
-                    FontSize="28"
+                    FontSize="38"
+                    FontWeight="Light"
                     FontFamily="Segoe WP"
                     x:Uid="MainViewAbout"
                     caliburn:Message.Attach="[Event Tapped] = [Action NavigateToAbout]" />
